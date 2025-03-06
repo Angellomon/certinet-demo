@@ -15,6 +15,8 @@
 
 		<PasswordInput bind:password />
 
-		<button class="btn btn-primary inline self-end" onclick={() => console.log(email)}>Login</button>
+		<a href="/profesionista" class="self-end">
+			<button class="btn btn-primary">Login</button>
+		</a>
 	</div>
 </main>

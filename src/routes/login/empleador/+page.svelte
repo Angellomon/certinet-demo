@@ -15,6 +15,8 @@
 
 		<PasswordInput bind:password />
 
-		<button class="btn btn-secondary inline self-end" onclick={() => console.log(email)}>Login</button>
+		<a href="/empleador" class="self-end">
+			<button class="btn btn-secondary">Login</button>
+		</a>
 	</div>
 </main>
