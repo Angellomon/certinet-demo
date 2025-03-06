@@ -11,8 +11,8 @@
 	];
 </script>
 
-<nav class="relative hidden items-center gap-5 lg:flex lg:flex-row lg:justify-end lg:px-5">
-	<a href="/"> <div class="absolute left-5 top-0">CertiNet Logo</div></a>
+<nav class="hidden lg:relative lg:gap-5 lg:flex lg:flex-row lg:justify-end lg:align-middle lg:items-center lg:px-5 lg:py-5">
+	<a class="absolute left-5 py-3 px-5" href="/"> <div class="text-3xl">CertiNet Logo</div></a>
 	<ul class="flex flex-row gap-5">
 		{#each paths as path}
 			<li><a href={path.path}>{path.name}</a></li>
