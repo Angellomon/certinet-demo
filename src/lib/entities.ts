@@ -29,6 +29,7 @@ export type Empleador = {
 
 export type ProcesoContacto = {
 	id: string;
+	idCertificacion: string;
 	idProfesionista: string;
 	idEmpleador: string;
 	idCalificacion: string | null;
@@ -51,7 +52,7 @@ export type Calificacion = {
 
 export type CalificacionProceso = {
 	id: string;
-	idProceso: string,
+	idProceso: string;
 	empleador: Calificacion | null;
 	profesionista: Calificacion | null;
 };
