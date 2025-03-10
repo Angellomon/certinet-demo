@@ -183,7 +183,8 @@ export const getDemoProcesosContacto: () => ProcesoContacto[] = () => [
 		},
 		fechaInicio: new Date(2025, 2, 15),
 		fechaFin: null,
-		idCalificacion: null
+		idCalificacion: null,
+		idCertificacion: 'yzE7vahMEhfynZYHzqzqUA'
 	},
 	{
 		id: 'RHoZVhhVXDwm5LciscAB3g',
@@ -196,7 +197,8 @@ export const getDemoProcesosContacto: () => ProcesoContacto[] = () => [
 		},
 		fechaInicio: new Date(2025, 3, 8),
 		fechaFin: null,
-		idCalificacion: null
+		idCalificacion: null,
+		idCertificacion: 'CXjtZgWa6_mMFe0zRbPoMw'
 	},
 	{
 		id: 'RHoZVhhVXDwm5LciscAB3g',
@@ -209,7 +211,8 @@ export const getDemoProcesosContacto: () => ProcesoContacto[] = () => [
 		},
 		fechaInicio: new Date(2025, 3, 8),
 		fechaFin: null,
-		idCalificacion: null
+		idCalificacion: null,
+		idCertificacion: '5fuiE0rs02uc8j2jiX2RhQ'
 	},
 	{
 		id: 'U4BLP3metaGZuYGjekNLOQ',
@@ -222,7 +225,8 @@ export const getDemoProcesosContacto: () => ProcesoContacto[] = () => [
 		},
 		fechaInicio: new Date(2025, 3, 8),
 		fechaFin: new Date(2025, 3, 15),
-		idCalificacion: 'zvX4wZ97-t2RUf70uwvDWw'
+		idCalificacion: 'zvX4wZ97-t2RUf70uwvDWw',
+		idCertificacion: '5fuiE0rs02uc8j2jiX2RhQ'
 	},
 	{
 		id: 'Bp9cxscAcaMYXJaodSSpjA',
@@ -235,7 +239,8 @@ export const getDemoProcesosContacto: () => ProcesoContacto[] = () => [
 		},
 		fechaInicio: new Date(2025, 2, 8),
 		fechaFin: new Date(2025, 2, 15),
-		idCalificacion: 'qFAT9GjwgCi5nEtUwAjLtA'
+		idCalificacion: 'qFAT9GjwgCi5nEtUwAjLtA',
+		idCertificacion: '5YWM779iJ7xc9_Soy6q7sw'
 	}
 ];
 
