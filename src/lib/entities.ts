@@ -1,4 +1,5 @@
 export type Certificacion = {
+	id: string;
 	nombre: string;
 	serie: string;
 	organizacion: string;
@@ -14,7 +15,6 @@ export type Profesionista = {
 	apellidos: string;
 	fechaNacimeinto: Date;
 	profesion: string;
-	cedula: string;
 	verificado: boolean;
 };
 
@@ -28,13 +28,30 @@ export type Empleador = {
 };
 
 export type ProcesoContacto = {
+	id: string;
 	idProfesionista: string;
 	idEmpleador: string;
-	fechaInicio: string;
-	fechaFin: string | null;
+	idCalificacion: string | null;
+	fechaInicio: Date;
+	fechaFin: Date | null;
 	contacto: {
 		tipo: 'email' | 'whatsapp' | 'otro';
 		empleador: string;
 		profesionista: string;
 	};
+};
+
+export type TipoCalificacion = 'estrella-5' | 'ponderacion-5' | 'ponderacion-10';
+
+export type Calificacion = {
+	id: string;
+	tipo: TipoCalificacion;
+	valor: number;
+};
+
+export type CalificacionProceso = {
+	id: string;
+	idProceso: string,
+	empleador: Calificacion | null;
+	profesionista: Calificacion | null;
 };
