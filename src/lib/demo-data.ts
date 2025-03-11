@@ -97,9 +97,9 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 		idProfesionista: 'I_ijr3ITGtJX3Rns1QIjAQ',
 		nombre: "System's Architect",
 		organizacion: 'Google',
-
 		serie: 'Yt4s6iH_W_oKehZAAXey4Q',
-		vigencia: -1
+		vigencia: -1,
+		verificado: false
 	},
 	{
 		id: '5YWM779iJ7xc9_Soy6q7sw',
@@ -108,7 +108,8 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 		nombre: 'Cloud Architect',
 		organizacion: 'Google',
 		serie: 'Yt4s6iH_W_oKehZAAXey4Q',
-		vigencia: 5
+		vigencia: 5,
+		verificado: true
 	},
 	{
 		id: '2vGis39bF6aEFMRGILSI0A',
@@ -117,7 +118,8 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 		nombre: 'Certified Ethical Hacker',
 		organizacion: 'eccouncil.org',
 		serie: 'iQuymvZRkvVfPK3zApS_TQ',
-		vigencia: 3
+		vigencia: 3,
+		verificado: true
 	},
 	{
 		id: '5fuiE0rs02uc8j2jiX2RhQ',
@@ -126,7 +128,8 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 		nombre: 'Web DEV Certified',
 		organizacion: 'W3 Schools',
 		serie: '3T56TJQRMVdZHoa0PJS2Kg',
-		vigencia: 2
+		vigencia: 2,
+		verificado: false
 	},
 	{
 		id: 'CXjtZgWa6_mMFe0zRbPoMw',
@@ -135,7 +138,8 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 		nombre: 'Oracle DB Advocate',
 		organizacion: 'Oracle',
 		serie: 'VUtEUoDg_5U_KE7PmsTgqQ',
-		vigencia: 1
+		vigencia: 1,
+		verificado: true
 	},
 	{
 		id: 'SkcIwQFhVQsDm27q5WaAlA',
@@ -144,7 +148,8 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 		nombre: 'Kubernetes Fundamentals',
 		organizacion: 'Google',
 		serie: 'yOWXZVM2CRpX4U8D9T-zJw',
-		vigencia: 2
+		vigencia: 2,
+		verificado: true
 	},
 	{
 		id: 'Q3qI4-XPmLUGWSahHbZgig',
@@ -153,7 +158,8 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 		nombre: 'Microsoft Certified: Azure Fundamentals',
 		organizacion: 'Microsoft',
 		serie: '12Yexw5WiJCVtwL04dyYsg',
-		vigencia: 5
+		vigencia: 5,
+		verificado: false
 	},
 	{
 		id: 'yzE7vahMEhfynZYHzqzqUA',
@@ -162,7 +168,8 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 		nombre: 'Data Analyst Associate',
 		organizacion: 'Microsoft',
 		serie: 'rao7KCE4XojvfiIFTGNhHA',
-		vigencia: 5
+		vigencia: 5,
+		verificado: true
 	}
 ];
 
