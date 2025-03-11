@@ -14,7 +14,7 @@
 	</div>
 
 	<h2 class="text-2xl">Procesos Recientes</h2>
-	<ListaProcesos {certificacionesDataMap} {procesosContacto} />
+	<ListaProcesos baseUrl="/profesionista/procesos" {certificacionesDataMap} {procesosContacto} />
 
-	<JsonData jsonData={currentProfesionista} />
+	<JsonData title="Raw Data Profesionista" jsonData={currentProfesionista} />
 </div>

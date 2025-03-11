@@ -12,15 +12,15 @@ export function load(data) {
   const procesosContacto = procesos.slice(0, 10);
   const totalProcesos = procesos.length;
 
-  const certificaciones = getDemoCertificaciones();
-  const totalCertificaciones = certificaciones.filter(c => c.idProfesionista == currentProfesionista.id).length
+  const certificaciones = getDemoCertificaciones().filter(c => c.idProfesionista == currentProfesionista.id);
+  const totalCertificaciones = certificaciones.length
   const certificacionesDataMap: Record<string, Certificacion> = {};
 
-  procesos.forEach((p) => {
-    const cert = certificaciones.find((c) => c.id == p.idCertificacion);
-    if (!cert) return;
+  certificaciones.forEach((c) => {
+    // const cert = certificaciones.find((c) => c.id == p.idCertificacion);
+    // if (!cert) return;
 
-    certificacionesDataMap[p.idCertificacion] = cert;
+    certificacionesDataMap[c.id] = c;
   });
 
   return {

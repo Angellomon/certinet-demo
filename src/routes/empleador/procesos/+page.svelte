@@ -15,5 +15,5 @@
 	</div>
 
 	<h2 class="text-2xl">Procesos de Contacto</h2>
-	<ListaProcesos {certificacionesDataMap} {procesosContacto} />
+	<ListaProcesos baseUrl="/empleador/procesos" {certificacionesDataMap} {procesosContacto} />
 </main>
