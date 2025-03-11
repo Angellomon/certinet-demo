@@ -6,7 +6,7 @@
 	const { currentEmpleador, procesosContacto, certificacionesDataMap } = data;
 </script>
 
-<div>
+<div class="flex flex-col gap-5">
 	<div class="breadcrumbs text-sm">
 		<ul>
 			<a href="/empleador"><li>Dashboard</li></a>
