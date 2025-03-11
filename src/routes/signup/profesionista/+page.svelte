@@ -10,7 +10,12 @@
 
 		<label class="input">
 			<span class="label">Apellidos</span>
-			<input class="input" name="nombre" id="nombre" type="text"/>
+			<input class="input" name="apellidos" id="apellidos" type="text" />
+		</label>
+
+		<label class="input">
+			<span class="label">Correo</span>
+			<input class="input" name="correo" id="correo" type="email" placeholder="email@site.com"/>
 		</label>
 
 		<label class="input">
