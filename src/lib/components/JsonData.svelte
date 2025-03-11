@@ -1,8 +1,8 @@
 <script lang="ts">
-	let { jsonData } = $props<{jsonData: any}>();
+	let { jsonData, title = "Raw Data" } = $props<{jsonData: any, title?: string}>();
 </script>
 
 <div>
-	<h3 class="text-lg">Raw Data</h3>
+	<h3 class="text-lg">{title}</h3>
 	<pre>{JSON.stringify(jsonData, null, '\t')}</pre>
 </div>
