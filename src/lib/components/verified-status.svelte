@@ -2,7 +2,7 @@
 	const { text = '', verified = false } = $props();
 </script>
 
-<div class="flex flex-row justify-center items-center gap-1">
+<div class="flex flex-row lg:justify-center items-center gap-1">
   {#if verified}
 	<div class="inline-grid *:[grid-area:1/1]">
 		<div class="status status-accent"></div>

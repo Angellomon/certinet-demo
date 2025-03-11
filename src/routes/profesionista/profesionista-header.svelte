@@ -7,10 +7,10 @@
 
 </script>
 
-<div class="flex flex-row items-start justify-between">
+<div class="flex flex-col md:flex-row items-start justify-between">
 	<div>
 		<h1 class="text-4xl">{profesionista.nombre} {profesionista.apellidos}</h1>
-		<div class="flex flex-col items-center justify-start gap-10 lg:flex-row">
+		<div class="flex flex-col md:items-center justify-start gap-10 md:flex-row">
 			<div class="link link-primary text-xl italic">{profesionista.correo}</div>
 
 			{#if profesionista.verificado}
