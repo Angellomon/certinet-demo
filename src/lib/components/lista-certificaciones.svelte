@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Certificacion } from '$lib/entities';
-	import CountStat from './count-stat.svelte';
 	import VerifiedStatus from './verified-status.svelte';
 
-	const { certificaciones, basePath }: { certificaciones: Certificacion[], basePath: string } = $props();
+	let { certificaciones, basePath }: { certificaciones: Certificacion[]; basePath: string } =
+		$props();
 </script>
 
 {#snippet statVigencia(title: string, value: string)}
