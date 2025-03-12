@@ -31,7 +31,7 @@
 			<li>
 				<a
 					class={page.url.pathname.includes('/empleador/certificaciones') ? 'menu-active' : ''}
-					href="/empleador/procesos">Buscador</a
+					href="/empleador/certificaciones">Buscador</a
 				>
 			</li>
 			<!-- <li><a>Configuración</a></li> -->
