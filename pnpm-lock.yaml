@@ -36,6 +36,9 @@ importers:
       daisyui:
         specifier: ^5.0.0
         version: 5.0.0
+      date-picker-svelte:
+        specifier: ^2.15.1
+        version: 2.15.1(svelte@5.22.5)
       eslint:
         specifier: ^9.18.0
         version: 9.21.0(jiti@2.4.2)
@@ -729,6 +732,11 @@ packages:
 
   date-fns@4.1.0:
     resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
+
+  date-picker-svelte@2.15.1:
+    resolution: {integrity: sha512-o0sjLgXDRIxpvaVeps97htbWoplYUXpLSeyfTts88ZOb0NYDO0KJLKIya/Ee3DuKLPjYNY+brp0cOCs0VLsbkw==}
+    peerDependencies:
+      svelte: ^3.24.0 || ^4.0.0 || ^5.0.0
 
   debug@4.4.0:
     resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
@@ -2015,6 +2023,10 @@ snapshots:
   daisyui@5.0.0: {}
 
   date-fns@4.1.0: {}
+
+  date-picker-svelte@2.15.1(svelte@5.22.5):
+    dependencies:
+      svelte: 5.22.5
 
   debug@4.4.0:
     dependencies:
