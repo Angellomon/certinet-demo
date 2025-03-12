@@ -29,11 +29,9 @@
 							)}
 						{/if}
 
-						{#if cert.verificado}
-							<VerifiedStatus text="Verificado" verified />
-						{:else}
-							<VerifiedStatus text="Verificación Pendiente" verified={false} />
-						{/if}
+						<VerifiedStatus verified={cert.verificado}
+							>{cert.verificado ? 'Verificado' : 'Verificación Pendiente'}</VerifiedStatus
+						>
 					</div>
 				</div>
 			</li>
