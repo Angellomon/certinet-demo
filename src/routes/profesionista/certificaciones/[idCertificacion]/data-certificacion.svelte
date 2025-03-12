@@ -18,7 +18,10 @@
 					class="input"
 					type="date"
 					placeholder="YYYY-MM-DD"
-					bind:value={certificacion.fechaObtencion}
+					value={certificacion.fechaObtencion.toISOString().substr(0, 10)}
+					onchange={(e) => {
+						certificacion.fechaObtencion = new Date(e.currentTarget.value)
+					}}
 				/>
 			</div>
 
