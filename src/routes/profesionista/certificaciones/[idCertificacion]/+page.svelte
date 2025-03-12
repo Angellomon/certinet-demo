@@ -1,5 +1,6 @@
 <script lang="ts">
 	import JsonData from '$lib/components/JsonData.svelte';
+	import DataCertificacion from './data-certificacion.svelte';
 
 	const { data } = $props();
 
@@ -22,5 +23,10 @@
 			</li>
 		</ul>
 	</div>
+
+  <h2 class="text-xl font-bold">{certificacion.nombre}</h2>
+
+  <DataCertificacion {certificacion} />
+
 	<JsonData title="Raw Data Certificación" jsonData={certificacion} />
 </main>
