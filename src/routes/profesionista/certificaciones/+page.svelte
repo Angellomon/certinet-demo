@@ -15,5 +15,5 @@
 
 	<h2 class="text-2xl">Certificaciones</h2>
 
-	<ListaCertificaciones {certificaciones} />
+	<ListaCertificaciones basePath="/profesionista/certificaciones" {certificaciones} />
 </main>
