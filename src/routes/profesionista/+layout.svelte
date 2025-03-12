@@ -4,8 +4,6 @@
 
 	const { data, children,  } = $props();
 	const { currentProfesionista, totalProcesos, totalCertificaciones } = data;
-
-	console.log(page.url.pathname);
 	
 </script>
 

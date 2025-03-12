@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import EmpleadorHeader from './empleador-header.svelte';
 
 	const { data, children } = $props();
@@ -6,9 +7,9 @@
 </script>
 
 <main class="flex flex-col gap-5 p-5 lg:px-20 lg:py-5">
-	<ul class="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box">
-		<li><a href="/empleador">Dashboard</a></li>
-		<li><a href="/empleador/procesos">Procesos</a></li>
+	<ul class="menu menu-vertical sm:menu-horizontal bg-base-200 rounded-box">
+		<li><a class={page.url.pathname === "/empleador" ? "menu-active" : ""} href="/empleador">Dashboard</a></li>
+		<li><a class={page.url.pathname === "/empleador/procesos" ? "menu-active" : ""} href="/empleador/procesos">Procesos</a></li>
 		<!-- <li><a>Configuración</a></li> -->
 	</ul>
 
