@@ -11,7 +11,7 @@
 			<li><a href="/profesionista">Dashboard</a></li>
 			<li><a href="/profesionista/procesos">Procesos</a></li>
 		</ul>
-		
+
 		<JsonData title="Raw Data Proceso" jsonData={proceso} />
 	</div>
 </main>

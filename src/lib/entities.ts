@@ -6,7 +6,7 @@ export type Certificacion = {
 	fechaObtencion: Date;
 	vigencia: number;
 	idProfesionista: string;
-	verificado: boolean
+	verificado: boolean;
 };
 
 export type Profesionista = {

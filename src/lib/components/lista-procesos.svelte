@@ -15,9 +15,9 @@
 	}
 
 	function getNombreProfesionista(idProfesionista: string) {
-		const profesionista = getDemoProfesionistas().find(p => p.id === idProfesionista)
+		const profesionista = getDemoProfesionistas().find((p) => p.id === idProfesionista);
 
-		return profesionista ? profesionista.nombre + ' ' + profesionista.apellidos : ''
+		return profesionista ? profesionista.nombre + ' ' + profesionista.apellidos : '';
 	}
 </script>
 

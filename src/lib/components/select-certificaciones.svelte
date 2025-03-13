@@ -12,14 +12,10 @@
 		if (selectedIds.has(idCert)) {
 			selectedIds.delete(idCert);
 
-			console.log(selectedIds);
-
 			return;
 		}
 
 		selectedIds.add(idCert);
-
-		console.log(selectedIds);
 	}
 </script>
 
@@ -52,8 +48,8 @@
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<li
-			class="list-row my-1 hover:border"
-			class:border={selectedIds.has(cert.id)}
+			class="list-row my-1 cursor-pointer hover:border"
+			class:border-2={selectedIds.has(cert.id)}
 			onclick={() => handleSelect(cert.id)}
 		>
 			{@render certElement(cert)}

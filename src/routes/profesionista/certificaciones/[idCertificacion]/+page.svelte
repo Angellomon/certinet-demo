@@ -24,9 +24,9 @@
 		</ul>
 	</div>
 
-  <h2 class="text-xl font-bold">{certificacion.nombre}</h2>
+	<h2 class="text-xl font-bold">{certificacion.nombre}</h2>
 
-  <DataCertificacion {certificacion} />
+	<DataCertificacion {certificacion} />
 
 	<JsonData title="Raw Data Certificación" jsonData={certificacion} />
 </main>

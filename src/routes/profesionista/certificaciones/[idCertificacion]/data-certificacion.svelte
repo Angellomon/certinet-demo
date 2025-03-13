@@ -20,7 +20,7 @@
 					placeholder="YYYY-MM-DD"
 					value={certificacion.fechaObtencion.toISOString().substr(0, 10)}
 					onchange={(e) => {
-						certificacion.fechaObtencion = new Date(e.currentTarget.value)
+						certificacion.fechaObtencion = new Date(e.currentTarget.value);
 					}}
 				/>
 			</div>

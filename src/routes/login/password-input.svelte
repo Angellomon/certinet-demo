@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { ChangeEventHandler } from "svelte/elements";
+	import type { ChangeEventHandler } from 'svelte/elements';
 
-  let { password = $bindable("") } = $props()
+	let { password = $bindable('') } = $props();
 
-  const updatePassword: ChangeEventHandler<HTMLInputElement> = (e) => {
-    password = e.currentTarget.value
-  }
+	const updatePassword: ChangeEventHandler<HTMLInputElement> = (e) => {
+		password = e.currentTarget.value;
+	};
 </script>
 
 <div>
@@ -22,7 +22,13 @@
 				></path><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle></g
 			></svg
 		>
-		<input onchange={updatePassword} type="password" required placeholder="Password" minlength="8" />
+		<input
+			onchange={updatePassword}
+			type="password"
+			required
+			placeholder="Password"
+			minlength="8"
+		/>
 	</label>
 	<p class="validator-hint hidden">
 		Must be more than 8 characters, including

@@ -11,7 +11,7 @@
 			<li><a href="/empleador">Dashboard</a></li>
 			<li><a href="/empleador/procesos">Procesos</a></li>
 		</ul>
-		
+
 		<JsonData jsonData={proceso} />
 	</div>
 </main>

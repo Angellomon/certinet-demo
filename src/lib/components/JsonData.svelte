@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { jsonData, title = "Raw Data" } = $props<{jsonData: any, title?: string}>();
+	let { jsonData, title = 'Raw Data' } = $props<{ jsonData: any; title?: string }>();
 </script>
 
 <div>
