@@ -29,7 +29,7 @@
 {#snippet certElement(cert: Certificacion)}
 	<div class="flex flex-col">
 		<h3 class="text-xl font-bold hover:font-bold">{cert.nombre}</h3>
-		<div class="flex flex-col justify-between md:flex-row">
+		<div class="flex flex-col justify-start md:flex-row">
 			{#if cert.vigencia < 0}
 				{@render statVigencia('Vigencia', 'Vitalicia')}
 			{:else}
