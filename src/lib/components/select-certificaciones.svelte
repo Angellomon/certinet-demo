@@ -20,7 +20,7 @@
 </script>
 
 {#snippet statVigencia(title: string, value: string)}
-	<div class="mx-5 flex flex-col items-start justify-center">
+	<div class="mx-5 flex flex-col min-w-20 items-start justify-center">
 		<span class="text-md font-extralight">{title}</span>
 		<span class="text-lg font-bold">{value}</span>
 	</div>
