@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import ListaCertificaciones from '$lib/components/lista-certificaciones.svelte';
 	import SelectCertificaciones from '$lib/components/select-certificaciones.svelte';
 	import { SvelteSet } from 'svelte/reactivity';
 
@@ -9,6 +8,10 @@
 	const { certificaciones } = data;
 
 	let selectedIds: Set<string> = $state(new SvelteSet());
+
+	function handleNewProcess() {
+		goto(`/empleador/certificaciones/nuevo-proceso/?certIds=${Array.from(selectedIds).join(',')}`);
+	}
 </script>
 
 <main class="relative">
@@ -17,6 +20,8 @@
 	<SelectCertificaciones {certificaciones} bind:selectedIds />
 
 	{#if selectedIds.size > 0}
-		<button class="btn btn-primary fixed right-5 bottom-5">Proceder</button>
+		<button onclick={handleNewProcess} class="btn btn-primary fixed right-5 bottom-5"
+			>Proceder</button
+		>
 	{/if}
 </main>
