@@ -1,8 +1,10 @@
 <script lang="ts">
 	import type { Certificacion } from '$lib/entities';
-	const { certificacion } = $props<{ certificacion: Certificacion }>();
+	const { certificacion = $bindable() } = $props<{ certificacion: Certificacion }>();
 
 	let editMode = $state(false);
+
+	let certState = $state(certificacion)
 
 	function toggleEdit() {
 		editMode = !editMode;

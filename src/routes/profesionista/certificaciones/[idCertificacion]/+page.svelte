@@ -5,6 +5,7 @@
 	const { data } = $props();
 
 	const { certificacion } = data;
+	let certState = $state(certificacion);
 </script>
 
 <main class="flex flex-col gap-5">
@@ -26,7 +27,7 @@
 
 	<h2 class="text-xl font-bold">{certificacion.nombre}</h2>
 
-	<DataCertificacion {certificacion} />
+	<DataCertificacion bind:certificacion={certState} />
 
-	<JsonData title="Raw Data Certificación" jsonData={certificacion} />
+	<JsonData title="Raw Data Certificación" jsonData={certState} />
 </main>
