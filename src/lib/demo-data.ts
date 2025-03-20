@@ -1,3 +1,5 @@
+import { generateRandomString, type RandomReader } from '@oslojs/crypto/random';
+
 import type {
 	CalificacionProceso,
 	Certificacion,
@@ -176,6 +178,88 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 export const getCurrentProfesionistaDemoCertificates: () => Certificacion[] = () => {
 	const demoProfesionista = getDemoProfesionista();
 	return getDemoCertificaciones().filter((c) => c.idProfesionista === demoProfesionista.id);
+};
+
+export const getDemoEmpleadorById = (idEmpleador: string) => {
+	const empleador = getDemoEmpleadores().find((e) => e.id === idEmpleador);
+
+	if (!empleador) return null;
+
+	return empleador;
+};
+
+export const getDemoCertificacionById = (idCertificacion: string) => {
+	const certificacion = getDemoCertificaciones().find((c) => c.id === idCertificacion);
+
+	if (!certificacion) return null;
+
+	return certificacion;
+};
+
+export const getDemoProfesionistaById = (idProfesionista: string) => {
+	const profesionista = getDemoProfesionistas().find((p) => p.id === idProfesionista);
+
+	if (!profesionista) return null;
+
+	return profesionista;
+};
+
+const generateId = () => {
+	const random: RandomReader = {
+		read(bytes) {
+			crypto.getRandomValues(bytes);
+		}
+	};
+	const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	// 10-characters long string consisting of the upper case letters
+	return generateRandomString(random, alphabet, 10);
+};
+
+export const newProcesoContacto = (
+	empleador: Empleador,
+	certificacion: Certificacion,
+	profesionista: Profesionista
+) => {
+	if (certificacion.idProfesionista !== profesionista.id)
+		throw new Error('mismatch profesionista & certificacion');
+
+	const proceso: ProcesoContacto = {
+		fechaInicio: new Date(),
+		fechaFin: null,
+		id: generateId(),
+		idCalificacion: null,
+		idCertificacion: certificacion.id,
+		idEmpleador: empleador.id,
+		idProfesionista: certificacion.idProfesionista,
+		contacto: {
+			empleador: empleador.correo,
+			profesionista: profesionista.correo,
+			tipo: 'email'
+		}
+	};
+
+	return proceso;
+};
+
+export const newProcesosContacto = (idEmpleador: string, idsCerts: string[]) => {
+	const empleador = getDemoEmpleadorById(idEmpleador);
+	const procesos: ProcesoContacto[] = [];
+
+	if (!empleador) throw new Error('empleador not found [id=' + idEmpleador + ']');
+
+	for (let idCert of idsCerts) {
+		const cert = getDemoCertificacionById(idCert);
+		if (!cert) continue;
+
+		const profesionista = getDemoProfesionistaById(cert.idProfesionista);
+		if (!profesionista) continue;
+
+		const proceso = newProcesoContacto(empleador, cert, profesionista);
+
+		procesos.push(proceso);
+	}
+
+	return procesos;
 };
 
 export const getDemoProcesosContacto: () => ProcesoContacto[] = () => [

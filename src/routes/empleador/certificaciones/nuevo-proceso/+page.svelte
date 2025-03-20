@@ -1,10 +1,16 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import FormPayment from '$lib/components/form-payment.svelte';
 	import ListaCertificaciones from '$lib/components/lista-certificaciones.svelte';
 
 	const { data } = $props();
 
 	const { certificaciones } = data;
+
+	function onSubmit() {
+		const idsCerts = certificaciones.map((c) => c.id).join(',');
+		goto(`/empleador/procesos?idsCerts=${idsCerts}`);
+	}
 </script>
 
 <main>
@@ -23,7 +29,7 @@
 		</div>
 		<div class="mx-3 flex flex-col gap-5">
 			<h2 class="text-right text-xl">Info Pago</h2>
-			<FormPayment />
+			<FormPayment {onSubmit} />
 		</div>
 	</div>
 </main>

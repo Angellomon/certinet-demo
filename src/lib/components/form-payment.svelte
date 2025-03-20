@@ -1,3 +1,7 @@
+<script lang="ts">
+	const { onSubmit }: { onSubmit: () => void } = $props();
+</script>
+
 <div class="flex flex-col pl-5">
 	<label class="input validator w-full grow self-end">
 		<svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -51,6 +55,6 @@
 		</label>
 	</div>
 
-	<button class="btn btn-secondary">Pagar</button>
-	<button class="btn btn-primary">Pagar con Paypal</button>
+	<button onclick={onSubmit} class="btn btn-secondary">Pagar</button>
+	<button onclick={onSubmit} class="btn btn-primary">Pagar con Paypal</button>
 </div>
