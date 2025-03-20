@@ -204,7 +204,7 @@ export const getDemoProfesionistaById = (idProfesionista: string) => {
 	return profesionista;
 };
 
-const generateId = () => {
+export const generateId = () => {
 	const random: RandomReader = {
 		read(bytes) {
 			crypto.getRandomValues(bytes);
