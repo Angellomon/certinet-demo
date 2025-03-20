@@ -1,5 +1,6 @@
 <script>
 	import ListaCertificaciones from '$lib/components/lista-certificaciones.svelte';
+	import { certificacionesLocalStore } from './utils.svelte';
 
 	const { data } = $props();
 	const { certificaciones } = data;
@@ -13,7 +14,11 @@
 		</ul>
 	</div>
 
-	<h2 class="text-2xl">Certificaciones</h2>
-
-	<ListaCertificaciones basePath="/profesionista/certificaciones" {certificaciones} />
+	<div class="flex flex-col justify-around gap-5 md:flex-row md:justify-between">
+		<h2 class="text-2xl">Certificaciones</h2>
+		<a href="/profesionista/certificaciones/nueva">
+			<button class="btn btn-primary">Nueva Certificación</button>
+		</a>
+	</div>
+	<ListaCertificaciones basePath="/profesionista/certificaciones" certificaciones={[...certificaciones, ...certificacionesLocalStore.certificaciones]} />
 </main>
