@@ -1,8 +1,9 @@
 <script lang="ts">
 	import JsonData from '$lib/components/JsonData.svelte';
+	import ProcesoData from '$lib/components/proceso-data.svelte';
 
 	const { data } = $props();
-	const { proceso } = data;
+	const { proceso, empleador, profesionista, certificacion } = data;
 </script>
 
 <main>
@@ -10,8 +11,21 @@
 		<ul>
 			<li><a href="/empleador">Dashboard</a></li>
 			<li><a href="/empleador/procesos">Procesos</a></li>
+			<li>
+				<a href={`/empleador/procesos/${proceso.id}`}
+					>{empleador.razonSocial}
+					<div class="divider-horizontal">&</div>
+					{profesionista.nombre}
+					{profesionista.apellidos}
+					({proceso.id})</a
+				>
+			</li>
 		</ul>
 
-		<JsonData jsonData={proceso} />
+		<h3 class="text-xl">Datos Profesionista</h3>
+
+		<ProcesoData {profesionista} {certificacion} />
+
+		<button class="btn btn-primary">Calificar</button>
 	</div>
 </main>
