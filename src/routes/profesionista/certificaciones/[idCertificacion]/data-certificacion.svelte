@@ -4,8 +4,6 @@
 
 	let editMode = $state(false);
 
-	let certState = $state(certificacion)
-
 	function toggleEdit() {
 		editMode = !editMode;
 	}
