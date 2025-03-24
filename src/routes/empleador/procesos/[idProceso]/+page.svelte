@@ -1,5 +1,4 @@
 <script lang="ts">
-	import JsonData from '$lib/components/JsonData.svelte';
 	import ProcesoData from '$lib/components/proceso-data.svelte';
 
 	const { data } = $props();
