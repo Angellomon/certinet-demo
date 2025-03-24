@@ -16,7 +16,7 @@
 					<div class="divider-horizontal">&</div>
 					{profesionista.nombre}
 					{profesionista.apellidos}
-					({proceso.id})</a
+					({certificacion.nombre})</a
 				>
 			</li>
 		</ul>
