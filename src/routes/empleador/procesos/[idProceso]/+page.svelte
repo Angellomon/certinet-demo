@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import ProcesoData from '$lib/components/proceso-data.svelte';
+	import ProcesoData from './proceso-data.svelte';
 
 	const { data } = $props();
 	const { proceso, empleador, profesionista, certificacion } = data;

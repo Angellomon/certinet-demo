@@ -26,8 +26,7 @@
 		<div class="divider divider-horizontal">|</div>
 		<!-- <div class="divider divider-horizontal">&</div> -->
 		<div class="grid h-20 grow place-items-center">
-			{profesionista.nombre}
-			{profesionista.apellidos}
+			{empleador.razonSocial}
 		</div>
 	</div>
 
