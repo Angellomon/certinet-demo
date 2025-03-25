@@ -4,6 +4,12 @@
 	let { children } = $props();
 </script>
 
+<svelte:head>
+	<title>
+		CertiNet | Acercando Talento
+	</title>
+</svelte:head>
+
 <header>
 	<Header />
 </header>
