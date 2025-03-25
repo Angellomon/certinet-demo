@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import ProcesoData from '$lib/components/proceso-data.svelte';
 
 	const { data } = $props();
@@ -25,6 +26,9 @@
 
 		<ProcesoData {profesionista} {certificacion} />
 
-		<button class="btn btn-primary">Calificar</button>
+		<a href={`${page.url.pathname}/calificar`}>
+
+			<button class="btn btn-primary">Calificar</button>
+		</a>
 	</div>
 </main>
