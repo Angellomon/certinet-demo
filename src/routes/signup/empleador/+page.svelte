@@ -1,4 +1,4 @@
-<main class="flex flex-col items-center justify-center gap-5">
+<main class="flex flex-col items-center justify-center gap-5 m-30">
 	<h1 class="text-3xl">Signup Empleador</h1>
 
 	<form class="flex flex-col gap-1 px-5">

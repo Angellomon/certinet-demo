@@ -6,7 +6,7 @@
 	let password = $state('');
 </script>
 
-<main class="flex flex-col items-center gap-10">
+<main class="flex flex-col items-center gap-10 my-30">
 	<h1 class="text-3xl">Login Profesionista</h1>
 
 	<div class="flex max-w-1/2 flex-col items-center gap-3">
