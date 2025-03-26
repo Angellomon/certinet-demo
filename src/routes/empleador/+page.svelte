@@ -1,5 +1,4 @@
 <script lang="ts">
-	import JsonData from '$lib/components/JsonData.svelte';
 	import ListaProcesos from '$lib/components/lista-procesos.svelte';
 
 	const { data } = $props();
@@ -15,6 +14,4 @@
 
 	<h2 class="text-2xl">Procesos Recientes</h2>
 	<ListaProcesos baseUrl="/empleador/procesos" {certificacionesDataMap} {procesosContacto} />
-
-	<JsonData jsonData={currentEmpleador} />
 </div>

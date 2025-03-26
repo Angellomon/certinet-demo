@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import FiltersList from '$lib/components/filters-list.svelte';
 	import Search from '$lib/components/search.svelte';
+	import type { Filter } from '$lib/search.svelte';
 	import EmpleadorHeader from './empleador-header.svelte';
 
 	const { data, children } = $props();
 	const { currentEmpleador, totalProcesos } = data;
 
 	let searchTerm = $state('');
+	let filters: Filter[] = $state([]);
 
 	function handleSearch() {
 		goto('/empleador/certificaciones?search=' + searchTerm);
@@ -38,9 +41,13 @@
 		</ul>
 
 		<div class="grow">
-			<Search bind:searchTerm onsearch={handleSearch} />
+			<Search bind:filters bind:searchTerm onsearch={handleSearch} />
 		</div>
 	</div>
+
+	{#if filters.length > 0}
+		<FiltersList bind:filters />
+	{/if}
 
 	<EmpleadorHeader empleador={currentEmpleador} {totalProcesos} />
 
