@@ -37,6 +37,12 @@
 					href="/empleador/certificaciones">Buscador</a
 				>
 			</li>
+			<li>
+				<a
+					class={page.url.pathname.includes('/empleador/compras') ? 'menu-active' : ''}
+					href="/empleador/compras">Compras</a
+				>
+			</li>
 			<!-- <li><a>Configuración</a></li> -->
 		</ul>
 

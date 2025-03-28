@@ -3,6 +3,7 @@ import { generateRandomString, type RandomReader } from '@oslojs/crypto/random';
 import type {
 	CalificacionProceso,
 	Certificacion,
+	Compra,
 	Empleador,
 	ProcesoContacto,
 	Profesionista
@@ -175,6 +176,52 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 	}
 ];
 
+export const getDemoPagos: () => Compra[] = () => [
+	{
+		fecha: new Date(2025, 1, 14),
+		id: generateId(),
+		idEmpleador: EMPLEADOR_DEMO_ID,
+		idsProcesosContacto: [
+			'ZrWElEKLAxoec6aUAnKsxQ',
+			'RHoZVhhVXDwm5LciscAB3g',
+			'WPfNt2Ci9J_OUBbyUmGDyA'
+		],
+		monto: 150,
+		precio: {
+			centena: 300,
+			decena: 250,
+			unidad: 50
+		},
+		status: 'completado'
+	},
+	{
+		fecha: new Date(2025, 1, 27),
+		id: generateId(),
+		idEmpleador: 'uEHLrPCnfnomFaD26VbcUw',
+		idsProcesosContacto: ['U4BLP3metaGZuYGjekNLOQ'],
+		monto: 43,
+		precio: {
+			centena: 20,
+			decena: 30,
+			unidad: 43
+		},
+		status: 'en proceso'
+	},
+	{
+		fecha: new Date(2025, 2, 4),
+		id: generateId(),
+		idEmpleador: EMPLEADOR_DEMO_ID,
+		idsProcesosContacto: ['Bp9cxscAcaMYXJaodSSpjA'],
+		monto: 56,
+		precio: {
+			centena: 100,
+			decena: 60,
+			unidad: 56
+		},
+		status: 'rechazado'
+	}
+];
+
 export const getCurrentProfesionistaDemoCertificates: () => Certificacion[] = () => {
 	const demoProfesionista = getDemoProfesionista();
 	return getDemoCertificaciones().filter((c) => c.idProfesionista === demoProfesionista.id);
@@ -292,7 +339,7 @@ export const getDemoProcesosContacto: () => ProcesoContacto[] = () => [
 		idCertificacion: 'CXjtZgWa6_mMFe0zRbPoMw'
 	},
 	{
-		id: 'RHoZVhhVXDwm5LciscAB3g',
+		id: 'WPfNt2Ci9J_OUBbyUmGDyA',
 		idEmpleador: EMPLEADOR_DEMO_ID,
 		idProfesionista: 'lkgQiHQXwnpAxpdJb0mygg',
 		contacto: {
@@ -321,7 +368,7 @@ export const getDemoProcesosContacto: () => ProcesoContacto[] = () => [
 	},
 	{
 		id: 'Bp9cxscAcaMYXJaodSSpjA',
-		idEmpleador: 'test-empleador',
+		idEmpleador: EMPLEADOR_DEMO_ID,
 		idProfesionista: 'I_ijr3ITGtJX3Rns1QIjAQ',
 		contacto: {
 			empleador: '+416669689483',
