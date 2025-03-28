@@ -3,12 +3,17 @@
 	import { certificacionesLocalStore } from '../../routes/profesionista/certificaciones/utils.svelte';
 	import VerifiedStatus from './verified-status.svelte';
 
-	let { certificaciones, basePath }: { certificaciones: Certificacion[]; basePath?: string } =
-		$props();
+	interface Props {
+		certificaciones: Certificacion[];
+		basePath?: string;
+		hideDeleteBtn?: boolean;
+	}
 
-		function handleCertRemove(idCert: string) {
-			certificacionesLocalStore.removeCertificacion(idCert)
-		}
+	let { certificaciones, basePath, hideDeleteBtn = false }: Props = $props();
+
+	function handleCertRemove(idCert: string) {
+		certificacionesLocalStore.removeCertificacion(idCert);
+	}
 </script>
 
 {#snippet statVigencia(title: string, value: string)}
@@ -20,7 +25,7 @@
 
 {#snippet btnRemoveCert(idCert: string)}
 	<!-- svelte-ignore a11y_consider_explicit_label -->
-	<button class="btn btn-error btn-square self-end" onclick={() => handleCertRemove(idCert)}>
+	<button class="btn btn-error btn-square absolute top-0 right-3" onclick={() => handleCertRemove(idCert)}>
 		<svg
 			class="size-[1.2em]"
 			fill="#ffffff"
@@ -36,7 +41,10 @@
 {/snippet}
 
 {#snippet cerData(cert: Certificacion)}
-	<li class="list-row my-1 hover:border">
+	<li class="list-row hover:bg-base-300 my-1">
+		{#if !hideDeleteBtn}
+			{@render btnRemoveCert(cert.id)}
+		{/if}
 		<div class="flex flex-col">
 			<h3 class="text-xl font-bold hover:font-bold">{cert.nombre}</h3>
 			<div class="flex flex-col justify-between md:flex-row">
@@ -54,9 +62,9 @@
 	</li>
 {/snippet}
 
-<ul class="list bg-base-100 rounded-box gap-1 shadow-md">
+<ul class="list bg-base-200 rounded-box gap-1 shadow-md">
 	{#each certificaciones as cert}
-		{@render btnRemoveCert(cert.id)}
+		
 		{#if basePath}
 			<a href={`${basePath}/${cert.id}`}>
 				{@render cerData(cert)}

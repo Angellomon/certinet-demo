@@ -21,12 +21,12 @@
 	}
 </script>
 
-<ul class="list bg-base-100 rounded-box shadow-md">
+<ul class="list bg-base-200 rounded-box shadow-md">
 	{#each procesosContacto as proceso, i}
 		{@const cert = certificacionesDataMap[proceso.idCertificacion]}
 		{@const concluido = !!proceso.fechaFin}
 		<a href={baseUrl + '/' + proceso.id}>
-			<li class="list-row hover:border">
+			<li class="list-row hover:bg-base-300">
 				<div>
 					<div class="flex flex-col items-center md:flex-row">
 						<div class="text-lg font-bold">{cert.nombre}</div>

@@ -43,12 +43,12 @@
 	</div>
 {/snippet}
 
-<ul class="list bg-base-100 rounded-box gap-1 shadow-md">
+<ul class="list bg-base-200 rounded-box gap-1 shadow-md">
 	{#each certificaciones as cert}
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<li
-			class="list-row my-1 cursor-pointer hover:border"
+			class="list-row cursor-pointer hover:bg-base-300"
 			class:border-2={selectedIds.has(cert.id)}
 			onclick={() => handleSelect(cert.id)}
 		>
