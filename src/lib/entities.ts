@@ -26,6 +26,8 @@ export type Empleador = {
 	giro: string;
 	fechaEstablecimiento: Date;
 	verificado: boolean;
+	precioCertificacion?: PrecioCertificacion | null;
+	formaPago?: FormaPago | null;
 };
 
 export type ProcesoContacto = {
@@ -41,6 +43,28 @@ export type ProcesoContacto = {
 		empleador: string;
 		profesionista: string;
 	};
+};
+
+export type Compra = {
+	id: string;
+	idEmpleador: string;
+	idsProcesosContacto: string[];
+	fecha: Date;
+	monto: number;
+	promocion?: string | null;
+	precio: PrecioCertificacion;
+	status: 'en proceso' | 'completado' | 'rechazado';
+};
+
+export type PrecioCertificacion = {
+	unidad: number;
+	decena: number;
+	centena: number;
+};
+
+export type FormaPago = {
+	tarjeta: string;
+	verificado: boolean;
 };
 
 export type TipoCalificacion = 'estrella-5' | 'ponderacion-5' | 'ponderacion-10';
