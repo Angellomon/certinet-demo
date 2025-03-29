@@ -176,10 +176,10 @@ export const getDemoCertificaciones: () => Certificacion[] = () => [
 	}
 ];
 
-export const getDemoPagos: () => Compra[] = () => [
+export const getDemoCompras: () => Compra[] = () => [
 	{
 		fecha: new Date(2025, 1, 14),
-		id: generateId(),
+		id: 'rDBQZ0J7sza7CQ2k-P-iIQ',
 		idEmpleador: EMPLEADOR_DEMO_ID,
 		idsProcesosContacto: [
 			'ZrWElEKLAxoec6aUAnKsxQ',
@@ -196,7 +196,7 @@ export const getDemoPagos: () => Compra[] = () => [
 	},
 	{
 		fecha: new Date(2025, 1, 27),
-		id: generateId(),
+		id: '9HwDyGY6K4uVbCk8wdIJ5w',
 		idEmpleador: 'uEHLrPCnfnomFaD26VbcUw',
 		idsProcesosContacto: ['U4BLP3metaGZuYGjekNLOQ'],
 		monto: 43,
@@ -209,7 +209,7 @@ export const getDemoPagos: () => Compra[] = () => [
 	},
 	{
 		fecha: new Date(2025, 2, 4),
-		id: generateId(),
+		id: 'mSMjxBTHEs5nrSILUeaoYg',
 		idEmpleador: EMPLEADOR_DEMO_ID,
 		idsProcesosContacto: ['Bp9cxscAcaMYXJaodSSpjA'],
 		monto: 56,
