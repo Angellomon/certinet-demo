@@ -2,6 +2,16 @@
 	const { children, data } = $props();
 
 	const { totalCertificacionesAdquiridas, totalCompras, ultimaCompra, empleador } = data;
+
+	let metodoPagoHover = $state(false);
+
+	function handleMetodoPagoMouseEnter() {
+		metodoPagoHover = true;
+	}
+
+	function handleMetodoPagoMouseLeave() {
+		metodoPagoHover = false;
+	}
 </script>
 
 {#snippet stat(title: string, value: string, desc?: string)}
@@ -55,17 +65,29 @@
 				{@render stat('Última compra', ultimaCompra.fecha.toISOString().substring(0, 10))}
 
 				{#if !empleador.formaPago}
-					{@render statusStat('Forma de Pago', 'error', 'No establecida.')}
+					<!-- svelte-ignore a11y_invalid_attribute -->
+					<a
+						href="#"
+						class="bg-base-200 hover:bg-base-300 rounded-box cursor-pointer"
+						onmouseenter={handleMetodoPagoMouseEnter}
+						onmouseleave={handleMetodoPagoMouseLeave}
+					>
+						{#if metodoPagoHover}
+							{@render statusStat('Forma de Pago', 'success', 'Configurar')}
+						{:else}
+							{@render statusStat('Forma de Pago', 'error', 'No establecida')}
+						{/if}
+					</a>
 				{:else if empleador.formaPago.verificado}
-					{@render statusStat('Forma de Pago', 'success', 'Verificada.')}
+					{@render statusStat('Forma de Pago', 'success', 'Verificada')}
 				{:else}
-					{@render statusStat('Forma de Pago', 'error', 'No verificada.')}
+					{@render statusStat('Forma de Pago', 'error', 'No verificada')}
 				{/if}
 			</div>
 		</div>
 	</div>
 
-  <div class="divider 1"></div>
+	<div class="divider 1"></div>
 
 	{@render children()}
 </main>

@@ -7,5 +7,5 @@
 </script>
 
 <main>
-	<ListaCompras {compras} />
+	<ListaCompras {compras} links />
 </main>

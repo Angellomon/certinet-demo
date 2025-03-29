@@ -1,9 +1,9 @@
-import { getDemoCertificaciones, getDemoEmpleador, getDemoPagos } from '$lib/demo-data.js';
+import { getDemoCertificaciones, getDemoEmpleador, getDemoCompras } from '$lib/demo-data.js';
 
 export const load = (e) => {
 	const empleador = getDemoEmpleador();
 
-	const compras = getDemoPagos().filter((c) => c.idEmpleador === empleador.id).reverse();
+	const compras = getDemoCompras().filter((c) => c.idEmpleador === empleador.id).reverse();
 
 	const totalMontoCompras = compras.reduce((total, c) => total + c.monto, 0);
 
