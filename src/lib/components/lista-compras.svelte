@@ -3,9 +3,10 @@
 
 	interface Props {
 		compras: Compra[];
+		links?: boolean;
 	}
 
-	const { compras = [] }: Props = $props();
+	const { compras = [], links = false }: Props = $props();
 </script>
 
 {#snippet stat(title: string, value: string, desc?: string)}
@@ -51,29 +52,40 @@
 	</div>
 {/snippet}
 
+{#snippet compraRow(compra: Compra)}
+	<button
+		class="btn-block hover:bg-base-300 bg-base-200 border-b-accent-content rounded-box my-1 flex cursor-pointer flex-row flex-wrap items-end justify-between p-5 md:items-center"
+	>
+		<div class="tooltip tooltip-right self-start" data-tip="ID Compra">
+			<div class="text-xl underline">{compra.id}</div>
+		</div>
+
+		<div class="divider divider-vertical"></div>
+
+		<div>
+			{@render stat('Monto', `$ ${compra.monto.toFixed(2)}`)}
+			{@render stat('Fecha', compra.fecha.toISOString().substring(0, 10))}
+			{@render stat('# de Certificaciones', `${compra.idsProcesosContacto.length}`)}
+
+			{#if compra.status == 'completado'}
+				{@render statusStat('Estatus Pago', 'success', compra.status)}
+			{:else if compra.status == 'en proceso'}
+				{@render statusStat('Estatus Pago', 'warning', compra.status)}
+			{:else if compra.status == 'rechazado'}
+				{@render statusStat('Estatus Pago', 'error', compra.status)}
+			{/if}
+		</div>
+	</button>
+{/snippet}
+
 <div class="flex flex-col">
 	{#each compras as compra}
-		<button
-			class="hover:bg-base-300 bg-base-200 border-b-accent-content rounded-box my-1 flex cursor-pointer flex-row flex-wrap items-end justify-between p-5 md:items-center"
-		>
-			<div class="self-start">
-				<div class="text-xl underline">{compra.id}</div>
-			</div>
-      <div class="divider divider-vertical"></div>
-
-			<div>
-				{@render stat('Monto', `$ ${compra.monto.toFixed(2)}`)}
-				{@render stat('Fecha', compra.fecha.toISOString().substring(0, 10))}
-				{@render stat('# de Certificaciones', `${compra.idsProcesosContacto.length}`)}
-
-				{#if compra.status == 'completado'}
-					{@render statusStat('Estatus Pago', 'success', compra.status)}
-				{:else if compra.status == 'en proceso'}
-					{@render statusStat('Estatus Pago', 'warning', compra.status)}
-				{:else if compra.status == 'rechazado'}
-					{@render statusStat('Estatus Pago', 'error', compra.status)}
-				{/if}
-			</div>
-		</button>
+		{#if links}
+			<a href={`/empleador/compras/${compra.id}`}>
+				{@render compraRow(compra)}
+			</a>
+		{:else}
+			{@render compraRow(compra)}
+		{/if}
 	{/each}
 </div>
