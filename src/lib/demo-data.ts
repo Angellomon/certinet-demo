@@ -5,6 +5,8 @@ import type {
 	Certificacion,
 	Compra,
 	Empleador,
+	FormaPago,
+	PrecioCertificacion,
 	ProcesoContacto,
 	Profesionista
 } from './entities';
@@ -412,3 +414,19 @@ export const getDemoCalificacionesProceso: () => CalificacionProceso[] = () => [
 		}
 	}
 ];
+
+export function getDefaultPrecioCertificacion(): PrecioCertificacion {
+	return {
+		centena: 180,
+		decena: 15,
+		unidad: 1
+	};
+}
+
+export function getDefaultFormaPago(): FormaPago {
+	return {
+		tarjeta: '1111 2222 3333 4444',
+		verificado: false,
+		cvc: '000'
+	};
+}
