@@ -1,19 +1,9 @@
 <script lang="ts">
 	import '../app.css';
 	import Header from '$lib/components/header.svelte';
-	import { newCertificacionesStore, newProcesosContactoStore } from '$lib/localstore.svelte';
-	import { setContext } from 'svelte';
-	import type { Certificacion } from '$lib/entities';
 
 	let { children } = $props();
 
-
-	const certificacionesStore = newCertificacionesStore();
-	setContext('certificaciones', certificacionesStore);
-
-
-	const procesosContactoStore = newProcesosContactoStore();
-	setContext('procesos-contacto', procesosContactoStore);
 </script>
 
 <svelte:head>

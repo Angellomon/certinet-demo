@@ -6,7 +6,11 @@
 	import type { Filter } from '$lib/search.svelte';
 	import { setContext } from 'svelte';
 	import EmpleadorHeader from './empleador-header.svelte';
-	import { newEmpleadorStore } from '$lib/localstore.svelte';
+	import {
+		newCertificacionesStore,
+		newEmpleadorStore,
+		newProcesosContactoStore
+	} from '$lib/localstore.svelte';
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
 
 	const { data, children } = $props();
@@ -18,6 +22,12 @@
 	const store = newEmpleadorStore();
 
 	setContext('empleador-store', store);
+
+	const certificacionesStore = newCertificacionesStore();
+	setContext('certificaciones', certificacionesStore);
+
+	const procesosContactoStore = newProcesosContactoStore();
+	setContext('procesos-contacto', procesosContactoStore);
 
 	function handleSearch() {
 		goto('/empleador/certificaciones?search=' + searchTerm);
@@ -56,7 +66,7 @@
 		</div>
 
 		<button
-			class={`btn ${page.url.pathname.includes('/empleador/config') ? "btn-neutral" : ""}`}
+			class={`btn ${page.url.pathname.includes('/empleador/config') ? 'btn-neutral' : ''}`}
 			onclick={() => goto('/empleador/config')}
 		>
 			Configuración <SettingsSvg />
@@ -67,7 +77,7 @@
 		<FiltersList bind:filters />
 	{/if}
 
-	<EmpleadorHeader empleador={store.value} {totalProcesos} />
+	<EmpleadorHeader {totalProcesos} />
 
 	{@render children()}
 </main>
