@@ -22,6 +22,9 @@ const certificacionSchema = v.object({
 });
 export type Certificacion = v.InferOutput<typeof certificacionSchema>;
 
+export const certificacionesSchema = v.array(certificacionSchema)
+export type Certificaciones = v.InferOutput<typeof certificacionesSchema>
+
 const profesionistaSchema = v.object({
 	id: idSchema,
 	correo: emailSchema,
