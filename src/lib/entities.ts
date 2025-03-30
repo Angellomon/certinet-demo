@@ -64,6 +64,7 @@ export type PrecioCertificacion = {
 
 export type FormaPago = {
 	tarjeta: string;
+	cvc: string;
 	verificado: boolean;
 };
 
