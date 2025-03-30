@@ -1,8 +1,5 @@
 <script lang="ts">
 	import ListaProcesos from '$lib/components/lista-procesos.svelte';
-
-	const { data } = $props();
-
 </script>
 
 <main class="flex flex-col gap-5">
