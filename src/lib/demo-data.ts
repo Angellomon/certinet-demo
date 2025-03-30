@@ -427,6 +427,8 @@ export function getDefaultFormaPago(): FormaPago {
 	return {
 		tarjeta: '1111 2222 3333 4444',
 		verificado: false,
-		cvc: '000'
+		cvc: '000',
+		año: 2025,
+		mes: 1
 	};
 }

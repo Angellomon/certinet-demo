@@ -80,7 +80,9 @@ export type PrecioCertificacion = v.InferOutput<typeof precioCertificacionSchema
 export const formaPagoSchema = v.object({
 	tarjeta: v.string(),
 	cvc: v.string(),
-	verificado: v.boolean()
+	verificado: v.boolean(),
+	mes: v.fallback(v.number(), 1),
+	año: v.fallback(v.number(), 2025)
 });
 
 export type FormaPago = v.InferOutput<typeof formaPagoSchema>;
