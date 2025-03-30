@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { parse } from 'valibot';
-import { getDemoEmpleador } from './demo-data';
-import { empleadorSchema } from './entities';
+import { getDemoCertificaciones, getDemoEmpleador } from './demo-data';
+import { certificacionesSchema, empleadorSchema } from './entities';
 
 export class LocalObjectStore<T> {
 	value = $state<T>() as T;
@@ -40,10 +40,12 @@ export function newLocalStore<T>(key: string, value: T, schema: any) {
 
 export function newEmpleadorStore() {
 	const demoData = getDemoEmpleador();
-	const store = newLocalStore('empleador', demoData, empleadorSchema);
 
-	if (typeof store.value.fechaEstablecimiento === 'string')
-		store.value.fechaEstablecimiento = new Date(store.value.fechaEstablecimiento);
+	return newLocalStore('empleador', demoData, empleadorSchema);
+}
 
-	return store;
+export function newCertificacionesStore() {
+	const demoData = getDemoCertificaciones()
+
+	return newLocalStore("certificaciones", demoData, certificacionesSchema) 
 }
