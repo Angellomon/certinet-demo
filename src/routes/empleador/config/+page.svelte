@@ -128,6 +128,16 @@
 			/>
 
 			<!-- svelte-ignore a11y_label_has_associated_control -->
+			<label class="fieldset-label">Correo</label>
+			<input
+				type="email"
+				class="input"
+				placeholder="Razón Social"
+				bind:value={empleadorStore.value.correo}
+				disabled={!edit['datos']}
+			/>
+
+			<!-- svelte-ignore a11y_label_has_associated_control -->
 			<label class="fieldset-label">Giro</label>
 			<input
 				type="text"
