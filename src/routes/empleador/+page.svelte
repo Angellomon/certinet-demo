@@ -2,7 +2,6 @@
 	import ListaProcesos from '$lib/components/lista-procesos.svelte';
 
 	const { data } = $props();
-	const { currentEmpleador, procesosContacto, certificacionesDataMap } = data;
 </script>
 
 <div class="flex flex-col gap-5">
@@ -13,5 +12,5 @@
 	</div>
 
 	<h2 class="text-2xl">Procesos Recientes</h2>
-	<ListaProcesos baseUrl="/empleador/procesos" {certificacionesDataMap} {procesosContacto} />
+	<ListaProcesos baseUrl="/empleador/procesos" limit={10} />
 </div>
