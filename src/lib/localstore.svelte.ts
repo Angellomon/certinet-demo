@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { parse } from 'valibot';
-import { getDemoCertificaciones, getDemoEmpleador } from './demo-data';
-import { certificacionesSchema, empleadorSchema } from './entities';
+import { getDemoCertificaciones, getDemoEmpleador, getDemoProcesosContacto } from './demo-data';
+import { certificacionesSchema, empleadorSchema, procesosContactoSchema } from './entities';
 
 export class LocalObjectStore<T> {
 	value = $state<T>() as T;
@@ -49,3 +49,10 @@ export function newCertificacionesStore() {
 
 	return newLocalStore("certificaciones", demoData, certificacionesSchema) 
 }
+
+export function newProcesosContactoStore() {
+	const demoData = getDemoProcesosContacto()
+
+	return newLocalStore("procesos-contacto", demoData, procesosContactoSchema)
+}
+
