@@ -1,14 +1,17 @@
 <script lang="ts">
-	import type { Certificacion } from '$lib/entities';
+	import type { Certificacion, Certificaciones } from '$lib/entities';
 	import { SvelteSet } from 'svelte/reactivity';
 	import VerifiedStatus from './verified-status.svelte';
+	import type { LocalObjectStore } from '$lib/localstore.svelte';
+	import { getContext } from 'svelte';
 
 	let {
-		certificaciones,
 		selectedIds = $bindable(new SvelteSet())
-	}: { certificaciones: Certificacion[]; selectedIds: Set<string> } = $props();
+	}: {  selectedIds: Set<string> } = $props();
 
-	function handleSelect(idCert: string) {
+	const certificaciones: LocalObjectStore<Certificaciones> = getContext('certificaciones');
+
+		function handleSelect(idCert: string) {
 		if (selectedIds.has(idCert)) {
 			selectedIds.delete(idCert);
 
@@ -44,7 +47,7 @@
 {/snippet}
 
 <ul class="list bg-base-200 rounded-box gap-1 shadow-md">
-	{#each certificaciones as cert}
+	{#each certificaciones.value as cert}
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<li
