@@ -4,14 +4,13 @@
 	import VerifiedStatus from './verified-status.svelte';
 	import type { LocalObjectStore } from '$lib/localstore.svelte';
 	import { getContext } from 'svelte';
+	import CrossSvg from './cross-svg.svelte';
 
-	let {
-		selectedIds = $bindable(new SvelteSet())
-	}: {  selectedIds: Set<string> } = $props();
+	let { selectedIds = $bindable(new SvelteSet()) }: { selectedIds: Set<string> } = $props();
 
 	const certificaciones: LocalObjectStore<Certificaciones> = getContext('certificaciones');
 
-		function handleSelect(idCert: string) {
+	function handleSelect(idCert: string) {
 		if (selectedIds.has(idCert)) {
 			selectedIds.delete(idCert);
 
@@ -23,7 +22,7 @@
 </script>
 
 {#snippet statVigencia(title: string, value: string)}
-	<div class="mx-5 flex flex-col min-w-20 items-start justify-center">
+	<div class="mx-5 flex min-w-20 flex-col items-start justify-center">
 		<span class="text-md font-extralight">{title}</span>
 		<span class="text-lg font-bold">{value}</span>
 	</div>
@@ -51,11 +50,16 @@
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<li
-			class="list-row cursor-pointer hover:bg-base-300"
+			class="list-row hover:bg-base-300 cursor-pointer"
 			class:border-2={selectedIds.has(cert.id)}
 			onclick={() => handleSelect(cert.id)}
 		>
 			{@render certElement(cert)}
+			{#if selectedIds.has(cert.id)}
+				<button class="btn btn-error absolute right-5">
+					<CrossSvg />
+				</button>
+			{/if}
 		</li>
 	{/each}
 </ul>
