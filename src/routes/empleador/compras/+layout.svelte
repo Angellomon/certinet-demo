@@ -67,7 +67,7 @@
 				{#if !empleador.formaPago}
 					<!-- svelte-ignore a11y_invalid_attribute -->
 					<a
-						href="#"
+						href="/empleador/config"
 						class="bg-base-200 hover:bg-base-300 rounded-box cursor-pointer"
 						onmouseenter={handleMetodoPagoMouseEnter}
 						onmouseleave={handleMetodoPagoMouseLeave}

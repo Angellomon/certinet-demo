@@ -2,13 +2,17 @@
 	import CountStat from '$lib/components/count-stat.svelte';
 	import VerifiedStatus from '$lib/components/verified-status.svelte';
 	import type { Empleador } from '$lib/entities';
+	import { newEmpleadorStore, LocalStore } from '$lib/localstore.svelte';
+	import { getContext } from 'svelte';
 
 	const { empleador, totalProcesos } = $props<{ empleador: Empleador; totalProcesos: number }>();
+
+	const localEmpleador = getContext<LocalStore<Empleador>>("empleador-store")
 </script>
 
 <div class="flex flex-col items-start justify-between md:flex-row">
 	<div>
-		<h1 class="text-4xl">{empleador.razonSocial}</h1>
+		<h1 class="text-4xl">{localEmpleador.value.razonSocial}</h1>
 		<div class="flex flex-col justify-start gap-10 md:flex-row md:items-center">
 			<div class="link link-primary text-xl italic">{empleador.correo}</div>
 
