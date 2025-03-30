@@ -10,7 +10,7 @@
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
 
 	const { data, children } = $props();
-	const { currentEmpleador, totalProcesos } = data;
+	const { totalProcesos } = data;
 
 	let searchTerm = $state('');
 	let filters: Filter[] = $state([]);
@@ -67,7 +67,7 @@
 		<FiltersList bind:filters />
 	{/if}
 
-	<EmpleadorHeader empleador={currentEmpleador} {totalProcesos} />
+	<EmpleadorHeader empleador={store.value} {totalProcesos} />
 
 	{@render children()}
 </main>
