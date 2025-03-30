@@ -1,7 +1,13 @@
 <script lang="ts">
+	import type { Empleador } from '$lib/entities.js';
+	import type { LocalObjectStore } from '$lib/localstore.svelte.js';
+	import { getContext } from 'svelte';
+
 	const { children, data } = $props();
 
-	const { totalCertificacionesAdquiridas, totalCompras, ultimaCompra, empleador } = data;
+	const { totalCertificacionesAdquiridas, totalCompras, ultimaCompra } = data;
+
+	const empleador: LocalObjectStore<Empleador> = getContext('empleador-store');
 
 	let metodoPagoHover = $state(false);
 
@@ -32,7 +38,7 @@
 	</div>
 {/snippet}
 
-{#snippet statusStat(title: string, type: 'success' | 'error', value: string)}
+{#snippet statusStat(title: string, type: 'success' | 'error' | 'warning', value: string)}
 	<div class="stats">
 		<div class="stat">
 			<div class="stat-title">
@@ -43,6 +49,9 @@
 					{#if type == 'error'}
 						<div aria-label="error" class="status status-lg status-error animate-ping"></div>
 						<div class="status status-lg status-error"></div>
+					{:else if type == 'warning'}
+						<div aria-label="warning" class="status status-lg status-warning"></div>
+						<div class="status status-lg status-warning"></div>
 					{:else if type == 'success'}
 						<div aria-label="success" class="status status-lg status-success"></div>
 						<div class="status status-lg status-success"></div>
@@ -64,7 +73,7 @@
 				{@render stat('Compras realizadas', `${totalCompras}`)}
 				{@render stat('Última compra', ultimaCompra.fecha.toISOString().substring(0, 10))}
 
-				{#if !empleador.formaPago}
+				{#if !empleador.value.formaPago}
 					<!-- svelte-ignore a11y_invalid_attribute -->
 					<a
 						href="/empleador/config"
@@ -78,10 +87,10 @@
 							{@render statusStat('Forma de Pago', 'error', 'No establecida')}
 						{/if}
 					</a>
-				{:else if empleador.formaPago.verificado}
+				{:else if empleador.value.formaPago.verificado}
 					{@render statusStat('Forma de Pago', 'success', 'Verificada')}
 				{:else}
-					{@render statusStat('Forma de Pago', 'error', 'No verificada')}
+					{@render statusStat('Forma de Pago', 'warning', 'No verificada')}
 				{/if}
 			</div>
 		</div>

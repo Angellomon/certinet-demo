@@ -3,16 +3,31 @@
 	import EditSvg from '$lib/components/edit-svg.svelte';
 	import { getDefaultFormaPago, getDefaultPrecioCertificacion } from '$lib/demo-data';
 	import type { Empleador } from '$lib/entities';
-	import { newLocalStore, LocalStore } from '$lib/localstore.svelte';
+	import { newLocalStore, LocalObjectStore } from '$lib/localstore.svelte';
+	import { zhCN } from 'date-fns/locale';
 	import { getContext } from 'svelte';
-	import { value } from 'valibot';
+	import * as v from 'valibot';
 
-	const empleadorStore = getContext<LocalStore<Empleador>>('empleador-store');
+	const empleadorStore = getContext<LocalObjectStore<Empleador>>('empleador-store');
 
-	type Seccion = 'datos' | 'forma pago' | 'precio certificacion';
-	const seccionStore = newLocalStore('seccion-empleador-config', {
-		seccion: 'datos'
+	const seccionSchema = v.union([
+		v.literal('datos'),
+		v.literal('forma pago'),
+		v.literal('precio certificacion')
+	]);
+	type Seccion = v.InferOutput<typeof seccionSchema>;
+
+	const seccionObjSchema = v.object({
+		seccion: seccionSchema
 	});
+	type SeccionObjType = v.InferOutput<typeof seccionObjSchema>;
+	const seccionStore = newLocalStore(
+		'seccion-empleador-config',
+		{
+			seccion: 'datos'
+		},
+		seccionObjSchema
+	);
 
 	let edit: Record<Seccion, boolean> = $state({
 		datos: false,
