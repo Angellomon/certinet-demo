@@ -3,6 +3,7 @@ import type { LocalObjectStore } from './localstore.svelte';
 import type {
 	CalificacionesProceso,
 	Certificaciones,
+	Compras,
 	Empleador,
 	ProcesosContacto,
 	Profesionistas
@@ -50,4 +51,8 @@ export function getCalificacionProceso(idCalificacion: string | null) {
 	const calificaciones = getCalificacionesProcesoContext();
 
 	return calificaciones.value.find((c) => c.id === idCalificacion);
+}
+
+export function getComprasContext() {
+	return getContext('compras') as LocalObjectStore<Compras>;
 }
