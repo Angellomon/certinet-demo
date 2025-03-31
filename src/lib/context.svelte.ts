@@ -8,7 +8,8 @@ import type {
 	Empleadores,
 	ProcesosContacto,
 	Profesionista,
-	Profesionistas
+	Profesionistas,
+	Theme
 } from './entities';
 
 export function getCurrentEmpleadorContext() {
@@ -77,4 +78,8 @@ export function getEmpleadorContext(idEmpleador: string) {
 	const empleadores = getEmpleadoresContext();
 
 	return empleadores.value.find((e) => e.id === idEmpleador);
+}
+
+export function getThemeContext() {
+	return getContext('theme') as LocalObjectStore<Theme>;
 }

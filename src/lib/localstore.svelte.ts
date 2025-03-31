@@ -18,7 +18,8 @@ import {
 	empleadorSchema,
 	procesosContactoSchema,
 	profesionistaSchema,
-	profesionistasSchema
+	profesionistasSchema,
+	themeSchema
 } from './entities';
 
 export class LocalObjectStore<T> {
@@ -102,4 +103,9 @@ export function newEmpleadoresStore() {
 	const demoData = getDemoEmpleadores();
 
 	return newLocalStore('empleadores', demoData, empleadoresSchema);
+}
+
+export function newThemeStore() {
+	const defaultData = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	return newLocalStore('theme', defaultData, themeSchema);
 }

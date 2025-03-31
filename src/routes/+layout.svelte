@@ -1,8 +1,13 @@
 <script lang="ts">
 	import '../app.css';
 	import Header from '$lib/components/header.svelte';
+	import { newThemeStore } from '$lib/localstore.svelte';
+	import { setContext } from 'svelte';
 
 	let { children } = $props();
+
+	const themeStore = newThemeStore()
+	setContext("theme", themeStore)
 
 </script>
 

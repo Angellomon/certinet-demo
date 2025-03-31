@@ -45,6 +45,12 @@
 </script>
 
 <main class="flex flex-col gap-5 p-5 lg:px-20 lg:py-5">
+	<ProfesionistaHeader
+		profesionista={currentProfesionistaStore.value}
+		{totalProcesos}
+		{totalCertificaciones}
+	/>
+
 	<ul class="menu menu-vertical sm:menu-horizontal bg-base-200 rounded-box">
 		<li>
 			<a class={page.url.pathname === '/profesionista' ? 'menu-active' : ''} href="/profesionista"
@@ -65,12 +71,6 @@
 		</li>
 		<!-- <li><a>Configuración</a></li> -->
 	</ul>
-
-	<ProfesionistaHeader
-		profesionista={currentProfesionistaStore.value}
-		{totalProcesos}
-		{totalCertificaciones}
-	/>
 
 	{@render children()}
 </main>
