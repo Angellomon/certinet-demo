@@ -1,7 +1,21 @@
 import { browser } from '$app/environment';
 import { parse } from 'valibot';
-import { getDemoCertificaciones, getDemoEmpleador, getDemoProcesosContacto } from './demo-data';
-import { certificacionesSchema, empleadorSchema, procesosContactoSchema } from './entities';
+import {
+	getDemoCalificacionesProceso,
+	getDemoCertificaciones,
+	getDemoCompras,
+	getDemoEmpleador,
+	getDemoProcesosContacto,
+	getDemoProfesionistas
+} from './demo-data';
+import {
+	calificacionesProcesoSchema,
+	certificacionesSchema,
+	comprasSchema,
+	empleadorSchema,
+	procesosContactoSchema,
+	profesionistasSchema
+} from './entities';
 
 export class LocalObjectStore<T> {
 	value = $state<T>() as T;
@@ -45,14 +59,31 @@ export function newEmpleadorStore() {
 }
 
 export function newCertificacionesStore() {
-	const demoData = getDemoCertificaciones()
+	const demoData = getDemoCertificaciones();
 
-	return newLocalStore("certificaciones", demoData, certificacionesSchema) 
+	return newLocalStore('certificaciones', demoData, certificacionesSchema);
 }
 
 export function newProcesosContactoStore() {
-	const demoData = getDemoProcesosContacto()
+	const demoData = getDemoProcesosContacto();
 
-	return newLocalStore("procesos-contacto", demoData, procesosContactoSchema)
+	return newLocalStore('procesos-contacto', demoData, procesosContactoSchema);
 }
 
+export function newProfesionistasStore() {
+	const demoData = getDemoProfesionistas();
+
+	return newLocalStore('profesionistas', demoData, profesionistasSchema);
+}
+
+export function newComprasStore() {
+	const demoData = getDemoCompras();
+
+	return newLocalStore('compras', demoData, comprasSchema);
+}
+
+export function newCalificacionesProcesoStore() {
+	const demoData = getDemoCalificacionesProceso()
+
+	return newLocalStore("calificaciones-proceso", demoData, calificacionesProcesoSchema)
+}
