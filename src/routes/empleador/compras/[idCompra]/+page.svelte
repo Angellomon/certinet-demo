@@ -1,7 +1,14 @@
 <script lang="ts">
+	import { page } from '$app/state';
+	import type { Compras } from '$lib/entities.js';
+	import type { LocalObjectStore } from '$lib/localstore.svelte.js';
+	import { getContext } from 'svelte';
+
 	const { data } = $props();
 
 	const { compra, certificaciones, procesosContacto, certificacionesIdMap } = data;
+
+	const idCompra = page.params.idCompra;
 </script>
 
 {#snippet stat(title: string, value: string, desc?: string)}
@@ -48,21 +55,22 @@
 {/snippet}
 
 <main class="bg-base-300 rounded-box p-5">
-	<h3 class="tooltip tooltip-right text-xl underline" data-tip="ID Compra">{compra.id}</h3>
+	<h3 class="tooltip tooltip-right text-xl underline" data-tip="ID Compra">{idCompra}</h3>
 
-  <div class="divider"></div>
+	<div class="divider"></div>
+	{#if compra}
+		<div class="flex flex-row flex-wrap gap-2">
+			{@render stat('Monto', compra.monto.toFixed(2))}
+			{@render stat('Fecha', compra.fecha.toISOString().slice(0, 10))}
+			{@render stat('# de Certificaciones', `${certificaciones.length}`)}
 
-	<div class="flex flex-row flex-wrap gap-2">
-		{@render stat('Monto', compra.monto.toFixed(2))}
-		{@render stat('Fecha', compra.fecha.toISOString().slice(0, 10))}
-		{@render stat('# de Certificaciones', `${certificaciones.length}`)}
-
-		{#if compra.status == 'completado'}
-			{@render statusStat('Estatus Pago', 'success', 'Completado')}
-		{:else if compra.status == 'en proceso'}
-			{@render statusStat('Estatus Pago', 'warning', 'En Proceso')}
-		{:else if compra.status == 'rechazado'}
-			{@render statusStat('Estatus Pago', 'error', 'Rechazado')}
-		{/if}
-	</div>
+			{#if compra.status == 'completado'}
+				{@render statusStat('Estatus Pago', 'success', 'Completado')}
+			{:else if compra.status == 'en proceso'}
+				{@render statusStat('Estatus Pago', 'warning', 'En Proceso')}
+			{:else if compra.status == 'rechazado'}
+				{@render statusStat('Estatus Pago', 'error', 'Rechazado')}
+			{/if}
+		</div>
+	{/if}
 </main>
