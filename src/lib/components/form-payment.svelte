@@ -2,21 +2,16 @@
 	import * as v from 'valibot';
 	import CreditCardSvg from './credit-card-svg.svelte';
 	import UserSvg from './user-svg.svelte';
+	import { formaPagoSchema, type FormaPago } from '$lib/entities';
 
 	interface Props {
-		onSubmit: (data: FormData) => void;
+		onSubmit: (data: FormaPago) => void;
 		monto: number;
 	}
 
 	const { onSubmit, monto }: Props = $props();
 
-	const formSchema = v.object({
-		nombreTitular: v.string(),
-		tarjeta: v.string(),
-		cvc: v.string(),
-		mes: v.number(),
-		año: v.number()
-	});
+	const formSchema = formaPagoSchema
 	type FormData = v.InferOutput<typeof formSchema>;
 
 	let errors = $state (false)
@@ -26,19 +21,26 @@
 		nombreTitular: '',
 		tarjeta: '',
 		año: 2025,
-		mes: 1
+		mes: 1,
+		verificado: false
 	});
 
 	function handleSubmit() {
 		try {
 
-			const data = v.parse(formSchema, formDataState);
+			let data = v.parse(formSchema, formDataState);
+			data = v.parse(formaPagoSchema, data)
 			onSubmit(data)
 		} catch(e) {
+
+			console.log(e);
+			
 
 			errors = true
 		}
 	}
+
+	$inspect(errors)
 </script>
 
 <p class="pl-5 text-xl">Monto: ${monto.toFixed(2)}</p>

@@ -429,6 +429,7 @@ export function getDefaultFormaPago(): FormaPago {
 		verificado: false,
 		cvc: '000',
 		año: 2025,
-		mes: 1
+		mes: 1,
+		nombreTitular: "Nombre"
 	};
 }
