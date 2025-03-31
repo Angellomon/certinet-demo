@@ -1,11 +1,15 @@
 <script lang="ts">
 	import ListaCompras from '$lib/components/lista-compras.svelte';
+	import type { Compras, Empleador } from '$lib/entities.js';
+	import type { LocalObjectStore } from '$lib/localstore.svelte.js';
+	import { getContext } from 'svelte';
 
-	const { data } = $props();
+	const empleador: LocalObjectStore<Empleador> = getContext('empleador-store');
+	const getComprasEmpleador: (id: string) => Compras = getContext('get-compras-empleador');
 
-	const { compras } = data;
+	const comprasEmpleador = $derived.by(() => getComprasEmpleador(empleador.value.id));
 </script>
 
 <main>
-	<ListaCompras {compras} links />
+	<ListaCompras compras={comprasEmpleador} links />
 </main>
