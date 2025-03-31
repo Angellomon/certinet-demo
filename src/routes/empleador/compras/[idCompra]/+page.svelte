@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getCertificacionesContext, getCompra } from '$lib/context.svelte.js';
+	import { getCertificacionesContext, getCompraContext } from '$lib/context.svelte.js';
 
 
 	const idCompra = page.params.idCompra;
 
-	const compra = getCompra(idCompra)
+	const compra = getCompraContext(idCompra)
 	const certificaciones = getCertificacionesContext()
 
 

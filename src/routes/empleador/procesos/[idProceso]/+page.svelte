@@ -4,12 +4,12 @@
 	import { error } from '@sveltejs/kit';
 	import {
 		getCertificacionContext,
-		getEmpleadorContext,
+		getCurrentEmpleadorContext,
 		getProcesoContext,
 		getProfesionistaContext
 	} from '$lib/context.svelte';
 
-	const empleadorStore = getEmpleadorContext();
+	const empleadorStore = getCurrentEmpleadorContext();
 	const proceso = getProcesoContext(page.params.idProceso);
 
 	if (!proceso) error(404, `[404] Proceso no encontrado (p.id=${page.params.idProceso})`);

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import ListaProcesos from '$lib/components/lista-procesos.svelte';
-	import { getCurrentProfesionistaStore } from '$lib/context.svelte.js';
+	import { getCurrentProfesionistaContext } from '$lib/context.svelte.js';
 
-	const currentProfesionistaStore = getCurrentProfesionistaStore();
+	const currentProfesionistaStore = getCurrentProfesionistaContext();
 </script>
 
 <div class="flex flex-col gap-5">

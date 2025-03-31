@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CountStat from '$lib/components/count-stat.svelte';
 	import VerifiedStatus from '$lib/components/verified-status.svelte';
-	import { getEmpleadorContext } from '$lib/context.svelte';
+	import { getCurrentEmpleadorContext } from '$lib/context.svelte';
 
 	interface Props {
 		totalProcesos: number;
@@ -9,7 +9,7 @@
 
 	const { totalProcesos }: Props = $props();
 
-	const empleadorStore = getEmpleadorContext();
+	const empleadorStore = getCurrentEmpleadorContext();
 </script>
 
 {#snippet statusStat(title: string, type: 'success' | 'error' | 'warning', value: string)}

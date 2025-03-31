@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {
 		getComprasContext,
-		getEmpleadorContext,
+		getCurrentEmpleadorContext,
 		getProcesosContext
 	} from '$lib/context.svelte.js';
 
@@ -13,7 +13,7 @@
 
 	const comprasStore = getComprasContext();
 
-	const empleadorStore = getEmpleadorContext();
+	const empleadorStore = getCurrentEmpleadorContext();
 	const comprasEmpleador = $derived(
 		comprasStore.value.filter((c) => c.idEmpleador == empleadorStore.value.id)
 	);
@@ -22,7 +22,7 @@
 
 	const ultimaCompra = $derived(comprasEmpleador[comprasEmpleador.length - 1]);
 
-	const empleador = getEmpleadorContext();
+	const empleador = getCurrentEmpleadorContext();
 
 	let metodoPagoHover = $state(false);
 

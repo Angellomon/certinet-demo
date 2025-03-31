@@ -5,12 +5,13 @@ import type {
 	Certificaciones,
 	Compras,
 	Empleador,
+	Empleadores,
 	ProcesosContacto,
 	Profesionista,
 	Profesionistas
 } from './entities';
 
-export function getEmpleadorContext() {
+export function getCurrentEmpleadorContext() {
 	return getContext('empleador-store') as LocalObjectStore<Empleador>;
 }
 
@@ -58,12 +59,22 @@ export function getComprasContext() {
 	return getContext('compras') as LocalObjectStore<Compras>;
 }
 
-export function getCompra(idCompra: string) {
+export function getCompraContext(idCompra: string) {
 	const compras = getComprasContext();
 
 	return compras.value.find((c) => c.id === idCompra);
 }
 
-export function getCurrentProfesionistaStore() {
-	return getContext("profesionista") as LocalObjectStore<Profesionista>
+export function getCurrentProfesionistaContext() {
+	return getContext('profesionista') as LocalObjectStore<Profesionista>;
+}
+
+export function getEmpleadoresContext() {
+	return getContext('empleadores') as LocalObjectStore<Empleadores>;
+}
+
+export function getEmpleadorContext(idEmpleador: string) {
+	const empleadores = getEmpleadoresContext();
+
+	return empleadores.value.find((e) => e.id === idEmpleador);
 }

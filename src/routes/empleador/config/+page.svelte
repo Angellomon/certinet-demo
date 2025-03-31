@@ -1,12 +1,12 @@
 <script lang="ts">
 	import CrossSvg from '$lib/components/cross-svg.svelte';
 	import EditSvg from '$lib/components/edit-svg.svelte';
-	import { getEmpleadorContext } from '$lib/context.svelte';
+	import { getCurrentEmpleadorContext } from '$lib/context.svelte';
 	import { getDefaultFormaPago, getDefaultPrecioCertificacion } from '$lib/demo-data';
 	import { newLocalStore } from '$lib/localstore.svelte';
 	import * as v from 'valibot';
 
-	const empleadorStore = getEmpleadorContext()
+	const empleadorStore = getCurrentEmpleadorContext()
 
 	const seccionSchema = v.union([
 		v.literal('datos'),

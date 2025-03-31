@@ -10,7 +10,7 @@
 		newCalificacionesProcesoStore,
 		newCertificacionesStore,
 		newComprasStore,
-		newEmpleadorStore,
+		newCurrentEmpleadorStore,
 		newProcesosContactoStore,
 		newProfesionistasStore
 	} from '$lib/localstore.svelte';
@@ -21,7 +21,7 @@
 	let searchTerm = $state('');
 	let filters: Filter[] = $state([]);
 
-	const empleadorStore = newEmpleadorStore();
+	const empleadorStore = newCurrentEmpleadorStore();
 
 	setContext('empleador-store', empleadorStore);
 

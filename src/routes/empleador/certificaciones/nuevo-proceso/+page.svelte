@@ -6,7 +6,7 @@
 	import {
 		getCertificacionesContext,
 		getComprasContext,
-		getEmpleadorContext,
+		getCurrentEmpleadorContext,
 		getProcesosContext,
 		getProfesionistasContext
 	} from '$lib/context.svelte.js';
@@ -14,7 +14,7 @@
 	import type { Compra, FormaPago, ProcesosContacto } from '$lib/entities.js';
 	import { error } from '@sveltejs/kit';
 
-	const empleador = getEmpleadorContext();
+	const empleador = getCurrentEmpleadorContext();
 	const procesos = getProcesosContext();
 	const profesionistas = getProfesionistasContext();
 	const compras = getComprasContext();
