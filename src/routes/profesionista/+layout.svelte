@@ -10,6 +10,8 @@
 	} from '$lib/localstore.svelte';
 	import { setContext } from 'svelte';
 	import ProfesionistaHeader from './profesionista-header.svelte';
+	import { goto } from '$app/navigation';
+	import SettingsSvg from '$lib/components/settings-svg.svelte';
 
 	const { children } = $props();
 
@@ -42,6 +44,10 @@
 			(p) => p.idProfesionista === currentProfesionistaStore.value.id
 		).length
 	);
+
+	function handleConfigClick() {
+		goto('/profesionista/config');
+	}
 </script>
 
 <main class="flex flex-col gap-5 p-5 lg:px-20 lg:py-5">
@@ -51,26 +57,44 @@
 		{totalCertificaciones}
 	/>
 
-	<ul class="menu menu-vertical sm:menu-horizontal bg-base-200 rounded-box">
-		<li>
-			<a class={page.url.pathname === '/profesionista' ? 'menu-active' : ''} href="/profesionista"
-				>Dashboard</a
-			>
-		</li>
-		<li>
-			<a
-				class={page.url.pathname.includes('/procesos') ? 'menu-active' : ''}
-				href="/profesionista/procesos">Procesos</a
-			>
-		</li>
-		<li>
-			<a
-				class={page.url.pathname.includes('/certificaciones') ? 'menu-active' : ''}
-				href="/profesionista/certificaciones">Certificaciones</a
-			>
-		</li>
-		<!-- <li><a>Configuración</a></li> -->
-	</ul>
+	<div class="flex-row-flex-wrap flex items-center justify-between">
+		<ul class="menu menu-vertical sm:menu-horizontal bg-base-200 rounded-box">
+			<li>
+				<a
+					class={page.url.pathname === '/profesionista' ? 'menu-active' : ''}
+					href="/profesionista"
+				>
+					Dashboard
+				</a>
+			</li>
+			<li>
+				<a
+					class:menu-active={page.url.pathname.includes('/procesos')}
+					href="/profesionista/procesos"
+				>
+					Procesos
+				</a>
+			</li>
+			<li>
+				<a
+					class:menu-active={page.url.pathname.includes('/certificaciones')}
+					href="/profesionista/certificaciones"
+				>
+					Certificaciones
+				</a>
+			</li>
+			<!-- <li><a>Configuración</a></li> -->
+		</ul>
+
+		<button
+			class="btn"
+			class:btn-neutral={page.url.pathname.includes('/config')}
+			onclick={handleConfigClick}
+		>
+			<SettingsSvg />
+			Configuración
+		</button>
+	</div>
 
 	{@render children()}
 </main>
