@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getCurrentProfesionistaContext } from '$lib/context.svelte';
+	import { goto } from '$app/navigation';
 	import type { Certificacion, Certificaciones } from '$lib/entities';
 	import CrossSvg from './cross-svg.svelte';
 	import VerifiedStatus from './verified-status.svelte';
@@ -8,14 +8,19 @@
 		certificaciones: Certificaciones;
 		basePath?: string;
 		hideDeleteBtn?: boolean;
+		onCertDelete?: (idCert: string) => void;
 	}
 
-	let { basePath, hideDeleteBtn = false, certificaciones }: Props = $props();
+	let { basePath, hideDeleteBtn = false, certificaciones, onCertDelete }: Props = $props();
 
 	function handleCertRemove(idCert: string) {
-		const i = certificaciones.findIndex((c) => c.id === idCert);
-		certificaciones.splice(i, 1);
-		// certificacionesLocalStore.removeCertificacion(idCert);
+		console.log('click');
+
+		onCertDelete && onCertDelete(idCert);
+	}
+
+	function gotoCert(idCert: string) {
+		goto(`${basePath}/${idCert}`);
 	}
 </script>
 
@@ -28,19 +33,13 @@
 
 {#snippet btnRemoveCert(idCert: string)}
 	<!-- svelte-ignore a11y_consider_explicit_label -->
-	<button
-		class="btn btn-error btn-square absolute top-0 right-3"
-		onclick={() => handleCertRemove(idCert)}
-	>
+	<button class="btn btn-error btn-square" onclick={() => handleCertRemove(idCert)}>
 		<CrossSvg white />
 	</button>
 {/snippet}
 
 {#snippet cerData(cert: Certificacion)}
-	<li class="list-row hover:bg-base-300 my-1">
-		{#if !hideDeleteBtn && certificaciones.length > 1}
-			{@render btnRemoveCert(cert.id)}
-		{/if}
+	<li class="list-row hover:bg-base-300">
 		<div class="flex flex-col">
 			<h3 class="text-xl font-bold hover:font-bold">{cert.nombre}</h3>
 			<div class="flex flex-col justify-between md:flex-row">
@@ -50,20 +49,25 @@
 					{@render statVigencia('Vigencia', `${cert.vigencia} año${cert.vigencia > 1 ? 's' : ''}`)}
 				{/if}
 
-				<VerifiedStatus verified={cert.verificado}
-					>{cert.verificado ? 'Verificado' : 'Verificación Pendiente'}</VerifiedStatus
-				>
+				<VerifiedStatus verified={cert.verificado}>
+					{cert.verificado ? 'Verificado' : 'Verificación Pendiente'}
+				</VerifiedStatus>
 			</div>
 		</div>
 	</li>
 {/snippet}
 
-<ul class="list bg-base-200 rounded-box gap-1 shadow-md">
+<ul class="list bg-base-200 rounded-box gap-1 py-5 shadow-md">
 	{#each certificaciones as cert}
 		{#if basePath}
-			<a href={`${basePath}/${cert.id}`}>
-				{@render cerData(cert)}
-			</a>
+			<div class="relative flex justify-around">
+				<button class="w-[80%] cursor-pointer md:w-[95%]" onclick={() => gotoCert(cert.id)}>
+					{@render cerData(cert)}
+				</button>
+				{#if onCertDelete && !hideDeleteBtn && certificaciones.length > 1}
+					{@render btnRemoveCert(cert.id)}
+				{/if}
+			</div>
 		{:else}
 			{@render cerData(cert)}
 		{/if}

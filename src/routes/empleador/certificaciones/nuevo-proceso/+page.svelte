@@ -19,7 +19,7 @@
 	const profesionistas = getProfesionistasContext();
 	const compras = getComprasContext();
 
-	const certIds: string[] = page.url.searchParams.get("certIds")?.split(',') || [];
+	const certIds: string[] = page.url.searchParams.get('certIds')?.split(',') || [];
 	if (certIds.length < 1) error(400, 'too few certs');
 
 	const certs = getCertificacionesContext();
@@ -88,7 +88,7 @@
 			procesosNuevos.map((p) => p.id)
 		);
 
-		goto(`/empleador/procesos`);
+		goto(`/empleador/compras`);
 	}
 </script>
 
@@ -103,12 +103,16 @@
 
 	<div class="grid grid-cols-1 md:grid-cols-2">
 		<div class="mx-3">
-			<h2 class="text-right text-xl">Certificaciones Seleccionadas</h2>
+			<h2 class="mb-5 text-right text-xl">Certificaciones Seleccionadas</h2>
 			<ListaCertificaciones {certificaciones} />
 		</div>
 		<div class="mx-3 flex flex-col gap-5">
-			<h2 class="text-right text-xl">Info Pago</h2>
-			<FormPayment {monto} onSubmit={onFormaPagoSubmit} />
+			<div class="ml-5 flex flex-row justify-between">
+				<h2 class="text-right text-xl font-bold">Monto: $ {monto.toFixed(2)}</h2>
+				<h2 class="text-right text-xl">Info Pago</h2>
+			</div>
+
+			<FormPayment onSubmit={onFormaPagoSubmit} />
 
 			<button class="btn ml-5" onclick={() => history.back()}>Cancelar</button>
 		</div>

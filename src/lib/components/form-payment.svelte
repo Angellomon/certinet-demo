@@ -6,10 +6,9 @@
 
 	interface Props {
 		onSubmit: (data: FormaPago) => void;
-		monto: number;
 	}
 
-	const { onSubmit, monto }: Props = $props();
+	const { onSubmit }: Props = $props();
 
 	const formSchema = formaPagoSchema
 	type FormData = v.InferOutput<typeof formSchema>;
@@ -43,7 +42,6 @@
 	$inspect(errors)
 </script>
 
-<p class="pl-5 text-xl">Monto: ${monto.toFixed(2)}</p>
 
 <div class="flex flex-col pl-5">
 	<label class="input validator w-full grow self-end">
