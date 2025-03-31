@@ -40,7 +40,7 @@
 
 {#snippet cerData(cert: Certificacion)}
 	<li class="list-row hover:bg-base-300">
-		<div class="flex flex-col">
+		<div class="flex flex-col items-start">
 			<h3 class="text-xl font-bold hover:font-bold">{cert.nombre}</h3>
 			<div class="flex flex-col justify-between md:flex-row">
 				{#if cert.vigencia < 0}
