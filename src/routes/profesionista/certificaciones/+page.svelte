@@ -31,5 +31,6 @@
 			<button class="btn btn-primary">Nueva Certificación</button>
 		</a>
 	</div>
+
 	<ListaCertificaciones {certificaciones} basePath="/profesionista/certificaciones" />
 </main>
