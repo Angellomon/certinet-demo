@@ -6,6 +6,7 @@ import type {
 	Compras,
 	Empleador,
 	ProcesosContacto,
+	Profesionista,
 	Profesionistas
 } from './entities';
 
@@ -61,4 +62,8 @@ export function getCompra(idCompra: string) {
 	const compras = getComprasContext();
 
 	return compras.value.find((c) => c.id === idCompra);
+}
+
+export function getCurrentProfesionistaStore() {
+	return getContext("profesionista") as LocalObjectStore<Profesionista>
 }
