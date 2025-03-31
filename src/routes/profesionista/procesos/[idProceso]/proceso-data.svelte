@@ -2,13 +2,9 @@
 	import type { Certificacion, Empleador, ProcesoContacto, Profesionista } from '$lib/entities';
 
 	const {
-		proceso,
 		certificacion,
 		empleador,
-		profesionista
 	}: {
-		profesionista?: Profesionista;
-		proceso?: ProcesoContacto;
 		certificacion: Certificacion;
 		empleador: Empleador;
 	} = $props();
