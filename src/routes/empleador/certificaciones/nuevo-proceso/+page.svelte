@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import FormPayment from '$lib/components/form-payment.svelte';
 	import ListaCertificaciones from '$lib/components/lista-certificaciones.svelte';
 	import {
+		getCertificacionesContext,
 		getComprasContext,
 		getEmpleadorContext,
 		getProcesosContext,
@@ -10,17 +12,18 @@
 	} from '$lib/context.svelte.js';
 	import { generateId } from '$lib/demo-data.js';
 	import type { Compra, FormaPago, ProcesosContacto } from '$lib/entities.js';
-
-	const { data } = $props();
+	import { error } from '@sveltejs/kit';
 
 	const empleador = getEmpleadorContext();
 	const procesos = getProcesosContext();
 	const profesionistas = getProfesionistasContext();
 	const compras = getComprasContext();
 
-	const { certificaciones: certs } = data;
+	const certIds: string[] = page.url.searchParams.get("certIds")?.split(',') || [];
+	if (certIds.length < 1) error(400, 'too few certs');
 
-	let certificaciones = $state(certs);
+	const certs = getCertificacionesContext();
+	let certificaciones = $derived(certs.value.filter((c) => certIds.includes(c.id)));
 
 	let monto = $derived(certificaciones.length * (empleador.value.precioCertificacion?.unidad || 1));
 
@@ -101,7 +104,7 @@
 	<div class="grid grid-cols-1 md:grid-cols-2">
 		<div class="mx-3">
 			<h2 class="text-right text-xl">Certificaciones Seleccionadas</h2>
-			<ListaCertificaciones bind:certificaciones />
+			<ListaCertificaciones {certificaciones} />
 		</div>
 		<div class="mx-3 flex flex-col gap-5">
 			<h2 class="text-right text-xl">Info Pago</h2>

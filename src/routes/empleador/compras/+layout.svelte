@@ -1,13 +1,28 @@
 <script lang="ts">
-	import type { Empleador } from '$lib/entities.js';
-	import type { LocalObjectStore } from '$lib/localstore.svelte.js';
-	import { getContext } from 'svelte';
+	import {
+		getComprasContext,
+		getEmpleadorContext,
+		getProcesosContext
+	} from '$lib/context.svelte.js';
 
 	const { children, data } = $props();
 
-	const { totalCertificacionesAdquiridas, totalCompras, ultimaCompra } = data;
+	const procesosContactoStore = getProcesosContext();
 
-	const empleador: LocalObjectStore<Empleador> = getContext('empleador-store');
+	const totalCertificacionesAdquiridas = $derived(procesosContactoStore.value.length);
+
+	const comprasStore = getComprasContext();
+
+	const empleadorStore = getEmpleadorContext();
+	const comprasEmpleador = $derived(
+		comprasStore.value.filter((c) => c.idEmpleador == empleadorStore.value.id)
+	);
+
+	const totalCompras = $derived(comprasEmpleador.length);
+
+	const ultimaCompra = $derived(comprasEmpleador[comprasEmpleador.length - 1]);
+
+	const empleador = getEmpleadorContext();
 
 	let metodoPagoHover = $state(false);
 

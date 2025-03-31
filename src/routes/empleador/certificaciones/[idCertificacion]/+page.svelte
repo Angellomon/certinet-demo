@@ -1,10 +1,17 @@
 <script lang="ts">
+	import { page } from '$app/state';
+	import { getCertificacionContext, getProfesionistaContext } from '$lib/context.svelte';
+	import { error } from '@sveltejs/kit';
 	import DataCertificacion from './data-certificacion.svelte';
 	import DataProfesionista from './data-profesionista.svelte';
 
-	const { data } = $props();
+	const certificacion = getCertificacionContext(page.params.idCertificacion);
 
-	const { certificacion, profesionista } = data;
+	if (!certificacion) error(404, '[404] Certificación no encontrada');
+
+	const profesionista = getProfesionistaContext(certificacion.idProfesionista);
+
+	if (!profesionista) error(404, '[404] Profesionista no encontrado');
 </script>
 
 <main class="flex flex-col gap-5">
