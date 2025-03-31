@@ -16,7 +16,7 @@
 	} from '$lib/localstore.svelte';
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
 
-	const { data, children } = $props();
+	const { children } = $props();
 
 	let searchTerm = $state('');
 	let filters: Filter[] = $state([]);
@@ -51,6 +51,8 @@
 </script>
 
 <main class="flex flex-col gap-5 p-5 lg:px-20 lg:py-5">
+	<EmpleadorHeader totalProcesos={procesosContactoStore.value.length} />
+
 	<div class="flex flex-col gap-5 md:flex-row md:items-center">
 		<ul class="menu menu-vertical sm:menu-horizontal bg-base-200 rounded-box">
 			<li>
@@ -92,8 +94,6 @@
 	{#if filters.length > 0}
 		<FiltersList bind:filters />
 	{/if}
-
-	<EmpleadorHeader totalProcesos={procesosContactoStore.value.length} />
 
 	{@render children()}
 </main>
