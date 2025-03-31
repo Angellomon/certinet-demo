@@ -2,15 +2,21 @@
 	import { goto } from '$app/navigation';
 	import FormPayment from '$lib/components/form-payment.svelte';
 	import ListaCertificaciones from '$lib/components/lista-certificaciones.svelte';
+	import {
+		getComprasContext,
+		getEmpleadorContext,
+		getProcesosContext,
+		getProfesionistasContext
+	} from '$lib/context.svelte.js';
 	import { generateId } from '$lib/demo-data.js';
-	import type { Empleador, ProcesosContacto } from '$lib/entities.js';
-	import type { LocalObjectStore } from '$lib/localstore.svelte.js';
-	import { getContext } from 'svelte';
+	import type { Compra, FormaPago, ProcesosContacto } from '$lib/entities.js';
 
 	const { data } = $props();
 
-	const empleador: LocalObjectStore<Empleador> = getContext('empleador-store');
-	const procesos: LocalObjectStore<ProcesosContacto> = getContext('procesos-contacto');
+	const empleador = getEmpleadorContext();
+	const procesos = getProcesosContext();
+	const profesionistas = getProfesionistasContext();
+	const compras = getComprasContext();
 
 	const { certificaciones: certs } = data;
 
@@ -18,8 +24,66 @@
 
 	let monto = $derived(certificaciones.length * (empleador.value.precioCertificacion?.unidad || 1));
 
-	function onSubmit() {
-		// const idsCerts = certificaciones.map((c) => c.id).join(',');
+	function createNewProcesos() {
+		const idsProfesionistas = certificaciones.map((c) => c.idProfesionista).join(',');
+
+		const profesionistasResult = profesionistas.value.filter((p) =>
+			idsProfesionistas.includes(p.id)
+		);
+
+		const procesosNuevos: ProcesosContacto = [];
+
+		for (let certificacion of certificaciones) {
+			const profesionistaResult = profesionistasResult.find(
+				(p) => p.id == certificacion.idProfesionista
+			);
+			if (!profesionistaResult) continue;
+
+			procesosNuevos.push({
+				id: generateId(),
+				contacto: {
+					tipo: 'email',
+					empleador: empleador.value.correo,
+					profesionista: profesionistaResult.correo
+				},
+				fechaInicio: new Date(),
+				fechaFin: null,
+				idCalificacion: null,
+				idCertificacion: certificacion.id,
+				idEmpleador: empleador.value.id,
+				idProfesionista: profesionistaResult.id
+			});
+		}
+
+		procesos.value = procesos.value.concat(procesosNuevos);
+
+		return procesosNuevos;
+	}
+
+	function createNewCompra(dataFormaPago: FormaPago, idsProcesosContacto: string[]) {
+		if (!empleador.value.precioCertificacion) return;
+
+		const compra: Compra = {
+			fecha: new Date(),
+			id: generateId(),
+			idEmpleador: empleador.value.id,
+			idsProcesosContacto,
+			monto,
+			precio: empleador.value.precioCertificacion,
+			status: 'en proceso',
+			promocion: null
+		};
+
+		compras.value.push(compra);
+	}
+
+	function onFormaPagoSubmit(dataFormaPago: FormaPago) {
+		const procesosNuevos = createNewProcesos();
+
+		createNewCompra(
+			dataFormaPago,
+			procesosNuevos.map((p) => p.id)
+		);
 
 		goto(`/empleador/procesos`);
 	}
@@ -41,7 +105,7 @@
 		</div>
 		<div class="mx-3 flex flex-col gap-5">
 			<h2 class="text-right text-xl">Info Pago</h2>
-			<FormPayment {monto} {onSubmit} />
+			<FormPayment {monto} onSubmit={onFormaPagoSubmit} />
 
 			<button class="btn m1l-5" onclick={() => history.back()}>Cancelar</button>
 		</div>
