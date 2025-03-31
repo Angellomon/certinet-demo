@@ -56,3 +56,9 @@ export function getCalificacionProceso(idCalificacion: string | null) {
 export function getComprasContext() {
 	return getContext('compras') as LocalObjectStore<Compras>;
 }
+
+export function getCompra(idCompra: string) {
+	const compras = getComprasContext();
+
+	return compras.value.find((c) => c.id === idCompra);
+}
