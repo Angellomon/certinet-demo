@@ -12,8 +12,6 @@
 
 	let { basePath, hideDeleteBtn = false, certificaciones }: Props = $props();
 
-	const currentProfesionistaStore = getCurrentProfesionistaContext();
-
 	function handleCertRemove(idCert: string) {
 		const i = certificaciones.findIndex((c) => c.id === idCert);
 		certificaciones.splice(i, 1);
@@ -34,7 +32,7 @@
 		class="btn btn-error btn-square absolute top-0 right-3"
 		onclick={() => handleCertRemove(idCert)}
 	>
-		<CrossSvg />
+		<CrossSvg white />
 	</button>
 {/snippet}
 
