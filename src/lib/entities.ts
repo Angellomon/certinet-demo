@@ -36,6 +36,9 @@ const profesionistaSchema = v.object({
 });
 export type Profesionista = v.InferOutput<typeof profesionistaSchema>;
 
+export const profesionistasSchema = v.array(profesionistaSchema);
+export type Profesionistas = v.InferOutput<typeof profesionistasSchema>;
+
 const dataContactoSchema = v.object({
 	tipo: v.union([v.literal('email'), v.literal('whatsapp'), v.literal('otro')]),
 	empleador: v.string(),
@@ -58,17 +61,6 @@ export type ProcesoContacto = v.InferOutput<typeof procesoContactoSchema>;
 export const procesosContactoSchema = v.array(procesoContactoSchema);
 export type ProcesosContacto = v.InferOutput<typeof procesosContactoSchema>;
 
-export type Compra = {
-	id: string;
-	idEmpleador: string;
-	idsProcesosContacto: string[];
-	fecha: Date;
-	monto: number;
-	promocion?: string | null;
-	precio: PrecioCertificacion;
-	status: 'en proceso' | 'completado' | 'rechazado';
-};
-
 export const precioCertificacionSchema = v.object({
 	unidad: positiveNumberSchema,
 	decena: positiveNumberSchema,
@@ -77,7 +69,24 @@ export const precioCertificacionSchema = v.object({
 
 export type PrecioCertificacion = v.InferOutput<typeof precioCertificacionSchema>;
 
+export const compraSchema = v.object({
+	id: idSchema,
+	idEmpleador: idSchema,
+	idsProcesosContacto: v.array(idSchema),
+	fecha: dateSchema,
+	monto: positiveNumberSchema,
+	promocion: v.optional(v.nullable(v.string())),
+	precio: precioCertificacionSchema,
+	status: v.union([v.literal('en proceso'), v.literal('completado'), v.literal('rechazado')])
+});
+
+export type Compra = v.InferOutput<typeof compraSchema>;
+
+export const comprasSchema = v.array(compraSchema);
+export type Compras = v.InferOutput<typeof comprasSchema>;
+
 export const formaPagoSchema = v.object({
+	nombreTitular: v.fallback(v.string(), ''),
 	tarjeta: v.string(),
 	cvc: v.string(),
 	verificado: v.boolean(),
@@ -122,3 +131,7 @@ export const calificacionProcesoSchema = v.object({
 	profesionista: v.nullable(calificacionSchema)
 });
 export type CalificacionProceso = v.InferOutput<typeof calificacionProcesoSchema>;
+
+export const calificacionesProcesoSchema = v.array(calificacionProcesoSchema);
+
+export type CalificacionesProceso = v.InferOutput<typeof calificacionesProcesoSchema>;
