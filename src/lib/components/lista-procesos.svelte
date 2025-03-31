@@ -1,13 +1,14 @@
 <script lang="ts">
+	import {
+		getCertificacionesContext,
+		getEmpleadorContext,
+		getProcesosContext
+	} from '$lib/context.svelte';
 	import { getDemoEmpleadores, getDemoProfesionistas } from '$lib/demo-data';
 	import type {
 		Certificacion,
-		Certificaciones,
 		ProcesoContacto,
-		ProcesosContacto
 	} from '$lib/entities';
-	import type { LocalObjectStore } from '$lib/localstore.svelte';
-	import { getContext } from 'svelte';
 
 	interface Props {
 		baseUrl: string;
@@ -16,7 +17,8 @@
 
 	const { baseUrl, limit }: Props = $props();
 
-	const certificacionesStore: LocalObjectStore<Certificaciones> = getContext('certificaciones');
+	const certificacionesStore = getCertificacionesContext();
+	const empleadorStore = getEmpleadorContext();
 
 	const certificacionesDataMap = $derived.by(() => {
 		const map: Record<string, Certificacion> = {};
@@ -28,7 +30,9 @@
 		return map;
 	});
 
-	const procesosContacto: LocalObjectStore<ProcesosContacto> = getContext('procesos-contacto');
+	const procesosContactoStore = $derived.by(() =>
+		getProcesosContext().value.filter((p) => p.idEmpleador === empleadorStore.value.id)
+	);
 
 	function getNombreEmpleador(idEmpleador: string) {
 		const empleador = getDemoEmpleadores().find((e) => e.id === idEmpleador);
@@ -70,11 +74,11 @@
 
 <ul class="list bg-base-200 rounded-box shadow-md">
 	{#if limit}
-		{#each procesosContacto.value.slice(0, limit) as proceso, i}
+		{#each procesosContactoStore.slice(0, limit) as proceso, i}
 			{@render listRow(proceso)}
 		{/each}
 	{:else}
-		{#each procesosContacto.value as proceso, i}
+		{#each procesosContactoStore as proceso, i}
 			{@render listRow(proceso)}
 		{/each}
 	{/if}
