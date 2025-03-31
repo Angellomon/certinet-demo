@@ -5,7 +5,7 @@
 		getCalificacionesProcesoContext,
 		getCalificacionProceso,
 		getCertificacionContext,
-		getEmpleadorContext,
+		getCurrentEmpleadorContext,
 		getProcesoContext,
 		getProcesosContext,
 		getProfesionistaContext
@@ -30,7 +30,7 @@
 	const calificacionProceso = getCalificacionProceso(proceso.idCalificacion);
 	const procesos = getProcesosContext();
 
-	const empleadorStore = getEmpleadorContext();
+	const empleadorStore = getCurrentEmpleadorContext();
 	let calificacion = $state(calificacionProceso?.empleador?.valor || 0);
 
 	$effect(() => {
@@ -61,14 +61,18 @@
 		let indexCalificacion = calificacionesStore.value.findIndex(
 			(c) => c.id === proceso.idCalificacion
 		);
-		const calificacionResult = calificacionesStore.value[indexCalificacion];
+		let calificacionResult = calificacionesStore.value[indexCalificacion];
 
 		if (!calificacionResult || !proceso.idCalificacion) {
 			calificacionesStore.value.push(nuevaCalificacionProceso);
 
 			indexCalificacion = calificacionesStore.value.length;
+			calificacionResult = nuevaCalificacionProceso
 		}
-		
+
+		nuevaCalificacionProceso.empleador = calificacionResult.empleador;
+		nuevaCalificacionProceso.profesionista = calificacionResult.profesionista;
+
 		proceso.idCalificacion = nuevaCalificacionProceso.id;
 		calificacionesStore.value.splice(indexCalificacion, 1, nuevaCalificacionProceso);
 		procesos.value.splice(indexProceso, 1, proceso);
