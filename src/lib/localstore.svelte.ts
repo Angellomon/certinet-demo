@@ -17,7 +17,8 @@ import {
 	empleadoresSchema,
 	empleadorSchema,
 	procesosContactoSchema,
-	profesionistaSchema
+	profesionistaSchema,
+	profesionistasSchema
 } from './entities';
 
 export class LocalObjectStore<T> {
@@ -76,7 +77,7 @@ export function newProcesosContactoStore() {
 export function newProfesionistasStore() {
 	const demoData = getDemoProfesionistas();
 
-	return newLocalStore('profesionistas', demoData, profesionistaSchema);
+	return newLocalStore('profesionistas', demoData, profesionistasSchema);
 }
 
 export function newComprasStore() {
