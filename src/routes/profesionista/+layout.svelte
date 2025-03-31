@@ -1,9 +1,47 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import {
+		newCalificacionesProcesoStore,
+		newCertificacionesStore,
+		newCurrentEmpleadorStore,
+		newCurrentProfesionistaStore,
+		newEmpleadoresStore,
+		newProcesosContactoStore
+	} from '$lib/localstore.svelte';
+	import { setContext } from 'svelte';
 	import ProfesionistaHeader from './profesionista-header.svelte';
 
-	const { data, children } = $props();
-	const { currentProfesionista, totalProcesos, totalCertificaciones } = data;
+	const { children } = $props();
+
+	const currentProfesionistaStore = newCurrentProfesionistaStore();
+	setContext('profesionista', currentProfesionistaStore);
+
+	const procesosContactoStore = newProcesosContactoStore();
+	setContext('procesos-contacto', procesosContactoStore);
+
+	const certificacionesStore = newCertificacionesStore();
+	setContext('certificaciones', certificacionesStore);
+
+	const empleadoresStore = newEmpleadoresStore();
+	setContext('empleadores', empleadoresStore);
+
+	const calificacionesStore = newCalificacionesProcesoStore();
+	setContext('calificaciones-proceso', calificacionesStore);
+
+	const currentEmpleadorStore = newCurrentEmpleadorStore();
+	setContext('empleador-store', currentEmpleadorStore);
+
+	const totalCertificaciones = $derived(
+		certificacionesStore.value.filter(
+			(c) => c.idProfesionista === currentProfesionistaStore.value.id
+		).length
+	);
+
+	const totalProcesos = $derived(
+		procesosContactoStore.value.filter(
+			(p) => p.idProfesionista === currentProfesionistaStore.value.id
+		).length
+	);
 </script>
 
 <main class="flex flex-col gap-5 p-5 lg:px-20 lg:py-5">
@@ -29,7 +67,7 @@
 	</ul>
 
 	<ProfesionistaHeader
-		profesionista={currentProfesionista}
+		profesionista={currentProfesionistaStore.value}
 		{totalProcesos}
 		{totalCertificaciones}
 	/>
