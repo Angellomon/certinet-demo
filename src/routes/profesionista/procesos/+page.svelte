@@ -1,9 +1,8 @@
 <script lang="ts">
 	import ListaProcesos from '$lib/components/lista-procesos.svelte';
+	import { getCurrentProfesionistaContext } from '$lib/context.svelte';
 
-	const { data } = $props();
-
-	const { procesosContacto, certificacionesDataMap } = data;
+	const currentProfesionistaStore = getCurrentProfesionistaContext();
 </script>
 
 <main class="flex flex-col gap-5">
@@ -15,5 +14,9 @@
 	</div>
 
 	<h2 class="text-2xl">Procesos de Contacto</h2>
-	<ListaProcesos baseUrl="/profesionista/procesos" {certificacionesDataMap} {procesosContacto} />
+	<ListaProcesos
+		baseUrl="/profesionista/procesos"
+		id={currentProfesionistaStore.value.id}
+		currentType="profesionista"
+	/>
 </main>

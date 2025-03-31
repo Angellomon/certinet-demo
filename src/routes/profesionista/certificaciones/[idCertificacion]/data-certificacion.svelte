@@ -1,11 +1,23 @@
 <script lang="ts">
+	import { getCertificacionesContext } from '$lib/context.svelte';
 	import type { Certificacion } from '$lib/entities';
-	const { certificacion = $bindable() } = $props<{ certificacion: Certificacion }>();
+	
+	interface Props {
+		certificacion: Certificacion
+	}
+
+	const { certificacion = $bindable() }: Props = $props();
+
+	const certificacionesStore = getCertificacionesContext()
 
 	let editMode = $state(false);
 
 	function toggleEdit() {
 		editMode = !editMode;
+
+		const index = certificacionesStore.value.findIndex(c => c.id === certificacion.id)
+
+		certificacionesStore.value.splice(index, 1, certificacion)
 	}
 </script>
 

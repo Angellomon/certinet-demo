@@ -1,12 +1,86 @@
 <script lang="ts">
 	import ProcesoData from '../proceso-data.svelte';
 	import RateInput from '$lib/components/rate-input.svelte';
+	import {
+		getCalificacionesProcesoContext,
+		getCalificacionProceso,
+		getCertificacionContext,
+		getCurrentEmpleadorContext,
+		getCurrentProfesionistaContext,
+		getProcesoContext,
+		getProcesosContext,
+	} from '$lib/context.svelte';
+	import { page } from '$app/state';
+	import { error } from '@sveltejs/kit';
+	import type { Calificacion, CalificacionProceso } from '$lib/entities';
+	import { generateId } from '$lib/demo-data';
 
-	const { data } = $props();
+	const proceso = $state(getProcesoContext(page.params.idProceso));
+	if (!proceso) error(404, `[404] Proceso no encontrado (p.id=${page.params.idProceso})`);
 
-	const { proceso, empleador, profesionista, certificacion } = data;
+	const certificacion = getCertificacionContext(proceso.idCertificacion);
+	if (!certificacion)
+		error(404, `[404] Certificación no encontrada (p.idCertificacion=${proceso.idCertificacion})`);
 
-	let calificacion = $state(0);
+	const currentProfesionista = getCurrentProfesionistaContext();
+	// if (!currentProfesionista)
+	// 	error(404, `[404] Profesionista no encontrado (p.idProfesionista=${proceso.idProfesionista})`);
+
+	const calificacionesStore = getCalificacionesProcesoContext();
+	const calificacionProceso = getCalificacionProceso(proceso.idCalificacion);
+	const procesos = getProcesosContext();
+
+	const empleadorStore = getCurrentEmpleadorContext();
+	let calificacion = $state(calificacionProceso?.profesionista?.valor || 0);
+
+	$effect(() => {
+		for (let i = 0; i < procesos.value.length; i++) {
+			if (procesos.value[i].id == proceso.id) {
+				procesos.value[i] = proceso;
+			}
+		}
+	});
+
+	function createCalificacionProceso() {
+		if (!proceso) return;
+
+		const nuevaCalificacionProfesionista: Calificacion = {
+			id: generateId(),
+			tipo: 'estrella-5',
+			valor: calificacion
+		};
+		const nuevaCalificacionProceso: CalificacionProceso = {
+			id: generateId(),
+			empleador: null,
+			profesionista: nuevaCalificacionProfesionista,
+			idProceso: proceso.id
+		};
+
+		const indexProceso = procesos.value.findIndex((p) => p.id === proceso.id);
+
+		let indexCalificacion = calificacionesStore.value.findIndex(
+			(c) => c.id === proceso.idCalificacion
+		);
+		let calificacionResult = calificacionesStore.value[indexCalificacion];
+
+		if (!calificacionResult || !proceso.idCalificacion) {
+			calificacionesStore.value.push(nuevaCalificacionProceso);
+
+			indexCalificacion = calificacionesStore.value.length;
+			calificacionResult = nuevaCalificacionProceso
+		}
+
+		nuevaCalificacionProceso.empleador = calificacionResult.empleador;
+		nuevaCalificacionProceso.profesionista = calificacionResult.profesionista;
+
+		proceso.idCalificacion = nuevaCalificacionProceso.id;
+		calificacionesStore.value.splice(indexCalificacion, 1, nuevaCalificacionProceso);
+		procesos.value.splice(indexProceso, 1, proceso);
+	}
+
+	function handleCalificar() {
+		createCalificacionProceso();
+	}
 </script>
 
 <main class="flex flex-col gap-2">
@@ -15,7 +89,9 @@
 
 		<div class="flex flex-row gap-5">
 			<RateInput bind:value={calificacion} />
-			<button class="btn btn-primary" disabled={calificacion == 0}> Calificar </button>
+			<button onclick={handleCalificar} class="btn btn-primary" disabled={calificacion == 0}>
+				Calificar
+			</button>
 		</div>
 	</div>
 
@@ -26,9 +102,10 @@
 		<div class="divider divider-horizontal">|</div>
 		<!-- <div class="divider divider-horizontal">&</div> -->
 		<div class="grid h-20 grow place-items-center">
-			{empleador.razonSocial}
+			{currentProfesionista.value.nombre}
+			{currentProfesionista.value.apellidos}
 		</div>
 	</div>
 
-	<ProcesoData {certificacion} {profesionista} {empleador} {proceso} />
+	<ProcesoData {certificacion} empleador={empleadorStore.value} />
 </main>

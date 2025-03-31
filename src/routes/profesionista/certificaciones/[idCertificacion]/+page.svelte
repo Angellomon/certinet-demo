@@ -1,10 +1,13 @@
 <script lang="ts">
-	import JsonData from '$lib/components/JsonData.svelte';
+	import { page } from '$app/state';
+	import { getCertificacionContext } from '$lib/context.svelte';
+	import { error } from '@sveltejs/kit';
 	import DataCertificacion from './data-certificacion.svelte';
 
-	const { data } = $props();
+	const certificacion = getCertificacionContext(page.params.idCertificacion);
 
-	const { certificacion } = data;
+	if (!certificacion) error(404, { message: '[404] Certificación no encontrada' });
+
 	let certState = $state(certificacion);
 </script>
 
@@ -29,5 +32,4 @@
 
 	<DataCertificacion bind:certificacion={certState} />
 
-	<JsonData title="Raw Data Certificación" jsonData={certState} />
 </main>

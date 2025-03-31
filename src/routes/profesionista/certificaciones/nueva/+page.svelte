@@ -4,16 +4,15 @@
 	import type { ChangeEventHandler } from 'svelte/elements';
 	import { certificacionesLocalStore } from '../utils.svelte.js';
 	import { goto } from '$app/navigation';
+	import { getCurrentProfesionistaContext } from '$lib/context.svelte.js';
 
-	const { data } = $props();
-
-	const { currentProfesionista } = data;
+	const currentProfesionistaStore = getCurrentProfesionistaContext();
 
 	let certificacion: Certificacion = $state({
 		id: '',
 		fechaObtencion: new Date(),
 		nombre: '',
-		idProfesionista: currentProfesionista.id,
+		idProfesionista: currentProfesionistaStore.value.id,
 		organizacion: '',
 		serie: '',
 		verificado: false,
@@ -37,10 +36,10 @@
 	function createCertificacion() {
 		certificacion.id = generateId();
 
-		certificacionesLocalStore.addCertificacion(certificacion)
-		certificacionesLocalStore.saveCertificaciones()
+		certificacionesLocalStore.addCertificacion(certificacion);
+		certificacionesLocalStore.saveCertificaciones();
 
-		goto("/profesionista/certificaciones")
+		goto('/profesionista/certificaciones');
 	}
 </script>
 
