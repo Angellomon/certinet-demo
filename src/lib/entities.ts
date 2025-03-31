@@ -25,6 +25,20 @@ export type Certificacion = v.InferOutput<typeof certificacionSchema>;
 export const certificacionesSchema = v.array(certificacionSchema);
 export type Certificaciones = v.InferOutput<typeof certificacionesSchema>;
 
+export const dataCurriculum = v.object({
+	nombre: v.string(),
+	empresa: v.nullable(v.string()),
+	fechaInicio: dateSchema,
+	fechaFin: v.nullable(dateSchema),
+	deacripcion: v.string(),
+	tech: v.fallback(v.array(v.string()), [])
+});
+
+export const curriculumProfesionistaSchema = v.object({
+	laboral: v.fallback(v.array(dataCurriculum), []),
+	proyectos: v.fallback(v.array(dataCurriculum), [])
+});
+
 export const profesionistaSchema = v.object({
 	id: idSchema,
 	correo: emailSchema,
@@ -32,7 +46,8 @@ export const profesionistaSchema = v.object({
 	apellidos: v.string(),
 	fechaNacimeinto: dateSchema,
 	profesion: v.string(),
-	verificado: v.boolean()
+	verificado: v.boolean(),
+	trayectoria: v.fallback(curriculumProfesionistaSchema, { laboral: [], proyectos: [] })
 });
 export type Profesionista = v.InferOutput<typeof profesionistaSchema>;
 
