@@ -2,11 +2,14 @@
 	import { generateId } from '$lib/demo-data';
 	import type { Certificacion } from '$lib/entities';
 	import type { ChangeEventHandler } from 'svelte/elements';
-	import { certificacionesLocalStore } from '../utils.svelte.js';
 	import { goto } from '$app/navigation';
-	import { getCurrentProfesionistaContext } from '$lib/context.svelte.js';
+	import {
+		getCertificacionesContext,
+		getCurrentProfesionistaContext
+	} from '$lib/context.svelte.js';
 
 	const currentProfesionistaStore = getCurrentProfesionistaContext();
+	const certificacionesStore = getCertificacionesContext();
 
 	let certificacion: Certificacion = $state({
 		id: '',
@@ -36,8 +39,7 @@
 	function createCertificacion() {
 		certificacion.id = generateId();
 
-		certificacionesLocalStore.addCertificacion(certificacion);
-		certificacionesLocalStore.saveCertificaciones();
+		certificacionesStore.value.push(certificacion);
 
 		goto('/profesionista/certificaciones');
 	}
