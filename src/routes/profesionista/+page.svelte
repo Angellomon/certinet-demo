@@ -1,9 +1,8 @@
 <script lang="ts">
-	import JsonData from '$lib/components/JsonData.svelte';
 	import ListaProcesos from '$lib/components/lista-procesos.svelte';
+	import { getCurrentProfesionistaStore } from '$lib/context.svelte.js';
 
-	const { data } = $props();
-	const { currentProfesionista, procesosContacto, certificacionesDataMap } = data;
+	const currentProfesionistaStore = getCurrentProfesionistaStore();
 </script>
 
 <div class="flex flex-col gap-5">
@@ -14,7 +13,9 @@
 	</div>
 
 	<h2 class="text-2xl">Procesos Recientes</h2>
-	<ListaProcesos baseUrl="/profesionista/procesos" {certificacionesDataMap} {procesosContacto} />
-
-	<JsonData title="Raw Data Profesionista" jsonData={currentProfesionista} />
+	<ListaProcesos
+		baseUrl="/profesionista/procesos"
+		id={currentProfesionistaStore.value.id}
+		currentType="profesionista"
+	/>
 </div>

@@ -1,24 +1,21 @@
 <script lang="ts">
 	import {
 		getCertificacionesContext,
-		getEmpleadorContext,
 		getProcesosContext
 	} from '$lib/context.svelte';
 	import { getDemoEmpleadores, getDemoProfesionistas } from '$lib/demo-data';
-	import type {
-		Certificacion,
-		ProcesoContacto,
-	} from '$lib/entities';
+	import type { Certificacion, ProcesoContacto } from '$lib/entities';
 
 	interface Props {
 		baseUrl: string;
 		limit?: number;
+		id: string;
+		currentType: 'empleador' | 'profesionista';
 	}
 
-	const { baseUrl, limit }: Props = $props();
+	const { baseUrl, limit, id, currentType }: Props = $props();
 
 	const certificacionesStore = getCertificacionesContext();
-	const empleadorStore = getEmpleadorContext();
 
 	const certificacionesDataMap = $derived.by(() => {
 		const map: Record<string, Certificacion> = {};
@@ -31,7 +28,9 @@
 	});
 
 	const procesosContactoStore = $derived.by(() =>
-		getProcesosContext().value.filter((p) => p.idEmpleador === empleadorStore.value.id)
+		getProcesosContext().value.filter((p) =>
+			currentType === 'empleador' ? p.idEmpleador === id : p.idProfesionista === id
+		)
 	);
 
 	function getNombreEmpleador(idEmpleador: string) {
