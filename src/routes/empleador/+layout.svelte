@@ -7,27 +7,43 @@
 	import { setContext } from 'svelte';
 	import EmpleadorHeader from './empleador-header.svelte';
 	import {
+		newCalificacionesProcesoStore,
 		newCertificacionesStore,
+		newComprasStore,
 		newEmpleadorStore,
-		newProcesosContactoStore
+		newProcesosContactoStore,
+		newProfesionistasStore
 	} from '$lib/localstore.svelte';
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
 
 	const { data, children } = $props();
-	const { totalProcesos } = data;
 
 	let searchTerm = $state('');
 	let filters: Filter[] = $state([]);
 
-	const store = newEmpleadorStore();
+	const empleadorStore = newEmpleadorStore();
 
-	setContext('empleador-store', store);
+	setContext('empleador-store', empleadorStore);
 
 	const certificacionesStore = newCertificacionesStore();
 	setContext('certificaciones', certificacionesStore);
 
 	const procesosContactoStore = newProcesosContactoStore();
 	setContext('procesos-contacto', procesosContactoStore);
+
+	const profesionistasStore = newProfesionistasStore();
+	setContext('profesionistas', profesionistasStore);
+
+	const comprasStore = newComprasStore();
+	setContext('compras', comprasStore);
+
+	const getComprasEmpleador = (idEmpleador: string) => {
+		return comprasStore.value.filter((c) => c.idEmpleador === idEmpleador);
+	};
+	setContext('get-compras-empleador', getComprasEmpleador);
+
+	const calificacionesProcesoStore = newCalificacionesProcesoStore();
+	setContext('calificaciones-proceso', calificacionesProcesoStore);
 
 	function handleSearch() {
 		goto('/empleador/certificaciones?search=' + searchTerm);
@@ -77,7 +93,7 @@
 		<FiltersList bind:filters />
 	{/if}
 
-	<EmpleadorHeader {totalProcesos} />
+	<EmpleadorHeader totalProcesos={procesosContactoStore.value.length} />
 
 	{@render children()}
 </main>
