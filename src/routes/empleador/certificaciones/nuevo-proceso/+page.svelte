@@ -110,7 +110,7 @@
 			<h2 class="text-right text-xl">Info Pago</h2>
 			<FormPayment {monto} onSubmit={onFormaPagoSubmit} />
 
-			<button class="btn m1l-5" onclick={() => history.back()}>Cancelar</button>
+			<button class="btn ml-5" onclick={() => history.back()}>Cancelar</button>
 		</div>
 	</div>
 </main>

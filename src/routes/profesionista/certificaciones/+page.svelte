@@ -1,5 +1,20 @@
 <script>
 	import ListaCertificaciones from '$lib/components/lista-certificaciones.svelte';
+	import {
+		getCertificacionesContext,
+		getCurrentEmpleadorContext,
+		getCurrentProfesionistaContext
+	} from '$lib/context.svelte';
+
+	const currentProfesionistaStore = getCurrentProfesionistaContext();
+
+	const certificacionesStore = getCertificacionesContext();
+
+	const certificaciones = $derived(
+		certificacionesStore.value.filter(
+			(c) => c.idProfesionista === currentProfesionistaStore.value.id
+		)
+	);
 </script>
 
 <main class="flex flex-col gap-5">
@@ -16,5 +31,5 @@
 			<button class="btn btn-primary">Nueva Certificación</button>
 		</a>
 	</div>
-	<ListaCertificaciones basePath="/profesionista/certificaciones" />
+	<ListaCertificaciones {certificaciones} basePath="/profesionista/certificaciones" />
 </main>
