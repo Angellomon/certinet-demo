@@ -6,6 +6,7 @@ import {
 	getDemoCompras,
 	getDemoEmpleador,
 	getDemoProcesosContacto,
+	getDemoProfesionista,
 	getDemoProfesionistas
 } from './demo-data';
 import {
@@ -52,7 +53,7 @@ export function newLocalStore<T>(key: string, value: T, schema: any) {
 	return new LocalObjectStore(key, value, schema);
 }
 
-export function newEmpleadorStore() {
+export function newCurrentEmpleadorStore() {
 	const demoData = getDemoEmpleador();
 
 	return newLocalStore('empleador', demoData, empleadorSchema);
@@ -83,7 +84,13 @@ export function newComprasStore() {
 }
 
 export function newCalificacionesProcesoStore() {
-	const demoData = getDemoCalificacionesProceso()
+	const demoData = getDemoCalificacionesProceso();
 
-	return newLocalStore("calificaciones-proceso", demoData, calificacionesProcesoSchema)
+	return newLocalStore('calificaciones-proceso', demoData, calificacionesProcesoSchema);
+}
+
+export function newCurrentProfesionistaStore() {
+	const demoData = getDemoProfesionista();
+
+	return newLocalStore('profesionista', demoData, profesionistasSchema);
 }
