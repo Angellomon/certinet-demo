@@ -2,13 +2,12 @@
 	import type { Certificacion, Certificaciones } from '$lib/entities';
 	import { SvelteSet } from 'svelte/reactivity';
 	import VerifiedStatus from './verified-status.svelte';
-	import type { LocalObjectStore } from '$lib/localstore.svelte';
-	import { getContext } from 'svelte';
 	import CrossSvg from './cross-svg.svelte';
+	import { getCertificacionesContext } from '$lib/context.svelte';
 
 	let { selectedIds = $bindable(new SvelteSet()) }: { selectedIds: Set<string> } = $props();
 
-	const certificaciones: LocalObjectStore<Certificaciones> = getContext('certificaciones');
+	const certificaciones = getCertificacionesContext()
 
 	function handleSelect(idCert: string) {
 		if (selectedIds.has(idCert)) {
