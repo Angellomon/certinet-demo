@@ -6,9 +6,8 @@
 
 	let { children } = $props();
 
-	const themeStore = newThemeStore()
-	setContext("theme", themeStore)
-
+	const themeStore = newThemeStore();
+	setContext('theme', themeStore);
 </script>
 
 <svelte:head>

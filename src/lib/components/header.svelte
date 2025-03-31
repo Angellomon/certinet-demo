@@ -23,7 +23,12 @@
 {#snippet themeController()}
 	<label class="swap swap-rotate">
 		<!-- this hidden checkbox controls the state -->
-		<input type="checkbox" class="theme-controller" onclick={toggleTheme} value={themeStore.value} />
+		<input
+			type="checkbox"
+			class="theme-controller"
+			onclick={toggleTheme}
+			value={themeStore.value}
+		/>
 
 		<!-- sun icon -->
 		<svg
