@@ -25,7 +25,7 @@ export type Certificacion = v.InferOutput<typeof certificacionSchema>;
 export const certificacionesSchema = v.array(certificacionSchema);
 export type Certificaciones = v.InferOutput<typeof certificacionesSchema>;
 
-const profesionistaSchema = v.object({
+export const profesionistaSchema = v.object({
 	id: idSchema,
 	correo: emailSchema,
 	nombre: v.string(),
@@ -108,6 +108,10 @@ export const empleadorSchema = v.object({
 });
 
 export type Empleador = v.InferOutput<typeof empleadorSchema>;
+
+export const empleadoresSchema = v.array(empleadorSchema)
+
+export type Empleadores = v.InferOutput<typeof empleadoresSchema>
 
 const tipoCalificacionSchema = v.union([
 	v.literal('estrella-5'),
