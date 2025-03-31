@@ -5,6 +5,7 @@ import {
 	getDemoCertificaciones,
 	getDemoCompras,
 	getDemoEmpleador,
+	getDemoEmpleadores,
 	getDemoProcesosContacto,
 	getDemoProfesionista,
 	getDemoProfesionistas
@@ -13,9 +14,10 @@ import {
 	calificacionesProcesoSchema,
 	certificacionesSchema,
 	comprasSchema,
+	empleadoresSchema,
 	empleadorSchema,
 	procesosContactoSchema,
-	profesionistasSchema
+	profesionistaSchema
 } from './entities';
 
 export class LocalObjectStore<T> {
@@ -74,7 +76,7 @@ export function newProcesosContactoStore() {
 export function newProfesionistasStore() {
 	const demoData = getDemoProfesionistas();
 
-	return newLocalStore('profesionistas', demoData, profesionistasSchema);
+	return newLocalStore('profesionistas', demoData, profesionistaSchema);
 }
 
 export function newComprasStore() {
@@ -92,5 +94,11 @@ export function newCalificacionesProcesoStore() {
 export function newCurrentProfesionistaStore() {
 	const demoData = getDemoProfesionista();
 
-	return newLocalStore('profesionista', demoData, profesionistasSchema);
+	return newLocalStore('profesionista', demoData, profesionistaSchema);
+}
+
+export function newEmpleadoresStore() {
+	const demoData = getDemoEmpleadores();
+
+	return newLocalStore('empleadores', demoData, empleadoresSchema);
 }
