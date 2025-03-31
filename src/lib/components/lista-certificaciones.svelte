@@ -1,16 +1,23 @@
 <script lang="ts">
+	import { getCertificacionesContext, getCurrentProfesionistaContext } from '$lib/context.svelte';
 	import type { Certificacion } from '$lib/entities';
-	import { certificacionesLocalStore } from '../../routes/profesionista/certificaciones/utils.svelte';
 	import CrossSvg from './cross-svg.svelte';
 	import VerifiedStatus from './verified-status.svelte';
 
 	interface Props {
-		certificaciones: Certificacion[];
 		basePath?: string;
 		hideDeleteBtn?: boolean;
 	}
 
-	let { certificaciones = $bindable([]), basePath, hideDeleteBtn = false }: Props = $props();
+	let { basePath, hideDeleteBtn = false }: Props = $props();
+
+	const currentProfesionistaStore = getCurrentProfesionistaContext();
+	const certificacionesStore = getCertificacionesContext();
+	const certificaciones = $derived(
+		certificacionesStore.value.filter(
+			(c) => c.idProfesionista === currentProfesionistaStore.value.id
+		)
+	);
 
 	function handleCertRemove(idCert: string) {
 		const i = certificaciones.findIndex((c) => c.id === idCert);
