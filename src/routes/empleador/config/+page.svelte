@@ -1,14 +1,12 @@
 <script lang="ts">
 	import CrossSvg from '$lib/components/cross-svg.svelte';
 	import EditSvg from '$lib/components/edit-svg.svelte';
+	import { getEmpleadorContext } from '$lib/context.svelte';
 	import { getDefaultFormaPago, getDefaultPrecioCertificacion } from '$lib/demo-data';
-	import type { Empleador } from '$lib/entities';
-	import { newLocalStore, LocalObjectStore } from '$lib/localstore.svelte';
-	import { zhCN } from 'date-fns/locale';
-	import { getContext } from 'svelte';
+	import { newLocalStore } from '$lib/localstore.svelte';
 	import * as v from 'valibot';
 
-	const empleadorStore = getContext<LocalObjectStore<Empleador>>('empleador-store');
+	const empleadorStore = getEmpleadorContext()
 
 	const seccionSchema = v.union([
 		v.literal('datos'),

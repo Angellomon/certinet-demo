@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import type { Compras } from '$lib/entities.js';
-	import type { LocalObjectStore } from '$lib/localstore.svelte.js';
-	import { getContext } from 'svelte';
+	import { getCertificacionesContext, getCompra } from '$lib/context.svelte.js';
 
-	const { data } = $props();
-
-	const { compra, certificaciones, procesosContacto, certificacionesIdMap } = data;
 
 	const idCompra = page.params.idCompra;
+
+	const compra = getCompra(idCompra)
+	const certificaciones = getCertificacionesContext()
+
+
 </script>
 
 {#snippet stat(title: string, value: string, desc?: string)}
@@ -62,7 +62,7 @@
 		<div class="flex flex-row flex-wrap gap-2">
 			{@render stat('Monto', compra.monto.toFixed(2))}
 			{@render stat('Fecha', compra.fecha.toISOString().slice(0, 10))}
-			{@render stat('# de Certificaciones', `${certificaciones.length}`)}
+			{@render stat('# de Certificaciones', `${certificaciones.value.length}`)}
 
 			{#if compra.status == 'completado'}
 				{@render statusStat('Estatus Pago', 'success', 'Completado')}
