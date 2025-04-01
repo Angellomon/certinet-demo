@@ -131,7 +131,7 @@
 		{@render item(curriculum, i)}
 	{/each}
 
-	{#if edit}
+	{#if edit && currentProfesionistaStore.value.trayectoria.laboral.length > 0}
 		<button class="btn btn-dash" onclick={handleNewItem}> Agregar </button>
 	{/if}
 </ul>
