@@ -32,18 +32,18 @@
 			tech: []
 		};
 
-		handleItemEdit(item, currentProfesionistaStore.value.trayectoria.laboral.length);
+		handleItemEdit(item, currentProfesionistaStore.value.trayectoria.proyectos.length);
 	}
 
 	function handleItemSave() {
 		if (!currentTimelineItem) return;
 
 		if (currentTimelineIndex == -1)
-			currentProfesionistaStore.value.trayectoria.laboral.push(currentTimelineItem);
-		else if (!currentProfesionistaStore.value.trayectoria.laboral[currentTimelineIndex])
-			currentProfesionistaStore.value.trayectoria.laboral.push(currentTimelineItem);
+			currentProfesionistaStore.value.trayectoria.proyectos.push(currentTimelineItem);
+		else if (!currentProfesionistaStore.value.trayectoria.proyectos[currentTimelineIndex])
+			currentProfesionistaStore.value.trayectoria.proyectos.push(currentTimelineItem);
 		else
-			currentProfesionistaStore.value.trayectoria.laboral.splice(
+			currentProfesionistaStore.value.trayectoria.proyectos.splice(
 				currentTimelineIndex,
 				1,
 				currentTimelineItem
@@ -64,7 +64,7 @@
 	}
 
 	function handleDeleteCurriculum(i: number) {
-		currentProfesionistaStore.value.trayectoria.laboral.splice(i, 1);
+		currentProfesionistaStore.value.trayectoria.proyectos.splice(i, 1);
 	}
 </script>
 
@@ -120,18 +120,18 @@
 	</li>
 {/snippet}
 
-{#if edit && currentProfesionistaStore.value.trayectoria.laboral.length == 0}
+{#if edit && currentProfesionistaStore.value.trayectoria.proyectos.length == 0}
 	<button class="btn btn-dash rounded-box" onclick={handleNewTimeline}> Agregar </button>
-{:else if currentProfesionistaStore.value.trayectoria.laboral.length == 0}
-	<p>Sin Curriculum</p>
+{:else if currentProfesionistaStore.value.trayectoria.proyectos.length == 0}
+	<p>Sin proyectos</p>
 {/if}
 
 <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
-	{#each currentProfesionistaStore.value.trayectoria.laboral as curriculum, i}
+	{#each currentProfesionistaStore.value.trayectoria.proyectos as curriculum, i}
 		{@render item(curriculum, i)}
 	{/each}
 
-	{#if edit}
+	{#if !(currentProfesionistaStore.value.trayectoria.proyectos.length == 0) && edit}
 		<button class="btn btn-dash" onclick={handleNewItem}> Agregar </button>
 	{/if}
 </ul>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import EditSvg from '$lib/components/edit-svg.svelte';
+	import TimelineProyectos from '$lib/components/timeline-proyectos.svelte';
 	import TimelinteCurriculum from '$lib/components/timelinte-curriculum.svelte';
 	import { getCurrentProfesionistaContext } from '$lib/context.svelte';
 	import { newLocalStore } from '$lib/localstore.svelte';
@@ -167,6 +168,12 @@
 	</div>
 {/snippet}
 
+{#snippet proyectos()}
+	<div>
+		<TimelineProyectos edit />
+	</div>
+{/snippet}
+
 <h1 class="text-2xl">Configuración</h1>
 <main>
 	<main class="flex justify-start">
@@ -178,9 +185,8 @@
 					{@render datos()}
 				{:else if seccionStore.value.seccion == 'curriculum'}
 					{@render curriculum()}
-
-					<!-- {:else if seccionStore.value.seccion == 'precio certificacion'}
-          {@render precioCertificacion()}  -->
+				{:else if seccionStore.value.seccion == 'proyectos'}
+					{@render proyectos()}
 				{/if}
 			</div>
 		</div>
