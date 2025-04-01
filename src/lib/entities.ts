@@ -34,6 +34,8 @@ export const dataCurriculum = v.object({
 	tech: v.fallback(v.array(v.string()), [])
 });
 
+export type Curriculum = v.InferOutput<typeof dataCurriculum>;
+
 export const curriculumProfesionistaSchema = v.object({
 	laboral: v.fallback(v.array(dataCurriculum), []),
 	proyectos: v.fallback(v.array(dataCurriculum), [])
