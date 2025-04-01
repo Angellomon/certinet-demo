@@ -11,10 +11,10 @@
 </script>
 
 <div class="flex flex-col items-start justify-between md:flex-row">
-	<div>
+	<div class="flex flex-col gap-3">
 		<h1 class="text-4xl">{profesionista.nombre} {profesionista.apellidos}</h1>
 		<div class="flex flex-col justify-start gap-10 md:flex-row md:items-center">
-			<div class="link link-primary text-xl italic">{profesionista.correo}</div>
+			<div class="link link-accent text-xl italic">{profesionista.correo}</div>
 
 			<VerifiedStatus verified={profesionista.verificado}>
 				{profesionista.verificado ? 'Verificado' : 'Verificación Pendiente'}
