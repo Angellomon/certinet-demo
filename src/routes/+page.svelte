@@ -35,7 +35,7 @@
 		funcion: string;
 	};
 
-	const funciones: Funcion[] = [
+	const funciones1: Funcion[] = [
 		{
 			nombre: 'Descubre el Talento',
 			funcion:
@@ -55,6 +55,24 @@
 			nombre: 'Optimiza tus Recursos',
 			funcion:
 				'Reduce los costos de reclutamiento y el tiempo invertido en la búsqueda de talento, asegurando que cada contratación esté alineada con tus objetivos empresariales.'
+		}
+	];
+
+	const functiones2: Funcion[] = [
+		{
+			nombre: 'Descubre Talento Especializado',
+			funcion:
+				'Accede a nuestra amplia base de datos de profesionales certificados, listos para contribuir a tus proyectos, acelerando tu búsqueda de candidatos ideales.'
+		},
+		{
+			nombre: 'Personaliza tu Búsqueda',
+			funcion:
+				'Aprovecha herramientas de filtro avanzadas para definir tu búsqueda, asegurando que encuentres exactamente el perfil técnico que tu proyecto necesita.'
+		},
+		{
+			nombre: 'Acelera el Proceso de Selección',
+			funcion:
+				'Nuestra plataforma te permite gestionar candidatos de manera rápida y sencilla, facilitando decisiones informadas que optimizan tu tiempo y recursos en la contratación.'
 		}
 	];
 </script>
@@ -98,8 +116,8 @@
 	</div>
 {/snippet}
 
-{#snippet funcion(funcion: Funcion, i: number)}
-	<div class="card bg-base-100 shadow-sm sm:max-w-1/2 lg:max-w-1/4">
+{#snippet funcion(funcion: Funcion, i: number, dark = false)}
+	<div class:bg-base-200={dark} class="card bg-base-100 shadow-sm sm:max-w-[47%] lg:max-w-[23%] pt-5">
 		<div
 			class="bg-info text-info-content w-20 self-center rounded-full px-7 py-5 text-center text-4xl"
 		>
@@ -141,9 +159,9 @@
 		{@render mainTitle('Cómo Funciona CertiNet')}
 		<p>Conectando empresas con talento tecnológico certificado de manera eficiente</p>
 
-		<div class="flex flex-row flex-wrap">
-			{#each funciones as fn, i}
-				{@render funcion(fn, i + 1)}
+		<div class="flex flex-row flex-wrap gap-5 justify-center">
+			{#each funciones1 as fn, i}
+				{@render funcion(fn, i + 1, true)}
 			{/each}
 		</div>
 	</div>
@@ -224,6 +242,24 @@
 					<img src="/certinet-img-3.png" alt="img" />
 				</figure>
 			</div>
+		</div>
+	</div>
+
+	<div
+		class="bg-base-200 flex flex-col items-center justify-center gap-5 px-10 py-5 md:px-20 md:py-10"
+	>
+		<div class="text-center">
+			{@render mainTitle('Conecta con el Mejor Talento Tecnológico de Manera Eficiente')}
+		</div>
+		<p class="text-center">
+			Optimiza tu proceso de contratación con CertiNet, donde facilitar la conexión entre empresas y
+			profesionales certificados se convierte en una experiencia ágil y eficaz.
+		</p>
+
+		<div class="flex flex-row flex-wrap gap-10 justify-center">
+			{#each functiones2 as fn, i}
+				{@render funcion(fn, i + 1)}
+			{/each}
 		</div>
 	</div>
 </main>
