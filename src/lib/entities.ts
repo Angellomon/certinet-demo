@@ -30,7 +30,7 @@ export const dataCurriculum = v.object({
 	empresa: v.nullable(v.string()),
 	fechaInicio: dateSchema,
 	fechaFin: v.nullable(dateSchema),
-	deacripcion: v.string(),
+	descripcion: v.string(),
 	tech: v.fallback(v.array(v.string()), [])
 });
 

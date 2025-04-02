@@ -40,7 +40,7 @@
 				</div>
 			{/if}
 
-			{item.deacripcion}
+			{item.descripcion}
 
 			<div class="mt-2">
 				{@render tags(item.tech)}

@@ -37,7 +37,7 @@ export const getDemoProfesionistas: () => Profesionista[] = () => [
 		trayectoria: {
 			laboral: [
 				{
-					deacripcion:
+					descripcion:
 						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget iaculis nunc. Sed vulputate odio nibh, a dignissim quam accumsan quis. Suspendisse pharetra erat et ornare porttitor. Curabitur id turpis a ipsum egestas dapibus. ',
 					empresa: 'TestCO',
 					fechaInicio: new Date(2023, 5, 10),
@@ -46,7 +46,7 @@ export const getDemoProfesionistas: () => Profesionista[] = () => [
 					tech: ['python', 'pandas', 'azure', 'postgresql']
 				},
 				{
-					deacripcion:
+					descripcion:
 						'Cras lacinia libero tortor, iaculis consectetur enim pretium vel. Aenean porta nisi non ullamcorper efficitur. Nullam erat ex, pulvinar nec dictum in, sodales id dui. Aenean eget elit non erat mattis maximus a sed metus. Cras nunc risus, egestas id mauris a, faucibus ultrices magna.',
 					empresa: 'TestCO 2',
 					fechaInicio: new Date(2025, 4, 10),
@@ -57,7 +57,7 @@ export const getDemoProfesionistas: () => Profesionista[] = () => [
 			],
 			proyectos: [
 				{
-					deacripcion:
+					descripcion:
 						'Cenean erat est, porta id venenatis et, volutpat eget metus. Curabitur dolor elit, mollis ut tortor vehicula, consectetur dapibus dui. ',
 					empresa: 'Propia',
 					fechaInicio: new Date(2024, 7, 10),
@@ -66,7 +66,7 @@ export const getDemoProfesionistas: () => Profesionista[] = () => [
 					tech: ['zig', 'llvm', 'tigerbeetle']
 				},
 				{
-					deacripcion:
+					descripcion:
 						'Quisque tristique ligula quis fringilla placerat. Aliquam mattis scelerisque suscipit. Fusce urna tortor, dictum eu rhoncus a, egestas in nisi. Cras egestas nisl vitae arcu porttitor laoreet. Sed rutrum dolor velit, ut porta elit interdum sit amet. Integer et ornare dui. Praesent sem libero, imperdiet eu ante non, bibendum porttitor enim.',
 					empresa: 'Propia',
 					fechaInicio: new Date(2025, 9, 12),

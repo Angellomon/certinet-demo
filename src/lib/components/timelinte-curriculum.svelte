@@ -26,7 +26,7 @@
 
 	function handleNewItem() {
 		const item = {
-			deacripcion: '',
+			descripcion: '',
 			empresa: '',
 			nombre: '',
 			fechaInicio: new Date(),
@@ -54,7 +54,7 @@
 
 	function handleNewTimeline() {
 		const item = {
-			deacripcion: '',
+			descripcion: '',
 			empresa: '',
 			nombre: '',
 			fechaInicio: new Date(),
@@ -112,7 +112,7 @@
 				</div>
 			{/if}
 
-			{item.deacripcion}
+			{item.descripcion}
 
 			<div class="mt-2">
 
@@ -222,7 +222,7 @@
 				<label class="fieldset-label">Descripción</label>
 				<textarea
 					class="textarea"
-					bind:value={currentTimelineItem.deacripcion}
+					bind:value={currentTimelineItem.descripcion}
 					placeholder="Descripción"
 				></textarea>
 
