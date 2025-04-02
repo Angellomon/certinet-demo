@@ -29,6 +29,34 @@
 			puesto: 'Gerente de Desarrollo en TechCorp'
 		}
 	];
+
+	type Funcion = {
+		nombre: string;
+		funcion: string;
+	};
+
+	const funciones: Funcion[] = [
+		{
+			nombre: 'Descubre el Talento',
+			funcion:
+				'Accede a una amplia base de datos de profesionales certificados listos para ser contratados, facilitando así la búsqueda de expertos que se adapten a tus necesidades específicas.'
+		},
+		{
+			nombre: 'Personaliza tu Búsqueda',
+			funcion:
+				'Utiliza nuestros filtros avanzados para encontrar a los candidatos ideales según sus certificaciones, habilidades y experiencia, optimizando tu tiempo de reclutamiento.'
+		},
+		{
+			nombre: 'Facilita el Proceso de Contratación',
+			funcion:
+				'Aprovecha nuestra plataforma intuitiva que simplifica la comunicación y gestión de candidatos, permitiendo una contratación más ágil y efectiva.'
+		},
+		{
+			nombre: 'Optimiza tus Recursos',
+			funcion:
+				'Reduce los costos de reclutamiento y el tiempo invertido en la búsqueda de talento, asegurando que cada contratación esté alineada con tus objetivos empresariales.'
+		}
+	];
 </script>
 
 {#snippet mainTitle(title: string)}
@@ -66,6 +94,22 @@
 	</div>
 {/snippet}
 
+{#snippet funcion(funcion: Funcion, i: number)}
+	<div class="card bg-base-100 shadow-sm sm:max-w-1/2 lg:max-w-1/4">
+		<div class="self-center bg-info text-info-content rounded-full w-20 px-7 py-5 text-center text-4xl">{i}</div>
+
+		<div class="card-body items-center text-center">
+			<h2 class="card-title">{funcion.nombre}</h2>
+			<p>
+				{funcion.funcion}
+			</p>
+			<!-- <div class="card-actions">
+				<button class="btn btn-primary">Buy Now</button>
+			</div> -->
+		</div>
+	</div>
+{/snippet}
+
 <main class="flex flex-col">
 	<div class="bg-base-200 gap-5 px-10 py-5 md:px-20 md:py-10">
 		<div class="flex flex-col lg:flex-row">
@@ -82,6 +126,17 @@
 			</div>
 
 			<img class="scale-70" src="/certinet-img-1.png" alt="img" />
+		</div>
+	</div>
+
+	<div class="bg-base-100 flex flex-col justify-center gap-5 px-10 py-5 md:px-20 md:py-10">
+		{@render mainTitle('Cómo Funciona CertiNet')}
+		<p>Conectando empresas con talento tecnológico certificado de manera eficiente</p>
+
+		<div class="flex flex-row flex-wrap">
+			{#each funciones as fn, i}
+				{@render funcion(fn, i + 1)}
+			{/each}
 		</div>
 	</div>
 </main>
