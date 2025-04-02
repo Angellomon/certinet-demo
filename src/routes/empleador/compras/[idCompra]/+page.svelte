@@ -62,7 +62,7 @@
 		<div class="flex flex-row flex-wrap gap-2">
 			{@render stat('Monto', compra.monto.toFixed(2))}
 			{@render stat('Fecha', compra.fecha.toISOString().slice(0, 10))}
-			{@render stat('# de Certificaciones', `${certificaciones.value.length}`)}
+			{@render stat('# de Certificaciones', `${compra.idsProcesosContacto.length}`)}
 
 			{#if compra.status == 'completado'}
 				{@render statusStat('Estatus Pago', 'success', 'Completado')}
