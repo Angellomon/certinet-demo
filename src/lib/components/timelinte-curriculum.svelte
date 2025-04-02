@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getCurrentProfesionistaContext } from '$lib/context.svelte';
 	import type { Curriculum } from '$lib/entities';
+	import ArrowSvg from './arrow-svg.svelte';
 	import CrossSvg from './cross-svg.svelte';
 	import EditSvg from './edit-svg.svelte';
 
@@ -68,20 +69,10 @@
 	}
 </script>
 
-{#snippet arrowSvg()}
-	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
-		<path
-			fill-rule="evenodd"
-			d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-			clip-rule="evenodd"
-		/>
-	</svg>
-{/snippet}
-
 {#snippet item(item: Curriculum, i: number)}
 	<li class="md:min-w-[40vw]">
 		<div class="timeline-middle">
-			{@render arrowSvg()}
+			<ArrowSvg />
 		</div>
 
 		<div
@@ -99,7 +90,7 @@
 		</div>
 
 		{#if edit}
-			<div class="join absolute top-0" class:right-0={i % 2 === 0} class:left-0={i % 2 !== 0}>
+			<div class="join absolute top-0 right-0" class:md:right-0={i % 2 === 0} class:md:left-0={i % 2 !== 0}>
 				<button
 					onclick={() => handleItemEdit(item, i)}
 					class="tooltip btn btn-circle"
