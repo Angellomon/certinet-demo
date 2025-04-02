@@ -8,26 +8,42 @@
 
 	const themeStore = newThemeStore();
 	setContext('theme', themeStore);
+
+	const metadataData = {
+		siteName: 'CertiNet',
+		title: 'Conectando empresas con talento tecnológico certificado',
+		description:
+			'CertiNet simplifica la conexión entre empresas y profesionales certificados, optimizando tus necesidades de contratación.',
+		type: 'website',
+		domain: 'certinet-demo.onrender.com',
+		url: 'https://certinet-demo.onrender.com',
+		image: '/certinet-img-1.png'
+	};
 </script>
 
-{#snippet opengraphs()}
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://certinet-demo.onrender.com" />
-	<meta property="og:title" content="Conectando empresas con talento tecnológico certificado" />
-	<meta
-		property="og:description"
-		content="CertiNet simplifica la conexión entre empresas y profesionales certificados, optimizando
-					tus necesidades de contratación."
-	/>
-	<meta property="og:site_name" content="CertiNet" />
-	<meta property="og:locale" content="es_MX" />
-	<meta property="og:image" content="certinet-img-1.png" />
+{#snippet metadata()}
+	<meta name="description" content={metadataData.description} />
+
+	<!-- Facebook Meta Tags -->
+	<meta property="og:url" content={metadataData.url} />
+	<meta property="og:type" content={metadataData.type} />
+	<meta property="og:title" content={metadataData.title} />
+	<meta property="og:description" content={metadataData.description} />
+	<meta property="og:image" content={metadataData.image} />
+
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta property="twitter:domain" content={metadataData.domain} />
+	<meta property="twitter:url" content={metadataData.url} />
+	<meta name="twitter:title" content={metadataData.title} />
+	<meta name="twitter:description" content={metadataData.description} />
+	<meta name="twitter:image" content={metadataData.image} />
 {/snippet}
 
 <svelte:head>
 	<title>CertiNet | Acercando Talento</title>
 
-	{@render opengraphs()}
+	{@render metadata()}
 </svelte:head>
 
 <header>
