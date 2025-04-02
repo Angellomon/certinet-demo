@@ -17,7 +17,8 @@
 		type: 'website',
 		domain: 'certinet-demo.onrender.com',
 		url: 'https://certinet-demo.onrender.com',
-		image: '/certinet-img-1.png'
+		image: '/certinet-img-1.png',
+		locale: "es_MX"
 	};
 </script>
 
@@ -30,6 +31,7 @@
 	<meta property="og:title" content={metadataData.title} />
 	<meta property="og:description" content={metadataData.description} />
 	<meta property="og:image" content={metadataData.image} />
+	<meta property="og:locale" content={metadataData.locale} />
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
