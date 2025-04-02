@@ -1,4 +1,6 @@
 <script lang="ts">
+	import ArrowSvg from '$lib/components/arrow-svg.svelte';
+
 	type Opinion = {
 		opinion: string;
 		img: string;
@@ -75,6 +77,61 @@
 				'Nuestra plataforma te permite gestionar candidatos de manera rápida y sencilla, facilitando decisiones informadas que optimizan tu tiempo y recursos en la contratación.'
 		}
 	];
+
+	type Plan = {
+		nombre: string;
+		descripcion: string;
+		precio: number;
+		caracteristicas: string[];
+	};
+
+	const planes: Plan[] = [
+		{
+			nombre: 'Básico',
+			descripcion:
+				'Accede a nuestra plataforma con un plan gratuito por 14 días. Sin compromisos. Encuentra candidatos ideales y optimiza tu proceso de contratación.',
+			precio: 0,
+			caracteristicas: [
+				'5,000 usuarios',
+				'Proyectos ilimitados',
+				'Todos los tipos de proyectos',
+				'Integraciones ilimitadas',
+				'Compartición avanzada',
+				'Pruebas A/B de proyectos',
+				'Almacenamiento ilimitado'
+			]
+		},
+		{
+			nombre: 'Empresarial',
+			descripcion:
+				'Después de tu prueba gratuita de 14 días, accede de manera continua a talento tecnológico especializado. Sin ataduras, solo resultados.',
+			precio: 20,
+			caracteristicas: [
+				'15,000 usuarios',
+				'Proyectos ilimitados',
+				'Todos los tipos de proyectos',
+				'Integraciones ilimitadas',
+				'Compartición avanzada',
+				'Pruebas A/B de proyectos',
+				'Almacenamiento ilimitado'
+			]
+		},
+		{
+			nombre: 'Enterprise',
+			descripcion:
+				'Inicia tu prueba gratuita de 14 días y descubre la flexibilidad de acceder a recursos ilimitados. Cancelación en cualquier momento.',
+			precio: 99,
+			caracteristicas: [
+				'Usuarios ilimitados',
+				'Proyectos ilimitados',
+				'Todos los tipos de proyectos',
+				'Integraciones ilimitadas',
+				'Compartición avanzada',
+				'Pruebas A/B de proyectos',
+				'Almacenamiento ilimitado'
+			]
+		}
+	];
 </script>
 
 {#snippet mainTitle(title: string)}
@@ -117,7 +174,10 @@
 {/snippet}
 
 {#snippet funcion(funcion: Funcion, i: number, dark = false)}
-	<div class:bg-base-200={dark} class="card bg-base-100 shadow-sm sm:max-w-[47%] lg:max-w-[23%] pt-5">
+	<div
+		class:bg-base-200={dark}
+		class="card bg-base-100 pt-5 shadow-sm sm:max-w-[47%] lg:max-w-[23%]"
+	>
 		<div
 			class="bg-info text-info-content w-20 self-center rounded-full px-7 py-5 text-center text-4xl"
 		>
@@ -133,6 +193,48 @@
 				<button class="btn btn-primary">Buy Now</button>
 			</div> -->
 		</div>
+	</div>
+{/snippet}
+
+{#snippet plan(plan: Plan)}
+	<div
+		class="card bg-base-300 items-center justify-center px-5 py-5 shadow-sm sm:max-w-[47%] lg:max-w-[30%]"
+	>
+		<h3 class="my-2 text-center text-2xl font-bold">{plan.nombre}</h3>
+		<p class="text-center">{plan.descripcion}</p>
+
+		<div class="text-base-content  mt-8 text-center text-5xl font-bold">${plan.precio}</div>
+		<p class="mb-5 text-center font-extralight uppercase">Prueba gratuita de 14 días</p>
+
+		<button class="btn btn-neutral mb-5 w-55 uppercase">Seleccionar este plan</button>
+
+		<ul class="flex flex-col gap-1">
+			{#each plan.caracteristicas as caracteristica}
+				<li class="flex flex-row items-center gap-2"><ArrowSvg /> {caracteristica}</li>
+			{/each}
+		</ul>
+	</div>
+{/snippet}
+
+{#snippet planDestacado(plan: Plan)}
+	<div
+		class="card bg-info-content text-white items-center justify-center px-5 py-5 shadow-sm sm:max-w-[47%] lg:max-w-[30%]"
+	>
+		<h3 class="my-2 text-center text-2xl font-bold">{plan.nombre}</h3>
+		<p class="text-center">{plan.descripcion}</p>
+
+		<div class="text-white mt-8 text-center text-5xl font-bold">${plan.precio}</div>
+		<p class="mb-5 text-center font-extralight uppercase">Prueba gratuita de 14 días</p>
+
+		<button class="btn btn-neutral mb-5 w-55 uppercase">Seleccionar este plan</button>
+
+		<ul class="flex flex-col gap-1">
+			{#each plan.caracteristicas as caracteristica}
+				<li class="flex flex-row items-center gap-2"><ArrowSvg /> {caracteristica}</li>
+			{/each}
+		</ul>
+
+		<div class="absolute top-[-1rem]  uppercase btn btn-neutral cursor-default">Más Popular</div>
 	</div>
 {/snippet}
 
@@ -159,7 +261,7 @@
 		{@render mainTitle('Cómo Funciona CertiNet')}
 		<p>Conectando empresas con talento tecnológico certificado de manera eficiente</p>
 
-		<div class="flex flex-row flex-wrap gap-5 justify-center">
+		<div class="flex flex-row flex-wrap justify-center gap-5">
 			{#each funciones1 as fn, i}
 				{@render funcion(fn, i + 1, true)}
 			{/each}
@@ -256,10 +358,27 @@
 			profesionales certificados se convierte en una experiencia ágil y eficaz.
 		</p>
 
-		<div class="flex flex-row flex-wrap gap-10 justify-center">
+		<div class="flex flex-row flex-wrap justify-center gap-10">
 			{#each functiones2 as fn, i}
 				{@render funcion(fn, i + 1)}
 			{/each}
+		</div>
+	</div>
+
+	<div
+		class="bg-base-100 flex flex-col items-center justify-center gap-5 px-10 py-5 md:px-20 md:py-10"
+	>
+		<div class="text-center">
+			{@render mainTitle('Elige el plan perfecto para tu empresa')}
+		</div>
+		<p class="text-center">
+			Únete a las empresas que ya confían en CertiNet para agilizar su búsqueda de talento
+			tecnológico calificado.
+		</p>
+		<div class="my-10 flex flex-row flex-wrap items-center justify-center gap-5">
+			{@render plan(planes[0])}
+			{@render planDestacado(planes[1])}
+			{@render plan(planes[2])}
 		</div>
 	</div>
 </main>
