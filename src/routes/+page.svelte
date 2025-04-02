@@ -466,7 +466,7 @@
 					expertos.
 				</p>
 				
-				<a class="btn btn-primary w-40 mt-5" href="/signup">Inicia tu proceso</a>
+				<a class="btn btn-primary mt-5 w-40" href="/signup">Inicia tu proceso</a>
 			</div>
 
 			<div class="bg-base-200 flex items-center justify-center rounded-3xl">
