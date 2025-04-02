@@ -89,16 +89,17 @@
 {/snippet}
 
 {#snippet item(item: Curriculum, i: number)}
+{@const isEven = i % 2 === 0}
 	<li class="md:min-w-[40vw]">
 		<div class="timeline-middle">
 			<ArrowSvg />
 		</div>
 
 		<div
-			class:timeline-end={i % 2 === 0}
-			class:md:text-end={i % 2 !== 0}
-			class:timeline-start={i % 2 !== 0}
-			class="mb-10"
+			class:timeline-end={isEven}
+			class:md:text-end={!isEven}
+			class:timeline-start={!isEven}
+			class="mb-10 md:text-end"
 		>
 			<time class="font-mono italic">{item.fechaInicio.getFullYear()}</time>
 			<!-- <time class="font-mono italic">{item.fechaInicio.toISOString().slice(0, 10)}</time> -->
@@ -115,7 +116,6 @@
 			{item.descripcion}
 
 			<div class="mt-2">
-
 				{@render tags(item.tech)}
 			</div>
 
