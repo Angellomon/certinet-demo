@@ -21,7 +21,7 @@
 				'Con CertiNet, encontramos expertos en tecnología en un abrir y cerrar de ojos. Su sistema de búsqueda es excepcional',
 			img: 'certinet-avatar-2.png',
 			nombre: 'Carla Martínez',
-			puesto: 'Director de PRoyectos en Innovatech'
+			puesto: 'Director de Proyectos en Innovatech'
 		},
 		{
 			opinion:
@@ -132,6 +132,37 @@
 			]
 		}
 	];
+
+	type Insight = {
+		img: string;
+		titulo: string;
+		fecha: string;
+		contenido: string;
+	};
+
+	const insights: Insight[] = [
+		{
+			contenido:
+				'Aprende estrategias efectivas para mejorar tus iniciativas de integración de datos, asegurando a la vez la seguridad y el acceso sencillo a la información crítica.',
+			fecha: '15 FEB 2023',
+			img: 'certinet-card-img-1.png',
+			titulo: 'Optimizando Tu Estrategia de Integración de Datos'
+		},
+		{
+			contenido:
+				'Explora cómo las herramientas de colaboración en la nube pueden transformar la productividad de tu equipo y mejorar el acceso a datos críticos.',
+			fecha: '20 FEB 2023',
+			img: 'certinet-card-img-2.png',
+			titulo: 'Maximizando la Colaboración en la Nube'
+		},
+		{
+			contenido:
+				'Descubre estrategias clave para proteger tus datos en un entorno interconectado, optimizando la usabilidad al mismo tiempo.',
+			fecha: '25 FEB 2023',
+			img: 'certinet-card-img-3.png',
+			titulo: 'Asegurando tus Datos en un Mundo Digital'
+		}
+	];
 </script>
 
 {#snippet mainTitle(title: string)}
@@ -203,7 +234,7 @@
 		<h3 class="my-2 text-center text-2xl font-bold">{plan.nombre}</h3>
 		<p class="text-center">{plan.descripcion}</p>
 
-		<div class="text-base-content  mt-8 text-center text-5xl font-bold">${plan.precio}</div>
+		<div class="text-base-content mt-8 text-center text-5xl font-bold">${plan.precio}</div>
 		<p class="mb-5 text-center font-extralight uppercase">Prueba gratuita de 14 días</p>
 
 		<button class="btn btn-neutral mb-5 w-55 uppercase">Seleccionar este plan</button>
@@ -218,12 +249,12 @@
 
 {#snippet planDestacado(plan: Plan)}
 	<div
-		class="card bg-info-content text-white items-center justify-center px-5 py-5 shadow-sm sm:max-w-[47%] lg:max-w-[30%]"
+		class="card bg-info-content items-center justify-center px-5 py-5 text-white shadow-sm sm:max-w-[47%] lg:max-w-[30%]"
 	>
 		<h3 class="my-2 text-center text-2xl font-bold">{plan.nombre}</h3>
 		<p class="text-center">{plan.descripcion}</p>
 
-		<div class="text-white mt-8 text-center text-5xl font-bold">${plan.precio}</div>
+		<div class="mt-8 text-center text-5xl font-bold text-white">${plan.precio}</div>
 		<p class="mb-5 text-center font-extralight uppercase">Prueba gratuita de 14 días</p>
 
 		<button class="btn btn-neutral mb-5 w-55 uppercase">Seleccionar este plan</button>
@@ -234,7 +265,25 @@
 			{/each}
 		</ul>
 
-		<div class="absolute top-[-1rem]  uppercase btn btn-neutral cursor-default">Más Popular</div>
+		<div class="btn btn-neutral absolute top-[-1rem] cursor-default uppercase">Más Popular</div>
+	</div>
+{/snippet}
+
+{#snippet insight(insight: Insight)}
+	<div
+		class="card bg-base-300 shadow-sm sm:max-w-[47%] lg:max-w-[30%]"
+	>
+		<figure>
+			<img src={insight.img} alt="" />
+		</figure>
+
+		<div class="card-body">
+			<p class="text-base-content uppercase">{insight.fecha}</p>
+			<h2 class="card-title">{insight.titulo}</h2>
+			<p>{insight.contenido}</p>
+
+			<button class="btn btn-link uppercase self-start">Leer más</button>
+		</div>
 	</div>
 {/snippet}
 
@@ -270,7 +319,7 @@
 
 	<div class="bg-base-100 flex flex-col justify-center gap-5 px-10 py-5 md:px-20 md:py-10">
 		<div class="flex flex-col gap-10 md:flex-row-reverse">
-			<div class="flex flex-col">
+			<div class="flex flex-col md:w-2/3">
 				<div class="md:w-2/3">
 					{@render title('Transforma la Contratación de Talento Tecnológico')}
 				</div>
@@ -296,6 +345,7 @@
 						Reduce el tiempo y costos de reclutamiento al asegurar contrataciones más efectivas.
 					</li>
 				</ul>
+				{@render opinion(opiniones[1])}
 			</div>
 
 			<div class="bg-base-200 flex items-center justify-center rounded-3xl">
@@ -337,6 +387,7 @@
 						objetivos estratégicos.
 					</li>
 				</ul>
+				{@render opinion(opiniones[2])}
 			</div>
 
 			<div class="bg-base-200 flex items-center justify-center rounded-3xl">
@@ -375,10 +426,30 @@
 			Únete a las empresas que ya confían en CertiNet para agilizar su búsqueda de talento
 			tecnológico calificado.
 		</p>
-		<div class="my-10 flex flex-row flex-wrap items-center justify-center gap-5">
+		<div class="mt-10 flex flex-row flex-wrap items-center justify-center gap-5">
 			{@render plan(planes[0])}
 			{@render planDestacado(planes[1])}
 			{@render plan(planes[2])}
+		</div>
+	</div>
+
+	<div
+		class="bg-base-100 flex flex-col items-center justify-center gap-5 px-10 pb-5 md:px-20 md:pb-10"
+	>
+		<div class="text-center">
+			{@render mainTitle('Insights Recientes en CertiNet')}
+
+			<p>
+				Descubre artículos que abordan las tendencias en la conexión entre empresas y talento
+				tecnológico certificado. Estos recursos te proporcionarán las herramientas necesarias para
+				optimizar tus procesos de contratación y potenciar tu búsqueda de expertos en el sector.
+			</p>
+		</div>
+
+		<div class="flex flex-row flex-wrap justify-center gap-5">
+			{#each insights as ins}
+				{@render insight(ins)}
+			{/each}
 		</div>
 	</div>
 </main>
