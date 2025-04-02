@@ -9,6 +9,14 @@
 	const { timeline }: Props = $props();
 </script>
 
+{#snippet tags(tags: string[], edit = false)}
+	<div class="flex flex-row flex-wrap gap-2">
+		{#each tags as tech, i}
+			<div class="badge badge-neutral">{tech}</div>
+		{/each}
+	</div>
+{/snippet}
+
 {#snippet item(item: Curriculum, i: number)}
 	<li>
 		<div class="timeline-middle">
@@ -31,7 +39,12 @@
 					{item.empresa}
 				</div>
 			{/if}
+
 			{item.deacripcion}
+
+			<div class="mt-2">
+				{@render tags(item.tech)}
+			</div>
 		</div>
 
 		<hr />

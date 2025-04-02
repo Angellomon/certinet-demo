@@ -4,6 +4,7 @@
 	import ArrowSvg from './arrow-svg.svelte';
 	import CrossSvg from './cross-svg.svelte';
 	import EditSvg from './edit-svg.svelte';
+	import PlusSvg from './plus-svg.svelte';
 
 	interface Props {
 		edit?: boolean;
@@ -67,7 +68,25 @@
 	function handleDeleteCurriculum(i: number) {
 		currentProfesionistaStore.value.trayectoria.laboral.splice(i, 1);
 	}
+
+	let currentTech = $state('');
 </script>
+
+{#snippet tags(tags: string[], edit = false)}
+	<div class="flex flex-row flex-wrap gap-2">
+		{#each tags as tech, i}
+			{#if edit}
+				<button
+					onclick={() => currentTimelineItem && currentTimelineItem.tech.splice(i, 1)}
+					class="badge badge-neutral tooltip tooltip-bottom cursor-pointer"
+					data-tip="Eliminar">{tech}</button
+				>
+			{:else}
+				<div class="badge badge-neutral">{tech}</div>
+			{/if}
+		{/each}
+	</div>
+{/snippet}
 
 {#snippet item(item: Curriculum, i: number)}
 	<li class="md:min-w-[40vw]">
@@ -86,11 +105,29 @@
 			<div class="text-lg font-black">
 				{item.nombre}
 			</div>
+
+			{#if item.empresa}
+				<div class="text-lg">
+					{item.empresa}
+				</div>
+			{/if}
+
 			{item.deacripcion}
+
+			<div class="mt-2">
+
+				{@render tags(item.tech)}
+			</div>
+
+			<div class="divider"></div>
 		</div>
 
 		{#if edit}
-			<div class="join absolute top-0 right-0" class:md:right-0={i % 2 === 0} class:md:left-0={i % 2 !== 0}>
+			<div
+				class="join absolute top-0 right-0"
+				class:md:right-0={i % 2 === 0}
+				class:md:left-0={i % 2 !== 0}
+			>
 				<button
 					onclick={() => handleItemEdit(item, i)}
 					class="tooltip btn btn-circle"
@@ -188,6 +225,34 @@
 					bind:value={currentTimelineItem.deacripcion}
 					placeholder="Descripción"
 				></textarea>
+
+				<div class="join">
+					<input
+						type="text"
+						class="input"
+						placeholder="Tag"
+						bind:value={currentTech}
+						onkeydown={(e) => {
+							if (e.code === 'Enter') {
+								if (!currentTimelineItem || !currentTech) return;
+								currentTimelineItem.tech.push(currentTech);
+								currentTech = '';
+							}
+						}}
+					/>
+					<button
+						class="btn"
+						onclick={() => {
+							if (!currentTimelineItem || !currentTech) return;
+							currentTimelineItem.tech.push(currentTech);
+							currentTech = '';
+						}}
+					>
+						<PlusSvg />
+					</button>
+				</div>
+
+				{@render tags(currentTimelineItem.tech, true)}
 
 				<!-- <label class="fieldset-label">Author</label>
 				<input type="text" class="input" placeholder="Name" /> -->
