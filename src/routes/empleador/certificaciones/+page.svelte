@@ -44,8 +44,8 @@
 	<SelectCertificaciones bind:selectedIds />
 
 	{#if selectedIds.size > 0}
-		<button onclick={handleNewProcess} class="btn btn-primary fixed right-5 bottom-5"
-			>Proceder</button
-		>
+		<button onclick={handleNewProcess} class="btn btn-primary fixed right-5 bottom-5">
+			Proceder
+		</button>
 	{/if}
 </main>
