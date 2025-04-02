@@ -20,10 +20,12 @@
 
 {@render children()}
 
-<footer class="bg-base-300 flex flex-col md:flex-row">
+<footer class="bg-base-300 items-center flex flex-col md:flex-row">
 	<div class="flex-1">
-		<a href="/" class="btn btn-ghost text-xl">Certinet Demo</a>
+		<a href="/" class="btn btn-ghost text-xl">CertiNet</a>
 	</div>
+	<p class="self-center">© 2025 CertiNet Todos los derechos reservados</p>
+
 
 	<div class="flex flex-row flex-wrap gap-3">
 		<!-- svelte-ignore a11y_consider_explicit_label -->

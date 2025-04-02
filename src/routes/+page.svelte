@@ -270,9 +270,7 @@
 {/snippet}
 
 {#snippet insight(insight: Insight)}
-	<div
-		class="card bg-base-300 shadow-sm sm:max-w-[47%] lg:max-w-[30%]"
-	>
+	<div class="card bg-base-300 shadow-sm sm:max-w-[47%] lg:max-w-[30%]">
 		<figure>
 			<img src={insight.img} alt="" />
 		</figure>
@@ -282,7 +280,7 @@
 			<h2 class="card-title">{insight.titulo}</h2>
 			<p>{insight.contenido}</p>
 
-			<button class="btn btn-link uppercase self-start">Leer más</button>
+			<button class="btn btn-link self-start uppercase">Leer más</button>
 		</div>
 	</div>
 {/snippet}
@@ -450,6 +448,32 @@
 			{#each insights as ins}
 				{@render insight(ins)}
 			{/each}
+		</div>
+	</div>
+
+	<div class="bg-base-100 flex flex-col justify-center gap-5 px-10 py-5 md:px-20 md:py-10">
+		<div class="flex flex-col gap-10 md:flex-row-reverse">
+			<div class="flex flex-col md:w-2/3">
+				<div class="md:w-2/3">
+					{@render mainTitle('Transforma tu Proceso de Reclutamiento con CertiNet')}
+				</div>
+
+				<p class="mt-4 font-light">
+					Facilitamos la conexión entre empresas y profesionales certificados mediante una
+					plataforma intuitiva. Ajusta tu búsqueda con filtros personalizados que garantizan que
+					encuentres rápidamente el talento tecnológico que tu proyecto necesita, optimizando así
+					tus tiempos de selección y aumentando tus posibilidades de contratar a los mejores
+					expertos.
+				</p>
+				
+				<a class="btn btn-primary w-40 mt-5" href="/signup">Inicia tu proceso</a>
+			</div>
+
+			<div class="bg-base-200 flex items-center justify-center rounded-3xl">
+				<figure class="scale-90 p-10">
+					<img src="/certinet-img-4.png" alt="img" />
+				</figure>
+			</div>
 		</div>
 	</div>
 </main>
