@@ -8,44 +8,10 @@
 
 	const themeStore = newThemeStore();
 	setContext('theme', themeStore);
-
-	const metadataData = {
-		siteName: 'CertiNet',
-		title: 'Conectando empresas con talento tecnológico certificado',
-		description:
-			'CertiNet simplifica la conexión entre empresas y profesionales certificados, optimizando tus necesidades de contratación.',
-		type: 'website',
-		domain: 'certinet-demo.onrender.com',
-		url: 'https://certinet-demo.onrender.com',
-		image: '/certinet-img-1.png',
-		locale: "es_MX"
-	};
 </script>
-
-{#snippet metadata()}
-	<meta name="description" content={metadataData.description} />
-
-	<!-- Facebook Meta Tags -->
-	<meta property="og:url" content={metadataData.url} />
-	<meta property="og:type" content={metadataData.type} />
-	<meta property="og:title" content={metadataData.title} />
-	<meta property="og:description" content={metadataData.description} />
-	<meta property="og:image" content={metadataData.image} />
-	<meta property="og:locale" content={metadataData.locale} />
-
-	<!-- Twitter Meta Tags -->
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta property="twitter:domain" content={metadataData.domain} />
-	<meta property="twitter:url" content={metadataData.url} />
-	<meta name="twitter:title" content={metadataData.title} />
-	<meta name="twitter:description" content={metadataData.description} />
-	<meta name="twitter:image" content={metadataData.image} />
-{/snippet}
 
 <svelte:head>
 	<title>CertiNet | Acercando Talento</title>
-
-	{@render metadata()}
 </svelte:head>
 
 <header>
