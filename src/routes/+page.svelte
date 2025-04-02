@@ -63,6 +63,10 @@
 	<h1 class="text-3xl font-bold">{title}</h1>
 {/snippet}
 
+{#snippet title(title: string)}
+	<h1 class="text-2xl font-bold">{title}</h1>
+{/snippet}
+
 {#snippet avatar(img: string, nombre: string)}
 	<div class="avatar">
 		<div class="h-15 w-15 rounded-full">
@@ -96,7 +100,11 @@
 
 {#snippet funcion(funcion: Funcion, i: number)}
 	<div class="card bg-base-100 shadow-sm sm:max-w-1/2 lg:max-w-1/4">
-		<div class="self-center bg-info text-info-content rounded-full w-20 px-7 py-5 text-center text-4xl">{i}</div>
+		<div
+			class="bg-info text-info-content w-20 self-center rounded-full px-7 py-5 text-center text-4xl"
+		>
+			{i}
+		</div>
 
 		<div class="card-body items-center text-center">
 			<h2 class="card-title">{funcion.nombre}</h2>
@@ -137,6 +145,85 @@
 			{#each funciones as fn, i}
 				{@render funcion(fn, i + 1)}
 			{/each}
+		</div>
+	</div>
+
+	<div class="bg-base-100 flex flex-col justify-center gap-5 px-10 py-5 md:px-20 md:py-10">
+		<div class="flex flex-col gap-10 md:flex-row-reverse">
+			<div class="flex flex-col">
+				<div class="md:w-2/3">
+					{@render title('Transforma la Contratación de Talento Tecnológico')}
+				</div>
+
+				<p class="mt-4 font-light">
+					CertiNet simplifica la conexión entre empresas y profesionales certificados, optimizando
+					tus necesidades de contratación.
+				</p>
+
+				<ul class="mt-5 flex list-disc flex-col gap-3 pl-5">
+					<li>
+						Accede a un amplio pool de talentos calificados listos para aportar en tus proyectos.
+					</li>
+					<li>
+						Utiliza filtros personalizados para encontrar candidatos que cumplen con tus requisitos
+						específicos.
+					</li>
+					<li>
+						Facilita la comunicación y gestión de candidatos a través de nuestra plataforma
+						intuitiva.
+					</li>
+					<li>
+						Reduce el tiempo y costos de reclutamiento al asegurar contrataciones más efectivas.
+					</li>
+				</ul>
+			</div>
+
+			<div class="bg-base-200 flex items-center justify-center rounded-3xl">
+				<figure class="scale-90 p-10">
+					<img src="/certinet-img-2.png" alt="img" />
+				</figure>
+			</div>
+		</div>
+	</div>
+
+	<div class="bg-base-100 flex flex-col justify-center gap-5 px-10 py-5 md:px-20 md:py-10">
+		<div class="flex flex-col gap-10 md:flex-row">
+			<div class="flex flex-col md:w-4/5">
+				<div class="md:w-2/3">
+					{@render title('Optimiza tu Proceso de Contratación con CertiNet')}
+				</div>
+
+				<p class="mt-4 font-light">
+					Con CertiNet, accede a una solución avanzada que conecta de manera eficiente a empresas en
+					búsqueda de profesionales tecnológicos certificados. Encuentra rápidamente a los
+					candidatos ideales, reduce los tiempos de selección y asegura que cada contratación cuente
+					con la experiencia necesaria.
+				</p>
+
+				<ul class="mt-5 flex list-disc flex-col gap-3 pl-5">
+					<li>
+						Explora un amplio repertorio de talentos altamente calificados para cada proyecto.
+					</li>
+					<li>
+						Aprovecha filtros personalizables que te permiten afinar tu búsqueda según habilidades
+						específicas y certificaciones.
+					</li>
+					<li>
+						Facilita el reclutamiento con una plataforma intuitiva que mejora la comunicación y
+						gestión de candidatos.
+					</li>
+					<li>
+						Optimiza costos y tiempo, garantizando que cada contratación esté alineada con tus
+						objetivos estratégicos.
+					</li>
+				</ul>
+			</div>
+
+			<div class="bg-base-200 flex items-center justify-center rounded-3xl">
+				<figure>
+					<img src="/certinet-img-3.png" alt="img" />
+				</figure>
+			</div>
 		</div>
 	</div>
 </main>
