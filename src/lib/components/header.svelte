@@ -56,7 +56,7 @@
 
 <nav class="navbar bg-base-300 shadow-sm">
 	<div class="flex-1">
-		<a href="/" class="btn btn-ghost text-xl">Certinet Demo</a>
+		<a href="/" class="btn btn-ghost text-xl">CertiNet</a>
 	</div>
 
 	{@render themeController()}
