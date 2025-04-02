@@ -2,11 +2,12 @@
 	import EditSvg from '$lib/components/edit-svg.svelte';
 	import TimelineProyectos from '$lib/components/timeline-proyectos.svelte';
 	import TimelinteCurriculum from '$lib/components/timelinte-curriculum.svelte';
-	import { getCurrentProfesionistaContext } from '$lib/context.svelte';
+	import { getCurrentProfesionistaContext, getProfesionistasContext } from '$lib/context.svelte';
 	import { newLocalStore } from '$lib/localstore.svelte';
 	import * as v from 'valibot';
 
 	const currentProfesionistaStore = getCurrentProfesionistaContext();
+	const profesionistasStore = getProfesionistasContext();
 
 	const seccionSchema = v.union([
 		v.literal('datos'),
@@ -40,6 +41,14 @@
 	function setSeccion(s: Seccion) {
 		seccionStore.value.seccion = s;
 	}
+
+	$effect(() => {
+		const index = profesionistasStore.value.findIndex(
+			(p) => p.id == currentProfesionistaStore.value.id
+		);
+
+		profesionistasStore.value.splice(index, 1, currentProfesionistaStore.value);
+	});
 
 	let showModal = $state(false);
 </script>

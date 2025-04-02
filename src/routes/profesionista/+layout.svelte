@@ -6,7 +6,8 @@
 		newCurrentEmpleadorStore,
 		newCurrentProfesionistaStore,
 		newEmpleadoresStore,
-		newProcesosContactoStore
+		newProcesosContactoStore,
+		newProfesionistasStore
 	} from '$lib/localstore.svelte';
 	import { setContext } from 'svelte';
 	import ProfesionistaHeader from './profesionista-header.svelte';
@@ -14,6 +15,9 @@
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
 
 	const { children } = $props();
+
+	const profesionistasStore = newProfesionistasStore();
+	setContext('profesionistas', profesionistasStore);
 
 	const currentProfesionistaStore = newCurrentProfesionistaStore();
 	setContext('profesionista', currentProfesionistaStore);
