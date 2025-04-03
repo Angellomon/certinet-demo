@@ -11,6 +11,7 @@
 		newCertificacionesStore,
 		newComprasStore,
 		newCurrentEmpleadorStore,
+		newCurrentProfesionistaStore,
 		newProcesosContactoStore,
 		newProfesionistasStore
 	} from '$lib/localstore.svelte';
@@ -24,6 +25,9 @@
 	const empleadorStore = newCurrentEmpleadorStore();
 
 	setContext('empleador-store', empleadorStore);
+
+	const currentProfesionistaStore = newCurrentProfesionistaStore();
+	setContext('profesionista', currentProfesionistaStore);
 
 	const certificacionesStore = newCertificacionesStore();
 	setContext('certificaciones', certificacionesStore);
