@@ -54,8 +54,8 @@
 <main class="flex flex-col gap-5 p-5 lg:px-20 lg:py-5">
 	<EmpleadorHeader totalProcesos={procesosContactoStore.value.length} />
 
-	<div class="flex flex-col gap-5 md:flex-row md:items-center">
-		<ul class="menu menu-vertical sm:menu-horizontal bg-base-200 rounded-box">
+	<div class="flex gap-5 flex-row flex-wrap md:items-center">
+		<ul class="menu justify-around menu-horizontal bg-base-200 rounded-box">
 			<li>
 				<a class:menu-active={page.url.pathname === '/empleador'} href="/empleador">Dashboard</a>
 			</li>

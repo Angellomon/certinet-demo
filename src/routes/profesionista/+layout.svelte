@@ -57,8 +57,8 @@
 		{totalCertificaciones}
 	/>
 
-	<div class="flex-row-flex-wrap flex items-center justify-between">
-		<ul class="menu menu-vertical sm:menu-horizontal bg-base-200 rounded-box">
+	<div class="flex-row-flex-wrap flex-col sm:flex-row flex items-center justify-between">
+		<ul class="menu justify-around menu-horizontal bg-base-200 rounded-box">
 			<li>
 				<a
 					class={page.url.pathname === '/profesionista' ? 'menu-active' : ''}
