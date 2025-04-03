@@ -6,7 +6,7 @@
 	let password = $state('');
 </script>
 
-<main class="flex flex-col items-center gap-10 my-30">
+<main class="my-30 flex flex-col items-center gap-10">
 	<h1 class="text-3xl">Login Empleador</h1>
 
 	<div class="flex max-w-1/2 flex-col items-center gap-3">
@@ -14,8 +14,6 @@
 
 		<PasswordInput bind:password />
 
-		<a href="/empleador" class="self-end">
-			<button class="btn btn-secondary">Login</button>
-		</a>
+		<a href="/empleador" class="btn btn-secondary btn-block self-end">Login</a>
 	</div>
 </main>
