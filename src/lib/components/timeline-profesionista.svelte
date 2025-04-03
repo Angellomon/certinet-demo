@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getCurrentProfesionistaContext } from '$lib/context.svelte';
 	import type { Curriculum } from '$lib/entities';
-	import ArrowSvg from './arrow-svg.svelte';
+	import CheckSvg from './check-svg.svelte';
 	import CrossSvg from './cross-svg.svelte';
 	import EditSvg from './edit-svg.svelte';
 	import PlusSvg from './plus-svg.svelte';
@@ -107,7 +107,7 @@
 
 	<li class="md:min-w-[40vw]">
 		<div class="timeline-middle">
-			<ArrowSvg />
+			<CheckSvg />
 		</div>
 
 		<div

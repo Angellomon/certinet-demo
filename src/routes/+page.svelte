@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ArrowSvg from '$lib/components/arrow-svg.svelte';
+	import CheckSvg from '$lib/components/check-svg.svelte';
 
 	type Opinion = {
 		opinion: string;
@@ -241,7 +241,7 @@
 
 		<ul class="flex flex-col gap-1">
 			{#each plan.caracteristicas as caracteristica}
-				<li class="flex flex-row items-center gap-2"><ArrowSvg /> {caracteristica}</li>
+				<li class="flex flex-row items-center gap-2"><CheckSvg /> {caracteristica}</li>
 			{/each}
 		</ul>
 	</div>
@@ -261,7 +261,7 @@
 
 		<ul class="flex flex-col gap-1">
 			{#each plan.caracteristicas as caracteristica}
-				<li class="flex flex-row items-center gap-2"><ArrowSvg /> {caracteristica}</li>
+				<li class="flex flex-row items-center gap-2"><CheckSvg /> {caracteristica}</li>
 			{/each}
 		</ul>
 
