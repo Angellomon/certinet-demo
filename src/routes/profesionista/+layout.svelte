@@ -28,9 +28,6 @@
 	const certificacionesStore = newCertificacionesStore();
 	setContext('certificaciones', certificacionesStore);
 
-	const empleadoresStore = newEmpleadoresStore();
-	setContext('empleadores', empleadoresStore);
-
 	const calificacionesStore = newCalificacionesProcesoStore();
 	setContext('calificaciones-proceso', calificacionesStore);
 
@@ -56,7 +53,6 @@
 
 <main class="flex flex-col gap-5 p-5 lg:px-20 lg:py-5">
 	<ProfesionistaHeader
-		profesionista={currentProfesionistaStore.value}
 		{totalProcesos}
 		{totalCertificaciones}
 	/>

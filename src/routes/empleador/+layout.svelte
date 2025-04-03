@@ -35,9 +35,6 @@
 	const procesosContactoStore = newProcesosContactoStore();
 	setContext('procesos-contacto', procesosContactoStore);
 
-	const profesionistasStore = newProfesionistasStore();
-	setContext('profesionistas', profesionistasStore);
-
 	const comprasStore = newComprasStore();
 	setContext('compras', comprasStore);
 
