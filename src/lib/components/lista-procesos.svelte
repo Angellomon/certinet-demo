@@ -11,9 +11,10 @@
 		limit?: number;
 		id: string;
 		currentType: 'empleador' | 'profesionista';
+		idsProcesos?: string[]
 	}
 
-	const { baseUrl, limit, id, currentType }: Props = $props();
+	const { baseUrl, limit, id, currentType, idsProcesos }: Props = $props();
 
 	const certificacionesStore = getCertificacionesContext();
 
@@ -30,7 +31,7 @@
 	const procesosContactoStore = $derived.by(() =>
 		getProcesosContext().value.filter((p) =>
 			currentType === 'empleador' ? p.idEmpleador === id : p.idProfesionista === id
-		)
+		).filter(p => idsProcesos ? idsProcesos.includes(p.id) : true)
 	);
 
 	function getNombreEmpleador(idEmpleador: string) {
