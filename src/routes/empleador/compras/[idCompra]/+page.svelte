@@ -83,7 +83,7 @@
 
 	<h3 class="divider divider-start text-xl">Procesos de Contacto</h3>
 
-	<div class="bg-base-300 rounded-box p-5">
+	<div class="bg-base-100 rounded-box p-5">
 		<ListaProcesos
 			baseUrl="/empleador/procesos"
 			currentType="empleador"
