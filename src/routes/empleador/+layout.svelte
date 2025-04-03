@@ -16,6 +16,7 @@
 		newProfesionistasStore
 	} from '$lib/localstore.svelte';
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
+	import { getComprasContext, getProcesosContext } from '$lib/context.svelte';
 
 	const { children } = $props();
 
@@ -29,22 +30,14 @@
 	const currentProfesionistaStore = newCurrentProfesionistaStore();
 	setContext('profesionista', currentProfesionistaStore);
 
-	const certificacionesStore = newCertificacionesStore();
-	setContext('certificaciones', certificacionesStore);
+	const procesosContactoStore = getProcesosContext();
 
-	const procesosContactoStore = newProcesosContactoStore();
-	setContext('procesos-contacto', procesosContactoStore);
-
-	const comprasStore = newComprasStore();
-	setContext('compras', comprasStore);
+	const comprasStore = getComprasContext();
 
 	const getComprasEmpleador = (idEmpleador: string) => {
 		return comprasStore.value.filter((c) => c.idEmpleador === idEmpleador);
 	};
 	setContext('get-compras-empleador', getComprasEmpleador);
-
-	const calificacionesProcesoStore = newCalificacionesProcesoStore();
-	setContext('calificaciones-proceso', calificacionesProcesoStore);
 
 	function handleSearch() {
 		goto('/empleador/certificaciones?search=' + searchTerm);
@@ -54,8 +47,8 @@
 <main class="flex flex-col gap-5 p-5 lg:px-20 lg:py-5">
 	<EmpleadorHeader totalProcesos={procesosContactoStore.value.length} />
 
-	<div class="flex gap-5 flex-row flex-wrap md:items-center">
-		<ul class="menu justify-around menu-horizontal bg-base-200 rounded-box">
+	<div class="flex flex-row flex-wrap gap-5 md:items-center">
+		<ul class="menu menu-horizontal bg-base-200 rounded-box justify-around">
 			<li>
 				<a class:menu-active={page.url.pathname === '/empleador'} href="/empleador">Dashboard</a>
 			</li>
