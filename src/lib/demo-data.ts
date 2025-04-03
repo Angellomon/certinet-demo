@@ -11,8 +11,8 @@ import type {
 	Profesionista
 } from './entities';
 
-const PROFESIONISTA_DEMO_ID = 'test-profesionista';
-const EMPLEADOR_DEMO_ID = 'test-empleador';
+export const PROFESIONISTA_DEMO_ID = 'test-profesionista';
+export const EMPLEADOR_DEMO_ID = 'test-empleador';
 
 export const getDemoProfesionista: () => Profesionista = () =>
 	getDemoProfesionistas().filter((p) => p.id == PROFESIONISTA_DEMO_ID)[0];
