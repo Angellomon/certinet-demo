@@ -1,6 +1,8 @@
 import * as v from 'valibot';
 
-const idSchema = v.string();
+export const idSchema = v.string();
+export type ID = v.InferOutput<typeof idSchema>;
+
 const emailSchema = v.pipe(v.string(), v.trim(), v.email());
 const positiveNumberSchema = v.pipe(v.number(), v.minValue(0));
 const dateSchema = v.pipe(
