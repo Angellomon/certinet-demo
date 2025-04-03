@@ -1,6 +1,7 @@
 import { browser } from '$app/environment';
 import { parse } from 'valibot';
 import {
+	EMPLEADOR_DEMO_ID,
 	getDemoCalificacionesProceso,
 	getDemoCertificaciones,
 	getDemoCompras,
@@ -8,7 +9,8 @@ import {
 	getDemoEmpleadores,
 	getDemoProcesosContacto,
 	getDemoProfesionista,
-	getDemoProfesionistas
+	getDemoProfesionistas,
+	PROFESIONISTA_DEMO_ID
 } from './demo-data';
 import {
 	calificacionesProcesoSchema,
@@ -16,6 +18,7 @@ import {
 	comprasSchema,
 	empleadoresSchema,
 	empleadorSchema,
+	idSchema,
 	procesosContactoSchema,
 	profesionistaSchema,
 	profesionistasSchema,
@@ -108,4 +111,14 @@ export function newEmpleadoresStore() {
 export function newThemeStore() {
 	const defaultData = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 	return newLocalStore('theme', defaultData, themeSchema);
+}
+
+export function newIdEmpleadorStore() {
+	const defaultData = EMPLEADOR_DEMO_ID;
+	return newLocalStore('id-empleador', defaultData, idSchema);
+}
+
+export function newIdProfesionistaStore() {
+	const defaultData = PROFESIONISTA_DEMO_ID
+	return newLocalStore("id-profesionista", defaultData, idSchema)
 }
