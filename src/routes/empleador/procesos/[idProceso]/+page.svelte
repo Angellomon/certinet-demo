@@ -8,7 +8,7 @@
 		getProcesoContext,
 		getProfesionistaContext
 	} from '$lib/context.svelte';
-	import DataTimeline from './data-timeline.svelte';
+	import TimelineProfesionista from '$lib/components/timeline-profesionista.svelte';
 
 	const empleadorStore = getCurrentEmpleadorContext();
 	const proceso = getProcesoContext(page.params.idProceso);
@@ -51,12 +51,12 @@
 		<div class="divider divider-start text-2xl">Expreiencia Laboral</div>
 
 		<div>
-			<DataTimeline timeline={profesionista.trayectoria.laboral} />
+			<TimelineProfesionista type="laboral" />
 		</div>
 		<div class="divider divider-start text-2xl">Proyectos</div>
 
 		<div>
-			<DataTimeline timeline={profesionista.trayectoria.proyectos} />
+			<TimelineProfesionista type="proyectos" />
 		</div>
 
 		<a href={`${page.url.pathname}/calificar`}>

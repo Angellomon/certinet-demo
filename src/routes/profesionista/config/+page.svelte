@@ -1,7 +1,6 @@
 <script lang="ts">
 	import EditSvg from '$lib/components/edit-svg.svelte';
-	import TimelineProyectos from '$lib/components/timeline-proyectos.svelte';
-	import TimelinteCurriculum from '$lib/components/timelinte-curriculum.svelte';
+	import TimelineProfesionista from '$lib/components/timeline-profesionista.svelte';
 	import { getCurrentProfesionistaContext, getProfesionistasContext } from '$lib/context.svelte';
 	import { newLocalStore } from '$lib/localstore.svelte';
 	import * as v from 'valibot';
@@ -173,13 +172,13 @@
 
 {#snippet curriculum()}
 	<div>
-		<TimelinteCurriculum edit />
+		<TimelineProfesionista type="laboral" edit />
 	</div>
 {/snippet}
 
 {#snippet proyectos()}
 	<div>
-		<TimelineProyectos edit />
+		<TimelineProfesionista type="proyectos" edit />
 	</div>
 {/snippet}
 
