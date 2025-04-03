@@ -107,5 +107,5 @@
 		</div>
 	</div>
 
-	<ProcesoData {certificacion} {profesionista} empleador={empleadorStore.value} {proceso} />
+	<ProcesoData {certificacion} {profesionista} empleador={empleadorStore} {proceso} />
 </main>

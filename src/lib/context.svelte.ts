@@ -6,15 +6,13 @@ import type {
 	Compras,
 	Empleador,
 	Empleadores,
+	ID,
 	ProcesosContacto,
 	Profesionista,
 	Profesionistas,
 	Theme
 } from './entities';
-
-export function getCurrentEmpleadorContext() {
-	return getContext('empleador-store') as LocalObjectStore<Empleador>;
-}
+import { error } from '@sveltejs/kit';
 
 export function getProcesosContext() {
 	return getContext('procesos-contacto') as LocalObjectStore<ProcesosContacto>;
@@ -41,9 +39,10 @@ export function getProfesionistasContext() {
 }
 
 export function getProfesionistaContext(idProfesionista: string) {
-	const profesionistas = getProfesionistasContext();
+	const profesionista = getProfesionistasContext().value.find((p) => p.id === idProfesionista);
+	if (!profesionista) error(404, `profesionista no encontrado (id=${idProfesionista})`);
 
-	return profesionistas.value.find((p) => p.id === idProfesionista);
+	return profesionista;
 }
 
 export function getCalificacionesProcesoContext() {
@@ -66,20 +65,38 @@ export function getCompraContext(idCompra: string) {
 	return compras.value.find((c) => c.id === idCompra);
 }
 
-export function getCurrentProfesionistaContext() {
-	return getContext('profesionista') as LocalObjectStore<Profesionista>;
-}
-
 export function getEmpleadoresContext() {
 	return getContext('empleadores') as LocalObjectStore<Empleadores>;
 }
 
 export function getEmpleadorContext(idEmpleador: string) {
-	const empleadores = getEmpleadoresContext();
+	const empleador = getEmpleadoresContext().value.find((e) => e.id === idEmpleador);
 
-	return empleadores.value.find((e) => e.id === idEmpleador);
+	if (!empleador) error(404, `empleador not found (id=${idEmpleador})`);
+
+	return empleador;
 }
 
 export function getThemeContext() {
 	return getContext('theme') as LocalObjectStore<Theme>;
+}
+
+export function getIdEmpleadorContext() {
+	return getContext('id-empleador') as LocalObjectStore<ID>;
+}
+
+export function getIdProfesionistaContext() {
+	return getContext('id-profesionista') as LocalObjectStore<ID>;
+}
+
+export function getCurrentEmpleadorContext() {
+	const idEmpleadorStore = getIdEmpleadorContext();
+
+	return getEmpleadorContext(idEmpleadorStore.value);
+}
+
+export function getCurrentProfesionistaContext() {
+	const idProfesionistaStore = getIdProfesionistaContext();
+
+	return getProfesionistaContext(idProfesionistaStore.value);
 }

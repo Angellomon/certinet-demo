@@ -16,7 +16,7 @@
 	<ListaProcesos
 		baseUrl="/empleador/procesos"
 		limit={10}
-		id={currentEmpleadorStore.value.id}
+		id={currentEmpleadorStore.id}
 		currentType="empleador"
 	/>
 </div>

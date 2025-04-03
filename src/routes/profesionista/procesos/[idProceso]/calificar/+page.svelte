@@ -8,7 +8,7 @@
 		getCurrentEmpleadorContext,
 		getCurrentProfesionistaContext,
 		getProcesoContext,
-		getProcesosContext,
+		getProcesosContext
 	} from '$lib/context.svelte';
 	import { page } from '$app/state';
 	import { error } from '@sveltejs/kit';
@@ -67,7 +67,7 @@
 			calificacionesStore.value.push(nuevaCalificacionProceso);
 
 			indexCalificacion = calificacionesStore.value.length;
-			calificacionResult = nuevaCalificacionProceso
+			calificacionResult = nuevaCalificacionProceso;
 		}
 
 		nuevaCalificacionProceso.empleador = calificacionResult.empleador;
@@ -102,10 +102,10 @@
 		<div class="divider divider-horizontal">|</div>
 		<!-- <div class="divider divider-horizontal">&</div> -->
 		<div class="grid h-20 grow place-items-center">
-			{currentProfesionista.value.nombre}
-			{currentProfesionista.value.apellidos}
+			{currentProfesionista.nombre}
+			{currentProfesionista.apellidos}
 		</div>
 	</div>
 
-	<ProcesoData {certificacion} empleador={empleadorStore.value} />
+	<ProcesoData {certificacion} empleador={empleadorStore} />
 </main>

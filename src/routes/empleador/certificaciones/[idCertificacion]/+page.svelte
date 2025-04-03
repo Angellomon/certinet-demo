@@ -38,5 +38,5 @@
 	<h2 class="text-xl font-bold">{certificacion.nombre}</h2>
 
 	<DataCertificacion {certificacion} />
-	<DataProfesionista profesionista={currentProfesionistaStore.value} />
+	<DataProfesionista profesionista={currentProfesionistaStore} />
 </main>

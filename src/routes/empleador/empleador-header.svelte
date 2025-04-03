@@ -38,20 +38,20 @@
 
 <div class="flex flex-col items-start justify-between md:flex-row">
 	<div>
-		<h1 class="text-4xl">{empleadorStore.value.razonSocial}</h1>
+		<h1 class="text-4xl">{empleadorStore.razonSocial}</h1>
 		<div class="flex flex-col justify-start gap-10 md:flex-row md:items-center">
-			<div class="link link-accent text-xl italic">{empleadorStore.value.correo}</div>
+			<div class="link link-accent text-xl italic">{empleadorStore.correo}</div>
 		</div>
 	</div>
 
 	<div>
 		{@render statusStat(
 			'Estatus',
-			empleadorStore.value.verificado ? 'success' : 'warning',
-			empleadorStore.value.verificado ? 'Verificado' : 'Pendiente de Verificar'
+			empleadorStore.verificado ? 'success' : 'warning',
+			empleadorStore.verificado ? 'Verificado' : 'Pendiente de Verificar'
 		)}
 
-		{#if !empleadorStore.value.formaPago}
+		{#if !empleadorStore.formaPago}
 			{@render statusStat('Forma de Pago', 'error', 'No Establecida')}
 		{/if}
 

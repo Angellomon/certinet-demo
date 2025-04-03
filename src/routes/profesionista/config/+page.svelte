@@ -42,11 +42,9 @@
 	}
 
 	$effect(() => {
-		const index = profesionistasStore.value.findIndex(
-			(p) => p.id == currentProfesionistaStore.value.id
-		);
+		const index = profesionistasStore.value.findIndex((p) => p.id == currentProfesionistaStore.id);
 
-		profesionistasStore.value.splice(index, 1, currentProfesionistaStore.value);
+		profesionistasStore.value.splice(index, 1, currentProfesionistaStore);
 	});
 
 	let showModal = $state(false);
@@ -101,7 +99,7 @@
 						type="text"
 						class="input"
 						placeholder="Nombre"
-						bind:value={currentProfesionistaStore.value.nombre}
+						bind:value={currentProfesionistaStore.nombre}
 						disabled={!edit['datos']}
 					/>
 
@@ -111,7 +109,7 @@
 						type="text"
 						class="input"
 						placeholder="Apellidos"
-						bind:value={currentProfesionistaStore.value.apellidos}
+						bind:value={currentProfesionistaStore.apellidos}
 						disabled={!edit['datos']}
 					/>
 
@@ -121,7 +119,7 @@
 						type="email"
 						class="input"
 						placeholder="Razón Social"
-						bind:value={currentProfesionistaStore.value.correo}
+						bind:value={currentProfesionistaStore.correo}
 						disabled={!edit['datos']}
 					/>
 				</div>
@@ -133,7 +131,7 @@
 						type="text"
 						class="input"
 						placeholder="Profesion"
-						bind:value={currentProfesionistaStore.value.profesion}
+						bind:value={currentProfesionistaStore.profesion}
 						disabled={!edit['datos']}
 					/>
 
@@ -146,9 +144,9 @@
 						onchange={(e) => {
 							if (!e.currentTarget.value) return;
 
-							currentProfesionistaStore.value.fechaNacimeinto = new Date(e.currentTarget.value);
+							currentProfesionistaStore.fechaNacimeinto = new Date(e.currentTarget.value);
 						}}
-						value={currentProfesionistaStore.value.fechaNacimeinto.toISOString().slice(0, 10)}
+						value={currentProfesionistaStore.fechaNacimeinto.toISOString().slice(0, 10)}
 						disabled={!edit['datos']}
 					/>
 				</div>
@@ -156,7 +154,7 @@
 
 			{@render field(
 				'Estatus Verificación',
-				currentProfesionistaStore.value.verificado ? 'Verificado' : 'Verificación Pendiente'
+				currentProfesionistaStore.verificado ? 'Verificado' : 'Verificación Pendiente'
 			)}
 		</fieldset>
 		<button class="btn" onclick={() => toggleEdit('datos')}>
@@ -172,13 +170,13 @@
 
 {#snippet curriculum()}
 	<div>
-		<TimelineProfesionista type="laboral" edit />
+		<TimelineProfesionista idProfesionista={currentProfesionistaStore.id} type="laboral" edit />
 	</div>
 {/snippet}
 
 {#snippet proyectos()}
 	<div>
-		<TimelineProfesionista type="proyectos" edit />
+		<TimelineProfesionista idProfesionista={currentProfesionistaStore.id} type="proyectos" edit />
 	</div>
 {/snippet}
 

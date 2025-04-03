@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { getCurrentProfesionistaContext } from '$lib/context.svelte';
+	import { getCurrentProfesionistaContext, getProfesionistaContext } from '$lib/context.svelte';
 	import type { Curriculum } from '$lib/entities';
+	import { error } from '@sveltejs/kit';
 	import CheckSvg from './check-svg.svelte';
 	import CrossSvg from './cross-svg.svelte';
 	import EditSvg from './edit-svg.svelte';
@@ -9,11 +10,12 @@
 	interface Props {
 		edit?: boolean;
 		type: 'proyectos' | 'laboral';
+		idProfesionista: string;
 	}
 
-	const { edit = false, type }: Props = $props();
+	const { edit = false, type, idProfesionista }: Props = $props();
 
-	const currentProfesionistaStore = getCurrentProfesionistaContext();
+	const profesionista = getProfesionistaContext(idProfesionista);
 
 	let currentTimelineItem: Curriculum | undefined = $state();
 	let currentTimelineIndex: number = $state(-1);
@@ -36,8 +38,8 @@
 		};
 
 		if (type === 'proyectos')
-			handleItemEdit(item, currentProfesionistaStore.value.trayectoria.proyectos.length);
-		else handleItemEdit(item, currentProfesionistaStore.value.trayectoria.laboral.length);
+			handleItemEdit(item, profesionista.trayectoria.proyectos.length);
+		else handleItemEdit(item, profesionista.trayectoria.laboral.length);
 	}
 
 	function handleItemSave() {
@@ -45,20 +47,20 @@
 
 		if (currentTimelineIndex == -1)
 			if (type === 'proyectos')
-				currentProfesionistaStore.value.trayectoria.proyectos.push(currentTimelineItem);
-			else currentProfesionistaStore.value.trayectoria.laboral.push(currentTimelineItem);
-		else if (!currentProfesionistaStore.value.trayectoria.proyectos[currentTimelineIndex])
+				profesionista.trayectoria.proyectos.push(currentTimelineItem);
+			else profesionista.trayectoria.laboral.push(currentTimelineItem);
+		else if (!profesionista.trayectoria.proyectos[currentTimelineIndex])
 			if (type === 'proyectos')
-				currentProfesionistaStore.value.trayectoria.proyectos.push(currentTimelineItem);
-			else currentProfesionistaStore.value.trayectoria.laboral.push(currentTimelineItem);
+				profesionista.trayectoria.proyectos.push(currentTimelineItem);
+			else profesionista.trayectoria.laboral.push(currentTimelineItem);
 		else if (type === 'proyectos')
-			currentProfesionistaStore.value.trayectoria.proyectos.splice(
+			profesionista.trayectoria.proyectos.splice(
 				currentTimelineIndex,
 				1,
 				currentTimelineItem
 			);
 		else
-			currentProfesionistaStore.value.trayectoria.laboral.splice(
+			profesionista.trayectoria.laboral.splice(
 				currentTimelineIndex,
 				1,
 				currentTimelineItem
@@ -79,8 +81,8 @@
 	}
 
 	function handleDeleteCurriculum(i: number) {
-		if (type === 'proyectos') currentProfesionistaStore.value.trayectoria.proyectos.splice(i, 1);
-		else currentProfesionistaStore.value.trayectoria.laboral.splice(i, 1);
+		if (type === 'proyectos') profesionista.trayectoria.proyectos.splice(i, 1);
+		else profesionista.trayectoria.laboral.splice(i, 1);
 	}
 
 	let currentTech = $state('');
@@ -164,29 +166,29 @@
 {/snippet}
 
 {#if edit}
-	{#if type === 'proyectos' && currentProfesionistaStore.value.trayectoria.proyectos.length == 0}
+	{#if type === 'proyectos' && profesionista.trayectoria.proyectos.length == 0}
 		<button class="btn btn-dash rounded-box" onclick={handleNewTimeline}>
 			Crear Timeline de Proyectos
 		</button>
-	{:else if type === 'laboral' && currentProfesionistaStore.value.trayectoria.laboral.length == 0}
+	{:else if type === 'laboral' && profesionista.trayectoria.laboral.length == 0}
 		<button class="btn btn-dash rounded-box" onclick={handleNewTimeline}> Crear Currículum </button>
 	{/if}
 {/if}
 
 <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
 	{#if type === 'proyectos'}
-		{#each currentProfesionistaStore.value.trayectoria.proyectos as curriculum, i}
+		{#each profesionista.trayectoria.proyectos as curriculum, i}
 			{@render item(curriculum, i)}
 		{/each}
 	{:else}
-		{#each currentProfesionistaStore.value.trayectoria.laboral as curriculum, i}
+		{#each profesionista.trayectoria.laboral as curriculum, i}
 			{@render item(curriculum, i)}
 		{/each}
 	{/if}
 
-	{#if edit && currentProfesionistaStore.value.trayectoria.proyectos.length > 0}
+	{#if edit && profesionista.trayectoria.proyectos.length > 0}
 		<button class="btn btn-dash" onclick={handleNewItem}> Agregar Proyecto </button>
-	{:else if edit && currentProfesionistaStore.value.trayectoria.laboral.length > 0}
+	{:else if edit && profesionista.trayectoria.laboral.length > 0}
 		<button class="btn btn-dash" onclick={handleNewItem}> Agregar Experiencia Laboral</button>
 	{/if}
 </ul>

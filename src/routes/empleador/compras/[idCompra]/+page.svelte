@@ -87,7 +87,7 @@
 		<ListaProcesos
 			baseUrl="/empleador/procesos"
 			currentType="empleador"
-			id={currentEmpleador.value.id}
+			id={currentEmpleador.id}
 			idsProcesos={compra ? compra.idsProcesosContacto : undefined}
 		/>
 	</div>

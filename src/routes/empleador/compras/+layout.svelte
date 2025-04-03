@@ -5,7 +5,7 @@
 		getProcesosContext
 	} from '$lib/context.svelte.js';
 
-	const { children, data } = $props();
+	const { children } = $props();
 
 	const procesosContactoStore = getProcesosContext();
 
@@ -15,7 +15,7 @@
 
 	const empleadorStore = getCurrentEmpleadorContext();
 	const comprasEmpleador = $derived(
-		comprasStore.value.filter((c) => c.idEmpleador == empleadorStore.value.id)
+		comprasStore.value.filter((c) => c.idEmpleador == empleadorStore.id)
 	);
 
 	const totalCompras = $derived(comprasEmpleador.length);
@@ -88,7 +88,7 @@
 				{@render stat('Compras realizadas', `${totalCompras}`)}
 				{@render stat('Última compra', ultimaCompra.fecha.toISOString().substring(0, 10))}
 
-				{#if !empleador.value.formaPago}
+				{#if !empleador.formaPago}
 					<!-- svelte-ignore a11y_invalid_attribute -->
 					<a
 						href="/empleador/config"
@@ -102,7 +102,7 @@
 							{@render statusStat('Forma de Pago', 'error', 'No establecida')}
 						{/if}
 					</a>
-				{:else if empleador.value.formaPago.verificado}
+				{:else if empleador.formaPago.verificado}
 					{@render statusStat('Forma de Pago', 'success', 'Verificada')}
 				{:else}
 					{@render statusStat('Forma de Pago', 'warning', 'No verificada')}

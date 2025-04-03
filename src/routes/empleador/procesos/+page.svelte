@@ -14,5 +14,5 @@
 	</div>
 
 	<h2 class="text-2xl">Procesos de Contacto</h2>
-	<ListaProcesos baseUrl="/empleador/procesos" id={currentEmpleadorStore.value.id} currentType="empleador" />
+	<ListaProcesos baseUrl="/empleador/procesos" id={currentEmpleadorStore.id} currentType="empleador" />
 </main>

@@ -15,7 +15,7 @@
 		id: '',
 		fechaObtencion: new Date(),
 		nombre: '',
-		idProfesionista: currentProfesionistaStore.value.id,
+		idProfesionista: currentProfesionistaStore.id,
 		organizacion: '',
 		serie: '',
 		verificado: false,

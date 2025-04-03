@@ -12,7 +12,7 @@
 
 	const certificaciones = $derived(
 		certificacionesStore.value.filter(
-			(c) => c.idProfesionista === currentProfesionistaStore.value.id
+			(c) => c.idProfesionista === currentProfesionistaStore.id
 		)
 	);
 </script>

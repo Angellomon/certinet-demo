@@ -38,11 +38,11 @@
 	}
 
 	function handleAgregarFormaPago() {
-		empleadorStore.value.formaPago = getDefaultFormaPago();
+		empleadorStore.formaPago = getDefaultFormaPago();
 	}
 
 	function handleEliminarFormaPago() {
-		empleadorStore.value.formaPago = null;
+		empleadorStore.formaPago = null;
 	}
 
 	function setSeccion(s: Seccion) {
@@ -50,8 +50,8 @@
 	}
 
 	$effect(() => {
-		if (!empleadorStore.value.precioCertificacion)
-			empleadorStore.value.precioCertificacion = getDefaultPrecioCertificacion();
+		if (!empleadorStore.precioCertificacion)
+			empleadorStore.precioCertificacion = getDefaultPrecioCertificacion();
 	});
 </script>
 
@@ -121,7 +121,7 @@
 				type="text"
 				class="input"
 				placeholder="Razón Social"
-				bind:value={empleadorStore.value.razonSocial}
+				bind:value={empleadorStore.razonSocial}
 				disabled={!edit['datos']}
 			/>
 
@@ -131,7 +131,7 @@
 				type="email"
 				class="input"
 				placeholder="Razón Social"
-				bind:value={empleadorStore.value.correo}
+				bind:value={empleadorStore.correo}
 				disabled={!edit['datos']}
 			/>
 
@@ -141,7 +141,7 @@
 				type="text"
 				class="input"
 				placeholder="Giro"
-				bind:value={empleadorStore.value.giro}
+				bind:value={empleadorStore.giro}
 				disabled={!edit['datos']}
 			/>
 
@@ -154,15 +154,15 @@
 				onchange={(e) => {
 					if (!e.currentTarget.value) return;
 
-					empleadorStore.value.fechaEstablecimiento = new Date(e.currentTarget.value);
+					empleadorStore.fechaEstablecimiento = new Date(e.currentTarget.value);
 				}}
-				value={empleadorStore.value.fechaEstablecimiento.toISOString().slice(0, 10)}
+				value={empleadorStore.fechaEstablecimiento.toISOString().slice(0, 10)}
 				disabled={!edit['datos']}
 			/>
 
 			{@render field(
 				'Estatus Verificación',
-				empleadorStore.value.verificado ? 'Verificado' : 'Verificación Pendiente'
+				empleadorStore.verificado ? 'Verificado' : 'Verificación Pendiente'
 			)}
 		</fieldset>
 		<button class="btn" onclick={() => toggleEdit('datos')}>
@@ -178,7 +178,7 @@
 
 {#snippet formaPago()}
 	<div class="flex flex-col gap-5 md:flex-row">
-		{#if empleadorStore.value.formaPago}
+		{#if empleadorStore.formaPago}
 			<fieldset class="fieldset">
 				<!-- svelte-ignore a11y_label_has_associated_control -->
 				<label class="fieldset-label">Tarjeta</label>
@@ -186,7 +186,7 @@
 					type="text"
 					class="input"
 					placeholder="Razón Social"
-					bind:value={empleadorStore.value.formaPago.tarjeta}
+					bind:value={empleadorStore.formaPago.tarjeta}
 					disabled={!edit['forma pago']}
 				/>
 
@@ -196,7 +196,7 @@
 					type="text"
 					class="input"
 					placeholder="Giro"
-					bind:value={empleadorStore.value.giro}
+					bind:value={empleadorStore.giro}
 					disabled={!edit['forma pago']}
 				/>
 			</fieldset>
@@ -223,11 +223,11 @@
 {/snippet}
 
 {#snippet precioCertificacion()}
-	{#if empleadorStore.value.precioCertificacion}
+	{#if empleadorStore.precioCertificacion}
 		<div class="flex flex-row flex-wrap gap-5">
-			{@render field('Unidad', empleadorStore.value.precioCertificacion.unidad.toFixed(2))}
-			{@render field('Decena', empleadorStore.value.precioCertificacion.decena.toFixed(2))}
-			{@render field('Centena', empleadorStore.value.precioCertificacion.centena.toFixed(2))}
+			{@render field('Unidad', empleadorStore.precioCertificacion.unidad.toFixed(2))}
+			{@render field('Decena', empleadorStore.precioCertificacion.decena.toFixed(2))}
+			{@render field('Centena', empleadorStore.precioCertificacion.centena.toFixed(2))}
 		</div>
 	{/if}
 {/snippet}

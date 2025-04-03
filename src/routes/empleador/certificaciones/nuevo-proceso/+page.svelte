@@ -25,7 +25,7 @@
 	const certs = getCertificacionesContext();
 	let certificaciones = $derived(certs.value.filter((c) => certIds.includes(c.id)));
 
-	let monto = $derived(certificaciones.length * (empleador.value.precioCertificacion?.unidad || 1));
+	let monto = $derived(certificaciones.length * (empleador.precioCertificacion?.unidad || 1));
 
 	function createNewProcesos() {
 		const idsProfesionistas = certificaciones.map((c) => c.idProfesionista).join(',');
@@ -46,14 +46,14 @@
 				id: generateId(),
 				contacto: {
 					tipo: 'email',
-					empleador: empleador.value.correo,
+					empleador: empleador.correo,
 					profesionista: profesionistaResult.correo
 				},
 				fechaInicio: new Date(),
 				fechaFin: null,
 				idCalificacion: null,
 				idCertificacion: certificacion.id,
-				idEmpleador: empleador.value.id,
+				idEmpleador: empleador.id,
 				idProfesionista: profesionistaResult.id
 			});
 		}
@@ -64,15 +64,15 @@
 	}
 
 	function createNewCompra(dataFormaPago: FormaPago, idsProcesosContacto: string[]) {
-		if (!empleador.value.precioCertificacion) return;
+		if (!empleador.precioCertificacion) return;
 
 		const compra: Compra = {
 			fecha: new Date(),
 			id: generateId(),
-			idEmpleador: empleador.value.id,
+			idEmpleador: empleador.id,
 			idsProcesosContacto,
 			monto,
-			precio: empleador.value.precioCertificacion,
+			precio: empleador.precioCertificacion,
 			status: 'en proceso',
 			promocion: null
 		};

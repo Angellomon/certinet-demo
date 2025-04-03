@@ -29,8 +29,8 @@
 				<a href={`/profesionista/procesos/${procesoContacto.id}`}
 					>{empleador.razonSocial}
 					<div class="divider-horizontal">&</div>
-					{currentProfesionistaStore.value.nombre}
-					{currentProfesionistaStore.value.apellidos}
+					{currentProfesionistaStore.nombre}
+					{currentProfesionistaStore.apellidos}
 					({certificacion.nombre})</a
 				>
 			</li>

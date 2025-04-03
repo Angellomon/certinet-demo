@@ -16,7 +16,7 @@
 	<h2 class="text-2xl">Procesos de Contacto</h2>
 	<ListaProcesos
 		baseUrl="/profesionista/procesos"
-		id={currentProfesionistaStore.value.id}
+		id={currentProfesionistaStore.id}
 		currentType="profesionista"
 	/>
 </main>

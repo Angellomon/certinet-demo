@@ -1,13 +1,15 @@
 <script lang="ts">
 	import CountStat from '$lib/components/count-stat.svelte';
 	import VerifiedStatus from '$lib/components/verified-status.svelte';
+	import { getCurrentProfesionistaContext } from '$lib/context.svelte';
 	import type { Profesionista } from '$lib/entities';
 
-	const { profesionista, totalProcesos, totalCertificaciones } = $props<{
-		profesionista: Profesionista;
+	const { totalProcesos, totalCertificaciones } = $props<{
 		totalProcesos: number;
 		totalCertificaciones: number;
 	}>();
+
+	const profesionista = getCurrentProfesionistaContext()
 </script>
 
 <div class="flex flex-col items-start justify-between md:flex-row">
