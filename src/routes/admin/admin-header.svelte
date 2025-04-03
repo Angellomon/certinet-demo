@@ -1,20 +1,32 @@
 <script lang="ts">
 	import CountStat from '$lib/components/count-stat.svelte';
-	import { getCertificacionesContext, getCurrentEmpleadorContext, getProcesosContext } from '$lib/context.svelte';
+	import {
+		getCertificacionesContext,
+		getComprasContext,
+		getCurrentEmpleadorContext,
+		getEmpleadoresContext,
+		getProcesosContext,
+		getProfesionistasContext
+	} from '$lib/context.svelte';
 
-	interface Props {
-	}
+	interface Props {}
 
-	const {  }: Props = $props();
+	const {}: Props = $props();
 
-  const certificacionesStore = getCertificacionesContext()
+	const profesionistasStore = getProfesionistasContext();
+	const empleadoresStore = getEmpleadoresContext();
+	const procesosContactoStore = getProcesosContext();
+	const certificacionesStore = getCertificacionesContext();
+	const comprasStore = getComprasContext();
 
-  const totalCertificaciones = $derived(certificacionesStore.value.length)
-
-  const procesosContactoStore = getProcesosContext()
-
-  const totalProcesos = $derived(procesosContactoStore.value.length)
-
+	const totalProfesionistas = $derived(profesionistasStore.value.length);
+	const totalEmpleadores = $derived(empleadoresStore.value.length);
+	const totalProcesos = $derived(procesosContactoStore.value.length);
+	const totalCertificaciones = $derived(certificacionesStore.value.length);
+	const totalCompras = $derived(comprasStore.value.length);
+	const montoTotalCompras = $derived.by(() =>
+		comprasStore.value.reduce((prev, c) => c.monto + prev, 0)
+	);
 </script>
 
 {#snippet statusStat(title: string, type: 'success' | 'error' | 'warning', value: string)}
@@ -49,19 +61,23 @@
 			<div class="link link-accent text-xl italic">admin@test.com</div>
 		</div>
 	</div>
-
+	
 	<div class="flex flex-row flex-wrap">
 		<!-- {@render statusStat(
 			'Estatus',
 			empleadorStore.verificado ? 'success' : 'warning',
 			empleadorStore.verificado ? 'Verificado' : 'Pendiente de Verificar'
-		)}
-
-		{#if !empleadorStore.formaPago}
+			)}
+			
+			{#if !empleadorStore.formaPago}
 			{@render statusStat('Forma de Pago', 'error', 'No Establecida')}
-		{/if} -->
-
-		<CountStat count={totalProcesos} title="Total Procesos" />
-		<CountStat count={totalCertificaciones} title="Total Certificaciones" />
+			{/if} -->
+			
+			<CountStat count={totalProfesionistas} title="Total Profesionistas" />
+			<CountStat count={totalEmpleadores} title="Total Empleadores" />
+			<CountStat count={totalProcesos} title="Total Procesos" />
+			<CountStat count={totalCertificaciones} title="Total Certificaciones" />
+			<CountStat count={totalCompras} title="# Compras" />
+			<CountStat count={montoTotalCompras} title="Total Compras" isMoney />
+		</div>
 	</div>
-</div>
