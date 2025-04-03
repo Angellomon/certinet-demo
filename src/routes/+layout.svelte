@@ -1,13 +1,31 @@
 <script lang="ts">
 	import '../app.css';
 	import Header from '$lib/components/header.svelte';
-	import { newThemeStore } from '$lib/localstore.svelte';
+	import {
+		newEmpleadoresStore,
+		newIdEmpleadorStore,
+		newIdProfesionistaStore,
+		newProfesionistasStore,
+		newThemeStore
+	} from '$lib/localstore.svelte';
 	import { setContext } from 'svelte';
 
 	let { children } = $props();
 
 	const themeStore = newThemeStore();
 	setContext('theme', themeStore);
+
+	const idEmpleadorStore = newIdEmpleadorStore();
+	setContext('id-empleador', idEmpleadorStore);
+
+	const idProfesionistaStore = newIdProfesionistaStore();
+	setContext('id-profesionista', idProfesionistaStore);
+
+	const profesionistasStore = newProfesionistasStore();
+	setContext('profesionistas', profesionistasStore);
+
+	const empleadoresStore = newEmpleadoresStore();
+	setContext('empleadores', empleadoresStore);
 </script>
 
 <svelte:head>
