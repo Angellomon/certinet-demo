@@ -2,9 +2,13 @@
 	import '../app.css';
 	import Header from '$lib/components/header.svelte';
 	import {
+	newCalificacionesProcesoStore,
+		newCertificacionesStore,
+		newComprasStore,
 		newEmpleadoresStore,
 		newIdEmpleadorStore,
 		newIdProfesionistaStore,
+		newProcesosContactoStore,
 		newProfesionistasStore,
 		newThemeStore
 	} from '$lib/localstore.svelte';
@@ -26,6 +30,18 @@
 
 	const empleadoresStore = newEmpleadoresStore();
 	setContext('empleadores', empleadoresStore);
+
+	const certificacionesStore = newCertificacionesStore();
+	setContext('certificaciones', certificacionesStore);
+
+	const procesosContactoStore = newProcesosContactoStore();
+	setContext('procesos-contacto', procesosContactoStore);
+
+	const comprasStore = newComprasStore();
+	setContext('compras', comprasStore);
+
+	const calificacionesProcesoStore = newCalificacionesProcesoStore();
+	setContext('calificaciones-proceso', calificacionesProcesoStore);
 </script>
 
 <svelte:head>
