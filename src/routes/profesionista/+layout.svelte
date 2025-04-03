@@ -1,13 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import {
-		newCalificacionesProcesoStore,
-		newCertificacionesStore,
 		newCurrentEmpleadorStore,
 		newCurrentProfesionistaStore,
-		newEmpleadoresStore,
-		newProcesosContactoStore,
-		newProfesionistasStore
 	} from '$lib/localstore.svelte';
 	import { setContext } from 'svelte';
 	import ProfesionistaHeader from './profesionista-header.svelte';
