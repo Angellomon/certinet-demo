@@ -1,14 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { getCertificacionesContext, getCompraContext } from '$lib/context.svelte.js';
-
+	import ListaProcesos from '$lib/components/lista-procesos.svelte';
+	import {
+		getCertificacionesContext,
+		getCompraContext,
+		getCurrentEmpleadorContext
+	} from '$lib/context.svelte.js';
 
 	const idCompra = page.params.idCompra;
 
-	const compra = getCompraContext(idCompra)
-	const certificaciones = getCertificacionesContext()
-
-
+	const compra = getCompraContext(idCompra);
+	const currentEmpleador = getCurrentEmpleadorContext();
 </script>
 
 {#snippet stat(title: string, value: string, desc?: string)}
@@ -54,23 +56,39 @@
 	</div>
 {/snippet}
 
-<main class="bg-base-300 rounded-box p-5">
-	<h3 class="tooltip tooltip-right text-xl underline" data-tip="ID Compra">{idCompra}</h3>
+<main class="flex flex-col">
+	<div class="bg-base-300 rounded-box p-5">
+		<h3 class=" text-xl">
+			<span class="font-normal ">Resumen de Compra</span>
+			<span class="tooltip tooltip-right font-mono badge badge-neutral" data-tip="ID Compra">{idCompra}</span>
+		</h3>
 
-	<div class="divider"></div>
-	{#if compra}
-		<div class="flex flex-row flex-wrap gap-2">
-			{@render stat('Monto', compra.monto.toFixed(2))}
-			{@render stat('Fecha', compra.fecha.toISOString().slice(0, 10))}
-			{@render stat('# de Certificaciones', `${compra.idsProcesosContacto.length}`)}
+		<div class="divider"></div>
+		{#if compra}
+			<div class="flex flex-row flex-wrap gap-2">
+				{@render stat('Monto', compra.monto.toFixed(2))}
+				{@render stat('Fecha', compra.fecha.toISOString().slice(0, 10))}
+				{@render stat('# de Certificaciones', `${compra.idsProcesosContacto.length}`)}
 
-			{#if compra.status == 'completado'}
-				{@render statusStat('Estatus Pago', 'success', 'Completado')}
-			{:else if compra.status == 'en proceso'}
-				{@render statusStat('Estatus Pago', 'warning', 'En Proceso')}
-			{:else if compra.status == 'rechazado'}
-				{@render statusStat('Estatus Pago', 'error', 'Rechazado')}
-			{/if}
-		</div>
-	{/if}
+				{#if compra.status == 'completado'}
+					{@render statusStat('Estatus Pago', 'success', 'Completado')}
+				{:else if compra.status == 'en proceso'}
+					{@render statusStat('Estatus Pago', 'warning', 'En Proceso')}
+				{:else if compra.status == 'rechazado'}
+					{@render statusStat('Estatus Pago', 'error', 'Rechazado')}
+				{/if}
+			</div>
+		{/if}
+	</div>
+
+	<h3 class="divider divider-start text-xl">Procesos de Contacto</h3>
+
+	<div class="bg-base-300 rounded-box p-5">
+		<ListaProcesos
+			baseUrl="/empleador/procesos"
+			currentType="empleador"
+			id={currentEmpleador.value.id}
+			idsProcesos={compra ? compra.idsProcesosContacto : undefined}
+		/>
+	</div>
 </main>
