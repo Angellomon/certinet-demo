@@ -13,23 +13,16 @@
 	import ProfesionistaHeader from './profesionista-header.svelte';
 	import { goto } from '$app/navigation';
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
+	import { getCertificacionesContext, getProcesosContext } from '$lib/context.svelte';
 
 	const { children } = $props();
-
-	const profesionistasStore = newProfesionistasStore();
-	setContext('profesionistas', profesionistasStore);
 
 	const currentProfesionistaStore = newCurrentProfesionistaStore();
 	setContext('profesionista', currentProfesionistaStore);
 
-	const procesosContactoStore = newProcesosContactoStore();
-	setContext('procesos-contacto', procesosContactoStore);
+	const procesosContactoStore = getProcesosContext()
 
-	const certificacionesStore = newCertificacionesStore();
-	setContext('certificaciones', certificacionesStore);
-
-	const calificacionesStore = newCalificacionesProcesoStore();
-	setContext('calificaciones-proceso', calificacionesStore);
+	const certificacionesStore = getCertificacionesContext()
 
 	const currentEmpleadorStore = newCurrentEmpleadorStore();
 	setContext('empleador-store', currentEmpleadorStore);
