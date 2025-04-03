@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import AdminHeader from './admin-header.svelte';
+
+	const { children } = $props();
 </script>
 
 <main class="flex flex-col gap-5 p-5 lg:px-20 lg:py-5">
@@ -12,7 +14,10 @@
 				<a class:menu-active={page.url.pathname === '/admin'} href="/admin"> Dashboard </a>
 			</li>
 			<li>
-				<a class:menu-active={page.url.pathname.includes('/profesionistas')} href="/admin/profesionistas">
+				<a
+					class:menu-active={page.url.pathname.includes('/profesionistas')}
+					href="/admin/profesionistas"
+				>
 					Profesionistas
 				</a>
 			</li>
@@ -35,14 +40,12 @@
 				</a>
 			</li>
 			<li>
-				<a
-					class:menu-active={page.url.pathname.includes('/compras')}
-					href="/admin/compras"
-				>
+				<a class:menu-active={page.url.pathname.includes('/compras')} href="/admin/compras">
 					Compras
 				</a>
 			</li>
 			<!-- <li><a>Configuración</a></li> -->
 		</ul>
 	</div>
+	{@render children()}
 </main>
