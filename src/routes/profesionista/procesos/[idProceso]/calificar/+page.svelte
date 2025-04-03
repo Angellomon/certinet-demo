@@ -23,20 +23,18 @@
 		error(404, `[404] Certificación no encontrada (p.idCertificacion=${proceso.idCertificacion})`);
 
 	const currentProfesionista = getCurrentProfesionistaContext();
-	// if (!currentProfesionista)
-	// 	error(404, `[404] Profesionista no encontrado (p.idProfesionista=${proceso.idProfesionista})`);
 
 	const calificacionesStore = getCalificacionesProcesoContext();
 	const calificacionProceso = getCalificacionProceso(proceso.idCalificacion);
-	const procesos = getProcesosContext();
+	const procesosStore = getProcesosContext();
 
 	const empleadorStore = getCurrentEmpleadorContext();
 	let calificacion = $state(calificacionProceso?.profesionista?.valor || 0);
 
 	$effect(() => {
-		for (let i = 0; i < procesos.value.length; i++) {
-			if (procesos.value[i].id == proceso.id) {
-				procesos.value[i] = proceso;
+		for (let i = 0; i < procesosStore.value.length; i++) {
+			if (procesosStore.value[i].id == proceso.id) {
+				procesosStore.value[i] = proceso;
 			}
 		}
 	});
@@ -49,33 +47,34 @@
 			tipo: 'estrella-5',
 			valor: calificacion
 		};
-		const nuevaCalificacionProceso: CalificacionProceso = {
-			id: generateId(),
-			empleador: null,
-			profesionista: nuevaCalificacionProfesionista,
-			idProceso: proceso.id
-		};
 
-		const indexProceso = procesos.value.findIndex((p) => p.id === proceso.id);
+		const indexProceso = procesosStore.value.findIndex((p) => p.id === proceso.id);
 
 		let indexCalificacion = calificacionesStore.value.findIndex(
 			(c) => c.id === proceso.idCalificacion
 		);
-		let calificacionResult = calificacionesStore.value[indexCalificacion];
 
-		if (!calificacionResult || !proceso.idCalificacion) {
+		if (!calificacionProceso || !proceso.idCalificacion) {
+			const nuevaCalificacionProceso: CalificacionProceso = {
+				id: generateId(),
+				empleador: null,
+				profesionista: nuevaCalificacionProfesionista,
+				idProceso: proceso.id
+			};
+
 			calificacionesStore.value.push(nuevaCalificacionProceso);
 
-			indexCalificacion = calificacionesStore.value.length;
-			calificacionResult = nuevaCalificacionProceso;
+			proceso.idCalificacion = nuevaCalificacionProceso.id;
+			procesosStore.value.splice(indexProceso, 1, proceso);
+
+			return;
 		}
 
-		nuevaCalificacionProceso.empleador = calificacionResult.empleador;
-		nuevaCalificacionProceso.profesionista = calificacionResult.profesionista;
+		if (!calificacionProceso.profesionista)
+			calificacionProceso.profesionista = nuevaCalificacionProfesionista;
+		else calificacionProceso.profesionista.valor = calificacion;
 
-		proceso.idCalificacion = nuevaCalificacionProceso.id;
-		calificacionesStore.value.splice(indexCalificacion, 1, nuevaCalificacionProceso);
-		procesos.value.splice(indexProceso, 1, proceso);
+		calificacionesStore.value.splice(indexCalificacion, 1, calificacionProceso);
 	}
 
 	function handleCalificar() {
@@ -88,7 +87,7 @@
 		<h1 class="text-2xl">Calificar</h1>
 
 		<div class="flex flex-row gap-5">
-			<RateInput bind:value={calificacion} />
+			<RateInput color="profesionista" bind:value={calificacion} />
 			<button onclick={handleCalificar} class="btn btn-primary" disabled={calificacion == 0}>
 				Calificar
 			</button>

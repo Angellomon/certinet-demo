@@ -18,5 +18,6 @@
 		baseUrl="/profesionista/procesos"
 		id={currentProfesionistaStore.id}
 		currentType="profesionista"
+		showCalificacionProfesionista
 	/>
 </main>

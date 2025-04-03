@@ -2,7 +2,7 @@
 	import ListaProcesos from '$lib/components/lista-procesos.svelte';
 	import { getCurrentEmpleadorContext } from '$lib/context.svelte';
 
-	const currentEmpleadorStore = getCurrentEmpleadorContext()
+	const currentEmpleadorStore = getCurrentEmpleadorContext();
 </script>
 
 <main class="flex flex-col gap-5">
@@ -14,5 +14,10 @@
 	</div>
 
 	<h2 class="text-2xl">Procesos de Contacto</h2>
-	<ListaProcesos baseUrl="/empleador/procesos" id={currentEmpleadorStore.id} currentType="empleador" />
+	<ListaProcesos
+		showCalificacionEmpleador
+		baseUrl="/empleador/procesos"
+		id={currentEmpleadorStore.id}
+		currentType="empleador"
+	/>
 </main>
