@@ -2,7 +2,6 @@
 	import {
 		getCalificacionesProcesoContext,
 		getCertificacionesContext,
-		getComprasContext,
 		getProcesosContext
 	} from '$lib/context.svelte';
 	import { getDemoEmpleadores, getDemoProfesionistas } from '$lib/demo-data';
@@ -72,15 +71,14 @@
 			? 'Calificación al Empleador'
 			: 'Calificación al Profesionista'}
 	>
-		<p class="text-end">Calificacion</p>
+		<p class="text-end">Calificación</p>
 		<div class="rating rating-lg rating-half">
-			<input type="radio" name="rating-11" class="rating-hidden" />
+			<input type="radio" class="rating-hidden" />
 
 			{#each rates as rate, i}
 				{@const checked = value >= rate}
 				<input
 					type="radio"
-					name="rating-11"
 					class="mask mask-star-2"
 					class:bg-green-500={type === 'empleador'}
 					class:bg-orange-500={type === 'profesionista'}
