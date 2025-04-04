@@ -67,11 +67,19 @@
 {#snippet rating(value: number, type: 'empleador' | 'profesionista')}
 	<div
 		class="tooltip flex flex-col justify-end justify-self-end"
-		data-tip={currentType === 'profesionista'
-			? 'Calificación al Empleador'
-			: 'Calificación al Profesionista'}
+		data-tip={value === 0
+			? 'Calificación Pendiente'
+			: currentType === 'profesionista'
+				? 'Calificación al Empleador'
+				: 'Calificación al Profesionista'}
 	>
-		<p class="text-end">Calificación</p>
+		<p class="text-end">
+			{#if value === 0}
+				Calificación Pendiente
+			{:else}
+				Calificación
+			{/if}
+		</p>
 		<div class="rating rating-lg rating-half">
 			<input type="radio" class="rating-hidden" />
 
@@ -80,8 +88,9 @@
 				<input
 					type="radio"
 					class="mask mask-star-2"
-					class:bg-green-500={type === 'empleador'}
+					class:bg-green-500={type === 'empleador' && value > 0}
 					class:bg-orange-500={type === 'profesionista'}
+					class:blue-500={value == 0}
 					class:mask-half-1={i % 2 == 0}
 					class:mask-half-2={i % 2 != 0}
 					aria-label={`${i + 1} star`}
@@ -96,14 +105,16 @@
 	{@const cert = certificacionesDataMap[proceso.idCertificacion]}
 	{@const concluido = !!proceso.fechaFin}
 	<a href={baseUrl + '/' + proceso.id}>
-		<li class="list-row hover:bg-base-300">
-			<div class="w-full">
-				<div class="text-lg font-bold">{cert.nombre}</div>
-				<div class="flex w-full flex-row flex-wrap items-center gap-10">
-					<div class="flex flex-row flex-wrap">
-						<div class="">{getNombreEmpleador(proceso.idEmpleador)}</div>
-						<div class="divider divider-horizontal divider-start">&</div>
-						<div class="">{getNombreProfesionista(proceso.idProfesionista)}</div>
+		<li class="list-row hover:bg-base-300 grid-cols-2 md:grid-row-1 grid-row-2 sm:grid-cols-2">
+			<div class="grow text-lg font-bold">{cert.nombre}</div>
+			<div class="flex w-full flex-col items-center justify-center md:flex-row">
+				<div class="flex w-full grow flex-row flex-wrap items-center justify-end gap-10">
+					<div class="flex flex-row flex-wrap items-center">
+						{#if currentType === 'profesionista'}
+							<div class="">{getNombreEmpleador(proceso.idEmpleador)}</div>
+						{:else if currentType === 'empleador'}
+							<div class="">{getNombreProfesionista(proceso.idProfesionista)}</div>
+						{/if}
 					</div>
 
 					<div>
@@ -126,6 +137,8 @@
 						{:else if calificacion && showCalificacionProfesionista && calificacion.profesionista}
 							{@render rating(calificacion.profesionista.valor, 'profesionista')}
 						{/if}
+					{:else}
+						{@render rating(0, 'empleador')}
 					{/if}
 				</div>
 			</div>
