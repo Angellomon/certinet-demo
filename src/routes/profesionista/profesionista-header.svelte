@@ -23,6 +23,9 @@
 			</VerifiedStatus>
 		</div>
 	</div>
-	<CountStat count={totalCertificaciones} title="Total Certificaciones" />
-	<CountStat count={totalProcesos} title="Total Procesos" />
+	<div class="flex flex-row flex-wrap">
+
+		<CountStat count={totalCertificaciones} title="Total Certificaciones" />
+		<CountStat count={totalProcesos} title="Total Procesos" />
+	</div>
 </div>

@@ -44,7 +44,7 @@
 		</div>
 	</div>
 
-	<div>
+	<div class="flex flex-row flex-wrap">
 		{@render statusStat(
 			'Estatus',
 			empleadorStore.verificado ? 'success' : 'warning',
