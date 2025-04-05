@@ -143,8 +143,9 @@
 {/snippet}
 
 {#snippet avanzado()}
-	<div class="flex flex-col gap-10">
+	<div class="flex flex-col md:items-center gap-2 md:gap-5 md:flex-row">
 		<button onclick={handleResetData} class="btn btn-neutral"> Reset Datos </button>
+		<p>En caso de fallas, resetea los datos locales y recarga la página.</p>
 	</div>
 {/snippet}
 
