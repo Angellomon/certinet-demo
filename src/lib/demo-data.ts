@@ -1,6 +1,7 @@
 import { generateRandomString, type RandomReader } from '@oslojs/crypto/random';
 
 import type {
+	Admin,
 	CalificacionProceso,
 	Certificacion,
 	Compra,
@@ -13,6 +14,7 @@ import type {
 
 export const PROFESIONISTA_DEMO_ID = 'test-profesionista';
 export const EMPLEADOR_DEMO_ID = 'test-empleador';
+export const ADMIN_DEMO_ID = 'test-admin';
 
 export const getDemoProfesionista: () => Profesionista = () =>
 	getDemoProfesionistas().filter((p) => p.id == PROFESIONISTA_DEMO_ID)[0];
@@ -483,3 +485,13 @@ export function getDefaultFormaPago(): FormaPago {
 		nombreTitular: 'Nombre'
 	};
 }
+
+export function getDefaultAdmin(): Admin {
+	return {
+		correo: 'admin@test.com',
+		id: ADMIN_DEMO_ID,
+		nombre: 'Admon'
+	};
+}
+
+export const getDefaultAdmins = () => [getDefaultAdmin()];
