@@ -2,6 +2,7 @@ import { browser } from '$app/environment';
 import { parse } from 'valibot';
 import {
 	EMPLEADOR_DEMO_ID,
+	getDefaultAdmins,
 	getDemoCalificacionesProceso,
 	getDemoCertificaciones,
 	getDemoCompras,
@@ -13,6 +14,8 @@ import {
 	PROFESIONISTA_DEMO_ID
 } from './demo-data';
 import {
+	adminSchema,
+	adminsSchema,
 	calificacionesProcesoSchema,
 	certificacionesSchema,
 	comprasSchema,
@@ -22,6 +25,7 @@ import {
 	procesosContactoSchema,
 	profesionistaSchema,
 	profesionistasSchema,
+	seccionAdminConfigSchema,
 	themeSchema
 } from './entities';
 
@@ -119,6 +123,16 @@ export function newIdEmpleadorStore() {
 }
 
 export function newIdProfesionistaStore() {
-	const defaultData = PROFESIONISTA_DEMO_ID
-	return newLocalStore("id-profesionista", defaultData, idSchema)
+	const defaultData = PROFESIONISTA_DEMO_ID;
+	return newLocalStore('id-profesionista', defaultData, idSchema);
+}
+
+export function newAdminsStore() {
+	const defaultData = getDefaultAdmins();
+	return newLocalStore('admins', defaultData, adminsSchema);
+}
+
+export function newSeccionAdminConfigStore() {
+	const defaultData = "datos"
+	return newLocalStore("seccion-config-admin", defaultData, seccionAdminConfigSchema)
 }
