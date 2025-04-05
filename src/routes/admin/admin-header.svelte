@@ -61,23 +61,13 @@
 			<div class="link link-accent text-xl italic">admin@test.com</div>
 		</div>
 	</div>
-	
+
 	<div class="flex flex-row flex-wrap">
-		<!-- {@render statusStat(
-			'Estatus',
-			empleadorStore.verificado ? 'success' : 'warning',
-			empleadorStore.verificado ? 'Verificado' : 'Pendiente de Verificar'
-			)}
-			
-			{#if !empleadorStore.formaPago}
-			{@render statusStat('Forma de Pago', 'error', 'No Establecida')}
-			{/if} -->
-			
-			<CountStat count={totalProfesionistas} title="Total Profesionistas" />
-			<CountStat count={totalEmpleadores} title="Total Empleadores" />
-			<CountStat count={totalProcesos} title="Total Procesos" />
-			<CountStat count={totalCertificaciones} title="Total Certificaciones" />
-			<CountStat count={totalCompras} title="# Compras" />
-			<CountStat count={montoTotalCompras} title="Total Compras" isMoney />
-		</div>
+		<CountStat count={totalProfesionistas} title="Total Profesionistas" />
+		<CountStat count={totalEmpleadores} title="Total Empleadores" />
+		<CountStat count={totalProcesos} title="Total Procesos" />
+		<CountStat count={totalCertificaciones} title="Total Certificaciones" />
+		<CountStat count={totalCompras} title="# Compras" />
+		<CountStat count={montoTotalCompras} title="Total Compras" isMoney />
 	</div>
+</div>
