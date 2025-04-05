@@ -309,9 +309,9 @@ export const generateId = () => {
 			crypto.getRandomValues(bytes);
 		}
 	};
-	const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 	// 10-characters long string consisting of the upper case letters
-	return generateRandomString(random, alphabet, 10);
+	return generateRandomString(random, alphabet, 24);
 };
 
 export const newProcesoContacto = (
