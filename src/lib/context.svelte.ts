@@ -89,6 +89,10 @@ export function getIdProfesionistaContext() {
 	return getContext('id-profesionista') as LocalObjectStore<ID>;
 }
 
+export function getIdAdminContext() {
+	return getContext('id-admin') as LocalObjectStore<ID>;
+}
+
 export function getCurrentEmpleadorContext() {
 	const idEmpleadorStore = getIdEmpleadorContext();
 

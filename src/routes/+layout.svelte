@@ -26,6 +26,9 @@
 	const idProfesionistaStore = newIdProfesionistaStore();
 	setContext('id-profesionista', idProfesionistaStore);
 
+	const idAdminStore = newIdProfesionistaStore();
+	setContext('id-admin', idAdminStore);
+
 	const profesionistasStore = newProfesionistasStore();
 	setContext('profesionistas', profesionistasStore);
 
