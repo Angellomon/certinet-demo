@@ -2,7 +2,8 @@
 	import '../app.css';
 	import Header from '$lib/components/header.svelte';
 	import {
-	newCalificacionesProcesoStore,
+		newAdminsStore,
+		newCalificacionesProcesoStore,
 		newCertificacionesStore,
 		newComprasStore,
 		newEmpleadoresStore,
@@ -42,6 +43,9 @@
 
 	const calificacionesProcesoStore = newCalificacionesProcesoStore();
 	setContext('calificaciones-proceso', calificacionesProcesoStore);
+
+	const adminsStore = newAdminsStore();
+	setContext('admins', adminsStore);
 </script>
 
 <svelte:head>
