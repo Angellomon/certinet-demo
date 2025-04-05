@@ -161,3 +161,22 @@ export type CalificacionesProceso = v.InferOutput<typeof calificacionesProcesoSc
 
 export const themeSchema = v.union([v.literal('dark'), v.literal('light')]);
 export type Theme = v.InferOutput<typeof themeSchema>;
+
+export const entities = v.union([
+	v.literal('profesionistas'),
+	v.literal('empleadores'),
+	v.literal('admins')
+]);
+
+export const adminSchema = v.object({
+	id: idSchema,
+	nombre: v.string(),
+	correo: emailSchema
+});
+export type Admin = v.InferOutput<typeof adminSchema>;
+
+export const adminsSchema = v.array(adminSchema);
+export type AdminsSchema = v.InferOutput<typeof adminsSchema>;
+
+export const seccionAdminConfigSchema = v.union([v.literal('datos'), v.literal('avanzado')]);
+export type SeccionAdminConfigSchema = v.InferOutput<typeof seccionAdminConfigSchema>;
