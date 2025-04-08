@@ -2,7 +2,10 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
-	import { newSeccionAdminConfigStore } from '$lib/localstore.svelte';
+	import {
+		newSeccionAdminConfigStore,
+		newSeccionAdminProfesionistasStore
+	} from '$lib/localstore.svelte';
 	import { setContext } from 'svelte';
 	import AdminHeader from './admin-header.svelte';
 
@@ -11,8 +14,12 @@
 	const seccionAdminConfigStore = newSeccionAdminConfigStore();
 	setContext('seccion-admin-config-store', seccionAdminConfigStore);
 
+	const seccionAdminProfesionistasStore = newSeccionAdminProfesionistasStore();
+	setContext('seccion-admin-profesionistas-store', seccionAdminProfesionistasStore);
+
 	function handleMenuClick() {
 		seccionAdminConfigStore.value = 'datos';
+		seccionAdminProfesionistasStore.value = 'dashboard';
 	}
 </script>
 

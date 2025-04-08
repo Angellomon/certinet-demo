@@ -1,7 +1,7 @@
 import { getContext } from 'svelte';
 import type { LocalObjectStore } from './localstore.svelte';
 import type {
-	AdminsSchema,
+	Admins,
 	CalificacionesProceso,
 	Certificaciones,
 	Compras,
@@ -9,7 +9,8 @@ import type {
 	ID,
 	ProcesosContacto,
 	Profesionistas,
-	SeccionAdminConfigSchema,
+	SeccionAdminConfig,
+	SeccionAdminProfesionistas,
 	Theme
 } from './entities';
 import { error } from '@sveltejs/kit';
@@ -106,9 +107,13 @@ export function getCurrentProfesionistaContext() {
 }
 
 export function getAdmins() {
-	return getContext('admins') as LocalObjectStore<AdminsSchema>;
+	return getContext('admins') as LocalObjectStore<Admins>;
 }
 
 export function getSeccionAdminConfigContext() {
-	return getContext('seccion-admin-config-store') as LocalObjectStore<SeccionAdminConfigSchema>;
+	return getContext('seccion-admin-config-store') as LocalObjectStore<SeccionAdminConfig>;
+}
+
+export function getSeccionAdminProfesionistasContext() {
+	return getContext('seccion-admin-profesionistas-store') as LocalObjectStore<SeccionAdminProfesionistas>;
 }
