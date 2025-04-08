@@ -176,7 +176,14 @@ export const adminSchema = v.object({
 export type Admin = v.InferOutput<typeof adminSchema>;
 
 export const adminsSchema = v.array(adminSchema);
-export type AdminsSchema = v.InferOutput<typeof adminsSchema>;
+export type Admins = v.InferOutput<typeof adminsSchema>;
 
 export const seccionAdminConfigSchema = v.union([v.literal('datos'), v.literal('avanzado')]);
-export type SeccionAdminConfigSchema = v.InferOutput<typeof seccionAdminConfigSchema>;
+export type SeccionAdminConfig = v.InferOutput<typeof seccionAdminConfigSchema>;
+
+export const seccionAdminProfesionistasSchema = v.union([
+	v.literal('dashboard'),
+	v.literal('verificacion'),
+	v.literal('listado')
+]);
+export type SeccionAdminProfesionistas = v.InferOutput<typeof seccionAdminProfesionistasSchema>;
