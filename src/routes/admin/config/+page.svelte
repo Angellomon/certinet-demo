@@ -4,7 +4,7 @@
 	import MenuSeccion from '$lib/components/menu-seccion.svelte';
 	import { getCurrentEmpleadorContext, getSeccionAdminConfigContext } from '$lib/context.svelte';
 	import { getDefaultFormaPago, getDefaultPrecioCertificacion } from '$lib/demo-data';
-	import type { SeccionAdminConfigSchema } from '$lib/entities';
+	import type { SeccionAdminConfig } from '$lib/entities';
 
 	const empleadorStore = getCurrentEmpleadorContext();
 	const seccionAdminConfigStore = getSeccionAdminConfigContext();
@@ -20,12 +20,12 @@
 		}
 	];
 
-	let edit: Record<SeccionAdminConfigSchema, boolean> = $state({
+	let edit: Record<SeccionAdminConfig, boolean> = $state({
 		datos: false,
 		avanzado: false
 	});
 
-	function toggleEdit(s: SeccionAdminConfigSchema) {
+	function toggleEdit(s: SeccionAdminConfig) {
 		edit[s] = !edit[s];
 	}
 
