@@ -31,7 +31,7 @@
 	});
 </script>
 
-<h1 class="text-2xl">Profesionistas</h1>
+<h1 class="text-2xl mb-5">Profesionistas</h1>
 
 <main class="flex justify-start">
 	<div class="flex flex-col md:flex-row">
