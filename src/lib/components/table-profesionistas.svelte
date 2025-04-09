@@ -76,11 +76,11 @@
 					<th>{i + 1}</th>
 					<td>{profesionista.nombre}</td>
 					<td>{profesionista.apellidos}</td>
-					<td
-						><a class="link link-accent" href={`mailto=${profesionista.correo}`}
-							>{profesionista.correo}</a
-						></td
-					>
+					<td>
+						<a class="link link-accent" href={`mailto:${profesionista.correo}`}>
+							{profesionista.correo}
+						</a>
+					</td>
 					<td>{profesionista.profesion}</td>
 					<td>{yoe}</td>
 					<td>{age}</td>
