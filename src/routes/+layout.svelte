@@ -59,7 +59,9 @@
 	<Header />
 </header>
 
-{@render children()}
+<div class="overflow-x-auto">
+	{@render children()}
+</div>
 
 <footer class="bg-base-300 flex flex-col items-center md:flex-row">
 	<div class="flex-1">
