@@ -78,5 +78,7 @@
 			Configuración <SettingsSvg />
 		</button>
 	</div>
-	{@render children()}
+	<div class="overflow-x-auto">
+		{@render children()}
+	</div>
 </main>
