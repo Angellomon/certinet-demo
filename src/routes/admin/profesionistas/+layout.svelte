@@ -9,7 +9,7 @@
 	const dataMenu = [
 		{
 			seccion: 'dashboard',
-			title: 'Dashboard',
+			title: 'General',
 			url: '/admin/profesionistas'
 		},
 		{
