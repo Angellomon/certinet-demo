@@ -6,6 +6,6 @@
 
 	<h1 class="text-2xl">Listado</h1>
 
-	<TableProfesionistas showActions showVerifyActions />
+	<TableProfesionistas baseURL="/admin/profesionistas" showActions showVerifyActions />
 
 </main>
