@@ -87,7 +87,7 @@
 {/snippet}
 
 <div class="rounded-box border-base-content/5 bg-base-100 overflow-x-auto border">
-	<table class="table-sm table">
+	<table class="table-xs md:table-sm lg:table-md 2xl:table-lg table">
 		<thead>
 			<tr>
 				<th></th>
