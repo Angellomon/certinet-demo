@@ -1,5 +1,21 @@
 <script>
 	import TableProfesionistas from '$lib/components/table-profesionistas.svelte';
+	import { popBreadcrumbs, pushBreadcrumbs } from '$lib/context.svelte';
+
+	const breadcrumbs = [
+		{
+			title: 'Profesionistas',
+			url: '/admin/profesionistas'
+		}
+	];
+
+	$effect(() => {
+		pushBreadcrumbs(...breadcrumbs);
+
+		return () => {
+			popBreadcrumbs(...breadcrumbs);
+		};
+	});
 </script>
 
 <h1 class="text-2xl">Profesionistas</h1>
