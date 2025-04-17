@@ -35,7 +35,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <ul
 	class="menu menu-horizontal bg-base-200 rounded-box w-full"
-	class:lg:menu-vertical={vertical}
+	class:menu-vertical={vertical}
 	class:md:w-56={vertical}
 	class:menu-sm={size === 'sm'}
 	class:menu-md={size === 'md'}
