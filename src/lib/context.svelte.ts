@@ -150,3 +150,16 @@ export function setBreadCrumbsContext(data: Store<BreadcrumbsData>) {
 export function getBreadcrumbsContext() {
 	return getContext('breadcrumbs-data') as Store<BreadcrumbsData>;
 }
+
+export function pushBreadcrumbs(...items: BreadcrumbsData) {
+	const breadcrumbs = getBreadcrumbsContext();
+	breadcrumbs.value.push(...items);
+}
+
+export function popBreadcrumbs(...items: BreadcrumbsData) {
+	const breadcrumbs = getBreadcrumbsContext();
+
+	for (let _ of items) {
+		breadcrumbs.value.pop();
+	}
+}
