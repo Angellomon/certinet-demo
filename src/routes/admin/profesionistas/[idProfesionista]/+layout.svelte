@@ -40,6 +40,11 @@
 </script>
 
 <main class="flex flex-col gap-5 md:flex-row">
-	<MenuSeccion vertical bind:current={seccionAdminProfesionistaStore.value} data={menuData} />
+	<MenuSeccion
+		urlMode
+		vertical
+		bind:current={seccionAdminProfesionistaStore.value}
+		data={menuData}
+	/>
 	{@render children()}
 </main>
