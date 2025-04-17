@@ -4,7 +4,6 @@
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
 	import {
 		newSeccionAdminConfigStore,
-		newSeccionAdminProfesionistasStore,
 		newSeccionAdminProfesionistaStore,
 		newSeccionAdminStore
 	} from '$lib/localstore.svelte';
