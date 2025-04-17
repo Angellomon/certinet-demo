@@ -2,7 +2,9 @@ import { browser } from '$app/environment';
 import { parse } from 'valibot';
 import {
 	DEFAULT_SECCION_ADMIN_CONFIG_STORE,
+	DEFAULT_SECCION_ADMIN_PROFESIONISTA_STORE,
 	DEFAULT_SECCION_ADMIN_PROFESIONISTAS_STORE,
+	DEFAULT_SECCION_ADMIN_STORE,
 	EMPLEADOR_DEMO_ID,
 	getDefaultAdmins,
 	getDemoCalificacionesProceso,
@@ -27,7 +29,9 @@ import {
 	profesionistaSchema,
 	profesionistasSchema,
 	seccionAdminConfigSchema,
+	seccionAdminProfesionistaSchema,
 	seccionAdminProfesionistasSchema,
+	seccionAdminSchema,
 	themeSchema
 } from './entities';
 
@@ -134,6 +138,11 @@ export function newAdminsStore() {
 	return newLocalStore('admins', defaultData, adminsSchema);
 }
 
+export function newSeccionAdminStore() {
+	const defaultData = DEFAULT_SECCION_ADMIN_STORE;
+	return newLocalStore('seccion-admin', defaultData, seccionAdminSchema);
+}
+
 export function newSeccionAdminConfigStore() {
 	const defaultData = DEFAULT_SECCION_ADMIN_CONFIG_STORE;
 	return newLocalStore('seccion-config-admin', defaultData, seccionAdminConfigSchema);
@@ -146,4 +155,9 @@ export function newSeccionAdminProfesionistasStore() {
 		defaultData,
 		seccionAdminProfesionistasSchema
 	);
+}
+
+export function newSeccionAdminProfesionistaStore() {
+	const defaultData = DEFAULT_SECCION_ADMIN_PROFESIONISTA_STORE;
+	return newLocalStore('seccion-admin-profesionista', defaultData, seccionAdminProfesionistaSchema);
 }

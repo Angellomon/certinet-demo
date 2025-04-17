@@ -178,6 +178,17 @@ export type Admin = v.InferOutput<typeof adminSchema>;
 export const adminsSchema = v.array(adminSchema);
 export type Admins = v.InferOutput<typeof adminsSchema>;
 
+export const seccionAdminSchema = v.union([
+	v.literal('dashboard'),
+	v.literal('profesionistas'),
+	v.literal('empleadores'),
+	v.literal('certificaciones'),
+	v.literal('procesos'),
+	v.literal('compras'),
+	v.literal('config')
+]);
+export type SeccionAdmin = v.InferOutput<typeof seccionAdminSchema>;
+
 export const seccionAdminConfigSchema = v.union([v.literal('datos'), v.literal('avanzado')]);
 export type SeccionAdminConfig = v.InferOutput<typeof seccionAdminConfigSchema>;
 
@@ -187,3 +198,21 @@ export const seccionAdminProfesionistasSchema = v.union([
 	v.literal('listado')
 ]);
 export type SeccionAdminProfesionistas = v.InferOutput<typeof seccionAdminProfesionistasSchema>;
+
+export const seccionAdminProfesionistaSchema = v.union([
+	v.literal('datos'),
+	v.literal('certificaciones'),
+	v.literal('verificacion')
+]);
+export type SeccionAdminProfesionista = v.InferOutput<typeof seccionAdminProfesionistaSchema>;
+
+export const breadcrumbDataSchema = v.object({
+	title: v.string(),
+	url: v.optional(v.string()),
+	icon: v.optional(v.string())
+});
+
+export type BeadrcrumbData = v.InferOutput<typeof breadcrumbDataSchema>;
+
+export const breadcrumbsDataSchema = v.array(breadcrumbDataSchema);
+export type BreadcrumbsData = v.InferOutput<typeof breadcrumbsDataSchema>;
