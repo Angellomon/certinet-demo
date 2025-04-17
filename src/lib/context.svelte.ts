@@ -1,7 +1,8 @@
-import { getContext } from 'svelte';
+import { getContext, setContext } from 'svelte';
 import type { LocalObjectStore } from './localstore.svelte';
 import type {
 	Admins,
+	BreadcrumbsData,
 	CalificacionesProceso,
 	Certificaciones,
 	Compras,
@@ -9,11 +10,14 @@ import type {
 	ID,
 	ProcesosContacto,
 	Profesionistas,
+	SeccionAdmin,
 	SeccionAdminConfig,
+	SeccionAdminProfesionista,
 	SeccionAdminProfesionistas,
 	Theme
 } from './entities';
 import { error } from '@sveltejs/kit';
+import type { Store } from './store.svelte';
 
 export function getProcesosContext() {
 	return getContext('procesos-contacto') as LocalObjectStore<ProcesosContacto>;
@@ -115,5 +119,34 @@ export function getSeccionAdminConfigContext() {
 }
 
 export function getSeccionAdminProfesionistasContext() {
-	return getContext('seccion-admin-profesionistas-store') as LocalObjectStore<SeccionAdminProfesionistas>;
+	return getContext(
+		'seccion-admin-profesionistas-store'
+	) as LocalObjectStore<SeccionAdminProfesionistas>;
+}
+
+export function getSeccionAdminProfesionistaContext() {
+	return getContext(
+		'seccion-admin-profesionista-store'
+	) as LocalObjectStore<SeccionAdminProfesionista>;
+}
+
+export function setSeccionAdminProfesionistaContext(
+	data: LocalObjectStore<SeccionAdminProfesionista>
+) {
+	setContext('seccion-admin-profesionista-store', data);
+}
+
+export function setSeccionAdminContext(data: LocalObjectStore<SeccionAdmin>) {
+	setContext('seccion-admin-store', data);
+}
+export function getSeccionAdminContext() {
+	return getContext('seccion-admin-store') as LocalObjectStore<SeccionAdmin>;
+}
+
+export function setBreadCrumbsContext(data: Store<BreadcrumbsData>) {
+	setContext('breadcrumbs-data', data);
+}
+
+export function getBreadcrumbsContext() {
+	return getContext('breadcrumbs-data') as Store<BreadcrumbsData>;
 }
