@@ -1,11 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import Breadcrumbs from '$lib/components/breadcrumbs.svelte';
 	import TableCertificaciones from '$lib/components/table-certificaciones.svelte';
 	import { getProfesionistaContext } from '$lib/context.svelte';
 
 	const { idProfesionista } = page.params;
 
 	const profesionista = getProfesionistaContext(idProfesionista);
+
+	const breadData: { url?: string; title: string; icon?: string }[] = [
+		{
+			title: 'Admin',
+			url: '/admin'
+		}
+	];
 </script>
 
 {#snippet field(label: string, data: string)}
@@ -77,7 +85,9 @@
 	</fieldset>
 {/snippet}
 
-<main class=" flex flex-col gap-5">
+<main class="flex flex-col gap-5">
+	<Breadcrumbs data={breadData} />
+
 	<div class="">
 		<h1 class="text-2xl underline">{profesionista.nombre} {profesionista.apellidos}</h1>
 		<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Profesionista">
