@@ -3,6 +3,7 @@
 	import { FloppyDisk, NotePencil } from 'phosphor-svelte';
 	import InputProfesionista from '$lib/components/input-profesionista.svelte';
 	import { getProfesionistaContext } from '$lib/context.svelte';
+	import TimelineProfesionista from '$lib/components/timeline-profesionista.svelte';
 
 	const { idProfesionista } = page.params;
 
@@ -37,4 +38,10 @@
 	</div>
 
 	<InputProfesionista {edit} {idProfesionista} />
+
+	<div class="divider">Experiencia Laboral</div>
+	<TimelineProfesionista {edit} {idProfesionista} type="laboral" />
+
+	<div class="divider">Proyectos</div>
+	<TimelineProfesionista {edit} {idProfesionista} type="proyectos" />
 </main>
