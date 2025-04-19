@@ -40,8 +40,8 @@
 	<InputProfesionista {edit} {idProfesionista} />
 
 	<div class="divider">Experiencia Laboral</div>
-	<TimelineProfesionista {edit} {idProfesionista} type="laboral" />
+	<TimelineProfesionista startOdd {edit} {idProfesionista} type="laboral" />
 
 	<div class="divider">Proyectos</div>
-	<TimelineProfesionista {edit} {idProfesionista} type="proyectos" />
+	<TimelineProfesionista startOdd {edit} {idProfesionista} type="proyectos" />
 </main>

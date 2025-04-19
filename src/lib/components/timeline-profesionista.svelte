@@ -11,9 +11,10 @@
 		edit?: boolean;
 		type: 'proyectos' | 'laboral';
 		idProfesionista: string;
+		startOdd?: boolean;
 	}
 
-	const { edit = false, type, idProfesionista }: Props = $props();
+	const { edit = false, type, idProfesionista, startOdd = false }: Props = $props();
 
 	const profesionista = getProfesionistaContext(idProfesionista);
 
@@ -37,8 +38,7 @@
 			tech: []
 		};
 
-		if (type === 'proyectos')
-			handleItemEdit(item, profesionista.trayectoria.proyectos.length);
+		if (type === 'proyectos') handleItemEdit(item, profesionista.trayectoria.proyectos.length);
 		else handleItemEdit(item, profesionista.trayectoria.laboral.length);
 	}
 
@@ -46,25 +46,14 @@
 		if (!currentTimelineItem) return;
 
 		if (currentTimelineIndex == -1)
-			if (type === 'proyectos')
-				profesionista.trayectoria.proyectos.push(currentTimelineItem);
+			if (type === 'proyectos') profesionista.trayectoria.proyectos.push(currentTimelineItem);
 			else profesionista.trayectoria.laboral.push(currentTimelineItem);
 		else if (!profesionista.trayectoria.proyectos[currentTimelineIndex])
-			if (type === 'proyectos')
-				profesionista.trayectoria.proyectos.push(currentTimelineItem);
+			if (type === 'proyectos') profesionista.trayectoria.proyectos.push(currentTimelineItem);
 			else profesionista.trayectoria.laboral.push(currentTimelineItem);
 		else if (type === 'proyectos')
-			profesionista.trayectoria.proyectos.splice(
-				currentTimelineIndex,
-				1,
-				currentTimelineItem
-			);
-		else
-			profesionista.trayectoria.laboral.splice(
-				currentTimelineIndex,
-				1,
-				currentTimelineItem
-			);
+			profesionista.trayectoria.proyectos.splice(currentTimelineIndex, 1, currentTimelineItem);
+		else profesionista.trayectoria.laboral.splice(currentTimelineIndex, 1, currentTimelineItem);
 	}
 
 	function handleNewTimeline() {
@@ -105,7 +94,7 @@
 {/snippet}
 
 {#snippet item(item: Curriculum, i: number)}
-	{@const isEven = i % 2 === 0}
+	{@const isEven = startOdd ? i % 2 !== 0 : i % 2 === 0}
 
 	<li class="md:min-w-[40vw]">
 		<div class="timeline-middle">
@@ -140,11 +129,7 @@
 		</div>
 
 		{#if edit}
-			<div
-				class="join absolute top-0 right-0"
-				class:md:right-0={i % 2 === 0}
-				class:md:left-0={i % 2 !== 0}
-			>
+			<div class="join absolute top-0 right-0" class:md:right-0={isEven} class:md:left-0={!isEven}>
 				<button
 					onclick={() => handleItemEdit(item, i)}
 					class="tooltip btn btn-circle"
