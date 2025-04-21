@@ -14,6 +14,10 @@
 	function toggleEdit() {
 		edit = !edit;
 	}
+
+	function toggleVerify() {
+		profesionista.verificado = !profesionista.verificado;
+	}
 </script>
 
 <main class="flex flex-col gap-5">
@@ -26,7 +30,18 @@
 			</div>
 		</div>
 
-		<div class="join">
+		<div class="join gap-2">
+			<button class="btn btn-neutral clear-both"
+			class:btn-success={profesionista.verificado}
+			onclick={toggleVerify}>
+				{#if profesionista.verificado}
+				Verificado
+				{:else}
+				Verificar
+				{/if}
+				<input type="checkbox" checked={profesionista.verificado} class="toggle toggle-success" />
+			</button>
+
 			<button class="btn btn-neutral" onclick={toggleEdit}>
 				{#if edit}
 					Guardar <FloppyDisk class="text-lg" />

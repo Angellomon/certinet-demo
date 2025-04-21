@@ -31,11 +31,6 @@
 			seccion: 'certificaciones',
 			title: 'Certificaciones',
 			url: `/admin/profesionistas/${idProfesionista}/certificaciones`
-		},
-		{
-			seccion: 'verificacion',
-			title: 'Verificación',
-			url: `/admin/profesionistas/${idProfesionista}/verificacion`
 		}
 	];
 
