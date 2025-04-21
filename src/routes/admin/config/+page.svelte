@@ -1,10 +1,9 @@
 <script lang="ts">
-	import CrossSvg from '$lib/components/cross-svg.svelte';
-	import EditSvg from '$lib/components/edit-svg.svelte';
 	import MenuSeccion from '$lib/components/menu-seccion.svelte';
 	import { getCurrentEmpleadorContext, getSeccionAdminConfigContext } from '$lib/context.svelte';
 	import { getDefaultFormaPago, getDefaultPrecioCertificacion } from '$lib/demo-data';
 	import type { SeccionAdminConfig } from '$lib/entities';
+	import { NotePencil } from 'phosphor-svelte';
 
 	const empleadorStore = getCurrentEmpleadorContext();
 	const seccionAdminConfigStore = getSeccionAdminConfigContext();
@@ -137,13 +136,13 @@
 			{:else}
 				Editar
 			{/if}
-			<EditSvg />
+			<NotePencil />
 		</button>
 	</div>
 {/snippet}
 
 {#snippet avanzado()}
-	<div class="flex flex-col md:items-center gap-2 md:gap-5 md:flex-row">
+	<div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-5">
 		<button onclick={handleResetData} class="btn btn-neutral"> Reset Datos </button>
 		<p>En caso de fallas, resetea los datos locales y recarga la página.</p>
 	</div>
@@ -162,7 +161,7 @@
 <h1 class="text-2xl">Configuración</h1>
 <main class="flex justify-start">
 	<div class="flex flex-col md:flex-row">
-		<MenuSeccion bind:current={seccionAdminConfigStore.value} data={dataMenu} />
+		<MenuSeccion vertical bind:current={seccionAdminConfigStore.value} data={dataMenu} />
 
 		<div class="grow px-0 py-5 md:px-5 md:py-0">
 			{#if seccionAdminConfigStore.value == 'datos'}
