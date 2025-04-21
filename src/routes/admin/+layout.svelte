@@ -79,6 +79,12 @@
 		seccionAdminConfigStore.value = 'datos';
 		seccionAdminProfesionistaStore.value = 'datos';
 	}
+
+	function handleConfigClick() {
+		seccionAdminStore.value = 'config';
+		handleMenuClick();
+		goto('/admin/config');
+	}
 </script>
 
 <main class="flex flex-col gap-1 p-5 lg:px-20 lg:py-5">
@@ -89,7 +95,7 @@
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<MenuSeccion
 			data={menuData}
-			current={seccionAdminStore.value}
+			bind:current={seccionAdminStore.value}
 			onMenuClick={handleMenuClick}
 			urlMode
 			size="lg"
@@ -97,7 +103,7 @@
 		<button
 			class="btn"
 			class:btn-neutral={page.url.pathname.includes('/config')}
-			onclick={() => goto('/admin/config')}
+			onclick={handleConfigClick}
 		>
 			Configuración <SettingsSvg />
 		</button>
