@@ -6,15 +6,7 @@
 	import type { Filter } from '$lib/filters.svelte';
 	import { setContext } from 'svelte';
 	import EmpleadorHeader from './empleador-header.svelte';
-	import {
-		newCalificacionesProcesoStore,
-		newCertificacionesStore,
-		newComprasStore,
-		newCurrentEmpleadorStore,
-		newCurrentProfesionistaStore,
-		newProcesosContactoStore,
-		newProfesionistasStore
-	} from '$lib/localstore.svelte';
+	import { newCurrentEmpleadorStore, newCurrentProfesionistaStore } from '$lib/localstore.svelte';
 	import SettingsSvg from '$lib/components/settings-svg.svelte';
 	import { getComprasContext, getProcesosContext } from '$lib/context.svelte';
 
