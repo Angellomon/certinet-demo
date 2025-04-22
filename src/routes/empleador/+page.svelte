@@ -18,5 +18,6 @@
 		limit={10}
 		id={currentEmpleadorStore.id}
 		currentType="empleador"
+		showCalificacionEmpleador
 	/>
 </div>
