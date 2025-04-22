@@ -48,6 +48,7 @@
 	"dependencies": {
 		"@oslojs/crypto": "^1.0.1",
 		"date-fns": "^4.1.0",
+		"flexsearch": "^0.8.158",
 		"valibot": "^1.0.0"
 	}
 }
