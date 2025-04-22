@@ -2,8 +2,6 @@
 	import { getIndexProfesionistasContext, getProfesionistasContext } from '$lib/context.svelte';
 	import type { ID, Profesionista } from '$lib/entities';
 	import { ArrowSquareOut, NotePencil, X } from 'phosphor-svelte';
-	import CrossSvg from './cross-svg.svelte';
-	import ExternalLinkSvg from './external-link-svg.svelte';
 	import SearchInput from './search-input.svelte';
 
 	interface Props {
@@ -23,6 +21,7 @@
 	}: Props = $props();
 
 	let searchIds: string[] = $state([]);
+	let noResults = $state(false);
 
 	const indexProfesionistas = getIndexProfesionistasContext();
 
@@ -30,6 +29,21 @@
 
 	let editProfesionista: Profesionista | undefined = $state();
 	let deleteID: ID | undefined = $state();
+	let searchTerm = $state('');
+
+	$effect(() => {
+		if (searchTerm.length <= 2) {
+			searchIds = [];
+			noResults = false;
+		} else {
+			handleSearch(searchTerm);
+		}
+	});
+
+	$effect(() => {
+		if (searchTerm.length > 2 && searchIds.length == 0) noResults = true;
+		else noResults = false;
+	});
 
 	function calcDateDiffYears(start: Date, end: Date = new Date()) {
 		const startYear = start.getFullYear();
@@ -145,7 +159,7 @@
 					{:else}
 						<div class="join gap-2">
 							{i + 1}
-							<ExternalLinkSvg />
+							<NotePencil class="h-5" />
 						</div>
 					{/if}
 				</th>
@@ -161,6 +175,7 @@
 				<td>{age}</td>
 				<td class="join items-center gap-2">
 					{@render badgeVerificado(profesionista.verificado)}
+
 					{#if showVerifyActions}
 						<label class="toggle text-base-content my-2 self-center">
 							<input type="checkbox" bind:checked={profesionista.verificado} />
@@ -214,8 +229,12 @@
 		<SearchInput
 			placeholder="Buscar por nombre, apellidos, correo, palabras clave..."
 			onSearch={handleSearch}
+			bind:searchTerm
 		/>
 	</div>
+	{#if noResults}
+		<p>Sin resultados...</p>
+	{/if}
 {/if}
 
 <div class="rounded-box border-base-content/5 bg-base-100 overflow-x-auto border">
@@ -315,7 +334,7 @@
 		<div class="modal-box">
 			<form method="dialog">
 				<button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">
-					<CrossSvg />
+					<X class="h-5" />
 				</button>
 			</form>
 
