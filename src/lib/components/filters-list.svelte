@@ -7,7 +7,7 @@
 		MoreThanFilter,
 		TagFilter,
 		type Filter
-	} from '$lib/search.svelte';
+	} from '$lib/filters.svelte';
 	import CrossSvg from './cross-svg.svelte';
 
 	interface Props {
