@@ -15,9 +15,9 @@
 		setSeccionAdminProfesionistaContext
 	} from '$lib/context.svelte';
 	import MenuSeccion from '$lib/components/menu-seccion.svelte';
-	import type { BreadcrumbsData, SeccionAdmin, SeccionAdminProfesionistas } from '$lib/entities';
+	import type { SeccionAdmin } from '$lib/entities';
 	import Breadcrumbs from '$lib/components/breadcrumbs.svelte';
-	import { newbreadcrumbsStore } from '$lib/store.svelte';
+	import { newBreadcrumbsState } from '$lib/breadcrumbs.svelte';
 
 	const { children } = $props();
 
@@ -30,7 +30,7 @@
 	const seccionAdminProfesionistaStore = newSeccionAdminProfesionistaStore();
 	setSeccionAdminProfesionistaContext(seccionAdminProfesionistaStore);
 
-	const breadcrumbsAdmin = newbreadcrumbsStore([
+	const breadcrumbsAdmin = newBreadcrumbsState([
 		{
 			title: 'Admin',
 			url: '/admin'
