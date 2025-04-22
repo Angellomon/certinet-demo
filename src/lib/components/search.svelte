@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { Filter } from '$lib/filters.svelte';
-	import CrossSvg from './cross-svg.svelte';
-	import FilterSvg from './filter-svg.svelte';
-	import FiltersSelect from './filters-select.svelte';
+	import { Funnel, X } from 'phosphor-svelte';
+	import FiltersSelect from './filters/filters-select-empleadores.svelte';
 	import SearchSvg from './search-svg.svelte';
 
 	let {
@@ -47,9 +46,9 @@
 			<div class="tooltip" data-tip={showFiltersList ? 'Cerrar Filtros' : 'Abrir Filtros'}>
 				<button class="btn join-item" onclick={toggleFilterList}>
 					{#if showFiltersList}
-						<CrossSvg />
+						<X class="h-5" />
 					{:else}
-						<FilterSvg />
+						<Funnel />
 					{/if}
 				</button>
 			</div>
