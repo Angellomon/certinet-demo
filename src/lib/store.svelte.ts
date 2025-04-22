@@ -20,7 +20,3 @@ export class Store<T> {
 		else return rawData;
 	}
 }
-
-export function newbreadcrumbsStore(data: BreadcrumbsData) {
-	return new Store(data, breadcrumbsDataSchema)
-}

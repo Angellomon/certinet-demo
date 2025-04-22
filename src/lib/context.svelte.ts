@@ -2,7 +2,6 @@ import { getContext, setContext } from 'svelte';
 import type { LocalObjectStore } from './localstore.svelte';
 import type {
 	Admins,
-	BreadcrumbsData,
 	CalificacionesProceso,
 	Certificaciones,
 	Compras,
@@ -17,7 +16,8 @@ import type {
 	Theme
 } from './entities';
 import { error } from '@sveltejs/kit';
-import type { Store } from './store.svelte';
+import type { ProfesionistasIndex } from './search';
+import type { BreadcrumbsState } from './breadcrumbs.svelte';
 
 export function getProcesosContext() {
 	return getContext('procesos-contacto') as LocalObjectStore<ProcesosContacto>;
@@ -143,23 +143,18 @@ export function getSeccionAdminContext() {
 	return getContext('seccion-admin-store') as LocalObjectStore<SeccionAdmin>;
 }
 
-export function setBreadCrumbsContext(data: Store<BreadcrumbsData>) {
+export function setBreadCrumbsContext(data: BreadcrumbsState) {
 	setContext('breadcrumbs-data', data);
 }
 
 export function getBreadcrumbsContext() {
-	return getContext('breadcrumbs-data') as Store<BreadcrumbsData>;
+	return getContext('breadcrumbs-data') as BreadcrumbsState;
 }
 
-export function pushBreadcrumbs(...items: BreadcrumbsData) {
-	const breadcrumbs = getBreadcrumbsContext();
-	breadcrumbs.value.push(...items);
+export function setIndexProfesionistasContext(index: ProfesionistasIndex) {
+	setContext('index-profesionistas', index);
 }
 
-export function popBreadcrumbs(...items: BreadcrumbsData) {
-	const breadcrumbs = getBreadcrumbsContext();
-
-	for (let _ of items) {
-		breadcrumbs.value.pop();
-	}
+export function getIndexProfesionistasContext() {
+	return getContext('index-profesionistas') as ProfesionistasIndex;
 }

@@ -2,10 +2,9 @@
 	import { page } from '$app/state';
 	import MenuSeccion from '$lib/components/menu-seccion.svelte';
 	import {
+		getBreadcrumbsContext,
 		getProfesionistaContext,
-		getSeccionAdminProfesionistaContext,
-		popBreadcrumbs,
-		pushBreadcrumbs
+		getSeccionAdminProfesionistaContext
 	} from '$lib/context.svelte';
 	import type { SeccionAdminProfesionista } from '$lib/entities';
 
@@ -34,6 +33,8 @@
 		}
 	];
 
+	const breadcrumbsState = getBreadcrumbsContext();
+
 	const breadcrumbs = [
 		{
 			title: 'Profesionistas',
@@ -45,12 +46,13 @@
 		}
 	];
 
+	breadcrumbsState.pushBreadcrumbs(...breadcrumbs);
+
 	$effect(() => {
-		pushBreadcrumbs(...breadcrumbs);
 		return () => {
 			seccionAdminProfesionistaStore.value = 'datos';
 
-			popBreadcrumbs(...breadcrumbs);
+			breadcrumbsState.popBreadcrumbs(...breadcrumbs);
 		};
 	});
 </script>

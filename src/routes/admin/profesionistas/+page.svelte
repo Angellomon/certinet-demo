@@ -1,6 +1,8 @@
 <script>
 	import TableProfesionistas from '$lib/components/table-profesionistas.svelte';
-	import { popBreadcrumbs, pushBreadcrumbs } from '$lib/context.svelte';
+	import { getBreadcrumbsContext } from '$lib/context.svelte';
+
+	const breadcrumbsState = getBreadcrumbsContext();
 
 	const breadcrumbs = [
 		{
@@ -9,11 +11,11 @@
 		}
 	];
 
-	$effect(() => {
-		pushBreadcrumbs(...breadcrumbs);
+	breadcrumbsState.pushBreadcrumbs(...breadcrumbs);
 
+	$effect(() => {
 		return () => {
-			popBreadcrumbs(...breadcrumbs);
+			breadcrumbsState.popBreadcrumbs(...breadcrumbs);
 		};
 	});
 </script>
@@ -21,5 +23,5 @@
 <h1 class="text-2xl">Profesionistas</h1>
 
 <main class="flex flex-col gap-5">
-	<TableProfesionistas baseURL="/admin/profesionistas" showActions showVerifyActions />
+	<TableProfesionistas showSearch baseURL="/admin/profesionistas" showActions showVerifyActions />
 </main>
