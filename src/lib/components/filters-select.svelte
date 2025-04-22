@@ -6,7 +6,7 @@
 		MoreThanFilter,
 		TagFilter,
 		type Filter,
-	} from '$lib/search.svelte';
+	} from '$lib/filters.svelte';
 
 	interface Props {
 		onSelect?: (filerType: Filter) => void;

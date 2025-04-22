@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import FiltersList from '$lib/components/filters-list.svelte';
 	import Search from '$lib/components/search.svelte';
-	import type { Filter } from '$lib/search.svelte';
+	import type { Filter } from '$lib/filters.svelte';
 	import { setContext } from 'svelte';
 	import EmpleadorHeader from './empleador-header.svelte';
 	import {

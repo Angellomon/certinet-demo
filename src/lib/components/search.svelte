@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Filter, FilterType } from '$lib/search.svelte';
+	import type { Filter } from '$lib/filters.svelte';
 	import CrossSvg from './cross-svg.svelte';
 	import FilterSvg from './filter-svg.svelte';
 	import FiltersSelect from './filters-select.svelte';
