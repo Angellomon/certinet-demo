@@ -1,18 +1,30 @@
 <script lang="ts">
-	import { getProfesionistasContext } from '$lib/context.svelte';
+	import { getIndexProfesionistasContext, getProfesionistasContext } from '$lib/context.svelte';
 	import type { ID, Profesionista } from '$lib/entities';
+	import { ArrowSquareOut, NotePencil, X } from 'phosphor-svelte';
 	import CrossSvg from './cross-svg.svelte';
-	import EditSvg from './edit-svg.svelte';
 	import ExternalLinkSvg from './external-link-svg.svelte';
+	import SearchInput from './search-input.svelte';
 
 	interface Props {
 		limit?: number;
 		showActions?: boolean;
 		showVerifyActions?: boolean;
 		baseURL?: string;
+		showSearch?: boolean;
 	}
 
-	const { limit, showActions = false, showVerifyActions, baseURL }: Props = $props();
+	const {
+		limit,
+		showActions = false,
+		showSearch = false,
+		showVerifyActions,
+		baseURL
+	}: Props = $props();
+
+	let searchIds: string[] = $state([]);
+
+	const indexProfesionistas = getIndexProfesionistasContext();
 
 	const profesionistas = getProfesionistasContext();
 
@@ -67,6 +79,14 @@
 		deleteID = idProfesionista;
 		(document.getElementById('modal_delete_profesionista') as any)?.showModal();
 	}
+
+	function handleSearch(searchTerm: string) {
+		if (!searchTerm) return;
+
+		const results = indexProfesionistas.search(searchTerm);
+
+		searchIds = results;
+	}
 </script>
 
 {#snippet badgeVerificado(verified: boolean)}
@@ -86,106 +106,123 @@
 	</div>
 {/snippet}
 
-<div class="rounded-box border-base-content/5 bg-base-100 overflow-x-auto border">
-	<table class="table-xs md:table-sm lg:table-md 2xl:table-lg table">
-		<thead>
-			<tr>
-				<th></th>
-				<th>Nombre</th>
-				<th>Apellidos</th>
-				<th>Correo</th>
-				<th>Profesión</th>
-				<th>Años de Exp.</th>
-				<th>Edad</th>
-				<th>Estatus Verificación</th>
+{#snippet header()}
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Nombre</th>
+			<th>Apellidos</th>
+			<th>Correo</th>
+			<th>Profesión</th>
+			<th>Años de Exp.</th>
+			<th>Edad</th>
+			<th>Estatus Verificación</th>
 
-				{#if showActions}
-					<th>Acciones</th>
-				{/if}
-			</tr>
-		</thead>
+			{#if showActions}
+				<th>Acciones</th>
+			{/if}
+		</tr>
+	</thead>
+{/snippet}
 
-		<tbody>
-			{#each limit ? profesionistas.value.slice(0, limit) : profesionistas.value as profesionista, i}
-				{@const firstJob =
-					profesionista.trayectoria.laboral[0] || profesionista.trayectoria.proyectos[0]}
-				{@const yoe = firstJob ? calcDateDiffYears(firstJob.fechaInicio) : 0}
-				{@const age = calcAge(profesionista.fechaNacimeinto)}
+{#snippet body()}
+	<tbody>
+		{#each searchIds.length > 0 ? profesionistas.value.filter( (p) => searchIds.includes(p.id) ) : limit ? profesionistas.value.slice(0, limit) : profesionistas.value as profesionista, i}
+			{@const firstJob =
+				profesionista.trayectoria.laboral[0] || profesionista.trayectoria.proyectos[0]}
+			{@const yoe = firstJob ? calcDateDiffYears(firstJob.fechaInicio) : 0}
+			{@const age = calcAge(profesionista.fechaNacimeinto)}
 
-				<tr class="hover:bg-base-300">
-					<th>
-						{#if baseURL}
-							<a href={`${baseURL}/${profesionista.id}`}>
-								<div class="join gap-2">
-									{i + 1}
-									<ExternalLinkSvg />
-								</div>
-							</a>
-						{:else}
+			<tr class="hover:bg-base-300">
+				<th>
+					{#if baseURL}
+						<a href={`${baseURL}/${profesionista.id}`}>
 							<div class="join gap-2">
 								{i + 1}
-								<ExternalLinkSvg />
+								<ArrowSquareOut class="h-5" />
 							</div>
-						{/if}
-					</th>
-					<td>{profesionista.nombre}</td>
-					<td>{profesionista.apellidos}</td>
-					<td>
-						<a class="link link-accent" href={`mailto:${profesionista.correo}`}>
-							{profesionista.correo}
 						</a>
-					</td>
-					<td>{profesionista.profesion}</td>
-					<td>{yoe}</td>
-					<td>{age}</td>
-					<td>
-						{@render badgeVerificado(profesionista.verificado)}
-						{#if showVerifyActions}
-							<label class="toggle text-base-content my-2 self-center">
-								<input type="checkbox" bind:checked={profesionista.verificado} />
-								<svg
-									aria-label="disabled"
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 24 24"
+					{:else}
+						<div class="join gap-2">
+							{i + 1}
+							<ExternalLinkSvg />
+						</div>
+					{/if}
+				</th>
+				<td>{profesionista.nombre}</td>
+				<td>{profesionista.apellidos}</td>
+				<td>
+					<a class="link link-accent" href={`mailto:${profesionista.correo}`}>
+						{profesionista.correo}
+					</a>
+				</td>
+				<td>{profesionista.profesion}</td>
+				<td>{yoe}</td>
+				<td>{age}</td>
+				<td class="join items-center gap-2">
+					{@render badgeVerificado(profesionista.verificado)}
+					{#if showVerifyActions}
+						<label class="toggle text-base-content my-2 self-center">
+							<input type="checkbox" bind:checked={profesionista.verificado} />
+							<svg
+								aria-label="disabled"
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="4"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<path d="M18 6 6 18" />
+								<path d="m6 6 12 12" />
+							</svg>
+							<svg aria-label="enabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<g
+									stroke-linejoin="round"
+									stroke-linecap="round"
+									stroke-width="4"
 									fill="none"
 									stroke="currentColor"
-									stroke-width="4"
-									stroke-linecap="round"
-									stroke-linejoin="round"
 								>
-									<path d="M18 6 6 18" />
-									<path d="m6 6 12 12" />
-								</svg>
-								<svg aria-label="enabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-									<g
-										stroke-linejoin="round"
-										stroke-linecap="round"
-										stroke-width="4"
-										fill="none"
-										stroke="currentColor"
-									>
-										<path d="M20 6 9 17l-5-5"></path>
-									</g>
-								</svg>
-							</label>
-						{/if}
-					</td>
-
-					{#if showActions}
-						<td>
-							<div class="join">
-								<button class="btn" onclick={() => handleEditClick(profesionista.id)}>
-									<EditSvg />
-								</button>
-								<button class="btn btn-error" onclick={() => handleDeleteClick(profesionista.id)}>
-									<CrossSvg />
-								</button>
-							</div>
-						</td>
+									<path d="M20 6 9 17l-5-5"></path>
+								</g>
+							</svg>
+						</label>
 					{/if}
-				</tr>
-			{/each}
-		</tbody>
+				</td>
+
+				{#if showActions}
+					<td>
+						<div class="join">
+							<button class="btn" onclick={() => handleEditClick(profesionista.id)}>
+								<NotePencil class="h-5" />
+							</button>
+							<button class="btn btn-error" onclick={() => handleDeleteClick(profesionista.id)}>
+								<X class="fill-base-content h-5" />
+							</button>
+						</div>
+					</td>
+				{/if}
+			</tr>
+		{/each}
+	</tbody>
+{/snippet}
+
+{#if showSearch}
+	<div class="flex justify-center">
+		<SearchInput
+			placeholder="Buscar por nombre, apellidos, correo, palabras clave..."
+			onSearch={handleSearch}
+		/>
+	</div>
+{/if}
+
+<div class="rounded-box border-base-content/5 bg-base-100 overflow-x-auto border">
+	<table class="table-xs md:table-sm lg:table-md 2xl:table-lg table">
+		{@render header()}
+
+		{@render body()}
 	</table>
 </div>
 
@@ -194,7 +231,7 @@
 		<div class="modal-box">
 			<form method="dialog">
 				<button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">
-					<CrossSvg />
+					<X />
 				</button>
 			</form>
 
