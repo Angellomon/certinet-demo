@@ -21,7 +21,7 @@
 </script>
 
 <main class="flex flex-col gap-5">
-	<div class="flex flex-row items-center justify-between">
+	<div class="flex flex-row items-center justify-between gap-5">
 		<div>
 			<h1 class="text-2xl underline">{profesionista.nombre} {profesionista.apellidos}</h1>
 
@@ -31,13 +31,15 @@
 		</div>
 
 		<div class="join gap-2">
-			<button class="btn btn-neutral clear-both"
-			class:btn-success={profesionista.verificado}
-			onclick={toggleVerify}>
+			<button
+				class="btn btn-neutral clear-both"
+				class:btn-success={profesionista.verificado}
+				onclick={toggleVerify}
+			>
 				{#if profesionista.verificado}
-				Verificado
+					Verificado
 				{:else}
-				Verificar
+					Verificar
 				{/if}
 				<input type="checkbox" checked={profesionista.verificado} class="toggle toggle-success" />
 			</button>
