@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Filter } from '$lib/filters.svelte';
 	import { Funnel, X } from 'phosphor-svelte';
-	import FiltersSelect from './filters/filters-select-empleadores.svelte';
+	import FiltersSelect from './filters/filters-empleadores.svelte';
 	import SearchSvg from './search-svg.svelte';
 
 	let {
