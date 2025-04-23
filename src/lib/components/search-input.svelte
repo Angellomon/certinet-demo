@@ -1,13 +1,26 @@
 <script lang="ts">
-	import { MagnifyingGlass } from 'phosphor-svelte';
+	import { Funnel, MagnifyingGlass, X } from 'phosphor-svelte';
+	import type { Snippet } from 'svelte';
 
 	interface Props {
 		searchTerm?: string;
 		placeholder?: string;
+		filters?: Snippet;
+		showFiltersList?: boolean;
 		onSearch: (searchTerm: string) => void;
 	}
 
-	let { searchTerm = $bindable(''), onSearch, placeholder = 'Buscar...' }: Props = $props();
+	let {
+		searchTerm = $bindable(''),
+		onSearch,
+		filters,
+		showFiltersList = $bindable(false),
+		placeholder = 'Buscar...'
+	}: Props = $props();
+
+	function toggleFilterList() {
+		showFiltersList = !showFiltersList;
+	}
 
 	function handleSearch() {
 		onSearch(searchTerm);
@@ -18,12 +31,51 @@
 	}
 </script>
 
-<div class="join w-full">
-	<label class="input w-full">
-		<MagnifyingGlass />
-		<input bind:value={searchTerm} {placeholder} type="search" required onkeydown={handleKeyDown} />
-	</label>
-	<!-- svelte-ignore a11y_click_events_have_key_events -->
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<buttton class="btn btn-neutral" onclick={handleSearch}> Buscar </buttton>
+<div class="relative w-full">
+	<div class="join w-full">
+		{#if filters}
+			<div class="indicator">
+				<!-- svelte-ignore a11y_consider_explicit_label -->
+				<div class="tooltip tooltip-right" data-tip={showFiltersList ? 'Cerrar Filtros' : 'Abrir Filtros'}>
+					<button class="btn join-item" onclick={toggleFilterList}>
+						{#if showFiltersList}
+							<X class="h-5" />
+						{:else}
+							<Funnel class="h-5" />
+						{/if}
+					</button>
+				</div>
+			</div>
+
+			<div class="indicator">
+				{#if showFiltersList}
+					<div class="join-item absolute top-10 left-0 z-10 w-full sm:m-auto">
+						{@render filters()}
+					</div>
+				{/if}
+			</div>
+		{/if}
+
+		<label class="input w-full">
+			<MagnifyingGlass />
+			<input
+				class="w-full"
+				bind:value={searchTerm}
+				{placeholder}
+				type="search"
+				required
+				onkeydown={handleKeyDown}
+			/>
+		</label>
+
+		<buttton
+			role="button"
+			tabindex="0"
+			class="btn btn-neutral"
+			onkeydown={handleKeyDown}
+			onclick={handleSearch}
+		>
+			Buscar
+		</buttton>
+	</div>
 </div>
