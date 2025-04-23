@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import SettingsSvg from '$lib/components/settings-svg.svelte';
+	import { Gear } from 'phosphor-svelte';
 	import {
 		newSeccionAdminConfigStore,
 		newSeccionAdminProfesionistaStore,
@@ -105,7 +105,7 @@
 			class:btn-neutral={page.url.pathname.includes('/config')}
 			onclick={handleConfigClick}
 		>
-			Configuración <SettingsSvg />
+			Configuración <Gear class="h-5" />
 		</button>
 	</div>
 
