@@ -6,7 +6,7 @@
 		searchTerm?: string;
 		placeholder?: string;
 		filters?: Snippet;
-		showFiltersList?: boolean;
+		showFiltersSelect?: boolean;
 		onSearch: (searchTerm: string) => void;
 	}
 
@@ -14,12 +14,12 @@
 		searchTerm = $bindable(''),
 		onSearch,
 		filters,
-		showFiltersList = $bindable(false),
+		showFiltersSelect = $bindable(false),
 		placeholder = 'Buscar...'
 	}: Props = $props();
 
 	function toggleFilterList() {
-		showFiltersList = !showFiltersList;
+		showFiltersSelect = !showFiltersSelect;
 	}
 
 	function handleSearch() {
@@ -36,9 +36,12 @@
 		{#if filters}
 			<div class="indicator">
 				<!-- svelte-ignore a11y_consider_explicit_label -->
-				<div class="tooltip tooltip-right" data-tip={showFiltersList ? 'Cerrar Filtros' : 'Abrir Filtros'}>
+				<div
+					class="tooltip tooltip-right"
+					data-tip={showFiltersSelect ? 'Cerrar Filtros' : 'Abrir Filtros'}
+				>
 					<button class="btn join-item" onclick={toggleFilterList}>
-						{#if showFiltersList}
+						{#if showFiltersSelect}
 							<X class="h-5" />
 						{:else}
 							<Funnel class="h-5" />
@@ -48,7 +51,7 @@
 			</div>
 
 			<div class="indicator">
-				{#if showFiltersList}
+				{#if showFiltersSelect}
 					<div class="join-item absolute top-10 left-0 z-10 w-full sm:m-auto">
 						{@render filters()}
 					</div>
