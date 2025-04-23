@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { getIndexProfesionistasContext, getProfesionistasContext } from '$lib/context.svelte';
 	import type { ID, Profesionista } from '$lib/entities';
-	import { ArrowSquareOut, NotePencil, X } from 'phosphor-svelte';
+	import { ArrowSquareOut, Hash, NotePencil, X } from 'phosphor-svelte';
 	import SearchInput from './search-input.svelte';
+	import FiltersAdminEmpleadores from './filters/filters-admin-profesionistas.svelte';
+	import FiltersList from './filters-list.svelte';
+	import type { Filter } from '$lib/filters.svelte';
 
 	interface Props {
 		limit?: number;
@@ -20,16 +23,18 @@
 		baseURL
 	}: Props = $props();
 
+	const indexProfesionistas = getIndexProfesionistasContext();
+	const profesionistas = getProfesionistasContext();
+
 	let searchIds: string[] = $state([]);
 	let noResults = $state(false);
-
-	const indexProfesionistas = getIndexProfesionistasContext();
-
-	const profesionistas = getProfesionistasContext();
 
 	let editProfesionista: Profesionista | undefined = $state();
 	let deleteID: ID | undefined = $state();
 	let searchTerm = $state('');
+
+	let showFiltersSelect = $state(false);
+	let filtersList: Filter[] = $state([]);
 
 	$effect(() => {
 		if (searchTerm.length <= 2) {
@@ -101,6 +106,17 @@
 
 		searchIds = results;
 	}
+
+	function hideFilters() {
+		showFiltersSelect = false;
+	}
+
+	function handleFilterSelect(filter: Filter) {
+		hideFilters();
+		filtersList.push(filter);
+	}
+
+	function handleApplyFilters() {}
 </script>
 
 {#snippet badgeVerificado(verified: boolean)}
@@ -123,7 +139,7 @@
 {#snippet header()}
 	<thead>
 		<tr>
-			<th>#</th>
+			<th><Hash class="size-5" /></th>
 			<th>Nombre</th>
 			<th>Apellidos</th>
 			<th>Correo</th>
@@ -153,7 +169,7 @@
 						<a href={`${baseURL}/${profesionista.id}`}>
 							<div class="join gap-2">
 								{i + 1}
-								<ArrowSquareOut class="h-5" />
+								<ArrowSquareOut class="size-5" />
 							</div>
 						</a>
 					{:else}
@@ -213,6 +229,7 @@
 							<button class="btn" onclick={() => handleEditClick(profesionista.id)}>
 								<NotePencil class="h-5" />
 							</button>
+
 							<button class="btn btn-error" onclick={() => handleDeleteClick(profesionista.id)}>
 								<X class="fill-base-content h-5" />
 							</button>
@@ -230,8 +247,16 @@
 			placeholder="Buscar por nombre, apellidos, correo, palabras clave..."
 			onSearch={handleSearch}
 			bind:searchTerm
-		/>
+			bind:showFiltersSelect
+		>
+			{#snippet filters()}
+				<FiltersAdminEmpleadores onClose={hideFilters} onSelect={handleFilterSelect} />
+			{/snippet}
+		</SearchInput>
 	</div>
+
+	<FiltersList onApply={handleApplyFilters} bind:filters={filtersList} />
+
 	{#if noResults}
 		<p>Sin resultados...</p>
 	{/if}
