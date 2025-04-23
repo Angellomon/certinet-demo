@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {
+		BooleanFilter,
 		EqualFilter,
 		LessThanFilter,
 		LocationFilter,
@@ -7,13 +8,14 @@
 		TagFilter,
 		type Filter
 	} from '$lib/filters.svelte';
-	import CrossSvg from './cross-svg.svelte';
+	import { ListMagnifyingGlass, X } from 'phosphor-svelte';
 
 	interface Props {
 		filters: Filter[];
+		onApply?(): void;
 	}
 
-	const { filters = $bindable([]) }: Props = $props();
+	const { filters = $bindable([]), onApply }: Props = $props();
 
 	const filterTags: Record<string, string[]> = $state({});
 
@@ -48,9 +50,23 @@
 	}
 </script>
 
+{#snippet optionButtons(filter: Filter)}
+	<div class="join">
+		{#if onApply}
+			<button class="btn tooltip" data-tip="Aplicar" onclick={onApply}>
+				<ListMagnifyingGlass class="size-5" />
+			</button>
+		{/if}
+		<button class="btn tooltip" data-tip="Quitar Filtro" onclick={() => removeFilter(filter.id)}>
+			<X class="size-4" />
+		</button>
+	</div>
+{/snippet}
+
 {#snippet locationFilter(filter: LocationFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
 		<p class="text-xs">{`${filter.name}`}</p>
+
 		<div class="join">
 			<input class="input" type="text" bind:value={filter.value} list="locations" />
 
@@ -61,11 +77,7 @@
 				<option value="Spain">Spain</option>
 			</datalist>
 
-			<div class="tooltip" data-tip="Quitar Filtro">
-				<button class="btn" onclick={() => removeFilter(filter.id)}>
-					<CrossSvg />
-				</button>
-			</div>
+			{@render optionButtons(filter)}
 		</div>
 	</div>
 {/snippet}
@@ -73,6 +85,7 @@
 {#snippet tagFilter(filter: TagFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
 		<p class="text-xs">{`${filter.name}`}</p>
+
 		<div class="join">
 			<input
 				class="input"
@@ -93,12 +106,9 @@
 				<option value="Cisco"></option>
 			</datalist>
 
-			<div class="tooltip" data-tip="Quitar Filtro">
-				<button class="btn" onclick={() => removeFilter(filter.id)}>
-					<CrossSvg />
-				</button>
-			</div>
+			{@render optionButtons(filter)}
 		</div>
+
 		{#if filterTags[filter.id]}
 			<div class="flex flex-row flex-wrap">
 				{#each filterTags[filter.id] as tag}
@@ -117,6 +127,7 @@
 {#snippet lessThanFilter(filter: LessThanFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
 		<p class="text-xs">{`${filter.name}`}</p>
+
 		<div class="join">
 			<div class="badge badge-soft badge-accent mr-2 place-self-center">
 				{'<='}
@@ -124,11 +135,7 @@
 
 			<input class="input w-[5rem]" type="number" min={1} bind:value={filter.value} />
 
-			<div class="tooltip" data-tip="Quitar Filtro">
-				<button class="btn" onclick={() => removeFilter(filter.id)}>
-					<CrossSvg />
-				</button>
-			</div>
+			{@render optionButtons(filter)}
 		</div>
 	</div>
 {/snippet}
@@ -136,6 +143,7 @@
 {#snippet moreThanFilter(filter: MoreThanFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
 		<p class="text-xs">{`${filter.name}`}</p>
+
 		<div class="join">
 			<div class="badge badge-soft badge-accent mr-2 place-self-center">
 				{'>='}
@@ -143,11 +151,7 @@
 
 			<input class="input w-[5rem]" type="number" min={1} bind:value={filter.value} />
 
-			<div class="tooltip" data-tip="Quitar Filtro">
-				<button class="btn" onclick={() => removeFilter(filter.id)}>
-					<CrossSvg />
-				</button>
-			</div>
+			{@render optionButtons(filter)}
 		</div>
 	</div>
 {/snippet}
@@ -155,18 +159,29 @@
 {#snippet equalFilter(filter: EqualFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
 		<p class="text-xs">{`${filter.name}`}</p>
+
 		<div class="join">
 			<div class="badge badge-soft badge-accent mr-2 place-self-center">
 				{'=='}
 			</div>
 
-			<input class="input w-[5rem]" type="number" min={1} bind:value={filter.value} />
+			{@render optionButtons(filter)}
+		</div>
+	</div>
+{/snippet}
 
-			<div class="tooltip" data-tip="Quitar Filtro">
-				<button class="btn" onclick={() => removeFilter(filter.id)}>
-					<CrossSvg />
-				</button>
-			</div>
+{#snippet booleanFilter(filter: BooleanFilter)}
+	<div class="rounded-box flex flex-col gap-2 border p-2">
+		<p class="text-xs">{`${filter.name}`}</p>
+
+		<div class="join gap-2">
+			<select class="select" bind:value={filter.value}>
+				<option disabled selected>Selecciona una opción</option>
+				<option value={true}>Verdadero</option>
+				<option value={false}>Falso</option>
+			</select>
+
+			{@render optionButtons(filter)}
 		</div>
 	</div>
 {/snippet}
@@ -184,7 +199,8 @@
 			{@render moreThanFilter(filter)}
 		{:else if filter instanceof EqualFilter}
 			{@render equalFilter(filter)}
+		{:else if filter instanceof BooleanFilter}
+			{@render booleanFilter(filter)}
 		{/if}
-		<!-- </div> -->
 	{/each}
 </div>
