@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
 		EqualFilter,
-		FilterNameMap,
 		LessThanFilter,
 		LocationFilter,
 		MoreThanFilter,
@@ -51,7 +50,7 @@
 
 {#snippet locationFilter(filter: LocationFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
-		<p class="text-xs">{`${FilterNameMap[filter.type]}`}</p>
+		<p class="text-xs">{`${filter.name}`}</p>
 		<div class="join">
 			<input class="input" type="text" bind:value={filter.value} list="locations" />
 
@@ -73,7 +72,7 @@
 
 {#snippet tagFilter(filter: TagFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
-		<p class="text-xs">{`${FilterNameMap[filter.type]}`}</p>
+		<p class="text-xs">{`${filter.name}`}</p>
 		<div class="join">
 			<input
 				class="input"
@@ -84,7 +83,7 @@
 						e.currentTarget.value = '';
 					}
 				}}
-        list="tech"
+				list="tech"
 			/>
 
 			<datalist id="tech">
@@ -117,7 +116,7 @@
 
 {#snippet lessThanFilter(filter: LessThanFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
-		<p class="text-xs">{`${FilterNameMap[filter.type]}`}</p>
+		<p class="text-xs">{`${filter.name}`}</p>
 		<div class="join">
 			<div class="badge badge-soft badge-accent mr-2 place-self-center">
 				{'<='}
@@ -136,7 +135,7 @@
 
 {#snippet moreThanFilter(filter: MoreThanFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
-		<p class="text-xs">{`${FilterNameMap[filter.type]}`}</p>
+		<p class="text-xs">{`${filter.name}`}</p>
 		<div class="join">
 			<div class="badge badge-soft badge-accent mr-2 place-self-center">
 				{'>='}
@@ -155,7 +154,7 @@
 
 {#snippet equalFilter(filter: EqualFilter)}
 	<div class="rounded-box flex flex-col gap-2 border p-2">
-		<p class="text-xs">{`${FilterNameMap[filter.type]}`}</p>
+		<p class="text-xs">{`${filter.name}`}</p>
 		<div class="join">
 			<div class="badge badge-soft badge-accent mr-2 place-self-center">
 				{'=='}
@@ -174,7 +173,7 @@
 
 <div class="flex flex-row flex-wrap gap-2">
 	{#each filters as filter (filter.id)}
-		<!-- <div class="tooltip tooltip-bottom" data-tip={FilterNameMap[filter.type]}> -->
+		<!-- <div class="tooltip tooltip-bottom" data-tip={filter.name}> -->
 		{#if filter instanceof LocationFilter}
 			{@render locationFilter(filter)}
 		{:else if filter instanceof TagFilter}

@@ -5,7 +5,7 @@
 		LocationFilter,
 		MoreThanFilter,
 		TagFilter,
-		type Filter,
+		type Filter
 	} from '$lib/filters.svelte';
 
 	interface Props {
@@ -15,39 +15,39 @@
 	const { onSelect = () => {} }: Props = $props();
 
 	function createNumberOfProjectsEqual(value = 0) {
-		onSelect(new EqualFilter('numberofprojects', value));
+		onSelect(new EqualFilter('numberofprojects', '# de Proyectos', value));
 	}
 
 	function createNumberOfProjectsLessThan(value = 0) {
-		onSelect(new LessThanFilter('numberofprojects', value));
+		onSelect(new LessThanFilter('numberofprojects', '# de Proyectos', value));
 	}
 
 	function createNumberOfProjectsMoreThan(value = 0) {
-		onSelect(new MoreThanFilter('numberofprojects', value));
+		onSelect(new MoreThanFilter('numberofprojects', '# de Proyectos', value));
 	}
 
 	function createYearsOfExperienceEqual(value = 0) {
-		onSelect(new EqualFilter('yearsofexperience', value));
+		onSelect(new EqualFilter('yearsofexperience', 'Años de Experiencia', value));
 	}
 
 	function createYearsOfExperienceLessThan(value = 0) {
-		onSelect(new LessThanFilter('yearsofexperience', value));
+		onSelect(new LessThanFilter('yearsofexperience', 'Años de Experiencia', value));
 	}
 
 	function createYearsOfExperienceMoreThan(value = 0) {
-		onSelect(new MoreThanFilter('yearsofexperience', value));
+		onSelect(new MoreThanFilter('yearsofexperience', 'Años de Experiencia', value));
 	}
 
 	function createLocation(value = '') {
-		onSelect(new LocationFilter(''));
+		onSelect(new LocationFilter('Ubicación', value));
 	}
 
 	function createTag() {
-		onSelect(new TagFilter([]));
+		onSelect(new TagFilter('Tecnologías', []));
 	}
 </script>
 
-<ul class="list bg-base-200 rounded-box shadow-md border border-base-content ">
+<ul class="list bg-base-200 rounded-box border-base-content border shadow-md">
 	<li class="p-4 pb-2 text-xs tracking-wide">Filtros</li>
 
 	<li class="list-row items-center gap-5">

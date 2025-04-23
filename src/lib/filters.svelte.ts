@@ -4,36 +4,42 @@ type LocationFilterType = 'location';
 type YearsOfExperienceFilterType = 'yearsofexperience';
 type NumberOfProjectsFilterType = 'numberofprojects';
 type TagFilterType = 'tag';
+type StatusBooleanFilterType = 'statusboolean';
 
 export type FilterType =
 	| LocationFilterType
 	| YearsOfExperienceFilterType
 	| NumberOfProjectsFilterType
-	| TagFilterType;
+	| TagFilterType
+	| StatusBooleanFilterType;
 
-export const FilterNameMap: Record<FilterType, string> = {
-	location: 'Ubicación',
-	numberofprojects: '# de Proyectos',
-	tag: 'Etiqueta',
-	yearsofexperience: 'Años de Experiencia'
-};
-export interface Filter {
+export abstract class Filter {
 	id: string;
 	type: FilterType;
-	value: number | string | [number, number] | string[];
-	isValid: () => boolean;
+	name: string;
+	value: number | string | [number, number] | string[] | boolean;
+
+	abstract isValid(): boolean;
+
+	constructor(type: FilterType, name: string, value: any) {
+		this.id = generateId();
+		this.type = type;
+		this.name = name;
+		this.value = value;
+	}
 }
 
-export class LessThanFilter implements Filter {
-	id: string;
-	type: YearsOfExperienceFilterType | NumberOfProjectsFilterType;
+export class LessThanFilter extends Filter {
 	value: number = $state(0);
-	// value: number = $state(0)
 
-	constructor(type: YearsOfExperienceFilterType | NumberOfProjectsFilterType, value: number) {
-		this.type = type;
+	constructor(
+		type: YearsOfExperienceFilterType | NumberOfProjectsFilterType,
+		name: string,
+		value: number
+	) {
+		super(type, name, value);
+
 		this.value = value;
-		this.id = generateId();
 	}
 
 	isValid() {
@@ -47,15 +53,17 @@ export class LessThanFilter implements Filter {
 	}
 }
 
-export class MoreThanFilter implements Filter {
-	id: string;
-	type: YearsOfExperienceFilterType | NumberOfProjectsFilterType;
+export class MoreThanFilter extends Filter {
 	value: number = $state(0);
 
-	constructor(type: YearsOfExperienceFilterType | NumberOfProjectsFilterType, value: number) {
-		this.type = type;
+	constructor(
+		type: YearsOfExperienceFilterType | NumberOfProjectsFilterType,
+		name: string,
+		value: number
+	) {
+		super(type, name, value);
+
 		this.value = value;
-		this.id = generateId();
 	}
 
 	isValid() {
@@ -69,15 +77,16 @@ export class MoreThanFilter implements Filter {
 	}
 }
 
-export class EqualFilter implements Filter {
-	id: string;
-	type: YearsOfExperienceFilterType | NumberOfProjectsFilterType;
+export class EqualFilter extends Filter {
 	value: number = $state(0);
 
-	constructor(type: YearsOfExperienceFilterType | NumberOfProjectsFilterType, value: number) {
-		this.type = type;
+	constructor(
+		type: YearsOfExperienceFilterType | NumberOfProjectsFilterType,
+		name: string,
+		value: number
+	) {
+		super(type, name, value);
 		this.value = value;
-		this.id = generateId();
 	}
 
 	isValid() {
@@ -91,18 +100,17 @@ export class EqualFilter implements Filter {
 	}
 }
 
-export class RangeFilter implements Filter {
-	id: string;
-	type: YearsOfExperienceFilterType | NumberOfProjectsFilterType;
+export class RangeFilter extends Filter {
 	value: [number, number] = $state([0, 0]);
 
 	constructor(
 		type: YearsOfExperienceFilterType | NumberOfProjectsFilterType,
+		name: string,
 		value: [number, number]
 	) {
-		this.type = type;
+		super(type, name, value);
+
 		this.value = value;
-		this.id = generateId();
 	}
 
 	isValid() {
@@ -121,15 +129,14 @@ export class RangeFilter implements Filter {
 	}
 }
 
-export class LocationFilter implements Filter {
-	id: string;
+export class LocationFilter extends Filter {
 	type: LocationFilterType;
 	value: string = $state('');
 
-	constructor(value: string) {
+	constructor(name: string, value: string) {
+		super('location', value, name);
 		this.type = 'location';
 		this.value = value;
-		this.id = generateId();
 	}
 
 	isValid() {
@@ -139,24 +146,36 @@ export class LocationFilter implements Filter {
 	}
 }
 
-export class TagFilter implements Filter {
-	id: string;
-	type: TagFilterType;
+export class TagFilter extends Filter {
 	value: string[];
 
-	constructor(value: string | string[]) {
+	constructor(name: string, value: string | string[]) {
 		let val;
 		if (typeof value === 'string') val = [value];
 		else val = value;
 
-		this.type = 'tag';
+		super('tag', name, val);
+
 		this.value = val;
-		this.id = generateId();
 	}
 
 	isValid() {
 		if (this.value.length === 0) return false;
 
 		return true;
+	}
+}
+
+export class BooleanFilter extends Filter {
+	value: boolean = $state() as boolean;
+
+	constructor(name: string, value: boolean) {
+		super('statusboolean', name, value);
+
+		this.id = generateId();
+	}
+
+	isValid() {
+		return typeof this.value === 'boolean';
 	}
 }
