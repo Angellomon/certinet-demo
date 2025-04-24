@@ -5,7 +5,7 @@
 		LocationFilter,
 		MoreThanFilter,
 		TagFilter,
-		type Filter,
+		type Filter
 	} from '$lib/filters.svelte';
 
 	interface Props {
@@ -15,35 +15,35 @@
 	const { onSelect = () => {} }: Props = $props();
 
 	function createNumberOfProjectsEqual(value = 0) {
-		onSelect(new EqualFilter('numberofprojects', value));
+		onSelect(new EqualFilter('numberofprojects', '# de Proyectos', value));
 	}
 
 	function createNumberOfProjectsLessThan(value = 0) {
-		onSelect(new LessThanFilter('numberofprojects', value));
+		onSelect(new LessThanFilter('numberofprojects', '# de Proyectos', value));
 	}
 
 	function createNumberOfProjectsMoreThan(value = 0) {
-		onSelect(new MoreThanFilter('numberofprojects', value));
+		onSelect(new MoreThanFilter('numberofprojects', '# de Proyectos', value));
 	}
 
 	function createYearsOfExperienceEqual(value = 0) {
-		onSelect(new EqualFilter('yearsofexperience', value));
+		onSelect(new EqualFilter('yearsofexperience', 'Años de Experiencia', value));
 	}
 
 	function createYearsOfExperienceLessThan(value = 0) {
-		onSelect(new LessThanFilter('yearsofexperience', value));
+		onSelect(new LessThanFilter('yearsofexperience', 'Años de Experiencia', value));
 	}
 
 	function createYearsOfExperienceMoreThan(value = 0) {
-		onSelect(new MoreThanFilter('yearsofexperience', value));
+		onSelect(new MoreThanFilter('yearsofexperience', 'Años de Experiencia', value));
 	}
 
 	function createLocation(value = '') {
-		onSelect(new LocationFilter(''));
+		onSelect(new LocationFilter('Ubicación', ''));
 	}
 
 	function createTag() {
-		onSelect(new TagFilter([]));
+		onSelect(new TagFilter('Tecnologías', []));
 	}
 </script>
 
@@ -90,13 +90,3 @@
 		<button class="btn" onclick={() => createTag()}>Etiqueta</button>
 	</li>
 </ul>
-
-<!-- 
-<select class="select">
-  <option class="text-xs" disabled selected>Filtros</option>
-	{#each filterTypes as filterType}
-		<option value={filterType.type} onclick={() => handleSelect(filterType.type)}
-			>{filterType.name}</option
-		>
-	{/each}
-</select> -->
