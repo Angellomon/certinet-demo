@@ -232,7 +232,7 @@
 				<th>
 					{#if baseURL}
 						<a href={`${baseURL}/${profesionista.id}`}>
-							<div class="join gap-2">
+							<div class="join gap-2 items-center">
 								{i + 1}
 								<ArrowSquareOut class="size-5" />
 							</div>
