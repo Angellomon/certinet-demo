@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { getCurrentProfesionistaContext, getProfesionistaContext } from '$lib/context.svelte';
+	import { getProfesionistaContext } from '$lib/context.svelte';
 	import type { Curriculum } from '$lib/entities';
-	import { error } from '@sveltejs/kit';
 	import CheckSvg from './check-svg.svelte';
-	import CrossSvg from './cross-svg.svelte';
-	import EditSvg from './edit-svg.svelte';
 	import PlusSvg from './plus-svg.svelte';
+	import { NotePencil, X } from 'phosphor-svelte';
 
 	interface Props {
 		edit?: boolean;
@@ -135,14 +133,14 @@
 					class="tooltip btn btn-circle"
 					data-tip="Editar"
 				>
-					<EditSvg />
+					<NotePencil class="size-5" />
 				</button>
 				<button
 					class="btn btn-danger btn-circle tooltip"
 					data-tip="Eliminar"
 					onclick={() => handleDeleteCurriculum(i)}
 				>
-					<CrossSvg />
+					<X class="size-5" />
 				</button>
 			</div>
 		{/if}
@@ -183,7 +181,7 @@
 		<div class="modal-box">
 			<form method="dialog">
 				<button class="btn btn-sm btn-circle btn-ghost absolute top-2 right-2">
-					<CrossSvg />
+					<X class="size-5" />
 				</button>
 			</form>
 

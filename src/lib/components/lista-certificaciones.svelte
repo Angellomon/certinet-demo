@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { Certificacion, Certificaciones } from '$lib/entities';
-	import CrossSvg from './cross-svg.svelte';
+	import { X } from 'phosphor-svelte';
 	import VerifiedStatus from './verified-status.svelte';
 
 	interface Props {
@@ -14,8 +14,6 @@
 	let { basePath, hideDeleteBtn = false, certificaciones, onCertDelete }: Props = $props();
 
 	function handleCertRemove(idCert: string) {
-		console.log('click');
-
 		onCertDelete && onCertDelete(idCert);
 	}
 
@@ -34,7 +32,7 @@
 {#snippet btnRemoveCert(idCert: string)}
 	<!-- svelte-ignore a11y_consider_explicit_label -->
 	<button class="btn btn-error btn-square" onclick={() => handleCertRemove(idCert)}>
-		<CrossSvg white />
+		<X class="size-5" />
 	</button>
 {/snippet}
 

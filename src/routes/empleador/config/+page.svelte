@@ -1,12 +1,11 @@
 <script lang="ts">
-	import CrossSvg from '$lib/components/cross-svg.svelte';
-	import EditSvg from '$lib/components/edit-svg.svelte';
 	import { getCurrentEmpleadorContext } from '$lib/context.svelte';
 	import { getDefaultFormaPago, getDefaultPrecioCertificacion } from '$lib/demo-data';
 	import { newLocalStore } from '$lib/localstore.svelte';
+	import { NotePencil, X } from 'phosphor-svelte';
 	import * as v from 'valibot';
 
-	const empleadorStore = getCurrentEmpleadorContext()
+	const empleadorStore = getCurrentEmpleadorContext();
 
 	const seccionSchema = v.union([
 		v.literal('datos'),
@@ -171,7 +170,8 @@
 			{:else}
 				Editar
 			{/if}
-			<EditSvg />
+
+			<NotePencil class="size-5" />
 		</button>
 	</div>
 {/snippet}
@@ -208,10 +208,11 @@
 					{:else}
 						Editar
 					{/if}
-					<EditSvg />
+
+					<NotePencil class="size-5" />
 				</button>
 				<button class="btn" onclick={handleEliminarFormaPago}>
-					<CrossSvg />
+					<X class="size-5" />
 				</button>
 			</div>
 		{:else}

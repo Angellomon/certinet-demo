@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { Certificacion, Certificaciones } from '$lib/entities';
+	import type { Certificacion } from '$lib/entities';
 	import { SvelteSet } from 'svelte/reactivity';
 	import VerifiedStatus from './verified-status.svelte';
-	import CrossSvg from './cross-svg.svelte';
 	import { getCertificacionesContext } from '$lib/context.svelte';
+	import { X } from 'phosphor-svelte';
 
 	let { selectedIds = $bindable(new SvelteSet()) }: { selectedIds: Set<string> } = $props();
 
-	const certificaciones = getCertificacionesContext()
+	const certificaciones = getCertificacionesContext();
 
 	function handleSelect(idCert: string) {
 		if (selectedIds.has(idCert)) {
@@ -56,7 +56,7 @@
 			{@render certElement(cert)}
 			{#if selectedIds.has(cert.id)}
 				<button class="btn btn-error absolute right-5">
-					<CrossSvg />
+					<X class="text-base-content size-5" />
 				</button>
 			{/if}
 		</li>

@@ -46,9 +46,9 @@
 			<div class="tooltip" data-tip={showFiltersList ? 'Cerrar Filtros' : 'Abrir Filtros'}>
 				<button class="btn join-item" onclick={toggleFilterList}>
 					{#if showFiltersList}
-						<X class="h-5" />
+						<X class="size-5" />
 					{:else}
-						<Funnel />
+						<Funnel class="size-5" />
 					{/if}
 				</button>
 			</div>

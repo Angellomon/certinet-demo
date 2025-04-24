@@ -1,8 +1,8 @@
 <script lang="ts">
-	import EditSvg from '$lib/components/edit-svg.svelte';
 	import TimelineProfesionista from '$lib/components/timeline-profesionista.svelte';
 	import { getCurrentProfesionistaContext, getProfesionistasContext } from '$lib/context.svelte';
 	import { newLocalStore } from '$lib/localstore.svelte';
+	import { NotePencil } from 'phosphor-svelte';
 	import * as v from 'valibot';
 
 	const currentProfesionistaStore = getCurrentProfesionistaContext();
@@ -163,7 +163,7 @@
 			{:else}
 				Editar
 			{/if}
-			<EditSvg />
+			<NotePencil class="size-5" />
 		</button>
 	</div>
 {/snippet}

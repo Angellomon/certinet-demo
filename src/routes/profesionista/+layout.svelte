@@ -7,8 +7,8 @@
 	import { setContext } from 'svelte';
 	import ProfesionistaHeader from './profesionista-header.svelte';
 	import { goto } from '$app/navigation';
-	import SettingsSvg from '$lib/components/settings-svg.svelte';
 	import { getCertificacionesContext, getProcesosContext } from '$lib/context.svelte';
+	import { Gear } from 'phosphor-svelte';
 
 	const { children } = $props();
 
@@ -79,8 +79,8 @@
 			class:btn-neutral={page.url.pathname.includes('/config')}
 			onclick={handleConfigClick}
 		>
-			<SettingsSvg />
-			Configuración
+		Configuración
+			<Gear class="size-5" />
 		</button>
 	</div>
 
