@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as v from 'valibot';
-	import CreditCardSvg from './credit-card-svg.svelte';
-	import UserSvg from './user-svg.svelte';
+	import { User, CreditCard } from 'phosphor-svelte';
 	import { formaPagoSchema, type FormaPago } from '$lib/entities';
 
 	interface Props {
@@ -10,10 +9,10 @@
 
 	const { onSubmit }: Props = $props();
 
-	const formSchema = formaPagoSchema
+	const formSchema = formaPagoSchema;
 	type FormData = v.InferOutput<typeof formSchema>;
 
-	let errors = $state (false)
+	let errors = $state(false);
 
 	const formDataState: FormData = $state({
 		cvc: '',
@@ -26,26 +25,22 @@
 
 	function handleSubmit() {
 		try {
-
 			let data = v.parse(formSchema, formDataState);
-			data = v.parse(formaPagoSchema, data)
-			onSubmit(data)
-		} catch(e) {
-
+			data = v.parse(formaPagoSchema, data);
+			onSubmit(data);
+		} catch (e) {
 			console.log(e);
-			
 
-			errors = true
+			errors = true;
 		}
 	}
 
-	$inspect(errors)
+	$inspect(errors);
 </script>
-
 
 <div class="flex flex-col pl-5">
 	<label class="input validator w-full grow self-end">
-		<UserSvg />
+		<User class="size-5" />
 		<input
 			type="input"
 			required
@@ -57,7 +52,7 @@
 	</label>
 
 	<label class="input validator w-full grow self-end">
-		<CreditCardSvg />
+		<CreditCard class="size-5" />
 
 		<input
 			type="input"

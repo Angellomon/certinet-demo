@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { Filter } from '$lib/filters.svelte';
-	import { Funnel, X } from 'phosphor-svelte';
+	import { Funnel, X, MagnifyingGlass } from 'phosphor-svelte';
 	import FiltersSelect from './filters/filters-empleadores.svelte';
-	import SearchSvg from './search-svg.svelte';
 
 	let {
 		searchTerm = $bindable(''),
@@ -30,7 +29,7 @@
 <div class="relative">
 	<div class="join">
 		<label class="input">
-			<SearchSvg />
+			<MagnifyingGlass class="size-5" />
 			<input
 				type="search"
 				class="grow"

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CheckSvg from '$lib/components/check-svg.svelte';
+	import { CheckCircle } from 'phosphor-svelte';
 
 	type Opinion = {
 		opinion: string;
@@ -241,7 +241,10 @@
 
 		<ul class="flex flex-col gap-1">
 			{#each plan.caracteristicas as caracteristica}
-				<li class="flex flex-row items-center gap-2"><CheckSvg /> {caracteristica}</li>
+				<li class="flex flex-row items-center gap-2">
+					<CheckCircle weight="fill" class="size-5" />
+					{caracteristica}
+				</li>
 			{/each}
 		</ul>
 	</div>
@@ -261,7 +264,10 @@
 
 		<ul class="flex flex-col gap-1">
 			{#each plan.caracteristicas as caracteristica}
-				<li class="flex flex-row items-center gap-2"><CheckSvg /> {caracteristica}</li>
+				<li class="flex flex-row items-center gap-2">
+					<CheckCircle weight="fill" class="size-5" />
+					{caracteristica}
+				</li>
 			{/each}
 		</ul>
 
@@ -465,7 +471,7 @@
 					tus tiempos de selección y aumentando tus posibilidades de contratar a los mejores
 					expertos.
 				</p>
-				
+
 				<a class="btn btn-primary mt-5 w-40" href="/signup">Inicia tu proceso</a>
 			</div>
 

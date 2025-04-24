@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { getProfesionistaContext } from '$lib/context.svelte';
 	import type { Curriculum } from '$lib/entities';
-	import CheckSvg from './check-svg.svelte';
-	import PlusSvg from './plus-svg.svelte';
-	import { NotePencil, X } from 'phosphor-svelte';
+	import { NotePencil, X, CheckCircle, Plus } from 'phosphor-svelte';
 
 	interface Props {
 		edit?: boolean;
@@ -96,7 +94,7 @@
 
 	<li class="md:min-w-[40vw]">
 		<div class="timeline-middle">
-			<CheckSvg />
+			<CheckCircle weight="fill" class=" fill-base-content size-5" />
 		</div>
 
 		<div
@@ -261,7 +259,7 @@
 								currentTech = '';
 							}}
 						>
-							<PlusSvg />
+							<Plus weight="bold" class="size-5" />
 						</button>
 					</div>
 
