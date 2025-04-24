@@ -13,9 +13,10 @@
 	interface Props {
 		filters: Filter[];
 		onApply?(): void;
+		onRemove?(): void;
 	}
 
-	const { filters = $bindable([]), onApply }: Props = $props();
+	const { filters = $bindable([]), onApply, onRemove }: Props = $props();
 
 	const filterTags: Record<string, string[]> = $state({});
 
@@ -47,6 +48,8 @@
 		filterTags[filterId].splice(i, 1);
 
 		filter.value.splice(i, 1);
+
+		onRemove && onRemove();
 	}
 </script>
 
