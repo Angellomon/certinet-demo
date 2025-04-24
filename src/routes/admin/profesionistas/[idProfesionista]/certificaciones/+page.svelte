@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import TableCertificaciones from '$lib/components/table-certificaciones.svelte';
+	import TableCertificaciones from '$lib/components/tables/table-certificaciones.svelte';
 
 	const { idProfesionista } = page.params;
 </script>

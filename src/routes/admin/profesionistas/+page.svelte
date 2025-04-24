@@ -1,5 +1,5 @@
 <script>
-	import TableProfesionistas from '$lib/components/table-profesionistas.svelte';
+	import TableProfesionistas from '$lib/components/tables/table-profesionistas.svelte';
 	
 </script>
 
