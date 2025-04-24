@@ -36,10 +36,10 @@
 	const breadcrumbsState = getBreadcrumbsContext();
 
 	const breadcrumbs = [
-		{
-			title: 'Profesionistas',
-			url: '/admin/profesionistas'
-		},
+		// {
+		// 	title: 'Profesionistas',
+		// 	url: '/admin/profesionistas'
+		// },
 		{
 			title: `${profesionista.nombre} ${profesionista.apellidos}`,
 			url: `/admin/profesionistas/${idProfesionista}`
