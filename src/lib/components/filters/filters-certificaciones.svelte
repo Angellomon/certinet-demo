@@ -47,7 +47,7 @@
 	}
 </script>
 
-<ul class="list bg-base-200 rounded-box shadow-md">
+<ul class="list bg-base-200 rounded-box border-base-content border shadow-md">
 	<li class="p-4 pb-2 text-xs tracking-wide opacity-60">Filtros</li>
 
 	<li class="list-row items-center gap-5">

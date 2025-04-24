@@ -91,12 +91,3 @@
 	</li>
 </ul>
 
-<!-- 
-<select class="select">
-  <option class="text-xs" disabled selected>Filtros</option>
-	{#each filterTypes as filterType}
-		<option value={filterType.type} onclick={() => handleSelect(filterType.type)}
-			>{filterType.name}</option
-		>
-	{/each}
-</select> -->
