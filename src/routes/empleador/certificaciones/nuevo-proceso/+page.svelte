@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import FormPayment from '$lib/components/form-payment.svelte';
+	import FormPayment from '$lib/components/inputs/inputs-payment.svelte';
 	import ListaCertificaciones from '$lib/components/lista-certificaciones.svelte';
 	import {
 		getCertificacionesContext,

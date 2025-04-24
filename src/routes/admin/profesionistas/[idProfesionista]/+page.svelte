@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { FloppyDisk, NotePencil } from 'phosphor-svelte';
-	import InputProfesionista from '$lib/components/input-profesionista.svelte';
+	import InputProfesionista from '$lib/components/inputs/inputs-profesionista.svelte';
 	import { getProfesionistaContext } from '$lib/context.svelte';
 	import TimelineProfesionista from '$lib/components/timeline-profesionista.svelte';
 
