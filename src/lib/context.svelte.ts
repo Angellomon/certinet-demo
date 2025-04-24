@@ -16,7 +16,7 @@ import type {
 	Theme
 } from './entities';
 import { error } from '@sveltejs/kit';
-import type { ProfesionistasIndex } from './search';
+import type { IndexProfesionistas } from './search';
 import type { BreadcrumbsState } from './breadcrumbs.svelte';
 
 export function getProcesosContext() {
@@ -151,10 +151,10 @@ export function getBreadcrumbsContext() {
 	return getContext('breadcrumbs-data') as BreadcrumbsState;
 }
 
-export function setIndexProfesionistasContext(index: ProfesionistasIndex) {
+export function setIndexProfesionistasContext(index: IndexProfesionistas) {
 	setContext('index-profesionistas', index);
 }
 
 export function getIndexProfesionistasContext() {
-	return getContext('index-profesionistas') as ProfesionistasIndex;
+	return getContext('index-profesionistas') as IndexProfesionistas;
 }

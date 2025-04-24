@@ -18,7 +18,7 @@ abstract class SearchIndex<T> {
 	abstract removeFromIndex(id: string): void;
 }
 
-export class ProfesionistasIndex extends SearchIndex<Profesionista> {
+export class IndexProfesionistas extends SearchIndex<Profesionista> {
 	constructor() {
 		super();
 	}
@@ -75,10 +75,10 @@ export class ProfesionistasIndex extends SearchIndex<Profesionista> {
 }
 
 
-export function newProfesionistasIndex(...data: Profesionistas) {
-	if (!data) return new ProfesionistasIndex();
+export function newIndexProfesionistas(...data: Profesionistas) {
+	if (!data) return new IndexProfesionistas();
 
-	const index = new ProfesionistasIndex();
+	const index = new IndexProfesionistas();
 
 	index.addToIndex(...data);
 

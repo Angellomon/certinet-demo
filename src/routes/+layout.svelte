@@ -14,7 +14,7 @@
 		newThemeStore
 	} from '$lib/localstore.svelte';
 	import { setContext } from 'svelte';
-	import { newProfesionistasIndex } from '$lib/search';
+	import { newIndexProfesionistas } from '$lib/search';
 	import { setIndexProfesionistasContext } from '$lib/context.svelte';
 
 	let { children } = $props();
@@ -34,7 +34,7 @@
 	const profesionistasStore = newProfesionistasStore();
 	setContext('profesionistas', profesionistasStore);
 
-	const indexProfesionistas = newProfesionistasIndex(...profesionistasStore.value);
+	const indexProfesionistas = newIndexProfesionistas(...profesionistasStore.value);
 	setIndexProfesionistasContext(indexProfesionistas);
 
 	const empleadoresStore = newEmpleadoresStore();
