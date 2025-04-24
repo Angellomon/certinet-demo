@@ -105,7 +105,7 @@
 			class:btn-neutral={page.url.pathname.includes('/config')}
 			onclick={handleConfigClick}
 		>
-			Configuración <Gear class="h-5" />
+			Configuración <Gear class="size-5" />
 		</button>
 	</div>
 

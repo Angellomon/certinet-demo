@@ -136,7 +136,7 @@
 			{:else}
 				Editar
 			{/if}
-			<NotePencil />
+			<NotePencil class="size-5" />
 		</button>
 	</div>
 {/snippet}
