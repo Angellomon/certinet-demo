@@ -14,8 +14,11 @@
 		newThemeStore
 	} from '$lib/localstore.svelte';
 	import { setContext } from 'svelte';
-	import { newIndexProfesionistas } from '$lib/search';
-	import { setIndexProfesionistasContext } from '$lib/context.svelte';
+	import { newIndexCertificaciones, newIndexProfesionistas } from '$lib/search';
+	import {
+		setIndexCertificacionesContext,
+		setIndexProfesionistasContext
+	} from '$lib/context.svelte';
 
 	let { children } = $props();
 
@@ -42,6 +45,9 @@
 
 	const certificacionesStore = newCertificacionesStore();
 	setContext('certificaciones', certificacionesStore);
+
+	const indexCertificaciones = newIndexCertificaciones(...certificacionesStore.value);
+	setIndexCertificacionesContext(indexCertificaciones);
 
 	const procesosContactoStore = newProcesosContactoStore();
 	setContext('procesos-contacto', procesosContactoStore);
