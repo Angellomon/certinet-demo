@@ -2,7 +2,7 @@
 	import { getIndexProfesionistasContext, getProfesionistasContext } from '$lib/context.svelte';
 	import type { ID, Profesionista, Profesionistas } from '$lib/entities';
 	import { ArrowSquareOut, Hash, NotePencil, X } from 'phosphor-svelte';
-	import SearchInput from '../search-input.svelte';
+	import SearchInput from '../search/search-input.svelte';
 	import FiltersAdminProfesionistas from '../filters/filters-admin-profesionistas.svelte';
 	import FiltersList from '../filters/filters-list.svelte';
 	import { BooleanFilter, type Filter } from '$lib/filters.svelte';

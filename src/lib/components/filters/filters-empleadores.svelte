@@ -47,13 +47,14 @@
 	}
 </script>
 
-<ul class="list bg-base-200 rounded-box border-base-content border shadow-md">
+<ul class="list bg-base-200 rounded-box border-base-content border shadow-md w-52">
 	<li class="p-4 pb-2 text-xs tracking-wide">Filtros</li>
 
 	<li class="list-row items-center gap-5">
 		<div class="flex flex-col">
 			<strong># de Proyectos</strong>
-			<div>
+			
+			<div class="join">
 				<button class="btn" onclick={() => createNumberOfProjectsEqual()}>
 					<pre>{'=='}</pre>
 				</button>
@@ -69,7 +70,8 @@
 	<li class="list-row items-center gap-5">
 		<div class="flex flex-col">
 			<strong>Años de exp.</strong>
-			<div>
+
+			<div class="join">
 				<button class="btn self-end" onclick={() => createYearsOfExperienceEqual()}>
 					<pre>{'=='}</pre>
 				</button>

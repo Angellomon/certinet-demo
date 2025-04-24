@@ -2,18 +2,20 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import FiltersList from '$lib/components/filters/filters-list.svelte';
-	import Search from '$lib/components/search.svelte';
+	import Search from '$lib/components/search/search.svelte';
 	import type { Filter } from '$lib/filters.svelte';
 	import { setContext } from 'svelte';
 	import EmpleadorHeader from './empleador-header.svelte';
 	import { newCurrentEmpleadorStore, newCurrentProfesionistaStore } from '$lib/localstore.svelte';
 	import { getComprasContext, getProcesosContext } from '$lib/context.svelte';
 	import { Gear } from 'phosphor-svelte';
+	import FiltersEmpleadores from '$lib/components/filters/filters-empleadores.svelte';
 
 	const { children } = $props();
 
 	let searchTerm = $state('');
 	let filters: Filter[] = $state([]);
+	let showFiltersSelect = $state(false);
 
 	const empleadorStore = newCurrentEmpleadorStore();
 
@@ -33,6 +35,11 @@
 
 	function handleSearch() {
 		goto('/empleador/certificaciones?search=' + searchTerm);
+	}
+
+	function handleFilterSelect(filter: Filter) {
+		showFiltersSelect = false
+		filters.push(filter);
 	}
 </script>
 
@@ -66,7 +73,11 @@
 		</ul>
 
 		<div class="grow">
-			<Search bind:filters bind:searchTerm onsearch={handleSearch} />
+			<Search bind:showFiltersSelect bind:searchTerm onSearch={handleSearch}>
+				{#snippet filters()}
+					<FiltersEmpleadores onSelect={handleFilterSelect} />
+				{/snippet}
+			</Search>
 		</div>
 
 		<button

@@ -168,6 +168,8 @@
 				{'=='}
 			</div>
 
+			<input class="input w-[5rem]" type="number" min={1} bind:value={filter.value} />
+
 			{@render optionButtons(filter)}
 		</div>
 	</div>
