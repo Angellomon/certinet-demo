@@ -87,6 +87,6 @@
 		<button class="btn" onclick={() => createLocation()}>Ubicación</button>
 	</li>
 	<li class="list-row items-center gap-5">
-		<button class="btn" onclick={() => createTag()}>Etiqueta</button>
+		<button class="btn" onclick={() => createTag()}>Tecnologías</button>
 	</li>
 </ul>

@@ -3,8 +3,8 @@
 	import type { ID, Profesionista, Profesionistas } from '$lib/entities';
 	import { ArrowSquareOut, Hash, NotePencil, X } from 'phosphor-svelte';
 	import SearchInput from '../search-input.svelte';
-	import FiltersAdminEmpleadores from '../filters/filters-admin-profesionistas.svelte';
-	import FiltersList from '../filters-list.svelte';
+	import FiltersAdminProfesionistas from '../filters/filters-admin-profesionistas.svelte';
+	import FiltersList from '../filters/filters-list.svelte';
 	import { BooleanFilter, type Filter } from '$lib/filters.svelte';
 
 	interface Props {
@@ -315,7 +315,7 @@
 			bind:showFiltersSelect
 		>
 			{#snippet filters()}
-				<FiltersAdminEmpleadores onClose={hideFilters} onSelect={handleFilterSelect} />
+				<FiltersAdminProfesionistas onClose={hideFilters} onSelect={handleFilterSelect} />
 			{/snippet}
 		</SearchInput>
 	</div>
