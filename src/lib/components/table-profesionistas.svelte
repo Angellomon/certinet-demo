@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { getIndexProfesionistasContext, getProfesionistasContext } from '$lib/context.svelte';
-	import type { ID, Profesionista } from '$lib/entities';
+	import type { ID, Profesionista, Profesionistas } from '$lib/entities';
 	import { ArrowSquareOut, Hash, NotePencil, X } from 'phosphor-svelte';
 	import SearchInput from './search-input.svelte';
 	import FiltersAdminEmpleadores from './filters/filters-admin-profesionistas.svelte';
 	import FiltersList from './filters-list.svelte';
-	import type { Filter } from '$lib/filters.svelte';
+	import { BooleanFilter, type Filter } from '$lib/filters.svelte';
 
 	interface Props {
 		limit?: number;
@@ -27,6 +27,7 @@
 	const profesionistas = getProfesionistasContext();
 
 	let searchIds: string[] = $state([]);
+	let filteredIds: string[] = $state([]);
 	let noResults = $state(false);
 
 	let editProfesionista: Profesionista | undefined = $state();
@@ -40,14 +41,11 @@
 		if (searchTerm.length <= 2) {
 			searchIds = [];
 			noResults = false;
-		} else {
-			handleSearch(searchTerm);
 		}
 	});
 
 	$effect(() => {
-		if (searchTerm.length > 2 && searchIds.length == 0) noResults = true;
-		else noResults = false;
+		if (filtersList.length === 0) filteredIds = [];
 	});
 
 	function calcDateDiffYears(start: Date, end: Date = new Date()) {
@@ -100,11 +98,18 @@
 	}
 
 	function handleSearch(searchTerm: string) {
-		if (!searchTerm) return;
+		if (!searchTerm) {
+			searchIds = [];
+			handleApplyFilters();
+
+			return;
+		}
 
 		const results = indexProfesionistas.search(searchTerm);
 
 		searchIds = results;
+
+		handleApplyFilters();
 	}
 
 	function hideFilters() {
@@ -116,7 +121,66 @@
 		filtersList.push(filter);
 	}
 
-	function handleApplyFilters() {}
+	function handleApplyFilters() {
+		let ids: string[] = [];
+
+		for (let filter of filtersList) {
+			if (filter instanceof BooleanFilter) {
+				ids = ids.concat(
+					...filter.filterIds(profesionistas.value.map((p) => ({ id: p.id, value: p.verificado })))
+				);
+			}
+		}
+
+		filteredIds = Array.from(new Set(ids));
+	}
+
+	function handleRemoveFilter() {
+		handleSearch(searchTerm);
+	}
+
+	function filterProfesionistas(): Profesionistas {
+		if (searchIds.length === 0 && filteredIds.length === 0)
+			return limit ? profesionistas.value.slice(limit) : profesionistas.value;
+
+		let profesionistasSearch: Profesionistas | undefined = undefined;
+		let profesionistasFilters: Profesionistas | undefined = undefined;
+
+		if (searchIds.length > 0)
+			profesionistasSearch = profesionistas.value.filter((p) => searchIds.includes(p.id));
+
+		if (filteredIds.length > 0)
+			profesionistasFilters = profesionistas.value.filter((p) => filteredIds.includes(p.id));
+
+		if (!profesionistasSearch && !profesionistasFilters) {
+			return [];
+		}
+
+		const profesionistasSearchIds = new Set(
+			profesionistasSearch ? profesionistasSearch.map((p) => p.id) : []
+		);
+		const profesionistasFiltersIds = new Set(
+			profesionistasFilters ? profesionistasFilters.map((p) => p.id) : []
+		);
+
+		let resultIds: string[];
+
+		if (profesionistasFiltersIds.size > 0 && profesionistasSearchIds.size > 0) {
+			resultIds = Array.from(profesionistasSearchIds.intersection(profesionistasFiltersIds));
+		} else if (profesionistasFiltersIds.size > 0) {
+			resultIds = Array.from(profesionistasFiltersIds);
+		} else if (profesionistasSearchIds.size > 0) {
+			resultIds = Array.from(profesionistasSearchIds);
+		} else {
+			resultIds = Array.from(profesionistasSearchIds.union(profesionistasFiltersIds));
+		}
+
+		const resultProfesionistas = profesionistas.value.filter((p) => resultIds.includes(p.id));
+
+		return limit ? resultProfesionistas.slice(limit) : resultProfesionistas;
+	}
+
+	let resultados = $derived.by(filterProfesionistas);
 </script>
 
 {#snippet badgeVerificado(verified: boolean)}
@@ -157,7 +221,7 @@
 
 {#snippet body()}
 	<tbody>
-		{#each searchIds.length > 0 ? profesionistas.value.filter( (p) => searchIds.includes(p.id) ) : limit ? profesionistas.value.slice(0, limit) : profesionistas.value as profesionista, i}
+		{#each resultados as profesionista, i}
 			{@const firstJob =
 				profesionista.trayectoria.laboral[0] || profesionista.trayectoria.proyectos[0]}
 			{@const yoe = firstJob ? calcDateDiffYears(firstJob.fechaInicio) : 0}
@@ -255,7 +319,11 @@
 		</SearchInput>
 	</div>
 
-	<FiltersList onApply={handleApplyFilters} bind:filters={filtersList} />
+	<FiltersList
+		onRemove={handleRemoveFilter}
+		onApply={handleApplyFilters}
+		bind:filters={filtersList}
+	/>
 
 	{#if noResults}
 		<p>Sin resultados...</p>

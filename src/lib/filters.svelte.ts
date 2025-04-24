@@ -20,6 +20,7 @@ export abstract class Filter {
 	value: number | string | [number, number] | string[] | boolean;
 
 	abstract isValid(): boolean;
+	abstract filterIds(ids: { id: string; value: any }[]): string[];
 
 	constructor(type: FilterType, name: string, value: any) {
 		this.id = generateId();
@@ -51,6 +52,10 @@ export class LessThanFilter extends Filter {
 
 		return true;
 	}
+
+	filterIds(ids: { id: string; value: number }[]): string[] {
+		return ids.filter((i) => i.value < this.value).map((i) => i.id);
+	}
 }
 
 export class MoreThanFilter extends Filter {
@@ -75,6 +80,10 @@ export class MoreThanFilter extends Filter {
 
 		return true;
 	}
+
+	filterIds(ids: { id: string; value: number }[]): string[] {
+		return ids.filter((i) => i.value > this.value).map((i) => i.id);
+	}
 }
 
 export class EqualFilter extends Filter {
@@ -97,6 +106,10 @@ export class EqualFilter extends Filter {
 		}
 
 		return true;
+	}
+
+	filterIds(ids: { id: string; value: number }[]): string[] {
+		return ids.filter((i) => i.value === this.value).map((i) => i.id);
 	}
 }
 
@@ -127,15 +140,18 @@ export class RangeFilter extends Filter {
 
 		return true;
 	}
+
+	filterIds(ids: { id: string; value: number }[]): string[] {
+		return ids.filter((i) => i.value > this.value[0] && i.value < this.value[1]).map((i) => i.id);
+	}
 }
 
 export class LocationFilter extends Filter {
-	type: LocationFilterType;
 	value: string = $state('');
 
 	constructor(name: string, value: string) {
 		super('location', value, name);
-		this.type = 'location';
+
 		this.value = value;
 	}
 
@@ -144,10 +160,14 @@ export class LocationFilter extends Filter {
 
 		return true;
 	}
+
+	filterIds(ids: { id: string; value: string }[]): string[] {
+		return ids.filter((i) => i.value === this.value).map((i) => i.id);
+	}
 }
 
 export class TagFilter extends Filter {
-	value: string[];
+	value: string[] = $state([]);
 
 	constructor(name: string, value: string | string[]) {
 		let val;
@@ -164,18 +184,26 @@ export class TagFilter extends Filter {
 
 		return true;
 	}
+
+	filterIds(ids: { id: string; value: string }[]): string[] {
+		return ids.filter((i) => this.value.includes(i.value)).map((i) => i.id);
+	}
 }
 
 export class BooleanFilter extends Filter {
-	value: boolean = $state() as boolean;
+	value: boolean = $state(false);
 
 	constructor(name: string, value: boolean) {
 		super('statusboolean', name, value);
 
-		this.id = generateId();
+		this.value = value;
 	}
 
 	isValid() {
 		return typeof this.value === 'boolean';
+	}
+
+	filterIds(ids: { id: string; value: boolean }[]): string[] {
+		return ids.filter((i) => i.value === this.value).map((i) => i.id);
 	}
 }
