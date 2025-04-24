@@ -2,7 +2,7 @@
 	import { getIndexProfesionistasContext, getProfesionistasContext } from '$lib/context.svelte';
 	import type { ID, Profesionista, Profesionistas } from '$lib/entities';
 	import { ArrowSquareOut, Hash, NotePencil, X } from 'phosphor-svelte';
-	import SearchInput from '../search/search-input.svelte';
+	import SearchInput from '../search.svelte';
 	import FiltersAdminProfesionistas from '../filters/filters-admin-profesionistas.svelte';
 	import FiltersList from '../filters/filters-list.svelte';
 	import { BooleanFilter, type Filter } from '$lib/filters.svelte';
@@ -232,7 +232,7 @@
 				<th>
 					{#if baseURL}
 						<a href={`${baseURL}/${profesionista.id}`}>
-							<div class="join gap-2 items-center">
+							<div class="join items-center gap-2">
 								{i + 1}
 								<ArrowSquareOut class="size-5" />
 							</div>

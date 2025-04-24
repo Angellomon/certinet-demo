@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import FiltersList from '$lib/components/filters/filters-list.svelte';
-	import Search from '$lib/components/search/search.svelte';
+	import Search from '$lib/components/search.svelte';
 	import type { Filter } from '$lib/filters.svelte';
 	import { setContext } from 'svelte';
 	import EmpleadorHeader from './empleador-header.svelte';
