@@ -1,5 +1,5 @@
 <script>
-	import ListaCertificaciones from '$lib/components/lista-certificaciones.svelte';
+	import ListaCertificaciones from '$lib/components/lists/lista-certificaciones.svelte';
 	import {
 		getCertificacionesContext,
 		getCurrentEmpleadorContext,

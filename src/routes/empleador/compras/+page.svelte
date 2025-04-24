@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ListaCompras from '$lib/components/lista-compras.svelte';
+	import ListaCompras from '$lib/components/lists/lista-compras.svelte';
 	import { getCurrentEmpleadorContext } from '$lib/context.svelte';
 	import type { Compras } from '$lib/entities.js';
 	import { getContext } from 'svelte';

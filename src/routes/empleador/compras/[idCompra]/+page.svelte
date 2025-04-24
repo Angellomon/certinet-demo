@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import ListaProcesos from '$lib/components/lista-procesos.svelte';
+	import ListaProcesos from '$lib/components/lists/lista-procesos.svelte';
 	import {
 		getCertificacionesContext,
 		getCompraContext,

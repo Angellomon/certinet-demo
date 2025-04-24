@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ListaProcesos from '$lib/components/lista-procesos.svelte';
+	import ListaProcesos from '$lib/components/lists/lista-procesos.svelte';
 	import { getCurrentEmpleadorContext } from '$lib/context.svelte';
 
 	const currentEmpleadorStore = getCurrentEmpleadorContext();

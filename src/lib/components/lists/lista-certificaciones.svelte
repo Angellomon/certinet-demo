@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import type { Certificacion, Certificaciones } from '$lib/entities';
 	import { X } from 'phosphor-svelte';
-	import VerifiedStatus from './verified-status.svelte';
+	import VerifiedStatus from '../verified-status.svelte';
 
 	interface Props {
 		certificaciones: Certificaciones;

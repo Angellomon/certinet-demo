@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import FormPayment from '$lib/components/inputs/inputs-payment.svelte';
-	import ListaCertificaciones from '$lib/components/lista-certificaciones.svelte';
+	import ListaCertificaciones from '$lib/components/lists/lista-certificaciones.svelte';
 	import {
 		getCertificacionesContext,
 		getComprasContext,

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ProcesoData from '../proceso-data.svelte';
-	import RateInput from '$lib/components/rate-input.svelte';
+	import RateInput from '$lib/components/inputs/input-rate.svelte';
 	import {
 		getCalificacionesProcesoContext,
 		getCalificacionProceso,
