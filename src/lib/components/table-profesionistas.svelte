@@ -137,6 +137,7 @@
 
 	function handleRemoveFilter() {
 		handleSearch(searchTerm);
+		handleApplyFilters();
 	}
 
 	function filterProfesionistas(): Profesionistas {
