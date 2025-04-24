@@ -1,5 +1,5 @@
 <script>
-	import ListaCertificaciones from '$lib/components/lists/lista-certificaciones.svelte';
+	import ListCertificaciones from '$lib/components/lists/list-certificaciones.svelte';
 	import {
 		getCertificacionesContext,
 		getCurrentEmpleadorContext,
@@ -32,5 +32,5 @@
 		</a>
 	</div>
 
-	<ListaCertificaciones {certificaciones} basePath="/profesionista/certificaciones" />
+	<ListCertificaciones {certificaciones} basePath="/profesionista/certificaciones" />
 </main>

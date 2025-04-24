@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ListaProcesos from '$lib/components/lists/lista-procesos.svelte';
+	import ListProcesos from '$lib/components/lists/list-procesos.svelte';
 	import { getCurrentEmpleadorContext } from '$lib/context.svelte';
 
 	const currentEmpleadorStore = getCurrentEmpleadorContext();
@@ -14,7 +14,7 @@
 	</div>
 
 	<h2 class="text-2xl">Procesos de Contacto</h2>
-	<ListaProcesos
+	<ListProcesos
 		showCalificacionEmpleador
 		baseUrl="/empleador/procesos"
 		id={currentEmpleadorStore.id}

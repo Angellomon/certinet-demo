@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import FormPayment from '$lib/components/inputs/inputs-payment.svelte';
-	import ListaCertificaciones from '$lib/components/lists/lista-certificaciones.svelte';
+	import ListCertificaciones from '$lib/components/lists/list-certificaciones.svelte';
 	import {
 		getCertificacionesContext,
 		getComprasContext,
@@ -104,7 +104,7 @@
 	<div class="grid grid-cols-1 md:grid-cols-2">
 		<div class="mx-3">
 			<h2 class="mb-5 text-right text-xl">Certificaciones Seleccionadas</h2>
-			<ListaCertificaciones {certificaciones} />
+			<ListCertificaciones {certificaciones} />
 		</div>
 		<div class="mx-3 flex flex-col gap-5">
 			<div class="ml-5 flex flex-row justify-between">

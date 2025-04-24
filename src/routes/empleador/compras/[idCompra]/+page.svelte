@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import ListaProcesos from '$lib/components/lists/lista-procesos.svelte';
+	import ListProcesos from '$lib/components/lists/list-procesos.svelte';
 	import {
-		getCertificacionesContext,
 		getCompraContext,
 		getCurrentEmpleadorContext
 	} from '$lib/context.svelte.js';
@@ -84,7 +83,7 @@
 	<h3 class="divider divider-start text-xl">Procesos de Contacto</h3>
 
 	<div class="bg-base-100 rounded-box p-5">
-		<ListaProcesos
+		<ListProcesos
 			baseUrl="/empleador/procesos"
 			currentType="empleador"
 			id={currentEmpleador.id}
