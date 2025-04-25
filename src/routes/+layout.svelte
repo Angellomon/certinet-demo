@@ -11,16 +11,24 @@
 		newIdProfesionistaStore,
 		newProcesosContactoStore,
 		newProfesionistasStore,
+		newSeccionAdminConfigStore,
+		newSeccionAdminProfesionistaStore,
+		newSeccionAdminStore,
 		newThemeStore
 	} from '$lib/localstore.svelte';
 	import { setContext } from 'svelte';
 	import { newIndexCertificaciones, newIndexProfesionistas } from '$lib/search';
 	import {
+		setBreadCrumbsContext,
 		setIndexCertificacionesContext,
-		setIndexProfesionistasContext
+		setIndexProfesionistasContext,
+		setSeccionAdminConfigContext,
+		setSeccionAdminContext,
+		setSeccionAdminProfesionistaContext
 	} from '$lib/context.svelte';
 
 	import { InstagramLogo, FacebookLogo, LinkedinLogo, TwitterLogo } from 'phosphor-svelte';
+	import { newBreadcrumbsState } from '$lib/breadcrumbs.svelte';
 
 	let { children } = $props();
 
@@ -62,6 +70,15 @@
 
 	const adminsStore = newAdminsStore();
 	setContext('admins', adminsStore);
+
+	const seccionAdminStore = newSeccionAdminStore();
+	setSeccionAdminContext(seccionAdminStore);
+
+	const seccionAdminConfigStore = newSeccionAdminConfigStore();
+	setSeccionAdminConfigContext(seccionAdminConfigStore);
+
+	const seccionAdminProfesionistaStore = newSeccionAdminProfesionistaStore();
+	setSeccionAdminProfesionistaContext(seccionAdminProfesionistaStore);
 </script>
 
 <svelte:head>

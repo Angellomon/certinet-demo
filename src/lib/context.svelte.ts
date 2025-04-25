@@ -114,14 +114,12 @@ export function getAdmins() {
 	return getContext('admins') as LocalObjectStore<Admins>;
 }
 
-export function getSeccionAdminConfigContext() {
-	return getContext('seccion-admin-config-store') as LocalObjectStore<SeccionAdminConfig>;
+export function setSeccionAdminConfigContext(data: LocalObjectStore<SeccionAdminConfig>) {
+	setContext('seccion-admin-config-store', data);
 }
 
-export function getSeccionAdminProfesionistasContext() {
-	return getContext(
-		'seccion-admin-profesionistas-store'
-	) as LocalObjectStore<SeccionAdminProfesionistas>;
+export function getSeccionAdminConfigContext() {
+	return getContext('seccion-admin-config-store') as LocalObjectStore<SeccionAdminConfig>;
 }
 
 export function getSeccionAdminProfesionistaContext() {
