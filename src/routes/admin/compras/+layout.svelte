@@ -7,8 +7,8 @@
 
 	const breadcrumbs = [
 		{
-			title: 'Certificaciones',
-			url: '/admin/certificaciones'
+			title: 'Compras',
+			url: '/admin/compras'
 		}
 	];
 
