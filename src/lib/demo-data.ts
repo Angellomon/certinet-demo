@@ -12,6 +12,7 @@ import type {
 	Profesionista,
 	SeccionAdmin,
 	SeccionAdminConfig,
+	SeccionAdminEmpleador,
 	SeccionAdminProfesionista,
 	SeccionAdminProfesionistas
 } from './entities';
@@ -24,6 +25,7 @@ export const DEFAULT_SECCION_ADMIN_STORE: SeccionAdmin = 'dashboard';
 export const DEFAULT_SECCION_ADMIN_CONFIG_STORE: SeccionAdminConfig = 'datos';
 export const DEFAULT_SECCION_ADMIN_PROFESIONISTAS_STORE: SeccionAdminProfesionistas = 'dashboard';
 export const DEFAULT_SECCION_ADMIN_PROFESIONISTA_STORE: SeccionAdminProfesionista = 'datos';
+export const DEFAULT_SECCION_ADMIN_EMPLEADOR_STORE: SeccionAdminEmpleador = 'datos';
 
 export const getDemoProfesionista: () => Profesionista = () =>
 	getDemoProfesionistas().filter((p) => p.id == PROFESIONISTA_DEMO_ID)[0];

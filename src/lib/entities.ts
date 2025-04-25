@@ -206,6 +206,13 @@ export const seccionAdminProfesionistaSchema = v.union([
 ]);
 export type SeccionAdminProfesionista = v.InferOutput<typeof seccionAdminProfesionistaSchema>;
 
+export const seccionAdminEmpleador = v.union([
+	v.literal('datos'),
+	v.literal('compras'),
+	v.literal('verificacion')
+]);
+export type SeccionAdminEmpleador = v.InferOutput<typeof seccionAdminEmpleador>;
+
 export const breadcrumbDataSchema = v.object({
 	title: v.string(),
 	url: v.optional(v.string()),

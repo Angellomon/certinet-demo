@@ -11,13 +11,15 @@ import type {
 	Profesionistas,
 	SeccionAdmin,
 	SeccionAdminConfig,
+	SeccionAdminEmpleador,
 	SeccionAdminProfesionista,
-	SeccionAdminProfesionistas,
 	Theme
 } from './entities';
 import { error } from '@sveltejs/kit';
-import type { IndexCertificaciones, IndexProfesionistas } from './search';
+import type { IndexCertificaciones } from './search-indexes/certificaciones';
+import type { IndexProfesionistas } from './search-indexes/profesionistas';
 import type { BreadcrumbsState } from './breadcrumbs.svelte';
+import type { IndexEmpleadores } from './search-indexes/empleadores';
 
 export function getProcesosContext() {
 	return getContext('procesos-contacto') as LocalObjectStore<ProcesosContacto>;
@@ -134,6 +136,14 @@ export function setSeccionAdminProfesionistaContext(
 	setContext('seccion-admin-profesionista-store', data);
 }
 
+export function setSeccionAdminEmpleadorContext(data: LocalObjectStore<SeccionAdminEmpleador>) {
+	setContext('seccion-admin-empleador-store', data);
+}
+
+export function getSeccionAdminEmpleadorContext() {
+	return getContext('seccion-admin-empleador-store') as LocalObjectStore<SeccionAdminEmpleador>;
+}
+
 export function setSeccionAdminContext(data: LocalObjectStore<SeccionAdmin>) {
 	setContext('seccion-admin-store', data);
 }
@@ -163,4 +173,12 @@ export function setIndexCertificacionesContext(index: IndexCertificaciones) {
 
 export function getIndexCertificacionesContext() {
 	return getContext('index-certificaciones') as IndexCertificaciones;
+}
+
+export function setIndexEmpleadoresContext(index: IndexEmpleadores) {
+	setContext('index-empleadores', index);
+}
+
+export function getIndexEmpleadoresContext() {
+	return getContext('index-empleadores') as IndexEmpleadores;
 }
