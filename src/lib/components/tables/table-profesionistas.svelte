@@ -28,19 +28,23 @@
 
 	let searchIds: string[] = $state([]);
 	let filteredIds: string[] = $state([]);
-	let noResults = $state(false);
+	let searchTerm = $state('');
+	let filtersList: Filter[] = $state([]);
+
+	let noResults = $derived(
+		searchIds.length === 0 &&
+			filteredIds.length === 0 &&
+			(filtersList.length > 0 || searchTerm.length > 0)
+	);
 
 	let editProfesionista: Profesionista | undefined = $state();
 	let deleteID: ID | undefined = $state();
-	let searchTerm = $state('');
 
 	let showFiltersSelect = $state(false);
-	let filtersList: Filter[] = $state([]);
 
 	$effect(() => {
 		if (searchTerm.length <= 2) {
 			searchIds = [];
-			noResults = false;
 		}
 	});
 
@@ -173,7 +177,7 @@
 		} else if (profesionistasSearchIds.size > 0) {
 			resultIds = Array.from(profesionistasSearchIds);
 		} else {
-			resultIds = Array.from(profesionistasSearchIds.union(profesionistasFiltersIds));
+			resultIds = [];
 		}
 
 		const resultProfesionistas = profesionistas.value.filter((p) => resultIds.includes(p.id));

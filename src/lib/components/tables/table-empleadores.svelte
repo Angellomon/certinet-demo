@@ -1,8 +1,5 @@
 <script lang="ts">
-	import {
-		getEmpleadoresContext,
-		getIndexEmpleadoresContext,
-	} from '$lib/context.svelte';
+	import { getEmpleadoresContext, getIndexEmpleadoresContext } from '$lib/context.svelte';
 	import type { Empleadores } from '$lib/entities';
 	import { ArrowSquareOut, Hash, NotePencil, X } from 'phosphor-svelte';
 	import SearchInput from '../search.svelte';
@@ -23,17 +20,20 @@
 
 	let searchIds: string[] = $state([]);
 	let filteredIds: string[] = $state([]);
-	let noResults = $state(false);
-
 	let searchTerm = $state('');
+	let filtersList: Filter[] = $state([]);
+
+	let noResults = $derived(
+		searchIds.length === 0 &&
+			filteredIds.length === 0 &&
+			(filtersList.length > 0 || searchTerm.length > 0)
+	);
 
 	let showFiltersSelect = $state(false);
-	let filtersList: Filter[] = $state([]);
 
 	$effect(() => {
 		if (searchTerm.length <= 2) {
 			searchIds = [];
-			noResults = false;
 		}
 	});
 
@@ -139,7 +139,7 @@
 		} else if (searchIdsEmpleadores.size > 0) {
 			resultIds = Array.from(searchIdsEmpleadores);
 		} else {
-			resultIds = Array.from(searchIdsEmpleadores.union(filteredIdsEmpleadores));
+			resultIds = [];
 		}
 
 		const resultEmpleadores = empleadores.value.filter((p) => resultIds.includes(p.id));
