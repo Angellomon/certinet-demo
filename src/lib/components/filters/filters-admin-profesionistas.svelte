@@ -21,7 +21,7 @@
 <ul class="list bg-base-200 rounded-box border-base-content relative w-72 border shadow-md">
 	<div class="absolute top-1 right-1">
 		<button class="btn tooltip tooltip-left" data-tip="Cerrar Filtros" onclick={handleClose}>
-			<X class="h-5" />
+			<X class="size-5" />
 		</button>
 	</div>
 
