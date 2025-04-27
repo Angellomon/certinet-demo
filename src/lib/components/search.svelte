@@ -35,7 +35,6 @@
 	<div class="join w-full">
 		{#if filters}
 			<div class="indicator">
-				<!-- svelte-ignore a11y_consider_explicit_label -->
 				<div
 					class="tooltip tooltip-right"
 					data-tip={showFiltersSelect ? 'Cerrar Filtros' : 'Abrir Filtros'}
