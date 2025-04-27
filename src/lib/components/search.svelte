@@ -41,10 +41,11 @@
 					data-tip={showFiltersSelect ? 'Cerrar Filtros' : 'Abrir Filtros'}
 				>
 					<button class="btn join-item" onclick={toggleFilterList}>
+						Filtros
 						{#if showFiltersSelect}
-							<X class="h-5" />
+							<X class="size-5" />
 						{:else}
-							<Funnel class="h-5" />
+							<Funnel class="size-5" />
 						{/if}
 					</button>
 				</div>
@@ -60,7 +61,6 @@
 		{/if}
 
 		<label class="input w-full">
-			<MagnifyingGlass />
 			<input
 				class="w-full"
 				bind:value={searchTerm}
@@ -79,6 +79,7 @@
 			onclick={handleSearch}
 		>
 			Buscar
+			<MagnifyingGlass class="size-5" />
 		</buttton>
 	</div>
 </div>
