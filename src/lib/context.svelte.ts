@@ -20,6 +20,7 @@ import type { IndexCertificaciones } from './search-indexes/certificaciones';
 import type { IndexProfesionistas } from './search-indexes/profesionistas';
 import type { BreadcrumbsState } from './breadcrumbs.svelte';
 import type { IndexEmpleadores } from './search-indexes/empleadores';
+import type { IndexProcesosContacto } from './search-indexes/index-procesos-contacto';
 
 export function getProcesosContext() {
 	return getContext('procesos-contacto') as LocalObjectStore<ProcesosContacto>;
@@ -181,4 +182,12 @@ export function setIndexEmpleadoresContext(index: IndexEmpleadores) {
 
 export function getIndexEmpleadoresContext() {
 	return getContext('index-empleadores') as IndexEmpleadores;
+}
+
+export function setIndexProcesosContext(index: IndexProcesosContacto) {
+	setContext('index-procesos-contacto', index);
+}
+
+export function getIndexProcesosContext() {
+	return getContext('index-procesos-contacto') as IndexProcesosContacto;
 }
