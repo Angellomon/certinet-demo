@@ -1,50 +1,41 @@
-import type { Certificacion, Certificaciones } from "$lib/entities";
-import { SearchIndex } from "./search-index";
+import type { Certificacion, Certificaciones } from '$lib/entities';
+import { convertCertificado } from './convert';
+import { SearchIndex } from './search-index';
 
 export class IndexCertificaciones extends SearchIndex<Certificacion> {
-  constructor() {
-    super();
-  }
+	constructor() {
+		super();
+	}
 
-  convertCertificado(data: Certificacion) {
-    let result = '';
+	search(searchTerm: string): string[] {
+		const text = this.escapeRegExp(searchTerm);
 
-    result = result.concat(data.nombre);
-    result = result.concat(data.serie);
-    result = result.concat(data.organizacion);
+		return this.index.search(text) as any;
+	}
 
-    return result;
-  }
+	addToIndex(...data: Certificaciones): void {
+		for (let cert of data) {
+			const certificacionStr = convertCertificado(cert);
+			this.index.add(cert.id, certificacionStr);
+		}
+	}
 
-  search(searchTerm: string): string[] {
-    const text = this.escapeRegExp(searchTerm);
+	updateIndex(data: Certificacion) {
+		if (this.index.contain(data.id)) this.index.update(data.id, convertCertificado(data));
+		else this.addToIndex(data);
+	}
 
-    return this.index.search(text) as any;
-  }
-
-  addToIndex(...data: Certificaciones): void {
-    for (let cert of data) {
-      const certificacionStr = this.convertCertificado(cert);
-      this.index.add(cert.id, certificacionStr);
-    }
-  }
-
-  updateIndex(data: Certificacion) {
-    if (this.index.contain(data.id)) this.index.update(data.id, this.convertCertificado(data));
-    else this.addToIndex(data);
-  }
-
-  removeFromIndex(id: string): void {
-    if (this.index.contain(id)) this.index.remove(id);
-  }
+	removeFromIndex(id: string): void {
+		if (this.index.contain(id)) this.index.remove(id);
+	}
 }
 
 export function newIndexCertificaciones(...data: Certificaciones) {
-  if (!data) return new IndexCertificaciones();
+	if (!data) return new IndexCertificaciones();
 
-  const index = new IndexCertificaciones();
+	const index = new IndexCertificaciones();
 
-  index.addToIndex(...data);
+	index.addToIndex(...data);
 
-  return index;
+	return index;
 }
