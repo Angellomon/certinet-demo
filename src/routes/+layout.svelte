@@ -23,6 +23,7 @@
 	import {
 		setIndexCertificacionesContext,
 		setIndexEmpleadoresContext,
+		setIndexProcesosContext,
 		setIndexProfesionistasContext,
 		setSeccionAdminConfigContext,
 		setSeccionAdminContext,
@@ -32,6 +33,7 @@
 
 	import { InstagramLogo, FacebookLogo, LinkedinLogo, TwitterLogo } from 'phosphor-svelte';
 	import { newIndexEmpleadores } from '$lib/search-indexes/empleadores';
+	import { newIndexProcesosContacto } from '$lib/search-indexes/index-procesos-contacto';
 
 	let { children } = $props();
 
@@ -67,6 +69,14 @@
 
 	const procesosContactoStore = newProcesosContactoStore();
 	setContext('procesos-contacto', procesosContactoStore);
+
+	const indexProcesosContacto = newIndexProcesosContacto(
+		profesionistasStore.value,
+		empleadoresStore.value,
+		certificacionesStore.value,
+		procesosContactoStore.value
+	);
+	setIndexProcesosContext(indexProcesosContacto);
 
 	const comprasStore = newComprasStore();
 	setContext('compras', comprasStore);
