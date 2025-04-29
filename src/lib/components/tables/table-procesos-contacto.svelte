@@ -223,9 +223,9 @@
 							</div>
 						</a>
 					{:else}
-						<div class="join gap-2">
+						<div class="join items-center gap-2">
 							{i + 1}
-							<NotePencil class="h-5" />
+							<!-- <NotePencil class="size-5" /> -->
 						</div>
 					{/if}
 				</th>
