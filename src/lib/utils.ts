@@ -9,3 +9,13 @@ export function formatNumber(num: number) {
 	}
 	return x1 + x2;
 }
+
+export function buildMap<T extends { id: string }>(data: T[]): Record<string, T> {
+	const result: Record<string, T> = {};
+
+	for (let d of data) {
+		result[d.id] = d;
+	}
+
+	return result;
+}
