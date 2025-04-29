@@ -16,10 +16,10 @@ import type {
 	Theme
 } from './entities';
 import { error } from '@sveltejs/kit';
-import type { IndexCertificaciones } from './search-indexes/certificaciones';
-import type { IndexProfesionistas } from './search-indexes/profesionistas';
+import type { IndexCertificaciones } from './search-indexes/index-certificaciones';
+import type { IndexProfesionistas } from './search-indexes/index-profesionistas';
 import type { BreadcrumbsState } from './breadcrumbs.svelte';
-import type { IndexEmpleadores } from './search-indexes/empleadores';
+import type { IndexEmpleadores } from './search-indexes/index-empleadores';
 import type { IndexProcesosContacto } from './search-indexes/index-procesos-contacto';
 
 export function getProcesosContext() {

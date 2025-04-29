@@ -18,8 +18,8 @@
 		newThemeStore
 	} from '$lib/localstore.svelte';
 	import { setContext } from 'svelte';
-	import { newIndexCertificaciones } from '$lib/search-indexes/certificaciones';
-	import { newIndexProfesionistas } from '$lib/search-indexes/profesionistas';
+	import { newIndexCertificaciones } from '$lib/search-indexes/index-certificaciones';
+	import { newIndexProfesionistas } from '$lib/search-indexes/index-profesionistas';
 	import {
 		setIndexCertificacionesContext,
 		setIndexEmpleadoresContext,
@@ -32,7 +32,7 @@
 	} from '$lib/context.svelte';
 
 	import { InstagramLogo, FacebookLogo, LinkedinLogo, TwitterLogo } from 'phosphor-svelte';
-	import { newIndexEmpleadores } from '$lib/search-indexes/empleadores';
+	import { newIndexEmpleadores } from '$lib/search-indexes/index-empleadores';
 	import { newIndexProcesosContacto } from '$lib/search-indexes/index-procesos-contacto';
 
 	let { children } = $props();
