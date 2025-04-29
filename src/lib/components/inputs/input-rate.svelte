@@ -16,7 +16,8 @@
 	const rates = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
 
 	function handleRate(_value: number) {
-		if (!disableInput) value = _value;
+		if (disableInput) return;
+		value = _value;
 	}
 </script>
 
@@ -39,6 +40,7 @@
 				aria-label={`${rate} star`}
 				checked={value >= rate}
 				onclick={() => handleRate(rate)}
+				disabled={disableInput}
 			/>
 		{/each}
 	</div>
