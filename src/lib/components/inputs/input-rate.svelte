@@ -3,14 +3,20 @@
 		value: number;
 		hideNumber?: boolean;
 		color?: 'profesionista' | 'empleador';
+		disableInput?: boolean;
 	}
 
-	let { value = $bindable(0), hideNumber = false, color = 'empleador' }: Props = $props();
+	let {
+		value = $bindable(0),
+		hideNumber = false,
+		color = 'empleador',
+		disableInput = false
+	}: Props = $props();
 
 	const rates = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
 
 	function handleRate(_value: number) {
-		value = _value;
+		if (!disableInput) value = _value;
 	}
 </script>
 
@@ -20,12 +26,11 @@
 	{/if}
 
 	<div class="rating rating-lg rating-half">
-		<input type="radio" name="rating-11" class="rating-hidden" />
+		<input type="radio" class="rating-hidden" />
 
 		{#each rates as rate, i}
 			<input
 				type="radio"
-				name="rating-11"
 				class:bg-green-500={color === 'empleador'}
 				class:bg-orange-500={color === 'profesionista'}
 				class="mask mask-star-2"
