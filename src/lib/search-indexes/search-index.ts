@@ -1,6 +1,7 @@
+import type { Identificable } from '$lib/entities';
 import { Index } from 'flexsearch';
 
-export abstract class SearchIndex<T> {
+export abstract class SearchIndex<T extends Identificable> {
 	protected index: Index;
 
 	constructor() {
