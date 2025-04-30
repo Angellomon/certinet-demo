@@ -7,9 +7,8 @@ export class IndexProfesionistas extends SearchIndex<Profesionista> {
 		super();
 	}
 
-	search(searchTerm: string): string[] {
-		const text = this.escapeRegExp(searchTerm);
-		return this.index.search(text) as any;
+	convert(data: Profesionista): string {
+		return convertProfesionista(data);
 	}
 
 	addToIndex(...data: Profesionistas): void {
@@ -17,15 +16,6 @@ export class IndexProfesionistas extends SearchIndex<Profesionista> {
 			const profesionistaStr = convertProfesionista(profesionista);
 			this.index.add(profesionista.id, profesionistaStr);
 		}
-	}
-
-	updateIndex(data: Profesionista) {
-		if (this.index.contain(data.id)) this.index.update(data.id, convertProfesionista(data));
-		else this.addToIndex(data);
-	}
-
-	removeFromIndex(id: string): void {
-		if (this.index.contain(id)) this.index.remove(id);
 	}
 }
 

@@ -7,25 +7,8 @@ export class IndexEmpleadores extends SearchIndex<Empleador> {
 		super();
 	}
 
-	search(searchTerm: string): string[] {
-		const text = this.escapeRegExp(searchTerm);
-		return this.index.search(text) as any;
-	}
-
-	addToIndex(...data: Empleadores): void {
-		for (let empleador of data) {
-			const empleadorStr = convertEmpleador(empleador);
-			this.index.add(empleador.id, empleadorStr);
-		}
-	}
-
-	updateIndex(data: Empleador): void {
-		if (this.index.contain(data.id)) this.index.update(data.id, convertEmpleador(data));
-		else this.addToIndex(data);
-	}
-
-	removeFromIndex(id: string): void {
-		if (this.index.contain(id)) this.index.remove(id);
+	convert(data: Empleador): string {
+		return convertEmpleador(data);
 	}
 }
 

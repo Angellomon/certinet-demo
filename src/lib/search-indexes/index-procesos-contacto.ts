@@ -25,36 +25,40 @@ type DataProcesosHelper = {
 };
 
 export class IndexProcesosContacto extends SearchIndex<ProcesoContacto> {
-	constructor() {
+	dataHelper: DataProcesosHelper[];
+
+	constructor(...data: DataProcesosHelper[]) {
 		super();
+
+		this.dataHelper = data;
 	}
 
-	search(searchTerm: string): string[] {
-		const text = this.escapeRegExp(searchTerm);
-		return this.index.search(text) as any;
+	convert(data: ProcesoContacto): string {
+		let dataProceso = this.dataHelper.find((d) => d.proceso.id === data.id);
+
+		return dataProceso ? this.convertHelper(dataProceso) : '';
 	}
 
-	addToIndex(...data: ProcesosContacto): void {}
+	convertHelper(data: DataProcesosHelper) {
+		let certificacionStr = convertCertificado(data.certificacion);
+		let profesionistaStr = convertProfesionista(data.profesionista);
+		let empleadorStr = convertEmpleador(data.empleador);
+		let procesoStr = convertProcesoContacto(data.proceso);
+
+		return `${certificacionStr}${profesionistaStr}${empleadorStr}${procesoStr}`;
+	}
 
 	addToIndexHelper(...data: DataProcesosHelper[]) {
-		let txt = '';
-
 		for (let p of data) {
 			let certificacionStr = convertCertificado(p.certificacion);
 			let profesionistaStr = convertProfesionista(p.profesionista);
 			let empleadorStr = convertEmpleador(p.empleador);
 			let procesoStr = convertProcesoContacto(p.proceso);
 
-			txt = txt.concat(certificacionStr, profesionistaStr, empleadorStr, procesoStr);
+			const txt = `${certificacionStr} ${profesionistaStr} ${empleadorStr} ${procesoStr}`;
 
 			this.index.add(p.proceso.id, txt);
 		}
-	}
-
-	updateIndex(data: ProcesoContacto) {}
-
-	removeFromIndex(id: string): void {
-		if (this.index.contain(id)) this.index.remove(id);
 	}
 }
 
@@ -67,8 +71,6 @@ export function newIndexProcesosContacto(
 	const mapCertificaciones = buildMap(certificaciones);
 	const mapProfesionistas = buildMap(profesionistas);
 	const mapEmpleadores = buildMap(empleadores);
-
-	const index = new IndexProcesosContacto();
 
 	const _data: DataProcesosHelper[] = [];
 
@@ -84,6 +86,7 @@ export function newIndexProcesosContacto(
 			profesionista
 		});
 	}
+	const index = new IndexProcesosContacto(..._data);
 
 	index.addToIndexHelper(..._data);
 
