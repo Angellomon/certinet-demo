@@ -1,23 +1,35 @@
 import { generateId } from './demo-data';
+import {
+	isEqual as isDateEqual,
+	isAfter as isDateAfter,
+	isBefore as isDateBefore,
+	isValid as isDateValid
+} from 'date-fns';
 
 type LocationFilterType = 'location';
 type YearsOfExperienceFilterType = 'yearsofexperience';
 type NumberOfProjectsFilterType = 'numberofprojects';
 type TagFilterType = 'tag';
 type StatusBooleanFilterType = 'statusboolean';
+type DateFilterType = 'date';
+type DateRangeFilterType = 'date-range';
 
 export type FilterType =
 	| LocationFilterType
 	| YearsOfExperienceFilterType
 	| NumberOfProjectsFilterType
 	| TagFilterType
-	| StatusBooleanFilterType;
+	| StatusBooleanFilterType
+	| DateFilterType
+	| DateRangeFilterType;
+
+type DateRange = [Date, Date];
 
 export abstract class Filter {
 	id: string;
 	type: FilterType;
 	name: string;
-	value: number | string | [number, number] | string[] | boolean;
+	value: number | string | [number, number] | string[] | boolean | Date | DateRange;
 
 	abstract isValid(): boolean;
 	abstract filterIds(ids: { id: string; value: any }[]): string[];
@@ -205,5 +217,79 @@ export class BooleanFilter extends Filter {
 
 	filterIds(ids: { id: string; value: boolean }[]): string[] {
 		return ids.filter((i) => i.value === this.value).map((i) => i.id);
+	}
+}
+
+export class DateEqualFilter extends Filter {
+	value: Date = $state() as Date;
+
+	constructor(name: string, value: Date) {
+		super('date', name, value);
+
+		this.value = value;
+	}
+
+	isValid(): boolean {
+		return isDateValid(this.value);
+	}
+
+	filterIds(ids: { id: string; value: Date }[]): string[] {
+		return ids.filter((i) => isDateEqual(i.value, this.value)).map((i) => i.id);
+	}
+}
+
+export class DateAfterFilter extends Filter {
+	value: Date = $state() as Date;
+
+	constructor(name: string, value: Date) {
+		super('date', name, value);
+
+		this.value = value;
+	}
+
+	isValid(): boolean {
+		return isDateValid(this.value);
+	}
+
+	filterIds(ids: { id: string; value: any }[]): string[] {
+		return ids.filter((i) => isDateAfter(i.value, this.value)).map((i) => i.id);
+	}
+}
+
+export class DateBeforeFilter extends Filter {
+	value: Date = $state() as Date;
+
+	constructor(name: string, value: Date) {
+		super('date', name, value);
+
+		this.value = value;
+	}
+
+	isValid(): boolean {
+		return isDateValid(this.value);
+	}
+
+	filterIds(ids: { id: string; value: any }[]): string[] {
+		return ids.filter((i) => isDateBefore(i.value, this.value)).map((i) => i.id);
+	}
+}
+
+export class DateRangeFilter extends Filter {
+	value: DateRange = $state() as DateRange;
+
+	constructor(name: string, value: DateRange) {
+		super('date-range', name, value);
+
+		this.value = value;
+	}
+
+	isValid(): boolean {
+		return isDateValid(this.value);
+	}
+
+	filterIds(ids: { id: string; value: any }[]): string[] {
+		return ids
+			.filter((i) => isDateAfter(i.value, this.value[0]) && isDateBefore(i.value, this.value[1]))
+			.map((i) => i.id);
 	}
 }
