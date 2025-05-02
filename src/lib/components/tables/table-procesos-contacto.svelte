@@ -3,19 +3,28 @@
 		getCalificacionesProcesoContext,
 		getCertificacionesContext,
 		getEmpleadoresContext,
-		getIndexEmpleadoresContext,
 		getIndexProcesosContext,
 		getProcesosContext,
 		getProfesionistasContext
 	} from '$lib/context.svelte';
-	import type { Empleadores, ProcesosContacto } from '$lib/entities';
-	import { ArrowSquareOut, Hash, NotePencil, X } from 'phosphor-svelte';
+	import type { ProcesosContacto } from '$lib/entities';
+	import { ArrowSquareOut, Hash } from 'phosphor-svelte';
 	import SearchInput from '../search.svelte';
-	import FiltersAdminProfesionistas from '../filters/filters-admin-profesionistas.svelte';
 	import FiltersList from '../filters/filters-list.svelte';
-	import { BooleanFilter, type Filter } from '$lib/filters.svelte';
+	import {
+		BooleanFilter,
+		DateAfterFilter,
+		DateBeforeFilter,
+		DateEqualFilter,
+		EqualFilter,
+		LessThanFilter,
+		MoreThanFilter,
+		TagFilter,
+		type Filter
+	} from '$lib/filters.svelte';
 	import { buildMap } from '$lib/utils';
 	import InputRate from '../inputs/input-rate.svelte';
+	import FiltersAdminProcesosContacto from '../filters/filters-admin-procesos-contacto.svelte';
 
 	interface Props {
 		limit?: number;
@@ -115,6 +124,73 @@
 			// 		...filter.filterIds(procesos.value.map((p) => ({ id: p.id, value: p.verificado })))
 			// 	);
 			// }
+
+			if (
+				filter instanceof LessThanFilter ||
+				filter instanceof MoreThanFilter ||
+				filter instanceof EqualFilter
+			) {
+				if (filter.type === 'rate-empleador') {
+					ids = ids.concat(
+						...filter.filterIds(
+							resultados
+								.map((p) => {
+									const calificacion = p.idCalificacion
+										? mapCalificaciones[p.idCalificacion]
+										: null;
+									const calificacionEmpleador = calificacion?.empleador
+										? calificacion.empleador.valor
+										: -1;
+
+									return { id: p.id, value: calificacionEmpleador };
+								})
+								.filter((i) => i.value > -1)
+						)
+					);
+				} else if (filter.type === 'rate-profesionista') {
+					ids = ids.concat(
+						...filter.filterIds(
+							resultados
+								.map((p) => {
+									const calificacion = p.idCalificacion
+										? mapCalificaciones[p.idCalificacion]
+										: null;
+									const calificacionProfesionista = calificacion?.profesionista
+										? calificacion.profesionista.valor
+										: -1;
+
+									return { id: p.id, value: calificacionProfesionista };
+								})
+								.filter((i) => i.value > -1)
+						)
+					);
+				}
+			} else if (
+				filter instanceof DateAfterFilter ||
+				filter instanceof DateBeforeFilter ||
+				filter instanceof DateEqualFilter
+			) {
+				if (filter.type === 'fecha-inicio') {
+					ids = ids.concat(
+						...filter.filterIds(resultados.map((p) => ({ id: p.id, value: p.fechaInicio })))
+					);
+				} else if (filter.type === 'fecha-fin') {
+					ids = ids.concat(
+						...filter.filterIds(
+							// resultados
+							// 	.map((p) => ({ id: p.id, value: p.fechaFin }))
+							// 	.filter((i) => i.value instanceof Date)
+							resultados
+								.filter((p) => !!p.fechaFin)
+								.map((p) => ({ id: p.id, value: p.fechaFin })) as { id: string; value: Date }[]
+						)
+					);
+				}
+			} else if (filter instanceof TagFilter) {
+				ids = ids.concat(
+					...filter.filterIds(resultados.map((p) => ({ id: p.id, value: p.contacto.tipo })))
+				);
+			}
 		}
 
 		filteredIds = Array.from(new Set(ids));
@@ -271,9 +347,9 @@
 			bind:searchTerm
 			bind:showFiltersSelect
 		>
-			<!-- {#snippet filters()}
-				<FiltersAdminProfesionistas onClose={hideFilters} onSelect={handleFilterSelect} />
-			{/snippet} -->
+			{#snippet filters()}
+				<FiltersAdminProcesosContacto onClose={hideFilters} onSelect={handleFilterSelect} />
+			{/snippet}
 		</SearchInput>
 	</div>
 
