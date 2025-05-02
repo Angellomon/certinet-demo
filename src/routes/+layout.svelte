@@ -22,6 +22,7 @@
 	import { newIndexProfesionistas } from '$lib/search-indexes/index-profesionistas';
 	import {
 		setIndexCertificacionesContext,
+		setIndexComprasContext,
 		setIndexEmpleadoresContext,
 		setIndexProcesosContext,
 		setIndexProfesionistasContext,
@@ -34,6 +35,7 @@
 	import { InstagramLogo, FacebookLogo, LinkedinLogo, TwitterLogo } from 'phosphor-svelte';
 	import { newIndexEmpleadores } from '$lib/search-indexes/index-empleadores';
 	import { newIndexProcesosContacto } from '$lib/search-indexes/index-procesos-contacto';
+	import { newIndexCompras } from '$lib/search-indexes/index-compras';
 
 	let { children } = $props();
 
@@ -80,6 +82,15 @@
 
 	const comprasStore = newComprasStore();
 	setContext('compras', comprasStore);
+
+	const indexCompras = newIndexCompras(
+		profesionistasStore.value,
+		empleadoresStore.value,
+		certificacionesStore.value,
+		procesosContactoStore.value,
+		comprasStore.value
+	);
+	setIndexComprasContext(indexCompras);
 
 	const calificacionesProcesoStore = newCalificacionesProcesoStore();
 	setContext('calificaciones-proceso', calificacionesProcesoStore);
