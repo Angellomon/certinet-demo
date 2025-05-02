@@ -17,6 +17,8 @@ type DateRangeFilterType = 'date-range';
 type RateFilterType = 'rate';
 type RateProfesionistaFilterType = 'rate-profesionista';
 type RateEmpleadorFilterType = 'rate-empleador';
+type MontoFilterType = 'monto';
+type StatusCompraFilterType = 'status-compra';
 
 export type FilterType =
 	| LocationFilterType
@@ -30,7 +32,9 @@ export type FilterType =
 	| DateRangeFilterType
 	| RateFilterType
 	| RateProfesionistaFilterType
-	| RateEmpleadorFilterType;
+	| RateEmpleadorFilterType
+	| MontoFilterType
+	| StatusCompraFilterType;
 
 type DateRange = [Date, Date];
 
@@ -56,7 +60,8 @@ type LessThanFilterType =
 	| NumberOfProjectsFilterType
 	| RateEmpleadorFilterType
 	| RateFilterType
-	| RateProfesionistaFilterType;
+	| RateProfesionistaFilterType
+	| MontoFilterType;
 
 export class LessThanFilter extends Filter {
 	value: number = $state(0);
@@ -87,7 +92,8 @@ type MoreThanFilterType =
 	| NumberOfProjectsFilterType
 	| RateFilterType
 	| RateEmpleadorFilterType
-	| RateProfesionistaFilterType;
+	| RateProfesionistaFilterType
+	| MontoFilterType;
 
 export class MoreThanFilter extends Filter {
 	value: number = $state(0);
@@ -118,7 +124,8 @@ type EqualFilterType =
 	| NumberOfProjectsFilterType
 	| RateFilterType
 	| RateEmpleadorFilterType
-	| RateProfesionistaFilterType;
+	| RateProfesionistaFilterType
+	| MontoFilterType;
 
 export class EqualFilter extends Filter {
 	value: number = $state(0);
@@ -148,7 +155,8 @@ type RangeFilterType =
 	| NumberOfProjectsFilterType
 	| RateFilterType
 	| RateEmpleadorFilterType
-	| RateProfesionistaFilterType;
+	| RateProfesionistaFilterType
+	| MontoFilterType;
 
 export class RangeFilter extends Filter {
 	value: [number, number] = $state([0, 0]);
@@ -314,5 +322,25 @@ export class DateRangeFilter extends Filter {
 		return ids
 			.filter((i) => isDateAfter(i.value, this.value[0]) && isDateBefore(i.value, this.value[1]))
 			.map((i) => i.id);
+	}
+}
+
+type StatusFilterType = StatusCompraFilterType;
+
+export class StatusFilter extends Filter {
+	value: string = $state() as string;
+
+	constructor(type: StatusFilterType, name: string, value: string) {
+		super(type, name, value);
+
+		this.value = value;
+	}
+
+	isValid(): boolean {
+		return typeof this.value == 'string';
+	}
+
+	filterIds(ids: { id: string; value: any }[]): string[] {
+		return ids.filter((i) => i.value === this.value).map((i) => i.id);
 	}
 }
