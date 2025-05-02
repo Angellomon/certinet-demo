@@ -92,6 +92,13 @@ export const precioCertificacionSchema = v.object({
 
 export type PrecioCertificacion = v.InferOutput<typeof precioCertificacionSchema>;
 
+export const statusCompraSchema = v.union([
+	v.literal('en proceso'),
+	v.literal('completado'),
+	v.literal('rechazado')
+]);
+export type StatusCompra = v.InferOutput<typeof statusCompraSchema>;
+
 export const compraSchema = v.object({
 	id: idSchema,
 	idEmpleador: idSchema,
@@ -100,7 +107,7 @@ export const compraSchema = v.object({
 	monto: positiveNumberSchema,
 	promocion: v.optional(v.nullable(v.string())),
 	precio: precioCertificacionSchema,
-	status: v.union([v.literal('en proceso'), v.literal('completado'), v.literal('rechazado')])
+	status: statusCompraSchema
 });
 
 export type Compra = v.InferOutput<typeof compraSchema>;
