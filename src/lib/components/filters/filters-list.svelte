@@ -1,6 +1,8 @@
 <script lang="ts">
 	import {
 		BooleanFilter,
+		DateAfterFilter,
+		DateBeforeFilter,
 		EqualFilter,
 		LessThanFilter,
 		LocationFilter,
@@ -8,7 +10,8 @@
 		TagFilter,
 		type Filter
 	} from '$lib/filters.svelte';
-	import { ListMagnifyingGlass, X } from 'phosphor-svelte';
+	import { CalendarBlank, ListMagnifyingGlass, X } from 'phosphor-svelte';
+	import { formatISO, parseISO } from 'date-fns';
 
 	interface Props {
 		filters: Filter[];
@@ -19,6 +22,10 @@
 	const { filters = $bindable([]), onApply, onRemove }: Props = $props();
 
 	const filterTags: Record<string, string[]> = $state({});
+
+	function formatDate(date: Date) {
+		return formatISO(date, { representation: 'date' });
+	}
 
 	function removeFilter(id: string) {
 		const i = filters.findIndex((f) => f.id === id);
@@ -191,6 +198,54 @@
 	</div>
 {/snippet}
 
+{#snippet dateAfterFilter(filter: DateAfterFilter)}
+	<div class="rounded-box flex flex-col gap-2 border p-2">
+		<p class="text-xs">{`${filter.name}`}</p>
+
+		<div class="join">
+			<div class="badge badge-soft badge-accent mr-2 w-full place-self-center">
+				<CalendarBlank class="size-5" />
+				<div class="break-keep">Después de</div>
+			</div>
+
+			<input
+				class="input"
+				type="date"
+				value={formatDate(filter.value)}
+				onchange={(e) => {
+					filter.value = parseISO(e.currentTarget.value);
+				}}
+			/>
+
+			{@render optionButtons(filter)}
+		</div>
+	</div>
+{/snippet}
+
+{#snippet dateBeforeFilter(filter: DateBeforeFilter)}
+	<div class="rounded-box flex flex-col gap-2 border p-2">
+		<p class="text-xs">{`${filter.name}`}</p>
+
+		<div class="join">
+			<div class="badge badge-soft badge-accent mr-2 w-full place-self-center">
+				<CalendarBlank class="size-5" />
+				<div class="break-keep">Antes de</div>
+			</div>
+
+			<input
+				class="input"
+				type="date"
+				value={formatDate(filter.value)}
+				onchange={(e) => {
+					filter.value = parseISO(e.currentTarget.value);
+				}}
+			/>
+
+			{@render optionButtons(filter)}
+		</div>
+	</div>
+{/snippet}
+
 <div class="flex flex-row flex-wrap gap-2">
 	{#each filters as filter (filter.id)}
 		<!-- <div class="tooltip tooltip-bottom" data-tip={filter.name}> -->
@@ -206,6 +261,10 @@
 			{@render equalFilter(filter)}
 		{:else if filter instanceof BooleanFilter}
 			{@render booleanFilter(filter)}
+		{:else if filter instanceof DateBeforeFilter}
+			{@render dateBeforeFilter(filter)}
+		{:else if filter instanceof DateAfterFilter}
+			{@render dateAfterFilter(filter)}
 		{/if}
 	{/each}
 </div>
