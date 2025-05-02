@@ -1,5 +1,6 @@
 import type {
 	Certificacion,
+	Compra,
 	Curriculum,
 	Empleador,
 	ProcesoContacto,
@@ -60,6 +61,14 @@ export function convertProcesoContacto(data: ProcesoContacto) {
 
 	result = result.concat(data.contacto.empleador, ' ');
 	result = result.concat(data.contacto.profesionista, ' ');
+
+	return result;
+}
+
+export function convertCompra(data: Compra) {
+	let result = '';
+
+	result = result.concat(data.id);
 
 	return result;
 }
