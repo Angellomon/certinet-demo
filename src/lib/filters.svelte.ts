@@ -11,8 +11,12 @@ type YearsOfExperienceFilterType = 'yearsofexperience';
 type NumberOfProjectsFilterType = 'numberofprojects';
 type TagFilterType = 'tag';
 type StatusBooleanFilterType = 'statusboolean';
-type DateFilterType = 'date';
+type DateFechaInicioFilterType = 'fecha-inicio';
+type DateFechaFinFilterType = 'fecha-fin';
 type DateRangeFilterType = 'date-range';
+type RateFilterType = 'rate';
+type RateProfesionistaFilterType = 'rate-profesionista';
+type RateEmpleadorFilterType = 'rate-empleador';
 
 export type FilterType =
 	| LocationFilterType
@@ -21,7 +25,12 @@ export type FilterType =
 	| TagFilterType
 	| StatusBooleanFilterType
 	| DateFilterType
-	| DateRangeFilterType;
+	| DateFechaInicioFilterType
+	| DateFechaFinFilterType
+	| DateRangeFilterType
+	| RateFilterType
+	| RateProfesionistaFilterType
+	| RateEmpleadorFilterType;
 
 type DateRange = [Date, Date];
 
@@ -42,14 +51,17 @@ export abstract class Filter {
 	}
 }
 
+type LessThanFilterType =
+	| YearsOfExperienceFilterType
+	| NumberOfProjectsFilterType
+	| RateEmpleadorFilterType
+	| RateFilterType
+	| RateProfesionistaFilterType;
+
 export class LessThanFilter extends Filter {
 	value: number = $state(0);
 
-	constructor(
-		type: YearsOfExperienceFilterType | NumberOfProjectsFilterType,
-		name: string,
-		value: number
-	) {
+	constructor(type: LessThanFilterType, name: string, value: number) {
 		super(type, name, value);
 
 		this.value = value;
@@ -70,14 +82,17 @@ export class LessThanFilter extends Filter {
 	}
 }
 
+type MoreThanFilterType =
+	| YearsOfExperienceFilterType
+	| NumberOfProjectsFilterType
+	| RateFilterType
+	| RateEmpleadorFilterType
+	| RateProfesionistaFilterType;
+
 export class MoreThanFilter extends Filter {
 	value: number = $state(0);
 
-	constructor(
-		type: YearsOfExperienceFilterType | NumberOfProjectsFilterType,
-		name: string,
-		value: number
-	) {
+	constructor(type: MoreThanFilterType, name: string, value: number) {
 		super(type, name, value);
 
 		this.value = value;
@@ -98,14 +113,17 @@ export class MoreThanFilter extends Filter {
 	}
 }
 
+type EqualFilterType =
+	| YearsOfExperienceFilterType
+	| NumberOfProjectsFilterType
+	| RateFilterType
+	| RateEmpleadorFilterType
+	| RateProfesionistaFilterType;
+
 export class EqualFilter extends Filter {
 	value: number = $state(0);
 
-	constructor(
-		type: YearsOfExperienceFilterType | NumberOfProjectsFilterType,
-		name: string,
-		value: number
-	) {
+	constructor(type: EqualFilterType, name: string, value: number) {
 		super(type, name, value);
 		this.value = value;
 	}
@@ -125,14 +143,17 @@ export class EqualFilter extends Filter {
 	}
 }
 
+type RangeFilterType =
+	| YearsOfExperienceFilterType
+	| NumberOfProjectsFilterType
+	| RateFilterType
+	| RateEmpleadorFilterType
+	| RateProfesionistaFilterType;
+
 export class RangeFilter extends Filter {
 	value: [number, number] = $state([0, 0]);
 
-	constructor(
-		type: YearsOfExperienceFilterType | NumberOfProjectsFilterType,
-		name: string,
-		value: [number, number]
-	) {
+	constructor(type: RangeFilterType, name: string, value: [number, number]) {
 		super(type, name, value);
 
 		this.value = value;
@@ -220,11 +241,13 @@ export class BooleanFilter extends Filter {
 	}
 }
 
+type DateFilterType = DateFechaFinFilterType | DateFechaInicioFilterType;
+
 export class DateEqualFilter extends Filter {
 	value: Date = $state() as Date;
 
-	constructor(name: string, value: Date) {
-		super('date', name, value);
+	constructor(type: DateFilterType, name: string, value: Date) {
+		super(type, name, value);
 
 		this.value = value;
 	}
@@ -241,8 +264,8 @@ export class DateEqualFilter extends Filter {
 export class DateAfterFilter extends Filter {
 	value: Date = $state() as Date;
 
-	constructor(name: string, value: Date) {
-		super('date', name, value);
+	constructor(type: DateFilterType, name: string, value: Date) {
+		super(type, name, value);
 
 		this.value = value;
 	}
@@ -259,8 +282,8 @@ export class DateAfterFilter extends Filter {
 export class DateBeforeFilter extends Filter {
 	value: Date = $state() as Date;
 
-	constructor(name: string, value: Date) {
-		super('date', name, value);
+	constructor(type: DateFilterType, name: string, value: Date) {
+		super(type, name, value);
 
 		this.value = value;
 	}
@@ -277,8 +300,8 @@ export class DateBeforeFilter extends Filter {
 export class DateRangeFilter extends Filter {
 	value: DateRange = $state() as DateRange;
 
-	constructor(name: string, value: DateRange) {
-		super('date-range', name, value);
+	constructor(type: DateFilterType, name: string, value: DateRange) {
+		super(type, name, value);
 
 		this.value = value;
 	}
