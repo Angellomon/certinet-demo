@@ -10,7 +10,9 @@ type LocationFilterType = 'location';
 type YearsOfExperienceFilterType = 'yearsofexperience';
 type NumberOfProjectsFilterType = 'numberofprojects';
 type TagFilterType = 'tag';
-type StatusBooleanFilterType = 'statusboolean';
+type StatusBooleanFilterType = 'status-boolean';
+type RateProfesionistaBooleanFilterType = 'rate-profesionista-boolean';
+type RateEmpleadorBooleanFilterType = 'rate-empleador-boolean';
 type DateFechaInicioFilterType = 'fecha-inicio';
 type DateFechaFinFilterType = 'fecha-fin';
 type DateRangeFilterType = 'date-range';
@@ -18,7 +20,7 @@ type RateFilterType = 'rate';
 type RateProfesionistaFilterType = 'rate-profesionista';
 type RateEmpleadorFilterType = 'rate-empleador';
 type MontoFilterType = 'monto';
-type StatusCompraFilterType = 'status-compra';
+type StatusCompraFilterType = 'status-compra-boolean';
 
 export type FilterType =
 	| LocationFilterType
@@ -34,7 +36,9 @@ export type FilterType =
 	| RateProfesionistaFilterType
 	| RateEmpleadorFilterType
 	| MontoFilterType
-	| StatusCompraFilterType;
+	| StatusCompraFilterType
+	| RateEmpleadorBooleanFilterType
+	| RateProfesionistaBooleanFilterType;
 
 type DateRange = [Date, Date];
 
@@ -231,11 +235,17 @@ export class TagFilter extends Filter {
 	}
 }
 
+type BooleanFilterType =
+	| StatusBooleanFilterType
+	| StatusCompraFilterType
+	| RateEmpleadorBooleanFilterType
+	| RateProfesionistaBooleanFilterType;
+
 export class BooleanFilter extends Filter {
 	value: boolean = $state(false);
 
-	constructor(name: string, value: boolean) {
-		super('statusboolean', name, value);
+	constructor(type: BooleanFilterType, name: string, value: boolean) {
+		super(type, name, value);
 
 		this.value = value;
 	}
