@@ -50,7 +50,7 @@
 	}
 
 	function createStatusFilter(value: boolean = false) {
-		onSelect(new BooleanFilter('Estatus Verificación', value));
+		onSelect(new BooleanFilter('status-boolean', 'Estatus Verificación', value));
 	}
 
 	function handleClose() {

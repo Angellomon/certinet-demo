@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {
+		BooleanFilter,
 		DateAfterFilter,
 		DateBeforeFilter,
 		EqualFilter,
@@ -7,7 +8,7 @@
 		MoreThanFilter,
 		type Filter
 	} from '$lib/filters.svelte';
-	import { Equals, LessThan, X, GreaterThan } from 'phosphor-svelte';
+	import { Equals, LessThan, X, GreaterThan, QuestionMark } from 'phosphor-svelte';
 
 	interface Props {
 		onSelect?(filterType: Filter): void;
@@ -54,6 +55,14 @@
 
 	function createRateEmpleadorEqualFilter(name: string) {
 		onSelect(new EqualFilter('rate', name, 0));
+	}
+
+	function createCalificacionProfesionistaBooleanFilter(name: string) {
+		onSelect(new BooleanFilter('rate-profesionista-boolean', name, false));
+	}
+
+	function createCalificacionEmpleadorBooleanFilter(name: string) {
+		onSelect(new BooleanFilter('rate-empleador-boolean', name, false));
 	}
 
 	function handleClose() {
@@ -137,6 +146,17 @@
 					<GreaterThan class="size-5" />
 				</button>
 			</div>
+
+			<div class="join gap-2">
+				<button
+					class="btn btn-neutral tooltip"
+					data-tip="Existe Calificación"
+					onclick={() =>
+						createCalificacionProfesionistaBooleanFilter('Existe Calificación Profesionista')}
+				>
+					Existe <QuestionMark class="size-5" />
+				</button>
+			</div>
 		</div>
 	</li>
 
@@ -167,6 +187,16 @@
 					data-tip="Mayor que"
 				>
 					<GreaterThan class="size-5" />
+				</button>
+			</div>
+
+			<div class="join gap-2">
+				<button
+					class="btn btn-neutral tooltip"
+					data-tip="Existe Calificación"
+					onclick={() => createCalificacionEmpleadorBooleanFilter('Existe Calificación Empleador')}
+				>
+					Existe <QuestionMark class="size-5" />
 				</button>
 			</div>
 		</div>
