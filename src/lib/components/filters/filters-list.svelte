@@ -7,6 +7,7 @@
 		LessThanFilter,
 		LocationFilter,
 		MoreThanFilter,
+		SingleTagSelectFilter,
 		TagFilter,
 		type Filter
 	} from '$lib/filters.svelte';
@@ -115,6 +116,39 @@
 				<option value="Microsoft Azure"></option>
 				<option value="Cisco"></option>
 			</datalist>
+
+			{@render optionButtons(filter)}
+		</div>
+
+		{#if filterTags[filter.id]}
+			<div class="flex flex-row flex-wrap">
+				{#each filterTags[filter.id] as tag}
+					<button
+						onclick={() => removeTag(filter.id, tag)}
+						class="badge badge-soft badge-accent mr-2 cursor-pointer place-self-center"
+					>
+						{tag}
+					</button>
+				{/each}
+			</div>
+		{/if}
+	</div>
+{/snippet}
+
+{#snippet singleTagSelectFilter(filter: SingleTagSelectFilter)}
+	<div class="rounded-box flex flex-col gap-2 border p-2">
+		<p class="text-xs">{`${filter.name}`}</p>
+
+		<div class="join">
+			<select class="select" bind:value={filter.value}>
+				<option disabled selected>Selecciona...</option>
+
+				{#each filter.options as tag}
+					<option value={tag}>
+						{tag}
+					</option>
+				{/each}
+			</select>
 
 			{@render optionButtons(filter)}
 		</div>
@@ -253,6 +287,8 @@
 			{@render locationFilter(filter)}
 		{:else if filter instanceof TagFilter}
 			{@render tagFilter(filter)}
+		{:else if filter instanceof SingleTagSelectFilter}
+			{@render singleTagSelectFilter(filter)}
 		{:else if filter instanceof LessThanFilter}
 			{@render lessThanFilter(filter)}
 		{:else if filter instanceof MoreThanFilter}
