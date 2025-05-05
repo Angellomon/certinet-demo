@@ -190,6 +190,38 @@
 				ids = ids.concat(
 					...filter.filterIds(resultados.map((p) => ({ id: p.id, value: p.contacto.tipo })))
 				);
+			} else if (filter instanceof BooleanFilter) {
+				if (filter.type === 'rate-empleador-boolean') {
+					ids = ids.concat(
+						...filter.filterIds(
+							resultados
+								.filter((p) => !!p.idCalificacion)
+								.map((p) => {
+									const calif = mapCalificaciones[p.idCalificacion as string];
+
+									return {
+										id: p.id,
+										value: !!calif.empleador
+									};
+								})
+						)
+					);
+				} else if (filter.type === 'rate-profesionista-boolean') {
+					ids = ids.concat(
+						...filter.filterIds(
+							resultados
+								.filter((p) => !!p.idCalificacion)
+								.map((p) => {
+									const calif = mapCalificaciones[p.idCalificacion as string];
+
+									return {
+										id: p.id,
+										value: !!calif.profesionista
+									};
+								})
+						)
+					);
+				}
 			}
 		}
 
