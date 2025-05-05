@@ -1,13 +1,16 @@
 <script lang="ts">
+	import type { StatusCompra } from '$lib/entities';
 	import {
 		DateAfterFilter,
 		DateBeforeFilter,
 		EqualFilter,
 		LessThanFilter,
 		MoreThanFilter,
+		SingleTagSelectFilter,
+		TagFilter,
 		type Filter
 	} from '$lib/filters.svelte';
-	import { Equals, LessThan, X, GreaterThan } from 'phosphor-svelte';
+	import { Equals, LessThan, X, GreaterThan, ListDashes } from 'phosphor-svelte';
 
 	interface Props {
 		onSelect?(filterType: Filter): void;
@@ -34,6 +37,11 @@
 
 	function createMontoEqualFilter(name: string) {
 		onSelect(new EqualFilter('rate-profesionista', name, 0));
+	}
+
+	function createStatusCompraSingleTagSelectFilter(name: string) {
+		const options: StatusCompra[] = ['completado', 'en proceso', 'rechazado'];
+		onSelect(new SingleTagSelectFilter(name, '', options));
 	}
 
 	function handleClose() {
@@ -95,6 +103,20 @@
 					<GreaterThan class="size-5" />
 				</button>
 			</div>
+		</div>
+	</li>
+
+	<li class="list-row items-center gap-5">
+		<div class="flex flex-col gap-2">
+			<strong>Estatus Compra</strong>
+
+			<button
+				class="btn btn-neutral tooltip"
+				data-tip="Estatus Compra"
+				onclick={() => createStatusCompraSingleTagSelectFilter('Estatus Compra')}
+			>
+				Estatus <ListDashes class="size-5" />
+			</button>
 		</div>
 	</li>
 </ul>
