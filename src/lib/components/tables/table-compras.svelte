@@ -19,6 +19,7 @@
 		EqualFilter,
 		LessThanFilter,
 		MoreThanFilter,
+		SingleTagSelectFilter,
 		StatusFilter,
 		type Filter
 	} from '$lib/filters.svelte';
@@ -123,6 +124,10 @@
 					...filter.filterIds(resultados.map((p) => ({ id: p.id, value: p.fecha })))
 				);
 			} else if (filter instanceof StatusFilter) {
+				ids = ids.concat(
+					...filter.filterIds(resultados.map((p) => ({ id: p.id, value: p.status })))
+				);
+			} else if (filter instanceof SingleTagSelectFilter) {
 				ids = ids.concat(
 					...filter.filterIds(resultados.map((p) => ({ id: p.id, value: p.status })))
 				);
