@@ -295,7 +295,7 @@
 	{/if}
 {/if}
 
-<div class="rounded-box border-base-content/5 bg-base-100 overflow-x-auto border">
+<div class="rounded-box border-base-content/5 bg-base-100 mb-56 overflow-x-auto border md:mb-96">
 	<table class="table-xs md:table-sm lg:table-md 2xl:table-lg table">
 		{@render header()}
 
