@@ -2,20 +2,13 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { Gear } from 'phosphor-svelte';
-	import {
-		newSeccionAdminConfigStore,
-		newSeccionAdminProfesionistaStore,
-		newSeccionAdminStore
-	} from '$lib/localstore.svelte';
-	import { setContext } from 'svelte';
+
 	import AdminHeader from './admin-header.svelte';
 	import {
 		getSeccionAdminConfigContext,
 		getSeccionAdminContext,
 		getSeccionAdminProfesionistaContext,
-		setBreadCrumbsContext,
-		setSeccionAdminContext,
-		setSeccionAdminProfesionistaContext
+		setBreadCrumbsContext
 	} from '$lib/context.svelte';
 	import MenuSeccion from '$lib/components/menu-seccion.svelte';
 	import type { SeccionAdmin } from '$lib/entities';
@@ -24,16 +17,10 @@
 
 	const { children } = $props();
 
-	// const seccionAdminStore = newSeccionAdminStore();
-	// setSeccionAdminContext(seccionAdminStore);
 	const seccionAdminStore = getSeccionAdminContext();
 
-	// const seccionAdminConfigStore = newSeccionAdminConfigStore();
-	// setContext('seccion-admin-config-store', seccionAdminConfigStore);
 	const seccionAdminConfigStore = getSeccionAdminConfigContext();
 
-	// const seccionAdminProfesionistaStore = newSeccionAdminProfesionistaStore();
-	// setSeccionAdminProfesionistaContext(seccionAdminProfesionistaStore);
 	const seccionAdminProfesionistaStore = getSeccionAdminProfesionistaContext();
 
 	const breadcrumbsAdmin = newBreadcrumbsState([
