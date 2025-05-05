@@ -10,8 +10,8 @@
 	import { setContext } from 'svelte';
 	import AdminHeader from './admin-header.svelte';
 	import {
-	getSeccionAdminConfigContext,
-	getSeccionAdminContext,
+		getSeccionAdminConfigContext,
+		getSeccionAdminContext,
 		getSeccionAdminProfesionistaContext,
 		setBreadCrumbsContext,
 		setSeccionAdminContext,
@@ -26,15 +26,15 @@
 
 	// const seccionAdminStore = newSeccionAdminStore();
 	// setSeccionAdminContext(seccionAdminStore);
-	const seccionAdminStore = getSeccionAdminContext()
+	const seccionAdminStore = getSeccionAdminContext();
 
 	// const seccionAdminConfigStore = newSeccionAdminConfigStore();
 	// setContext('seccion-admin-config-store', seccionAdminConfigStore);
-	const seccionAdminConfigStore = getSeccionAdminConfigContext()
+	const seccionAdminConfigStore = getSeccionAdminConfigContext();
 
 	// const seccionAdminProfesionistaStore = newSeccionAdminProfesionistaStore();
 	// setSeccionAdminProfesionistaContext(seccionAdminProfesionistaStore);
-	const seccionAdminProfesionistaStore = getSeccionAdminProfesionistaContext()
+	const seccionAdminProfesionistaStore = getSeccionAdminProfesionistaContext();
 
 	const breadcrumbsAdmin = newBreadcrumbsState([
 		{
@@ -46,8 +46,6 @@
 
 	$effect(() => {
 		return () => {
-			console.log("exiting admin");
-			
 			seccionAdminStore.value = 'dashboard';
 			seccionAdminConfigStore.value = 'datos';
 			seccionAdminProfesionistaStore.value = 'datos';
