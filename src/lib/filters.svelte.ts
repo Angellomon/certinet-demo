@@ -235,6 +235,26 @@ export class TagFilter extends Filter {
 	}
 }
 
+export class SingleTagSelectFilter extends Filter {
+	value: string = $state() as string;
+	options: string[];
+
+	constructor(name: string, value: string, options: string[]) {
+		super('tag', name, value);
+
+		this.value = value;
+		this.options = options;
+	}
+
+	isValid(): boolean {
+		return typeof this.value === 'string';
+	}
+
+	filterIds(ids: { id: string; value: any }[]): string[] {
+		return ids.filter((i) => this.value.includes(i.value)).map((i) => i.id);
+	}
+}
+
 type BooleanFilterType =
 	| StatusBooleanFilterType
 	| StatusCompraFilterType
