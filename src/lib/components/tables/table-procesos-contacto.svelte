@@ -30,12 +30,14 @@
 		limit?: number;
 		baseURL?: string;
 		showSearch?: boolean;
+		idEmpleador?: string;
+		idProfesionista?: string
 	}
 
-	const { limit, showSearch = false, baseURL }: Props = $props();
+	const { limit, showSearch = false, baseURL, idEmpleador, idProfesionista }: Props = $props();
 
 	const indexProcesosContacto = getIndexProcesosContext();
-	const procesos = getProcesosContext();
+	const procesosStore = getProcesosContext();
 	const certificacionesStore = getCertificacionesContext();
 	const profesionistasStore = getProfesionistasContext();
 	const empleadoresStore = getEmpleadoresContext();
@@ -234,17 +236,25 @@
 	}
 
 	function filterProcesosContacto(): ProcesosContacto {
+		let procesos = procesosStore.value
+
+		if (idEmpleador)
+			procesos = procesos.filter(p => p.idEmpleador === idEmpleador)
+		
+		if (idProfesionista)
+			procesos = procesos.filter(p => p.idProfesionista === idProfesionista)
+
 		if (searchIds.length === 0 && filteredIds.length === 0)
-			return limit ? procesos.value.slice(limit) : procesos.value;
+			return limit ?procesos.slice(limit) :procesos;
 
 		let empleadoresSearch: ProcesosContacto | undefined = undefined;
 		let empleadoresFilters: ProcesosContacto | undefined = undefined;
 
 		if (searchIds.length > 0)
-			empleadoresSearch = procesos.value.filter((p) => searchIds.includes(p.id));
+			empleadoresSearch =procesos.filter((p) => searchIds.includes(p.id));
 
 		if (filteredIds.length > 0)
-			empleadoresFilters = procesos.value.filter((p) => filteredIds.includes(p.id));
+			empleadoresFilters =procesos.filter((p) => filteredIds.includes(p.id));
 
 		if (!empleadoresSearch && !empleadoresFilters) {
 			return [];
@@ -269,7 +279,7 @@
 			resultIds = [];
 		}
 
-		const resultEmpleadores = procesos.value.filter((p) => resultIds.includes(p.id));
+		const resultEmpleadores =procesos.filter((p) => resultIds.includes(p.id));
 
 		return limit ? resultEmpleadores.slice(limit) : resultEmpleadores;
 	}
