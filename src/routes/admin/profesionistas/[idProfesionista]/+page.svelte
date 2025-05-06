@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { FloppyDisk, NotePencil } from 'phosphor-svelte';
+	import { FloppyDisk, Hash, NotePencil } from 'phosphor-svelte';
 	import InputProfesionista from '$lib/components/inputs/inputs-profesionista.svelte';
 	import { getProfesionistaContext } from '$lib/context.svelte';
 	import TimelineProfesionista from '$lib/components/timeline-profesionista.svelte';
@@ -26,6 +26,8 @@
 			<h1 class="text-2xl underline">{profesionista.nombre} {profesionista.apellidos}</h1>
 
 			<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Profesionista">
+				<Hash class="size-5" />
+				ID
 				{profesionista.id}
 			</div>
 		</div>
@@ -46,9 +48,9 @@
 
 			<button class="btn btn-neutral" onclick={toggleEdit}>
 				{#if edit}
-					Guardar <FloppyDisk class="text-lg" />
+					Guardar <FloppyDisk class="size-5" />
 				{:else}
-					Editar <NotePencil class="text-lg" />
+					Editar <NotePencil class="size-5" />
 				{/if}
 			</button>
 		</div>
