@@ -31,9 +31,10 @@
 		limit?: number;
 		baseURL?: string;
 		showSearch?: boolean;
+		idEmpleador?: string;
 	}
 
-	const { limit, showSearch = false, baseURL }: Props = $props();
+	const { limit, showSearch = false, baseURL, idEmpleador }: Props = $props();
 
 	const indexCompras = getIndexComprasContext();
 	const empleadoresStore = getEmpleadoresContext();
@@ -143,17 +144,19 @@
 	}
 
 	function filterCompras(): Compras {
+		let compras = comprasStore.value;
+
+		if (idEmpleador) compras = compras.filter((c) => c.idEmpleador === idEmpleador);
+
 		if (searchIds.length === 0 && filteredIds.length === 0)
-			return limit ? comprasStore.value.slice(limit) : comprasStore.value;
+			return limit ? compras.slice(limit) : compras;
 
 		let comprasSearch: Compras | undefined = undefined;
 		let comprasFilters: Compras | undefined = undefined;
 
-		if (searchIds.length > 0)
-			comprasSearch = comprasStore.value.filter((p) => searchIds.includes(p.id));
+		if (searchIds.length > 0) comprasSearch = compras.filter((p) => searchIds.includes(p.id));
 
-		if (filteredIds.length > 0)
-			comprasFilters = comprasStore.value.filter((p) => filteredIds.includes(p.id));
+		if (filteredIds.length > 0) comprasFilters = compras.filter((p) => filteredIds.includes(p.id));
 
 		if (!comprasSearch && !comprasFilters) {
 			return [];
@@ -174,7 +177,7 @@
 			resultIds = [];
 		}
 
-		const resultCompras = comprasStore.value.filter((c) => resultIds.includes(c.id));
+		const resultCompras = compras.filter((c) => resultIds.includes(c.id));
 
 		return limit ? resultCompras.slice(limit) : resultCompras;
 	}
