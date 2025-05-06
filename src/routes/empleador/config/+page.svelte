@@ -1,8 +1,9 @@
 <script lang="ts">
+	import ButtonStripe from '$lib/components/button-stripe.svelte';
 	import { getCurrentEmpleadorContext } from '$lib/context.svelte';
 	import { getDefaultFormaPago, getDefaultPrecioCertificacion } from '$lib/demo-data';
 	import { newLocalStore } from '$lib/localstore.svelte';
-	import { NotePencil, X } from 'phosphor-svelte';
+	import { Hash, NotePencil, X } from 'phosphor-svelte';
 	import * as v from 'valibot';
 
 	const empleadorStore = getCurrentEmpleadorContext();
@@ -177,49 +178,15 @@
 {/snippet}
 
 {#snippet formaPago()}
-	<div class="flex flex-col gap-5 md:flex-row">
-		{#if empleadorStore.formaPago}
-			<fieldset class="fieldset">
-				<!-- svelte-ignore a11y_label_has_associated_control -->
-				<label class="fieldset-label">Tarjeta</label>
-				<input
-					type="text"
-					class="input"
-					placeholder="Razón Social"
-					bind:value={empleadorStore.formaPago.tarjeta}
-					disabled={!edit['forma pago']}
-				/>
-
-				<!-- svelte-ignore a11y_label_has_associated_control -->
-				<label class="fieldset-label">Giro</label>
-				<input
-					type="text"
-					class="input"
-					placeholder="Giro"
-					bind:value={empleadorStore.giro}
-					disabled={!edit['forma pago']}
-				/>
-			</fieldset>
-
-			<div class="join join-vertical">
-				<button class="btn" onclick={() => toggleEdit('forma pago')}>
-					{#if edit['forma pago']}
-						Guardar
-					{:else}
-						Editar
-					{/if}
-
-					<NotePencil class="size-5" />
-				</button>
-				<button class="btn" onclick={handleEliminarFormaPago}>
-					<X class="size-5" />
-				</button>
+	<div class="flex flex-col gap-5">
+		{#if empleadorStore.idPagoExterno}
+			<div class="badge badge-neutral tooltip tooltip-right" data-tip="ID Método de Pago">
+				<Hash class="size-5" />
+				ID
+				{empleadorStore.idPagoExterno}
 			</div>
-		{:else}
-			<button class="btn btn-dash block w-full" onclick={handleAgregarFormaPago}
-				>Agregar forma de pago</button
-			>
 		{/if}
+		<ButtonStripe idEmpelador={empleadorStore.id} />
 	</div>
 {/snippet}
 

@@ -51,7 +51,7 @@
 			empleadorStore.verificado ? 'Verificado' : 'Pendiente de Verificar'
 		)}
 
-		{#if !empleadorStore.formaPago}
+		{#if !empleadorStore.idPagoExterno}
 			{@render statusStat('Forma de Pago', 'error', 'No Establecida')}
 		{/if}
 

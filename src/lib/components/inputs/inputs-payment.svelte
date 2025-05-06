@@ -2,12 +2,16 @@
 	import * as v from 'valibot';
 	import { User, CreditCard } from 'phosphor-svelte';
 	import { formaPagoSchema, type FormaPago } from '$lib/entities';
+	import { getCurrentEmpleadorContext } from '$lib/context.svelte';
+	import ButtonStripe from '../button-stripe.svelte';
 
 	interface Props {
 		onSubmit: (data: FormaPago) => void;
 	}
 
 	const { onSubmit }: Props = $props();
+
+	const empleadorStore = getCurrentEmpleadorContext();
 
 	const formSchema = formaPagoSchema;
 	type FormData = v.InferOutput<typeof formSchema>;
@@ -39,43 +43,9 @@
 </script>
 
 <div class="flex flex-col pl-5">
-	<label class="input validator w-full grow self-end">
-		<User class="size-5" />
-		<input
-			type="input"
-			required
-			placeholder="Nombre Titular"
-			minlength="3"
-			maxlength="30"
-			bind:value={formDataState.nombreTitular}
-		/>
-	</label>
-
-	<label class="input validator w-full grow self-end">
-		<CreditCard class="size-5" />
-
-		<input
-			type="input"
-			required
-			placeholder="Número de Tarjeta"
-			pattern="[0-9\-]*"
-			minlength="3"
-			maxlength="30"
-			title="Only letters, numbers or dash"
-			bind:value={formDataState.tarjeta}
-		/>
-	</label>
-
-	<div class="join w-full self-end">
-		<label class="input validator">
-			<input type="number" required placeholder="Mes" bind:value={formDataState.mes} />
-		</label>
-
-		<label class="input validator self-end">
-			<input type="number" required placeholder="Año" bind:value={formDataState.año} />
-		</label>
-	</div>
-
-	<button onclick={handleSubmit} class="btn btn-secondary">Pagar</button>
-	<button onclick={handleSubmit} class="btn btn-primary">Pagar con Paypal</button>
+	{#if empleadorStore.idPagoExterno}
+		<button onclick={handleSubmit} class="btn btn-primary">Pagar con Proveedor Externo</button>
+	{:else}
+		<ButtonStripe idEmpelador={empleadorStore.id} />
+	{/if}
 </div>

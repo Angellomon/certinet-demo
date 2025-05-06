@@ -88,7 +88,7 @@
 				{@render stat('Compras realizadas', `${totalCompras}`)}
 				{@render stat('Última compra', ultimaCompra.fecha.toISOString().substring(0, 10))}
 
-				{#if !empleador.formaPago}
+				{#if !empleador.idPagoExterno}
 					<!-- svelte-ignore a11y_invalid_attribute -->
 					<a
 						href="/empleador/config"
@@ -102,10 +102,8 @@
 							{@render statusStat('Forma de Pago', 'error', 'No establecida')}
 						{/if}
 					</a>
-				{:else if empleador.formaPago.verificado}
-					{@render statusStat('Forma de Pago', 'success', 'Verificada')}
 				{:else}
-					{@render statusStat('Forma de Pago', 'warning', 'No verificada')}
+					{@render statusStat('Forma de Pago', 'success', 'Establecida')}
 				{/if}
 			</div>
 		</div>
