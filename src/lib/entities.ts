@@ -134,7 +134,8 @@ export const empleadorSchema = v.object({
 	fechaEstablecimiento: dateSchema,
 	verificado: v.boolean(),
 	precioCertificacion: v.optional(v.nullable(precioCertificacionSchema)),
-	formaPago: v.optional(v.nullable(formaPagoSchema))
+	formaPago: v.optional(v.nullable(formaPagoSchema)),
+	idPagoExterno: v.optional(v.fallback(v.nullable(v.string()), null))
 });
 
 export type Empleador = v.InferOutput<typeof empleadorSchema>;
