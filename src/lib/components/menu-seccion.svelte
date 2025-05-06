@@ -34,7 +34,7 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <ul
-	class="menu menu-horizontal bg-base-200 rounded-box w-full"
+	class="menu menu-horizontal bg-base-200 rounded-box w-full min-w-40"
 	class:menu-vertical={vertical}
 	class:md:w-56={vertical}
 	class:menu-sm={size === 'sm'}
