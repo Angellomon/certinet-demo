@@ -24,12 +24,17 @@
 		{
 			seccion: 'datos',
 			title: 'Datos',
-			url: `/admin/profesionistas/${idEmpleador}`
+			url: `/admin/empleadores/${idEmpleador}`
 		},
 		{
 			seccion: 'compras',
-			title: 'Certificaciones',
-			url: `/admin/profesionistas/${idEmpleador}/certificaciones`
+			title: 'Compras',
+			url: `/admin/empleadores/${idEmpleador}/compras`
+		},
+		{
+			seccion: 'procesos',
+			title: 'Procesos de Contacto',
+			url: `/admin/empleadores/${idEmpleador}/procesos`
 		}
 	];
 
