@@ -221,7 +221,8 @@ export type SeccionAdminProfesionista = v.InferOutput<typeof seccionAdminProfesi
 export const seccionAdminEmpleador = v.union([
 	v.literal('datos'),
 	v.literal('compras'),
-	v.literal('verificacion')
+	v.literal('verificacion'),
+	v.literal('procesos')
 ]);
 export type SeccionAdminEmpleador = v.InferOutput<typeof seccionAdminEmpleador>;
 
