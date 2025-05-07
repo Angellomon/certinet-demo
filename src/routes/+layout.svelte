@@ -14,6 +14,7 @@
 		newSeccionAdminCertificacionStore,
 		newSeccionAdminConfigStore,
 		newSeccionAdminEmpeladorStore,
+		newSeccionAdminProcesoStore,
 		newSeccionAdminProfesionistaStore,
 		newSeccionAdminStore,
 		newThemeStore
@@ -31,6 +32,7 @@
 		setSeccionAdminConfigContext,
 		setSeccionAdminContext,
 		setSeccionAdminEmpleadorContext,
+		setSeccionAdminProcesoContext,
 		setSeccionAdminProfesionistaContext
 	} from '$lib/context.svelte';
 
@@ -114,6 +116,9 @@
 
 	const seccionAdminCertificacionStore = newSeccionAdminCertificacionStore();
 	setSeccionAdminCertificacionContext(seccionAdminCertificacionStore);
+
+	const seccionAdminProcesoStore = newSeccionAdminProcesoStore();
+	setSeccionAdminProcesoContext(seccionAdminProcesoStore);
 </script>
 
 <svelte:head>
