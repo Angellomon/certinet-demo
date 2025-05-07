@@ -13,7 +13,7 @@ import type {
 	SeccionAdminConfig,
 	SeccionAdminEmpleador,
 	SeccionAdminProfesionista,
-	SeciconAdminCertificacion,
+	SeccionAdminCertificacion,
 	Theme
 } from './entities';
 import { error } from '@sveltejs/kit';
@@ -150,7 +150,7 @@ export function getSeccionAdminEmpleadorContext() {
 }
 
 export function setSeccionAdminCertificacionContext(
-	data: LocalObjectStore<SeciconAdminCertificacion>
+	data: LocalObjectStore<SeccionAdminCertificacion>
 ) {
 	setContext('seccion-admin-certificacion-store', data);
 }
@@ -158,7 +158,7 @@ export function setSeccionAdminCertificacionContext(
 export function getSeccionAdminCertificacionContext() {
 	return getContext(
 		'seccion-admin-certificacion-store'
-	) as LocalObjectStore<SeciconAdminCertificacion>;
+	) as LocalObjectStore<SeccionAdminCertificacion>;
 }
 
 export function setSeccionAdminContext(data: LocalObjectStore<SeccionAdmin>) {

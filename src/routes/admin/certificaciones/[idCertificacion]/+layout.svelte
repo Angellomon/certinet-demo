@@ -6,7 +6,7 @@
 		getCertificacionContext,
 		getSeccionAdminCertificacionContext
 	} from '$lib/context.svelte';
-	import type { SeciconAdminCertificacion } from '$lib/entities';
+	import type { SeccionAdminCertificacion } from '$lib/entities';
 
 	const { idCertificacion } = page.params;
 
@@ -17,7 +17,7 @@
 	const seccionAdminCertificacion = getSeccionAdminCertificacionContext();
 
 	const menuData: {
-		seccion: SeciconAdminCertificacion;
+		seccion: SeccionAdminCertificacion;
 		title: string;
 		url: string;
 	}[] = [
