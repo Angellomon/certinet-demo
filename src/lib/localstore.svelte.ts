@@ -4,6 +4,7 @@ import {
 	DEFAULT_SECCION_ADMIN_CERTIFICACION_STORE,
 	DEFAULT_SECCION_ADMIN_CONFIG_STORE,
 	DEFAULT_SECCION_ADMIN_EMPLEADOR_STORE,
+	DEFAULT_SECCION_ADMIN_PROCESO_STOER,
 	DEFAULT_SECCION_ADMIN_PROFESIONISTA_STORE,
 	DEFAULT_SECCION_ADMIN_PROFESIONISTAS_STORE,
 	DEFAULT_SECCION_ADMIN_STORE,
@@ -33,6 +34,7 @@ import {
 	seccionAdminCertificacion,
 	seccionAdminConfigSchema,
 	seccionAdminEmpleador,
+	seccionAdminProceso,
 	seccionAdminProfesionistaSchema,
 	seccionAdminProfesionistasSchema,
 	seccionAdminSchema,
@@ -174,4 +176,9 @@ export function newSeccionAdminEmpeladorStore() {
 export function newSeccionAdminCertificacionStore() {
 	const defaultData = DEFAULT_SECCION_ADMIN_CERTIFICACION_STORE;
 	return newLocalStore('seccion-admin-certificacion', defaultData, seccionAdminCertificacion);
+}
+
+export function newSeccionAdminProcesoStore() {
+	const defaultData = DEFAULT_SECCION_ADMIN_PROCESO_STOER;
+	return newLocalStore('seccion-admin-proceso', defaultData, seccionAdminProceso);
 }
