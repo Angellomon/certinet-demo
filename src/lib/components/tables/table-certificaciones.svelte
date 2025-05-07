@@ -12,7 +12,7 @@
 		MoreThanFilter,
 		type Filter
 	} from '$lib/filters.svelte';
-	import { Hash } from 'phosphor-svelte';
+	import { ArrowSquareOut, Hash } from 'phosphor-svelte';
 	import FiltersCertificaciones from '../filters/filters-certificaciones.svelte';
 	import FiltersList from '../filters/filters-list.svelte';
 	import Search from '../search.svelte';
@@ -31,7 +31,8 @@
 		showActions,
 		showVerifyActions,
 		idProfesionista,
-		showSearch = false
+		showSearch = false,
+		baseURL
 	}: Props = $props();
 
 	let searchIds: string[] = $state([]);
@@ -294,7 +295,16 @@
 		{#each results as cert, i}
 			<tr class="hover:bg-base-300">
 				<th>
-					{i + 1}
+					{#if baseURL}
+						<a href={`${baseURL}/${cert.id}`}>
+							<div class="join items-center gap-2">
+								{i + 1}
+								<ArrowSquareOut class="size-5" />
+							</div>
+						</a>
+					{:else}
+						{i + 1}
+					{/if}
 				</th>
 				<td>{cert.nombre}</td>
 				<td>
