@@ -24,7 +24,7 @@
 		<div>
 			<h1 class="text-2xl">{certificacionStore.nombre}</h1>
 
-			<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Profesionista">
+			<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Certificacion">
 				<Hash class="size-5" />
 				ID
 				{certificacionStore.id}
