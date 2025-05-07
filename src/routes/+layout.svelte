@@ -11,6 +11,7 @@
 		newIdProfesionistaStore,
 		newProcesosContactoStore,
 		newProfesionistasStore,
+		newSeccionAdminCertificacionStore,
 		newSeccionAdminConfigStore,
 		newSeccionAdminEmpeladorStore,
 		newSeccionAdminProfesionistaStore,
@@ -26,6 +27,7 @@
 		setIndexEmpleadoresContext,
 		setIndexProcesosContext,
 		setIndexProfesionistasContext,
+		setSeccionAdminCertificacionContext,
 		setSeccionAdminConfigContext,
 		setSeccionAdminContext,
 		setSeccionAdminEmpleadorContext,
@@ -109,6 +111,9 @@
 
 	const seccionAdminEmpleadorStore = newSeccionAdminEmpeladorStore();
 	setSeccionAdminEmpleadorContext(seccionAdminEmpleadorStore);
+
+	const seccionAdminCertificacionStore = newSeccionAdminCertificacionStore();
+	setSeccionAdminCertificacionContext(seccionAdminCertificacionStore);
 </script>
 
 <svelte:head>
