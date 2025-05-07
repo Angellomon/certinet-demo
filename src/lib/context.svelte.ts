@@ -14,7 +14,8 @@ import type {
 	SeccionAdminEmpleador,
 	SeccionAdminProfesionista,
 	SeccionAdminCertificacion,
-	Theme
+	Theme,
+	SeccionAdminProceso
 } from './entities';
 import { error } from '@sveltejs/kit';
 import type { IndexCertificaciones } from './search-indexes/index-certificaciones';
@@ -29,9 +30,11 @@ export function getProcesosContext() {
 }
 
 export function getProcesoContext(idProceso: string) {
-	const procesos = getProcesosContext();
+	const proceso = getProcesosContext().value.find((p) => p.id === idProceso);
 
-	return procesos.value.find((p) => p.id === idProceso);
+	if (!proceso) error(404, `proceso not found (id=${idProceso})`);
+
+	return proceso;
 }
 
 export function getCertificacionesContext() {
@@ -159,6 +162,14 @@ export function getSeccionAdminCertificacionContext() {
 	return getContext(
 		'seccion-admin-certificacion-store'
 	) as LocalObjectStore<SeccionAdminCertificacion>;
+}
+
+export function setSeccionAdminProcesoContext(data: LocalObjectStore<SeccionAdminProceso>) {
+	setContext('seccion-admin-proceso-store', data);
+}
+
+export function getSeccionAdminProcesoContext() {
+	return getContext('seccion-admin-proceso-store') as LocalObjectStore<SeccionAdminProceso>;
 }
 
 export function setSeccionAdminContext(data: LocalObjectStore<SeccionAdmin>) {
