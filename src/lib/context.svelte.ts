@@ -1,5 +1,5 @@
 import { getContext, setContext } from 'svelte';
-import type { LocalObjectStore } from './localstore.svelte';
+import { LocalObjectStore } from './localstore.svelte';
 import type {
 	Admins,
 	CalificacionesProceso,
@@ -13,6 +13,7 @@ import type {
 	SeccionAdminConfig,
 	SeccionAdminEmpleador,
 	SeccionAdminProfesionista,
+	SeciconAdminCertificacion,
 	Theme
 } from './entities';
 import { error } from '@sveltejs/kit';
@@ -38,9 +39,11 @@ export function getCertificacionesContext() {
 }
 
 export function getCertificacionContext(idCertificacion: string) {
-	const certificaciones = getCertificacionesContext();
+	const certificacion = getCertificacionesContext().value.find((c) => c.id == idCertificacion);
 
-	return certificaciones.value.find((c) => c.id == idCertificacion);
+	if (!certificacion) error(404, `empleador not found (id=${idCertificacion})`);
+
+	return certificacion;
 }
 
 export function getProfesionistasContext() {
@@ -144,6 +147,18 @@ export function setSeccionAdminEmpleadorContext(data: LocalObjectStore<SeccionAd
 
 export function getSeccionAdminEmpleadorContext() {
 	return getContext('seccion-admin-empleador-store') as LocalObjectStore<SeccionAdminEmpleador>;
+}
+
+export function setSeccionAdminCertificacionContext(
+	data: LocalObjectStore<SeciconAdminCertificacion>
+) {
+	setContext('seccion-admin-certificacion-store', data);
+}
+
+export function getSeccionAdminCertificacionContext() {
+	return getContext(
+		'seccion-admin-certificacion-store'
+	) as LocalObjectStore<SeciconAdminCertificacion>;
 }
 
 export function setSeccionAdminContext(data: LocalObjectStore<SeccionAdmin>) {
