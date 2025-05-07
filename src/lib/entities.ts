@@ -226,6 +226,9 @@ export const seccionAdminEmpleador = v.union([
 ]);
 export type SeccionAdminEmpleador = v.InferOutput<typeof seccionAdminEmpleador>;
 
+export const seccionAdminCertificacion = v.union([v.literal('datos'), v.literal('profesionista')]);
+export type SeciconAdminCertificacion = v.InferOutput<typeof seccionAdminCertificacion>;
+
 export const breadcrumbDataSchema = v.object({
 	title: v.string(),
 	url: v.optional(v.string()),
