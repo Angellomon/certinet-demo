@@ -1,4 +1,4 @@
-FROM node:21 as build
+FROM node:22 as build
 
 WORKDIR /certinet-demo
 
@@ -9,7 +9,7 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-FROM node:21 as run
+FROM node:22 as run
 
 WORKDIR /certinet-demo
 COPY --from=build /certinet-demo/package.json ./package.json
