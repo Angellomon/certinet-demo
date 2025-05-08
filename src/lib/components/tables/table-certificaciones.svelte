@@ -24,6 +24,7 @@
 		idProfesionista?: ID;
 		showSearch?: boolean;
 		baseURL?: string;
+		idsCerts?: string[];
 	}
 
 	const {
@@ -31,6 +32,7 @@
 		showActions,
 		showVerifyActions,
 		idProfesionista,
+		idsCerts,
 		showSearch = false,
 		baseURL
 	}: Props = $props();
@@ -222,6 +224,7 @@
 							.filter((c) => c.idProfesionista === idProfesionista)
 							.slice(limit)
 					: storeCertificaciones.value.filter((c) => c.idProfesionista === idProfesionista);
+			else if (idsCerts) return storeCertificaciones.value.filter((c) => idsCerts.includes(c.id));
 			else return limit ? storeCertificaciones.value.slice(limit) : storeCertificaciones.value;
 		}
 
