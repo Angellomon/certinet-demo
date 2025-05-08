@@ -5,5 +5,5 @@
 <h1 class="pb-5 text-2xl">Compras</h1>
 
 <main class="flex flex-col gap-5">
-	<TableCompras showSearch />
+	<TableCompras baseURL="/admin/compras" showSearch />
 </main>
