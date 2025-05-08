@@ -15,7 +15,8 @@ import type {
 	SeccionAdminProfesionista,
 	SeccionAdminCertificacion,
 	Theme,
-	SeccionAdminProceso
+	SeccionAdminProceso,
+	SeccionAdminCompra
 } from './entities';
 import { error } from '@sveltejs/kit';
 import type { IndexCertificaciones } from './search-indexes/index-certificaciones';
@@ -75,9 +76,11 @@ export function getComprasContext() {
 }
 
 export function getCompraContext(idCompra: string) {
-	const compras = getComprasContext();
+	const compra = getComprasContext().value.find((c) => c.id === idCompra);
 
-	return compras.value.find((c) => c.id === idCompra);
+	if (!compra) error(404, `Compra no encontrada (ID=${idCompra})`);
+
+	return compra;
 }
 
 export function getEmpleadoresContext() {
@@ -170,6 +173,14 @@ export function setSeccionAdminProcesoContext(data: LocalObjectStore<SeccionAdmi
 
 export function getSeccionAdminProcesoContext() {
 	return getContext('seccion-admin-proceso-store') as LocalObjectStore<SeccionAdminProceso>;
+}
+
+export function setSeccionAdminCompraContext(data: LocalObjectStore<SeccionAdminCompra>) {
+	setContext('seccion-admin-compra', data);
+}
+
+export function getSeccionAdminCompraContext() {
+	return getContext('seccion-admin-compra') as LocalObjectStore<SeccionAdminCompra>;
 }
 
 export function setSeccionAdminContext(data: LocalObjectStore<SeccionAdmin>) {
