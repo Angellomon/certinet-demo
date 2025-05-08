@@ -226,6 +226,14 @@ export const seccionAdminEmpleador = v.union([
 ]);
 export type SeccionAdminEmpleador = v.InferOutput<typeof seccionAdminEmpleador>;
 
+export const seccionAdminCompraSchema = v.union([
+	v.literal('datos'),
+	v.literal('empleador'),
+	v.literal('procesos'),
+	v.literal("certificaciones")
+]);
+export type SeccionAdminCompra = v.InferOutput<typeof seccionAdminCompraSchema>;
+
 export const seccionAdminCertificacion = v.union([v.literal('datos'), v.literal('profesionista')]);
 export type SeccionAdminCertificacion = v.InferOutput<typeof seccionAdminCertificacion>;
 

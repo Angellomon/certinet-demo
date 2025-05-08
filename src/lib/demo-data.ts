@@ -16,7 +16,8 @@ import type {
 	SeccionAdminProfesionista,
 	SeccionAdminProfesionistas,
 	SeccionAdminCertificacion,
-	SeccionAdminProceso
+	SeccionAdminProceso,
+	SeccionAdminCompra
 } from './entities';
 
 export const PROFESIONISTA_DEMO_ID = 'test-profesionista';
@@ -30,6 +31,7 @@ export const DEFAULT_SECCION_ADMIN_PROFESIONISTA_STORE: SeccionAdminProfesionist
 export const DEFAULT_SECCION_ADMIN_EMPLEADOR_STORE: SeccionAdminEmpleador = 'datos';
 export const DEFAULT_SECCION_ADMIN_CERTIFICACION_STORE: SeccionAdminCertificacion = 'datos';
 export const DEFAULT_SECCION_ADMIN_PROCESO_STOER: SeccionAdminProceso = 'datos';
+export const DEFAULT_SECCION_ADMIN_COMPRA_STORE: SeccionAdminCompra = 'datos';
 
 export const getDemoProfesionista: () => Profesionista = () =>
 	getDemoProfesionistas().filter((p) => p.id == PROFESIONISTA_DEMO_ID)[0];
