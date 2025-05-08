@@ -31,10 +31,18 @@
 		baseURL?: string;
 		showSearch?: boolean;
 		idEmpleador?: string;
-		idProfesionista?: string
+		idProfesionista?: string;
+		idsProcesos?: string[];
 	}
 
-	const { limit, showSearch = false, baseURL, idEmpleador, idProfesionista }: Props = $props();
+	const {
+		limit,
+		showSearch = false,
+		baseURL,
+		idEmpleador,
+		idProfesionista,
+		idsProcesos
+	}: Props = $props();
 
 	const indexProcesosContacto = getIndexProcesosContext();
 	const procesosStore = getProcesosContext();
@@ -236,25 +244,24 @@
 	}
 
 	function filterProcesosContacto(): ProcesosContacto {
-		let procesos = procesosStore.value
+		let procesos = procesosStore.value;
 
-		if (idEmpleador)
-			procesos = procesos.filter(p => p.idEmpleador === idEmpleador)
-		
-		if (idProfesionista)
-			procesos = procesos.filter(p => p.idProfesionista === idProfesionista)
+		if (idEmpleador) procesos = procesos.filter((p) => p.idEmpleador === idEmpleador);
+
+		if (idProfesionista) procesos = procesos.filter((p) => p.idProfesionista === idProfesionista);
+
+		if (idsProcesos) procesos = procesos.filter((p) => idsProcesos.includes(p.id));
 
 		if (searchIds.length === 0 && filteredIds.length === 0)
-			return limit ?procesos.slice(limit) :procesos;
+			return limit ? procesos.slice(limit) : procesos;
 
 		let empleadoresSearch: ProcesosContacto | undefined = undefined;
 		let empleadoresFilters: ProcesosContacto | undefined = undefined;
 
-		if (searchIds.length > 0)
-			empleadoresSearch =procesos.filter((p) => searchIds.includes(p.id));
+		if (searchIds.length > 0) empleadoresSearch = procesos.filter((p) => searchIds.includes(p.id));
 
 		if (filteredIds.length > 0)
-			empleadoresFilters =procesos.filter((p) => filteredIds.includes(p.id));
+			empleadoresFilters = procesos.filter((p) => filteredIds.includes(p.id));
 
 		if (!empleadoresSearch && !empleadoresFilters) {
 			return [];
@@ -279,7 +286,7 @@
 			resultIds = [];
 		}
 
-		const resultEmpleadores =procesos.filter((p) => resultIds.includes(p.id));
+		const resultEmpleadores = procesos.filter((p) => resultIds.includes(p.id));
 
 		return limit ? resultEmpleadores.slice(limit) : resultEmpleadores;
 	}
