@@ -24,7 +24,7 @@
 		<div>
 			<h1 class="text-2xl">{empleadorStore.razonSocial}</h1>
 
-			<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Profesionista">
+			<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Empleador">
 				<Hash class="size-5" />
 				ID
 				{empleadorStore.id}
