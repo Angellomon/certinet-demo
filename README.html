@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>CertiNet &lpar;Demo&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="certinet-demo">CertiNet (Demo)</h1>
+<blockquote>
+<p><strong>Objetivo:</strong> desarrollar un maquetado para CertiNet, plataforma que permite buscar profesionales certificados de una manera sencilla para los empleadores.</p>
+</blockquote>
+<p>Esta aplicación es un Aplicación Web; es decir, utiliza un navejador web para funcionar (ej. Google Chrome, Mozilla Firefox, Safari, etc)</p>
+<blockquote>
+<p><strong>Importante:</strong> Los datos que utiliza esta aplicación son meramente ilustrativos, no se guardan en ningún servidor externo, sólo se guardan de manera local en el navejador utilizando LocalStorage.</p>
+</blockquote>
+<h2 id="tecnologías">Tecnologías</h2>
+<p>El aplicativo se desarrolló con <a href="https://svelte.dev/docs/kit/introduction">Sveltekit</a> + <a href="https://vite.dev/">Vite</a>, un Framework Web que compila el código fuente y lo transforma en HTML, CSS y Javascript de manera optimizada.</p>
+<p>Así mismo, se desarrolló un motor de búsqueda que busca, con base en la información local, resultados con uso de palabras clave y filtros.
+El motor de búsqueda es <a href="https://github.com/nextapps-de/flexsearch">FlexSearch</a> implementado sólo en el frontend (app en el navejador), de igual manera se puede implementar el mismo en un backend que lo alimente con datos originarios de una base de datos.</p>
+<h1 id="documentación-para-correr-y-desplejar-el-aplicativo">Documentación Para Correr y Desplejar el Aplicativo</h1>
+<p>Esta documentación mostrará como correr y hacer &lt;<deploy>&gt; al proyecto de manera progresiva, es decir de manera local, &lt;<deploy>&gt; en un servidor, y &lt;<deploy>&gt; en una plataforma de contenedores Docker</p>
+<h2 id="correr-la-app-localmente">Correr la app localmente</h2>
+<blockquote>
+<p><strong>Prerequisitos:</strong> contar con una terminal compatible con POSIX (Linux, Mac, Windows CMDer) o Powershell en caso de windows. Contar con <a href="https://nodejs.org/en/download">NodeJS</a> versión 22 o superior instalado y poder hacer uso del comando npm (incluido al instalar <a href="https://nodejs.org/en/download">NodeJS</a>)</p>
+</blockquote>
+<p>Para correr la app de manera local, se tiene que clonar el repositorio o descomprimir el archivo .zip proporcionado.
+Ubicarse dentro del proyecto utilizando <code>cd</code> (o <code>dir</code> en caso de windows) y correr el comando</p>
+<pre><code class="language-bash">npm run dev
+</code></pre>
+<h2 id="compilar-la-app">Compilar la app</h2>
+<blockquote>
+<p>Este paso se refiere a la compilación del proyecto para instalar de manera productiva en un servidor</p>
+</blockquote>
+<p>Como el proyecto es simple, no requiere de mayor configuración para llevarse a producción, sólo correr el comando:</p>
+<pre><code class="language-bash">npm run build
+</code></pre>
+<p>Que generará un directorio .build que se deberá transferir a un servidor (con <a href="https://nodejs.org/en/download">NodeJS</a> 22+ instalado) mediante ftp o ssh (rsync).
+Ya una vez esté en el servidor, hay que correr el comando en el mismo directorio donde se encuentra <code>.build</code></p>
+<pre><code class="language-bash">node build
+</code></pre>
+<p>Esto expondrá el aplicativo en modo productivo por el puerto :3000</p>
+<h3 id="siguientes-pasos">Siguientes pasos</h3>
+<p>Lo anterior mencionado muestra cómo correr la app en un ambiente productivo mediante el puerto :3000, con un inconveniente: si se cierra la sesión de la terminal, la app se cierra también. Por lo que se recomienda utilizar un manejador de procesos como <a href="https://pm2.io/">PM2</a>, <a href="https://www.gnu.org/software/screen/manual/screen.html">screen</a> o <a href="https://github.com/tmux/tmux/wiki">tmux</a>, que corre la app en un proceso que persiste si la terminal se cierra; es decir, lo deja en sejundo plano de manera indeterminada</p>
+<p>De esta manera el aplicativo estaría expuesto de manera local, es decir, mediante <a href="http://localhost:3000">http://localhost:3000</a> (dentro del servidor)</p>
+<p>Para exponerlo a más usuarios, es necesario instalar un servidor proxy, que pueda ser capaz de recibir peticiones externas y dirigirlas al puerto :3000 del aplicativo. Esto es <a href="https://nginx.org/en/">NginX</a>, <a href="https://doc.traefik.io/traefik/">Traefik</a> o <a href="https://caddyserver.com/">Caddy</a> con una configuración que permita 'mapear' las peticiones ya sea desde el puerto :80/:443 o <a href="http://dominio.com">dominio.com</a> a :3000</p>
+<p>ej. Caddy (<a href="https://mainvps.net/blog/using-caddy-as-a-reverse-proxy/">ref</a>)</p>
+<p>Al instalar y verificar que el siguiente comando funcione:</p>
+<pre><code class="language-bash">caddy version
+</code></pre>
+<p>Crear un archivo ubicado en <code>/etc/caddy/Caddyfile</code> que sea</p>
+<pre><code>certinet.net {
+  reverse_proxy localhost:3000
+}
+</code></pre>
+<p>Y Reiniciar el servicio Caddy (en caso de usar Linux como servidor) con el comando:</p>
+<pre><code class="language-bash">sudo systemctl reload caddy
+</code></pre>
+<p>Esto hará que Caddy:</p>
+<ul>
+<li>Enrute las peticiones http/https al puerto 3000</li>
+<li>Automáticamente configure el SSL via Let's Encrypt</li>
+<li>Renueva los certificados SSL antes de que expiren</li>
+<li>Redirecciona peticiones http a https</li>
+</ul>
+<blockquote>
+<p><strong>Importante:</strong> se debe crear un rejistro tipo <code>A</code> en un DNS que apunte el dominio <a href="http://certinet.net">certinet.net</a> a la IP del servidor, así como configurar el Firewall del mismo por razones de sejuridad</p>
+</blockquote>
+<h2 id="docker"><a href="https://www.docker.com/">Docker</a></h2>
+<p>El aplicativo se entreja con un archivo Dockerfile que permite construir el aplicativo dentro de un contenedor estándar <a href="https://opencontainers.org/">OCI</a>.</p>
+<h2 id="coolify"><a href="https://coolify.io/">Coolify</a></h2>
+<p>Lo anterior puede ser automatizado si al servidor se le instala la plataforma Coolify, un programa que automatiza el &lt;<deploy>&gt; de proyectos que utilicen Docker y estén en un repositorio.</p>
+<p>Dicha plataforma permite configurar el 'routing', configuraciones, variables de entorno, etc, con interfaz gráfica y configuración de SSL automática</p>
+<blockquote>
+<p><strong>Importante:</strong> se debe crear un rejistro tipo <code>Wildcard</code> o <code>*.certinet.net</code> que dirija todos los posibles subdominios a la IP del servidor. Además del rejistro tipo <code>A</code> que apunte a <a href="http://certinet.net">certinet.net</a>.
+Si el proveedor de DNS no permite rejistros <code>Wildcard</code>, se deben crear rejistros tipo <code>A</code> para cada subdominio que la app pueda requerir.</p>
+</blockquote>
+<h2 id="estructura-del-código">Estructura del código</h2>
+<p>El código en sí se encuentra dentro de ./src.
+Los archivos estáticos (imágenes, logos y demás medios) se encuentran en ./static
+Lo demás en el directorio principal son archivos de configuración y dependencias</p>
+<p>Al tratarse de un Framework cuyo <a href="https://www.oyova.com/blog/what-is-a-route-web-dev/">routing</a> está basado en el sistema de archivos, las vistas residen en el directorio ./src/routes</p>
+<p>La lógica del motor de búsqueda, componentes y demás utilidades se encuentran dentro de <code>./src/lib</code></p>
+<h3 id="rutasvistas">Rutas/Vistas</h3>
+<p>Se encuentran en <code>./src/routes</code>, y cada subdirectorio representa una ruta cuya vista se encuentra dentro de <code>+page.svelte</code> y/o <code>+layout.svelte</code> (layout envuelve a page y sus subrutas).
+Las vistas (<code>+page.svelte</code>) tienen sintaxis basada en HTML, que hace uso de un <code>script tag</code> que maneja la lógica dentro de la vista</p>
+<blockquote>
+<p><strong>Importante:</strong> Al tratarse de una app meramente 'client side', todas las opciones de servidor están apagadas, descrito en el archivo <code>./src/routes/+layout.ts</code></p>
+<pre><code class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> ssr = <span class="hljs-literal">false</span>;
+</code></pre>
+</blockquote>
+<h3 id="motor-de-búsqueda">Motor de Búsqueda</h3>
+<p>El motor de búsqueda está en <code>./src/lib/search-indexes</code>, dividido por entidad para mejor abstracción. Esta implementación hace uso de <a href="https://github.com/nextapps-de/flexsearch">FlexSearch</a> mediante clases que permiten la codificación de la información de la entidad a un <code>string</code> para que el motor pueda indexarlo</p>
+<h3 id="filtros">Filtros</h3>
+<p>De igual manera los filtros están implementados en <code>./src/lib/filters.svelte.ts</code>. Igual se utilizan clases para describir las características del filtro  y métodos para filtrar una serie de ids <code>string[]</code> que cumplan con lo establecido al crear dicho filtro.</p>
+<h3 id="modelos-de-entidades">Modelos de Entidades</h3>
+<p>Los modelos de las entidades; es decir, los modelos, están descritos en <code>./src/lib/entities.ts</code> con sintaxis de esquemas.</p>
+<h3 id="datos">Datos</h3>
+<p>Los datos de muestra están descritos en <code>./src/lib/demo-data.ts</code></p>
+
+            
+            
+        </body>
+        </html>
