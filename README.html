@@ -151,7 +151,7 @@
 <p>Así mismo, se desarrolló un motor de búsqueda que busca, con base en la información local, resultados con uso de palabras clave y filtros.
 El motor de búsqueda es <a href="https://github.com/nextapps-de/flexsearch">FlexSearch</a> implementado sólo en el frontend (app en el navejador), de igual manera se puede implementar el mismo en un backend que lo alimente con datos originarios de una base de datos.</p>
 <h1 id="documentación-para-correr-y-desplegar-la-aplicación">Documentación Para Correr y Desplegar la Aplicación</h1>
-<p>Esta documentación mostrará como correr y hacer &lt;<deploy>&gt; al proyecto de manera progresiva, es decir de manera local, &lt;<deploy>&gt; en un servidor, y &lt;<deploy>&gt; en una plataforma de contenedores Docker</p>
+<p>Esta documentación mostrará como correr y hacer <code>deploy</code> al proyecto de manera progresiva, es decir de manera local, <code>deploy</code> en un servidor, y <code>deploy</code> en una plataforma de contenedores Docker</p>
 <h2 id="correr-la-app-localmente">Correr la app localmente</h2>
 <blockquote>
 <p><strong>Prerequisitos:</strong> contar con una terminal compatible con POSIX (Linux, Mac, Windows CMDer) o Powershell en caso de windows.
@@ -209,7 +209,7 @@ Ya una vez esté en el servidor, hay que correr el comando en el mismo directori
 <h2 id="docker"><a href="https://www.docker.com/">Docker</a></h2>
 <p>La aplicación se entrega con un archivo Dockerfile que permite construir la aplicación dentro de un contenedor estándar <a href="https://opencontainers.org/">OCI</a>.</p>
 <h2 id="coolify"><a href="https://coolify.io/">Coolify</a></h2>
-<p>Lo anterior puede ser automatizado si al servidor se le instala la plataforma Coolify, un programa que automatiza el &lt;<deploy>&gt; de proyectos que utilicen Docker y estén en un repositorio.</p>
+<p>Lo anterior puede ser automatizado si al servidor se le instala la plataforma Coolify, un programa que automatiza el <code>deploy</code> de proyectos que utilicen Docker y estén en un repositorio.</p>
 <p>Dicha plataforma permite configurar el 'routing', configuraciones, variables de entorno, etc, con interfaz gráfica y configuración de SSL automática</p>
 <blockquote>
 <p><strong>Importante:</strong> se debe crear un rejistro tipo <code>Wildcard</code> o <code>*.certinet.net</code> que dirija todos los posibles subdominios a la IP del servidor. Además del rejistro tipo <code>A</code> que apunte a <a href="http://certinet.net">certinet.net</a>.
