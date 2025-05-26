@@ -249,7 +249,12 @@
 					{/if}
 				</th>
 				<td>
-					<div class="badge badge-neutral tooltip break-keep" data-tip="Id Compra">
+					<div
+						class="badge badge-neutral tooltip flex-nowrap text-nowrap font-mono break-keep"
+						data-tip="Id Compra"
+					>
+						<Hash class="size-5" />
+						ID
 						{compra.id}
 					</div>
 				</td>

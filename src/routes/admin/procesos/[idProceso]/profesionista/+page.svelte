@@ -12,22 +12,23 @@
 </script>
 
 <main class="flex flex-col gap-5">
-	<div class="flex flex-row items-center justify-between gap-5">
-		<div>
-			<h1 class="text-2xl underline">{profesionista.nombre} {profesionista.apellidos}</h1>
-
-			<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Profesionista">
-				<Hash class="size-5" />
-				ID
-				{profesionista.id}
-			</div>
-		</div>
+	<div class="flex flex-row flex-wrap items-center justify-between gap-5">
+		<h1 class="text-2xl underline">{profesionista.nombre} {profesionista.apellidos}</h1>
 
 		{#if profesionista.verificado}
 			<button class="btn btn-success"> Verificado </button>
 		{:else}
 			<button class="btn btn-warning"> Pendiente de Verificar </button>
 		{/if}
+	</div>
+
+	<div
+		class="badge badge-neutral tooltip tooltip-right flex-nowrap font-mono text-nowrap"
+		data-tip="ID Profesionista"
+	>
+		<Hash class="size-5" />
+		ID
+		{profesionista.id}
 	</div>
 
 	<InputProfesionista idProfesionista={procesoStore.idProfesionista} />

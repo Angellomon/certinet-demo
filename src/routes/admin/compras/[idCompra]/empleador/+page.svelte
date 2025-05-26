@@ -11,7 +11,7 @@
 </script>
 
 <main class="flex flex-col gap-5">
-	<div class="flex flex-row items-center justify-between gap-5">
+	<div class="flex flex-row flex-wrap items-center justify-between gap-5">
 		<div class="flex flex-col">
 			<a href={`/admin/empleadores/${empleadorStore.id}`}>
 				<div class="join items-center gap-2">
@@ -19,12 +19,6 @@
 					<h1 class="text-2xl">{empleadorStore.razonSocial}</h1>
 				</div>
 			</a>
-
-			<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Empleador">
-				<Hash class="size-5" />
-				ID
-				{empleadorStore.id}
-			</div>
 		</div>
 
 		<div class="join gap-2">
@@ -35,5 +29,15 @@
 			{/if}
 		</div>
 	</div>
+
+	<div
+		class="badge badge-neutral tooltip tooltip-right flex-nowrap font-mono text-nowrap"
+		data-tip="ID Empleador"
+	>
+		<Hash class="size-5" />
+		ID
+		{empleadorStore.id}
+	</div>
+
 	<InputsEmpleador idEmpleador={compraStore.idEmpleador} />
 </main>

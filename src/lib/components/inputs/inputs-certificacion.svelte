@@ -54,7 +54,7 @@
 			</div>
 
 			<div>
-				<legend class="fieldset-legend">Organización</legend>
+				<legend class="fieldset-legend">Vigencia</legend>
 				<input class="input" type="number" bind:value={certificacionStore.vigencia} />
 			</div>
 		</div>

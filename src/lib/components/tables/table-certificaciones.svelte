@@ -311,7 +311,11 @@
 				</th>
 				<td>{cert.nombre}</td>
 				<td>
-					<div class="badge badge-neutral tooltip tooltip-right break-keep" data-tip="# de Serie">
+					<div
+						class="badge badge-neutral tooltip tooltip-right flex-nowrap font-mono break-keep"
+						data-tip="# de Serie"
+					>
+						<Hash class="size-5" />
 						{cert.serie}
 					</div>
 				</td>

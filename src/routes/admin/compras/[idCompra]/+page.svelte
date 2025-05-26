@@ -20,12 +20,10 @@
 </script>
 
 <main class="flex flex-col gap-5">
-	<div>
-		<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Compra">
-			<Hash class="size-5" />
-			ID
-			{compraStore.id}
-		</div>
+	<div class="badge badge-neutral flex-nowrap text-nowrap tooltip tooltip-right font-mono" data-tip="ID Compra">
+		<Hash class="size-5" />
+		ID
+		{compraStore.id}
 	</div>
 
 	<div class="flex flex-col justify-between gap-5">

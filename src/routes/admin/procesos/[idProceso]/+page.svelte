@@ -31,15 +31,16 @@
 
 <main class="flex flex-col gap-5">
 	<div class="flex flex-row items-center justify-between gap-5">
-		<div>
-			<h1 class="text-2xl">{nombre}</h1>
+		<h1 class="text-2xl">{nombre}</h1>
+	</div>
 
-			<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Proceso">
-				<Hash class="size-5" />
-				ID
-				{procesoStore.id}
-			</div>
-		</div>
+	<div
+		class="badge badge-neutral tooltip tooltip-right flex-nowrap font-mono text-nowrap"
+		data-tip="ID Proceso"
+	>
+		<Hash class="size-5" />
+		ID
+		{procesoStore.id}
 	</div>
 
 	<div class="join items-center gap-5">

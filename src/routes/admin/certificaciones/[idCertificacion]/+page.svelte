@@ -20,18 +20,10 @@
 </script>
 
 <main class="flex flex-col gap-5">
-	<div class="flex flex-row items-center justify-between gap-5">
-		<div>
-			<h1 class="text-2xl">{certificacionStore.nombre}</h1>
+	<div class="flex flex-row flex-wrap items-center justify-between gap-5">
+		<h1 class="text-2xl">{certificacionStore.nombre}</h1>
 
-			<div class="badge badge-neutral tooltip tooltip-right font-mono" data-tip="ID Certificacion">
-				<Hash class="size-5" />
-				ID
-				{certificacionStore.id}
-			</div>
-		</div>
-
-		<div class="join gap-2">
+		<div class="flex flex-wrap gap-2">
 			<button
 				class="btn btn-neutral clear-both"
 				class:btn-success={certificacionStore.verificado}
@@ -57,6 +49,15 @@
 				{/if}
 			</button>
 		</div>
+	</div>
+
+	<div
+		class="badge badge-neutral tooltip tooltip-right flex-nowrap font-mono text-nowrap"
+		data-tip="ID Certificacion"
+	>
+		<Hash class="size-5" />
+		ID
+		{certificacionStore.id}
 	</div>
 
 	<InputsCertificacion {idCertificacion} {edit} />

@@ -180,7 +180,10 @@
 {#snippet formaPago()}
 	<div class="flex flex-col gap-5">
 		{#if empleadorStore.idPagoExterno}
-			<div class="badge badge-neutral tooltip tooltip-right" data-tip="ID Método de Pago">
+			<div
+				class="badge badge-neutral tooltip tooltip-right flex-nowrap text-nowrap"
+				data-tip="ID Método de Pago"
+			>
 				<Hash class="size-5" />
 				ID
 				{empleadorStore.idPagoExterno}
