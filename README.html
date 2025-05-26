@@ -147,18 +147,23 @@
 <p><strong>Importante:</strong> Los datos que utiliza esta aplicación son meramente ilustrativos, no se guardan en ningún servidor externo, sólo se guardan de manera local en el navejador utilizando LocalStorage.</p>
 </blockquote>
 <h2 id="tecnologías">Tecnologías</h2>
-<p>El aplicativo se desarrolló con <a href="https://svelte.dev/docs/kit/introduction">Sveltekit</a> + <a href="https://vite.dev/">Vite</a>, un Framework Web que compila el código fuente y lo transforma en HTML, CSS y Javascript de manera optimizada.</p>
+<p>La aplicación se desarrolló con <a href="https://svelte.dev/docs/kit/introduction">Sveltekit</a> + <a href="https://vite.dev/">Vite</a>, un Framework Web que compila el código fuente y lo transforma en HTML, CSS y Javascript de manera optimizada.</p>
 <p>Así mismo, se desarrolló un motor de búsqueda que busca, con base en la información local, resultados con uso de palabras clave y filtros.
 El motor de búsqueda es <a href="https://github.com/nextapps-de/flexsearch">FlexSearch</a> implementado sólo en el frontend (app en el navejador), de igual manera se puede implementar el mismo en un backend que lo alimente con datos originarios de una base de datos.</p>
-<h1 id="documentación-para-correr-y-desplejar-el-aplicativo">Documentación Para Correr y Desplejar el Aplicativo</h1>
+<h1 id="documentación-para-correr-y-desplegar-la-aplicación">Documentación Para Correr y Desplegar la Aplicación</h1>
 <p>Esta documentación mostrará como correr y hacer &lt;<deploy>&gt; al proyecto de manera progresiva, es decir de manera local, &lt;<deploy>&gt; en un servidor, y &lt;<deploy>&gt; en una plataforma de contenedores Docker</p>
 <h2 id="correr-la-app-localmente">Correr la app localmente</h2>
 <blockquote>
-<p><strong>Prerequisitos:</strong> contar con una terminal compatible con POSIX (Linux, Mac, Windows CMDer) o Powershell en caso de windows. Contar con <a href="https://nodejs.org/en/download">NodeJS</a> versión 22 o superior instalado y poder hacer uso del comando npm (incluido al instalar <a href="https://nodejs.org/en/download">NodeJS</a>)</p>
+<p><strong>Prerequisitos:</strong> contar con una terminal compatible con POSIX (Linux, Mac, Windows CMDer) o Powershell en caso de windows.
+Contar con <a href="https://nodejs.org/en/download">NodeJS</a> versión 22 o superior instalado y poder hacer uso del comando npm (incluido al instalar <a href="https://nodejs.org/en/download">NodeJS</a>).
+Opcional: instalar <a href="https://git-scm.com/downloads">git</a> para poder colar directamente el repositorio.</p>
 </blockquote>
-<p>Para correr la app de manera local, se tiene que clonar el repositorio o descomprimir el archivo .zip proporcionado.
-Ubicarse dentro del proyecto utilizando <code>cd</code> (o <code>dir</code> en caso de windows) y correr el comando</p>
-<pre><code class="language-bash">npm run dev
+<p>Para correr la app de manera local, se tiene que clonar el repositorio o descomprimir el archivo .zip proporcionado.</p>
+<pre><code class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/Angellomon/certinet-demo.git
+</code></pre>
+<p>Ubicarse dentro del proyecto utilizando <code>cd</code> (o <code>dir</code> en caso de windows) y correr el comando</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> certinet-demo
+npm run dev
 </code></pre>
 <h2 id="compilar-la-app">Compilar la app</h2>
 <blockquote>
@@ -168,14 +173,17 @@ Ubicarse dentro del proyecto utilizando <code>cd</code> (o <code>dir</code> en c
 <pre><code class="language-bash">npm run build
 </code></pre>
 <p>Que generará un directorio .build que se deberá transferir a un servidor (con <a href="https://nodejs.org/en/download">NodeJS</a> 22+ instalado) mediante ftp o ssh (rsync).
-Ya una vez esté en el servidor, hay que correr el comando en el mismo directorio donde se encuentra <code>.build</code></p>
+Ya una vez esté en el servidor, hay que correr el comando en el mismo directorio donde se encuentra <code>./build</code></p>
 <pre><code class="language-bash">node build
 </code></pre>
-<p>Esto expondrá el aplicativo en modo productivo por el puerto :3000</p>
+<p>O</p>
+<pre><code class="language-bash">node build/index.js
+</code></pre>
+<p>Esto expondrá la aplicación en modo productivo por el puerto :3000</p>
 <h3 id="siguientes-pasos">Siguientes pasos</h3>
 <p>Lo anterior mencionado muestra cómo correr la app en un ambiente productivo mediante el puerto :3000, con un inconveniente: si se cierra la sesión de la terminal, la app se cierra también. Por lo que se recomienda utilizar un manejador de procesos como <a href="https://pm2.io/">PM2</a>, <a href="https://www.gnu.org/software/screen/manual/screen.html">screen</a> o <a href="https://github.com/tmux/tmux/wiki">tmux</a>, que corre la app en un proceso que persiste si la terminal se cierra; es decir, lo deja en sejundo plano de manera indeterminada</p>
-<p>De esta manera el aplicativo estaría expuesto de manera local, es decir, mediante <a href="http://localhost:3000">http://localhost:3000</a> (dentro del servidor)</p>
-<p>Para exponerlo a más usuarios, es necesario instalar un servidor proxy, que pueda ser capaz de recibir peticiones externas y dirigirlas al puerto :3000 del aplicativo. Esto es <a href="https://nginx.org/en/">NginX</a>, <a href="https://doc.traefik.io/traefik/">Traefik</a> o <a href="https://caddyserver.com/">Caddy</a> con una configuración que permita 'mapear' las peticiones ya sea desde el puerto :80/:443 o <a href="http://dominio.com">dominio.com</a> a :3000</p>
+<p>De esta manera la aplicación estaría expuesto de manera local, es decir, mediante <a href="http://localhost:3000">http://localhost:3000</a> (dentro del servidor)</p>
+<p>Para exponerlo a más usuarios, es necesario instalar un servidor proxy, que pueda ser capaz de recibir peticiones externas y dirigirlas al puerto :3000 la aplicación. Esto es <a href="https://nginx.org/en/">NginX</a>, <a href="https://doc.traefik.io/traefik/">Traefik</a> o <a href="https://caddyserver.com/">Caddy</a> con una configuración que permita 'mapear' las peticiones ya sea desde el puerto :80/:443 o <a href="http://dominio.com">dominio.com</a> a :3000</p>
 <p>ej. Caddy (<a href="https://mainvps.net/blog/using-caddy-as-a-reverse-proxy/">ref</a>)</p>
 <p>Al instalar y verificar que el siguiente comando funcione:</p>
 <pre><code class="language-bash">caddy version
@@ -199,7 +207,7 @@ Ya una vez esté en el servidor, hay que correr el comando en el mismo directori
 <p><strong>Importante:</strong> se debe crear un rejistro tipo <code>A</code> en un DNS que apunte el dominio <a href="http://certinet.net">certinet.net</a> a la IP del servidor, así como configurar el Firewall del mismo por razones de sejuridad</p>
 </blockquote>
 <h2 id="docker"><a href="https://www.docker.com/">Docker</a></h2>
-<p>El aplicativo se entreja con un archivo Dockerfile que permite construir el aplicativo dentro de un contenedor estándar <a href="https://opencontainers.org/">OCI</a>.</p>
+<p>La aplicación se entrega con un archivo Dockerfile que permite construir la aplicación dentro de un contenedor estándar <a href="https://opencontainers.org/">OCI</a>.</p>
 <h2 id="coolify"><a href="https://coolify.io/">Coolify</a></h2>
 <p>Lo anterior puede ser automatizado si al servidor se le instala la plataforma Coolify, un programa que automatiza el &lt;<deploy>&gt; de proyectos que utilicen Docker y estén en un repositorio.</p>
 <p>Dicha plataforma permite configurar el 'routing', configuraciones, variables de entorno, etc, con interfaz gráfica y configuración de SSL automática</p>

@@ -11,7 +11,7 @@ La aplicación se desarrolló con [Sveltekit](https://svelte.dev/docs/kit/introd
 Así mismo, se desarrolló un motor de búsqueda que busca, con base en la información local, resultados con uso de palabras clave y filtros.
 El motor de búsqueda es [FlexSearch](https://github.com/nextapps-de/flexsearch) implementado sólo en el frontend (app en el navejador), de igual manera se puede implementar el mismo en un backend que lo alimente con datos originarios de una base de datos.
 
-# Documentación Para Correr y Desplejar la Aplicación
+# Documentación Para Correr y Desplegar la Aplicación
 Esta documentación mostrará como correr y hacer <<deploy>> al proyecto de manera progresiva, es decir de manera local, <<deploy>> en un servidor, y <<deploy>> en una plataforma de contenedores Docker
 
 ## Correr la app localmente
