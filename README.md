@@ -6,21 +6,29 @@ Esta aplicación es un Aplicación Web; es decir, utiliza un navejador web para 
 > **Importante:** Los datos que utiliza esta aplicación son meramente ilustrativos, no se guardan en ningún servidor externo, sólo se guardan de manera local en el navejador utilizando LocalStorage.
 
 ## Tecnologías
-El aplicativo se desarrolló con [Sveltekit](https://svelte.dev/docs/kit/introduction) + [Vite](https://vite.dev/), un Framework Web que compila el código fuente y lo transforma en HTML, CSS y Javascript de manera optimizada.
+La aplicación se desarrolló con [Sveltekit](https://svelte.dev/docs/kit/introduction) + [Vite](https://vite.dev/), un Framework Web que compila el código fuente y lo transforma en HTML, CSS y Javascript de manera optimizada.
 
 Así mismo, se desarrolló un motor de búsqueda que busca, con base en la información local, resultados con uso de palabras clave y filtros.
 El motor de búsqueda es [FlexSearch](https://github.com/nextapps-de/flexsearch) implementado sólo en el frontend (app en el navejador), de igual manera se puede implementar el mismo en un backend que lo alimente con datos originarios de una base de datos.
 
-# Documentación Para Correr y Desplejar el Aplicativo
+# Documentación Para Correr y Desplejar la Aplicación
 Esta documentación mostrará como correr y hacer <<deploy>> al proyecto de manera progresiva, es decir de manera local, <<deploy>> en un servidor, y <<deploy>> en una plataforma de contenedores Docker
 
 ## Correr la app localmente
-> **Prerequisitos:** contar con una terminal compatible con POSIX (Linux, Mac, Windows CMDer) o Powershell en caso de windows. Contar con [NodeJS](https://nodejs.org/en/download) versión 22 o superior instalado y poder hacer uso del comando npm (incluido al instalar [NodeJS](https://nodejs.org/en/download))
+> **Prerequisitos:** contar con una terminal compatible con POSIX (Linux, Mac, Windows CMDer) o Powershell en caso de windows.
+> Contar con [NodeJS](https://nodejs.org/en/download) versión 22 o superior instalado y poder hacer uso del comando npm (incluido al instalar [NodeJS](https://nodejs.org/en/download)).
+> Opcional: instalar [git](https://git-scm.com/downloads) para poder colar directamente el repositorio.
 
 Para correr la app de manera local, se tiene que clonar el repositorio o descomprimir el archivo .zip proporcionado.
+
+``` bash
+git clone https://github.com/Angellomon/certinet-demo.git
+```
+
 Ubicarse dentro del proyecto utilizando `cd` (o `dir` en caso de windows) y correr el comando
 
 ``` bash
+cd certinet-demo
 npm run dev
 ```
 
@@ -32,19 +40,23 @@ Como el proyecto es simple, no requiere de mayor configuración para llevarse a 
 npm run build
 ```
 Que generará un directorio .build que se deberá transferir a un servidor (con [NodeJS](https://nodejs.org/en/download) 22+ instalado) mediante ftp o ssh (rsync).
-Ya una vez esté en el servidor, hay que correr el comando en el mismo directorio donde se encuentra `.build`
+Ya una vez esté en el servidor, hay que correr el comando en el mismo directorio donde se encuentra `./build`
 ``` bash
 node build
 ```
+O
+``` bash
+node build/index.js
+```
 
-Esto expondrá el aplicativo en modo productivo por el puerto :3000
+Esto expondrá la aplicación en modo productivo por el puerto :3000
 
 ### Siguientes pasos
 Lo anterior mencionado muestra cómo correr la app en un ambiente productivo mediante el puerto :3000, con un inconveniente: si se cierra la sesión de la terminal, la app se cierra también. Por lo que se recomienda utilizar un manejador de procesos como [PM2](https://pm2.io/), [screen](https://www.gnu.org/software/screen/manual/screen.html) o [tmux](https://github.com/tmux/tmux/wiki), que corre la app en un proceso que persiste si la terminal se cierra; es decir, lo deja en sejundo plano de manera indeterminada
 
-De esta manera el aplicativo estaría expuesto de manera local, es decir, mediante http://localhost:3000 (dentro del servidor)
+De esta manera la aplicación estaría expuesto de manera local, es decir, mediante http://localhost:3000 (dentro del servidor)
 
-Para exponerlo a más usuarios, es necesario instalar un servidor proxy, que pueda ser capaz de recibir peticiones externas y dirigirlas al puerto :3000 del aplicativo. Esto es [NginX](https://nginx.org/en/), [Traefik](https://doc.traefik.io/traefik/) o [Caddy](https://caddyserver.com/) con una configuración que permita 'mapear' las peticiones ya sea desde el puerto :80/:443 o dominio.com a :3000
+Para exponerlo a más usuarios, es necesario instalar un servidor proxy, que pueda ser capaz de recibir peticiones externas y dirigirlas al puerto :3000 la aplicación. Esto es [NginX](https://nginx.org/en/), [Traefik](https://doc.traefik.io/traefik/) o [Caddy](https://caddyserver.com/) con una configuración que permita 'mapear' las peticiones ya sea desde el puerto :80/:443 o dominio.com a :3000
 
 ej. Caddy ([ref](https://mainvps.net/blog/using-caddy-as-a-reverse-proxy/))
 
@@ -76,7 +88,7 @@ Esto hará que Caddy:
 
 ## [Docker](https://www.docker.com/)
 
-El aplicativo se entreja con un archivo Dockerfile que permite construir el aplicativo dentro de un contenedor estándar [OCI](https://opencontainers.org/).
+La aplicación se entrega con un archivo Dockerfile que permite construir la aplicación dentro de un contenedor estándar [OCI](https://opencontainers.org/).
 
 ## [Coolify](https://coolify.io/)
 Lo anterior puede ser automatizado si al servidor se le instala la plataforma Coolify, un programa que automatiza el <<deploy>> de proyectos que utilicen Docker y estén en un repositorio.
