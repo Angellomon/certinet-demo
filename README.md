@@ -12,7 +12,7 @@ Así mismo, se desarrolló un motor de búsqueda que busca, con base en la infor
 El motor de búsqueda es [FlexSearch](https://github.com/nextapps-de/flexsearch) implementado sólo en el frontend (app en el navejador), de igual manera se puede implementar el mismo en un backend que lo alimente con datos originarios de una base de datos.
 
 # Documentación Para Correr y Desplegar la Aplicación
-Esta documentación mostrará como correr y hacer <<deploy>> al proyecto de manera progresiva, es decir de manera local, <<deploy>> en un servidor, y <<deploy>> en una plataforma de contenedores Docker
+Esta documentación mostrará como correr y hacer `deploy` al proyecto de manera progresiva, es decir de manera local, `deploy` en un servidor, y `deploy` en una plataforma de contenedores Docker
 
 ## Correr la app localmente
 > **Prerequisitos:** contar con una terminal compatible con POSIX (Linux, Mac, Windows CMDer) o Powershell en caso de windows.
@@ -91,7 +91,7 @@ Esto hará que Caddy:
 La aplicación se entrega con un archivo Dockerfile que permite construir la aplicación dentro de un contenedor estándar [OCI](https://opencontainers.org/).
 
 ## [Coolify](https://coolify.io/)
-Lo anterior puede ser automatizado si al servidor se le instala la plataforma Coolify, un programa que automatiza el <<deploy>> de proyectos que utilicen Docker y estén en un repositorio.
+Lo anterior puede ser automatizado si al servidor se le instala la plataforma Coolify, un programa que automatiza el `deploy` de proyectos que utilicen Docker y estén en un repositorio.
 
 Dicha plataforma permite configurar el 'routing', configuraciones, variables de entorno, etc, con interfaz gráfica y configuración de SSL automática
 
