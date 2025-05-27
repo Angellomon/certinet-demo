@@ -13,7 +13,7 @@
 			opinion:
 				'CertiNet ha transformado nuestra forma de contratar, facilitándonos el acceso a talento altamente calificado en cuestión de minutos',
 			img: 'certinet-avatar-1.png',
-			nombre: 'Marío López',
+			nombre: 'Mario López',
 			puesto: 'Gerente de Recursos Humanos en Innovatech'
 		},
 		{
