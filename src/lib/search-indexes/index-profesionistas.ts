@@ -1,4 +1,4 @@
-import type { Curriculum, Profesionista, Profesionistas } from '$lib/entities';
+import type { Profesionista, Profesionistas } from '$lib/entities';
 import { convertProfesionista } from './convert';
 import { SearchIndex } from './search-index';
 
